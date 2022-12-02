@@ -1,0 +1,323 @@
+/* banner */
+
+.curses__banner {
+    background-image: url("../img/slide1.jpg");
+    background-position: center;
+    background-size: cover;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    height: 350px;
+}
+
+.curses__banner-top {
+    color: #fff;
+}
+
+.curses__rating-name {
+    margin-right: 10px;
+}
+
+.curses__rating-img {
+    margin-right: 5px;
+}
+
+.curses__day-value {
+    padding-left: 23px;
+    background-image: url("../img/curses/clock.svg");
+    background-repeat: no-repeat;
+}
+
+.curses__title {
+    color: #fff;
+}
+
+ul.learn-press-nav-tabs .course-nav.active::before{
+    background: #ff0000 !important;
+}
+
+.course-curriculum .course-item .section-item-link::before{
+    color: #ff0000 !important;
+}
+
+.lp-archive-courses .course-summary-content .course-title{
+    color: #ff0000;
+}
+
+.lp-archive-courses .course-meta__pull-left .meta-item{
+    text-transform: none !important;
+}
+
+.lp-archive-courses .course-meta__pull-left .meta-item .meta-number{
+    display: inline-block;
+}
+
+
+.lp-archive-courses .course-meta__pull-left .meta-item .meta-number::nth-letter(3) {
+    text-transform: uppercase;
+}
+
+.content__bunner-autor {
+    display: block;
+    padding-left: 23px;
+    background-image: url("../img/autor.svg");
+    background-repeat: no-repeat;
+    color: #fff;
+}
+
+/* content */
+
+.card {
+    background: #FFFFFF;
+    border-radius: 6px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.card__content {
+    max-width: 48.5%;
+}
+
+.card__total-person {
+    display: block;
+    color: #29afda;
+}
+
+.card__reviews {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 30px;
+}
+
+.reviews__item {
+    background-color: #F5F5F5;
+    border-radius: 6px;
+}
+
+.reviews__img {
+    margin-right: 20px;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    overflow: hidden;
+}
+
+/* content:video */
+
+.card__video-block {
+    overflow: hidden;
+    margin-right: 30px;
+    border-radius: 6px;
+    object-fit: cover;
+    width: 585px;
+    height: 300px;
+}
+
+.card__video {
+    width: 100%;
+    height: 100%;
+}
+
+.vjs-theme-sea .vjs-big-play-button {
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(5px);
+}
+
+.vjs-modal-dialog .vjs-modal-dialog-content, .video-js .vjs-modal-dialog, .vjs-button > .vjs-icon-placeholder:before, .video-js .vjs-big-play-button .vjs-icon-placeholder:before {
+    top: 10%;
+}
+
+/* popup */
+
+.overlay {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: #1B1B1B;
+    opacity: 0.8;
+    z-index: 1000;
+
+    display: none;
+}
+.overlay.active-p {
+    display: block;
+}
+
+.popup {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 2000;
+
+    display: none;
+}
+.popup.active-p {
+    display: block;
+}
+
+.popup__wrapper {
+    position: relative;
+    display: flex;
+    background-color: #FFFFFF;
+    border-radius: 6px;
+}
+
+.popup__close {
+    position: absolute;
+    border: none;
+    background: none;
+    top: 20px;
+    right: 20px;
+}
+
+.rating__item {
+    width: 25px;
+    height: 25px;
+    fill: #BdBdBd;
+    cursor: pointer;
+}
+.rating__item:not(:last-child) {
+    margin-right: 10px;
+}
+.rating__item svg {
+    position: relative;
+    width: 25px;
+    height: 25px;
+    pointer-events: none;
+}
+.rating__item use {
+    width: 100%;
+    height: 100%;
+}
+
+.rating__item.active {
+    fill: #ffb800;
+}
+
+.popup__message {
+    resize: none;
+    border: none;
+    border-radius: 6px;
+    width: 400px;
+    height: 220px;
+    background-color: #f5f5f5;
+}
+
+.popup__btn {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #29afda;
+    color: #fff;
+}
+
+.no-scroll {
+    overflow: hidden;
+}
+.comment-form-comment label{
+    display: none;
+}
+.popup .comment-reply-title, .popup .logged-in-as{
+    display: none;
+}
+.comment-form-comment textarea{
+    resize: none;
+    border: none;
+    border-radius: 6px;
+    width: 400px;
+    height: 220px;
+    background-color: #f5f5f5;
+    padding: 1.25rem;
+    margin-bottom: 0.75rem;
+}
+.comment-respond .submit{
+    padding-top: 10px;
+    padding-bottom: 10px;
+    border: none;
+    border-radius: 6px;
+    background-color: #29afda;
+    color: #fff;
+    width: 100%;
+}
+.curses__rating-value .rmp-results-widget__visual-rating{
+    display: none;
+}
+.curses__rating-value .rmp-results-widget__vote-count{
+    display: none;
+}
+.swiper-backface-hidden .swiper-slide{
+    height: 500px;
+}
+.swiper-slide img {
+    height: 500px;
+    object-fit: cover;
+}
+.no-abs{
+    position: relative;
+    top: 0;
+    right: 0;
+}
+#popup-course #popup-sidebar{
+    background-color: #1e1e2d;
+    flex: 0 0 375px !important;
+}
+#popup-course #popup-sidebar .course-curriculum {
+    width: 375px !important;
+}
+#popup-course #sidebar-toggle{
+    left: 375px !important;
+    background: transparent !important;
+    display: none !important;
+}
+#popup-course #popup-sidebar .section-header{
+    background-color: #1e1e2d !important;
+}
+#popup-course #popup-sidebar .section-header .section-title, .lesson-title{
+    color: #87889a !important;
+}
+#popup-course {
+    top: 60px !important;
+    /*left: 265px !important;*/
+}
+#popup-course #popup-content{
+    background-color: #fff !important;
+}
+#popup-course #popup-sidebar .search-course{
+     background: transparent !important;
+}
+#popup-course #popup-footer{
+    background: #1e1e2d !important;
+    left: 375px !important;
+}
+#popup-course{
+     background: #1e1e2d !important;
+}
+#popup-course #popup-sidebar .course-item{
+    background: transparent !important;
+    color: #87889a !important;
+}
+.course-curriculum .course-item .item-name{
+    color: #87889a !important;
+}
+.popup .comment-form-attachment{
+    display: none;
+}
+.card__total-person, .card__video-block{
+    display: none;
+}
+.learn-press-comments #comments{
+    color: #87889a !important;
+    margin-bottom: 20px;
+}
+.learn-press-comments .commentlist{
+    color: #87889a !important;
+}
+#popup-course .search-course{
+     display: none !important;
+}

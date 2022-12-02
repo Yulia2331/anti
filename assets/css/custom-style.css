@@ -1,0 +1,726 @@
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-BoldItalic.eot');
+	src: local('Inter Bold Italic'), local('Inter-BoldItalic'),
+		 url('Inter-BoldItalic.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-BoldItalic.woff2') format('woff2'),
+		 url('Inter-BoldItalic.woff') format('woff'),
+		 url('Inter-BoldItalic.ttf') format('truetype');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-MediumItalic.eot');
+	src: local('Inter Medium Italic'), local('Inter-MediumItalic'),
+		 url('Inter-MediumItalic.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-MediumItalic.woff2') format('woff2'),
+		 url('Inter-MediumItalic.woff') format('woff'),
+		 url('Inter-MediumItalic.ttf') format('truetype');
+	font-weight: 500;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-ThinItalicBETA.eot');
+	src: local('Inter Thin Italic BETA'), local('Inter-ThinItalicBETA'),
+		 url('Inter-ThinItalicBETA.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-ThinItalicBETA.woff2') format('woff2'),
+		 url('Inter-ThinItalicBETA.woff') format('woff'),
+		 url('Inter-ThinItalicBETA.ttf') format('truetype');
+	font-weight: 100;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-Regular.eot');
+	src: local('Inter Regular'), local('Inter-Regular'),
+		 url('Inter-Regular.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-Regular.woff2') format('woff2'),
+		 url('Inter-Regular.woff') format('woff'),
+		 url('Inter-Regular.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-Black.eot');
+	src: local('Inter Black'), local('Inter-Black'),
+		 url('Inter-Black.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-Black.woff2') format('woff2'),
+		 url('Inter-Black.woff') format('woff'),
+		 url('Inter-Black.ttf') format('truetype');
+	font-weight: 900;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-BlackItalic.eot');
+	src: local('Inter Black Italic'), local('Inter-BlackItalic'),
+		 url('Inter-BlackItalic.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-BlackItalic.woff2') format('woff2'),
+		 url('Inter-BlackItalic.woff') format('woff'),
+		 url('Inter-BlackItalic.ttf') format('truetype');
+	font-weight: 900;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-LightBETA.eot');
+	src: local('Inter Light BETA'), local('Inter-LightBETA'),
+		 url('Inter-LightBETA.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-LightBETA.woff2') format('woff2'),
+		 url('Inter-LightBETA.woff') format('woff'),
+		 url('Inter-LightBETA.ttf') format('truetype');
+	font-weight: 300;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-SemiBold.eot');
+	src: local('Inter Semi Bold'), local('Inter-SemiBold'),
+		 url('Inter-SemiBold.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-SemiBold.woff2') format('woff2'),
+		 url('Inter-SemiBold.woff') format('woff'),
+		 url('Inter-SemiBold.ttf') format('truetype');
+	font-weight: 600;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-ExtraBoldItalic.eot');
+	src: local('Inter Extra Bold Italic'), local('Inter-ExtraBoldItalic'),
+		 url('Inter-ExtraBoldItalic.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-ExtraBoldItalic.woff2') format('woff2'),
+		 url('Inter-ExtraBoldItalic.woff') format('woff'),
+		 url('Inter-ExtraBoldItalic.ttf') format('truetype');
+	font-weight: 800;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-Bold.eot');
+	src: local('Inter Bold'), local('Inter-Bold'),
+		 url('Inter-Bold.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-Bold.woff2') format('woff2'),
+		 url('Inter-Bold.woff') format('woff'),
+		 url('Inter-Bold.ttf') format('truetype');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-ExtraLightItalicBETA.eot');
+	src: local('Inter Extra Light Italic BETA'), local('Inter-ExtraLightItalicBETA'),
+		 url('Inter-ExtraLightItalicBETA.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-ExtraLightItalicBETA.woff2') format('woff2'),
+		 url('Inter-ExtraLightItalicBETA.woff') format('woff'),
+		 url('Inter-ExtraLightItalicBETA.ttf') format('truetype');
+	font-weight: 200;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-ExtraLightBETA.eot');
+	src: local('Inter Extra Light BETA'), local('Inter-ExtraLightBETA'),
+		 url('Inter-ExtraLightBETA.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-ExtraLightBETA.woff2') format('woff2'),
+		 url('Inter-ExtraLightBETA.woff') format('woff'),
+		 url('Inter-ExtraLightBETA.ttf') format('truetype');
+	font-weight: 200;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-ExtraBold.eot');
+	src: local('Inter Extra Bold'), local('Inter-ExtraBold'),
+		 url('Inter-ExtraBold.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-ExtraBold.woff2') format('woff2'),
+		 url('Inter-ExtraBold.woff') format('woff'),
+		 url('Inter-ExtraBold.ttf') format('truetype');
+	font-weight: 800;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-ThinBETA.eot');
+	src: local('Inter Thin BETA'), local('Inter-ThinBETA'),
+		 url('Inter-ThinBETA.eot?#iefix') format('embedded-opentype'),
+		 url('Inter-ThinBETA.woff2') format('woff2'),
+		 url('Inter-ThinBETA.woff') format('woff'),
+		 url('Inter-ThinBETA.ttf') format('truetype');
+	font-weight: 100;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('Inter-LightItalicBETA.eot');
+	src: local('Inter Light Italic BETA'), local('Inter-LightItalicBETA'),
+		 url('./fonts/Inter-LightItalicBETA.eot?#iefix') format('embedded-opentype'),
+		 url('./fonts/Inter-LightItalicBETA.woff2') format('woff2'),
+		 url('./fonts/Inter-LightItalicBETA.woff') format('woff'),
+		 url('./fonts/Inter-LightItalicBETA.ttf') format('truetype');
+	font-weight: 300;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('./fonts/Inter-Italic.eot');
+	src: local('Inter Italic'), local('Inter-Italic'),
+		 url('./fonts/Inter-Italic.eot?#iefix') format('embedded-opentype'),
+		 url('./fonts/Inter-Italic.woff2') format('woff2'),
+		 url('./fonts/Inter-Italic.woff') format('woff'),
+		 url('./fonts/Inter-Italic.ttf') format('truetype');
+	font-weight: normal;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('./fonts/Inter-SemiBoldItalic.eot');
+	src: local('Inter Semi Bold Italic'), local('Inter-SemiBoldItalic'),
+		 url('./fonts/Inter-SemiBoldItalic.eot?#iefix') format('embedded-opentype'),
+		 url('./fonts/Inter-SemiBoldItalic.woff2') format('woff2'),
+		 url('./fonts/Inter-SemiBoldItalic.woff') format('woff'),
+		 url('./fonts/Inter-SemiBoldItalic.ttf') format('truetype');
+	font-weight: 600;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('./fonts/Inter-Medium.eot');
+	src: local('Inter Medium'), local('Inter-Medium'),
+		 url('./fonts/Inter-Medium.eot?#iefix') format('embedded-opentype'),
+		 url('./fonts/Inter-Medium.woff2') format('woff2'),
+		 url('./fonts/Inter-Medium.woff') format('woff'),
+		 url('./fonts/Inter-Medium.ttf') format('truetype');
+	font-weight: 500;
+	font-style: normal;
+}
+
+
+.page-title{
+	font-style: normal;
+font-weight: 600;
+font-size: 19px;
+line-height: 23px;
+/* identical to box height */
+
+
+color: #303030;
+}
+.rounded{
+	border-radius: 5px!important;
+}
+.subs{
+	padding: 10px 10px;
+}
+.subs__search{
+	border-bottom: 1px solid #F5F5F5;
+	margin-bottom: 20px;
+}
+.subs__search input::-webkit-input-placeholder{
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	color: #BDBDBD;
+}
+.subs__search input::-moz-placeholder{
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	color: #BDBDBD;
+}
+.subs__search input:-ms-input-placeholder{
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	color: #BDBDBD;
+}
+.subs__search input::-ms-input-placeholder{
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	color: #BDBDBD;
+}
+.subs__search input::placeholder{
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	color: #BDBDBD;
+}
+.fsize-10{
+	font-size: 10px;
+}
+.subs .search_results .comment{
+	font-family: 'Inter',sans-serif;
+	font-style: normal;
+	
+	font-size: 11px;
+	line-height: 13px;
+	margin-right: 10px;
+	color: #BDBDBD;
+}
+
+select + label{
+	width: 100%;
+	height: 40px;
+	padding: 0.825rem 1.5rem;
+	text-align: left;
+	top: 0;
+	font-weight: 500;
+	line-height: 1.5;
+	font-size: 1.15rem;
+	position: absolute;
+	pointer-events: none;
+	color: #A1A5B7;
+	display: block;
+  opacity: 1;
+ }
+ /* Здесь то что будет происходить с Placeholder'ом после изменения select */
+ select:valid+label {
+	display: none;
+ }
+ .logo img{
+	 max-height: 100%;
+ }
+.smiling{
+	cursor: pointer;
+}
+.smiling__body{
+	width: 230px;
+	right: 0;
+	background: #fff;
+	padding: 8px;
+	border: 1px solid #f5f8fa;
+	border-radius: 5px;
+	-webkit-box-shadow: 6px 7px 12px 3px rgba(34, 60, 80, 0.08);
+	box-shadow: 6px 7px 12px 3px rgba(34, 60, 80, 0.08);
+	z-index: 5;
+}
+.smiling__body .smile{
+	margin-right: 2px;
+	margin-bottom: 2px;
+	cursor: pointer;
+}
+.post-vision{
+	padding-left: 0;
+	list-style-type: none;
+	position: relative;
+}
+.post-vision li {
+	cursor: pointer;
+}
+.post-vision li.active{
+	font-style: normal;
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	color: #29AFDA;
+	margin-right: 10px;
+}
+.post-vision li.active::after{
+	position: absolute;
+	content: '';
+	border: solid #29AFDA;
+	border-width: 0 2px 2px 0;
+	display: inline-block;
+	padding: 2px;
+	-ms-transform: rotate(45deg) translateY(-50%);
+	    transform: rotate(45deg) translateY(-50%);
+	-webkit-transform: rotate(45deg) translateY(-50%);
+	margin-left: 4px;
+	top: 50%;
+}
+.post-vision li:not(.active){
+	position: absolute;
+	bottom: -37px;
+	padding: 10px 45px 10px 10px;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	color: #BDBDBD;
+	background: #FFFFFF;
+	-webkit-box-shadow: 0px 10px 30px rgba(48, 48, 48, 0.13);
+	        box-shadow: 0px 10px 30px rgba(48, 48, 48, 0.13);
+	border-radius: 6px;
+	white-space:nowrap;
+	display:none;
+}
+.post-vision:hover li:not(.active){
+	display: block;
+}
+.post-image{
+	margin-right: 33px;
+}
+.output-image img{
+	max-width: 100%;
+	height: auto;	
+}
+.output-image>div{
+	position: relative;
+}
+.output-image .del-image{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	
+}
+
+.post-filter{
+	padding-top: 30px;
+	padding-bottom: 15px;
+}
+.post-filter .filter-links a{
+	font-family: 'Inter';
+font-style: normal;
+font-weight: 500;
+font-size: 13px;
+line-height: 16px;
+color: #BDBDBD;
+position: relative;
+}
+.post-filter .filter-links a.active{
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	color: #303030;
+}
+.post-filter .filter-links a:first-child{
+	margin-right: 30px;
+}
+.post-filter .filter-links a::after{
+	content:'';
+	height: 1px;
+	background: #29AFDA;
+	position: absolute;
+	bottom: -28px;
+	left: 0;
+	width: 100%;
+}
+.post-filter .filter-links a:after{
+	max-width: 0;
+	-webkit-transition: 0.3s;
+	-o-transition: 0.3s;
+	transition: 0.3s;
+
+}
+.post-filter .filter-links a.active::after{
+	max-width: 100%;
+}
+
+.post-search .form-control{
+	border: none;
+	max-width: 600px;
+}
+.post-search .input-group-text{
+	background:#fff;
+	border: none;
+}
+
+.card-post-container{
+	width: 700px;
+	margin: 0 auto;
+	max-width: 100%;
+}
+
+
+
+.user-post .card-header{
+	padding-top: 30px;
+	padding-bottom: 20px;
+	border-bottom: 0;
+	
+}
+.card-post .author .autor__image{
+	width: 70px;
+	height: 70px;
+	margin-right: 20px;
+}
+
+.card-post .author .author__name{
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 17px;
+	color: #303030;
+	margin-bottom: 10px;
+
+}
+.card-post .author .author__date{
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 12px;
+	line-height: 15px;
+	color: #BDBDBD;
+}
+.card-post .card-funct .dropdown-toggle{
+
+}
+.card-post .card-funct .dropdown-toggle::after{
+	display: none;
+}
+
+.card-post .post-text{
+	font-family: 'Inter';
+	font-style: normal;
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	margin-bottom: 20px;
+}
+.card-post .post-image img{
+	width: 100%;
+	height: auto;
+}
+.card-post .post-image{
+	margin-right: 0;
+	margin-bottom: 10px;
+}
+.card-post .card-body{
+	padding-bottom:10px;
+}
+.meta-btn{
+	background: #F5F5F5;
+	border-radius: 6px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	padding: 17px 15px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+.meta-btn .icon{
+	width: 20px;
+	height: 19px;
+	margin-right: 12px;
+	display: -webkit-box;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+}
+#profilePhotoImg{
+	width: 160px;
+	height: auto;
+	max-height: 100%;
+}
+.avatar-image{
+	width: 100%;
+	height: 100%;
+}
+#posts-lists .card:first-child{
+	border-top-left-radius: 0px;
+	border-top-right-radius: 0px;
+}
+.like-btn{
+	border:none;
+}
+.like-btn .icon svg{
+	fill:#000;
+}
+.like-btn.liked .icon svg{
+	fill:#FF0000;
+}
+.comments-form  .comment-avatar{
+	width: 25px;
+	height: 25px;
+}
+.comments-form {
+	padding-top: 10px;
+	padding-bottom: 10px;
+}
+.comments-form  .input-group{
+	margin-right: 10px;
+	width: auto;
+	border-radius: 6px;
+
+}
+.comments-form .comment-avatar{
+	width: 25px;
+	height: 25px;
+	margin-right: 10px;
+}
+.comments-form .input-group .form-control{
+	background: #F5F5F5;
+	border-radius: 6px;
+	height: 30px;
+	border: none;
+}
+.comments-form .input-group .input-group-text{
+	height: 30px;
+	background: #F5F5F5;
+	border: none;
+	padding-right: 5px;
+	padding-left: 5px;
+}
+.comments-form .send-comment{
+	background-color: #fff;
+	border: none;
+}
+.main-comment .comments__avatar{
+	width: 40px;
+	height: 40px;
+	margin-right: 10px;
+}
+.main-comment{
+	padding-top: 10px;
+}
+.main-comment .comments__avatar .author-image{
+	width: 100%;
+	height: 100%;
+	border-radius: 100%;
+	background-position: center!important;
+	background-repeat: no-repeat!important;
+	background-size: cover!important;
+}
+.main-comment .comments__name{
+	font-family: 'Inter', sans-serif;
+	font-style: normal;
+	font-weight: 500;
+	font-size: 13px;
+	line-height: 16px;
+	margin-bottom: 5px;
+	color: #303030;
+}
+.main-comment .comments__text{
+	font-family: 'Inter', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 13px;
+	color: #303030;
+	margin-bottom: 5px;
+}
+.main-comment .comments__data .data{
+	font-family: 'Inter', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 13px;
+	color: #BDBDBD;
+	margin-right: 20px;
+}
+.main-comment .comments__data .comments__answer{
+	font-family: 'Inter', sans-serif;
+	font-style: normal;
+font-weight: 400;
+font-size: 11px;
+line-height: 13px;
+color: #29AFDA;
+background: none;
+border: none;
+}
+.comments_body{
+	border-bottom: 1px solid #E8E8E8;
+	padding-bottom: 10px;
+}
+.comment .children{
+	padding-left: 0px;
+	/* padding-top: 10px; */
+}
+/* .comment .children .comments__avatar{
+	width: 25px;
+	height: 25px;
+} */
+.comment .children .comments__name{
+	/* font-family: 'Inter', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 13px;
+	color: #303030; */
+}
+.comment .children .comments__text{
+	/* font-family: 'Inter', sans-serif;
+	font-style: normal;
+	font-weight: 400;
+	font-size: 11px;
+	line-height: 13px;
+	color: #303030; */
+}
+.comments__text p{
+	margin-bottom: 0;
+}
+.commets__list{
+	padding-left: 0;
+}
+.post-text p{
+	margin-bottom: 0;
+}
+.symbol img{
+	max-width: 100%;
+	max-height: 100%;
+	height: auto!important;
+}
+
+.form-check .form-check-input:checked{
+	background-color: red!important;
+}
+.new_clients .card{
+	height: 100%!important;
+}
+#kt_sign_up_form .form-check .form-check-input:checked{
+	background-color: #fff!important;
+}
+@media (min-width: 992px){
+	.aside .aside-logo {padding-left: 0;}
+}
+body{
+	min-width: 375px;
+}
+.header .custom-logo-link{
+	max-width: 200px;
+	display: block;
+
+}
+.header .custom-logo-link img{
+	max-width: 100%;
+	height: auto;
+	-o-object-fit: contain;
+	   object-fit: contain;
+}
+#kt_content_container .card{
+	background: #fff;
+}
+.card-post-container{
+	position: relative;
+}
+.card-post-container .delete-post{
+	position: absolute;
+	top: 10px;
+	right: 10px;
+}
+#kt_charts_widget_5 .apexcharts-yaxis-label{
+	cursor: pointer;
+}
+.symbol-35px img{
+	width: 35px;
+	height: 35px!important;
+}
+.tooltip-inner{
+	font-family:Arial, Helvetica, sans-serif;
+}
