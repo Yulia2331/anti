@@ -374,7 +374,7 @@ $('#public-post-btn').on('click', function(e){
     
       $.ajax({
         type:'POST',
-        url: '/wp-admin/admin-ajax.php',
+        url: window.location.href + '/wp-admin/admin-ajax.php',
         data: {
             action: 'add_user_post',
             user_id: id,

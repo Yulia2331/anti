@@ -456,9 +456,10 @@ add_action( 'template_redirect', function() {
 		 }
 	}
 });
+
 function my_upload_size_limit() {
-add_filter( 'upload_size_limit', 'my_upload_size_limit' );
-return wp_convert_hr_to_bytes( '2400M' );
+	add_filter( 'upload_size_limit', 'my_upload_size_limit' );
+	return wp_convert_hr_to_bytes( '2400M' );
 }
 my_upload_size_limit();
 

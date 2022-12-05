@@ -37,7 +37,7 @@ $user_info = get_userdata(get_current_user_id());
 								<div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500" id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
 								
 									<div class="menu-item <?php echo (is_author())?'here':'' ?>">
-										<a class="menu-link" href="/author/<?php echo $user_info->user_nicename ?>">
+										<a class="menu-link" href="<?php echo home_url(); ?>/author/<?php echo $user_info->user_nicename ?>">
 											<span class="menu-icon">
 												<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 												<span class="svg-icon svg-icon-2">
@@ -54,7 +54,7 @@ $user_info = get_userdata(get_current_user_id());
 									</div>
 									
 									<div class="menu-item <?php echo (is_page(244))?'here':'' ?>">
-										<a class="menu-link" href="/lenta/">
+										<a class="menu-link" href="<?php echo home_url(); ?>/lenta/">
 											<span class="menu-icon">
 												<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 												<span class="svg-icon svg-icon-2">
@@ -88,7 +88,7 @@ $user_info = get_userdata(get_current_user_id());
 										</span>
 										<div class="menu-sub menu-sub-accordion menu-active-bg">
 											<div class="menu-item <?php echo (is_page(241))?'here':''?>">
-												<a class="menu-link" href="/kalendar-kluba/">
+												<a class="menu-link" href="<?php echo home_url(); ?>/kalendar-kluba/">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -96,7 +96,7 @@ $user_info = get_userdata(get_current_user_id());
 												</a>
 											</div>
 											<div class="menu-item <?php echo (is_page(266))?'here':''?>">
-												<a class="menu-link " href="/kalendar-pkm/">
+												<a class="menu-link " href="<?php echo home_url(); ?>/kalendar-pkm/">
 													<span class="menu-bullet">
 														<span class="bullet bullet-dot"></span>
 													</span>
@@ -105,7 +105,7 @@ $user_info = get_userdata(get_current_user_id());
 											</div>
 										</div>
 										<div class="menu-item <?php echo is_page(252) ? 'here':'' ?>">
-											<a class="menu-link" href="/analitika/">
+											<a class="menu-link" href="<?php echo home_url(); ?>/analitika/">
 												<span class="menu-icon">
 													<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 													<span class="svg-icon svg-icon-2">
@@ -141,7 +141,7 @@ $user_info = get_userdata(get_current_user_id());
 											</a>
 										</div>
                                         										<div class="menu-item echo (is_author())?'here':'' ?>">
-												<a class="menu-link" href="/spisok-kursov/">
+												<a class="menu-link" href="<?php echo home_url(); ?>/spisok-kursov/">
 													<span class="menu-icon">
 														<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 														<span class="svg-icon svg-icon-2">
@@ -161,7 +161,7 @@ $user_info = get_userdata(get_current_user_id());
 										?>
 
 										<div class="menu-item <?php echo (is_page(255)?'here':'')?>">
-											<a class="menu-link" href="/spisok-razreshenij/">
+											<a class="menu-link" href="<?php echo home_url(); ?>/spisok-razreshenij/">
 												<span class="menu-icon">
 													<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 													<span class="svg-icon svg-icon-2">
@@ -177,7 +177,7 @@ $user_info = get_userdata(get_current_user_id());
 										</div>
 									
 											<div class="menu-item <?php echo (is_page(255)?'here':'')?>">
-												<a class="menu-link" href="/lp-become-a-teacher/">
+												<a class="menu-link" href="<?php echo home_url(); ?>/lp-become-a-teacher/">
 													<span class="menu-icon">
 														<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 														<span class="svg-icon svg-icon-2">
@@ -193,7 +193,7 @@ $user_info = get_userdata(get_current_user_id());
 											</div>
 
 											<div class="menu-item <?php echo (is_page(255)?'here':'')?>">
-												<a class="menu-link" href="/lp-profile//">
+												<a class="menu-link" href="<?php echo home_url(); ?>/lp-profile//">
 													<span class="menu-icon">
 														<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 														<span class="svg-icon svg-icon-2">
