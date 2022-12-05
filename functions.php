@@ -288,7 +288,13 @@ function getMonthName($month) {
 	  12=> array('Декабрь', 'Декабря')
 	);
 	
-	return $monthAr[(int)$month];
+	// проверяем ввод данных на правельность
+	if ($month <= 1 and $month >= 12 ){
+		return $monthAr[(int)$month];
+	}else{
+		return 'error';
+	}
+	
  }
 
 
@@ -445,7 +451,7 @@ function get_cities(){
 add_action( 'template_redirect', function() {
 	if( ( !is_page(array('auth','remind-password', 'reg') )) ) {
 		 if (!is_user_logged_in() ) {
-			  wp_redirect( site_url( '/auth' ) );        // redirect all...
+			  wp_redirect( site_url( '/antinorma.com/auth' ) );        // redirect all...
 			  exit();
 		 }
 	}

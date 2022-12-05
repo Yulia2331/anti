@@ -26,7 +26,7 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 			$this_day = $today['mday'];
 }
 ?>
-<?php get_header() ;
+<?php get_header();
 
 ?>
 
@@ -729,4 +729,4 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 				}
 		
 		</script>
-<? get_footer() ?>
+<?php get_footer(); ?>
