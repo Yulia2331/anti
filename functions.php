@@ -404,17 +404,17 @@ function check_zar(){
 				$today = getdate();
 				$this_month = $today['mon'];
 				$this_day = $today['mday'];
-				if (((int)$this_month - (int)$month-1) > 1 ){
-					wp_redirect( '/get_money', 301 );
-				}
-				if ((int)$this_month-1>(int)$month && (int)$this_day>3){
-					wp_redirect( '/get_money', 301 );
+				// if (((int)$this_month - (int)$month-1) > 1 ){
+				// 	wp_redirect( '/antinorma.com/get_money', 301 );
+				// }
+				// if ((int)$this_month-1>(int)$month && (int)$this_day>3){
+				// 	wp_redirect( '/antinorma.com/get_money', 301 );
 					
-				}
+				// }
 	}
 
 	elseif(!have_rows('zarabotok', 'user_'.$user_id )){
-		wp_redirect( '/get_money', 301 );
+		wp_redirect( '/antinorma.com/get_money', 301 );
 		
 	}
 }
