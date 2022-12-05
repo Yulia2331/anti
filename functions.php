@@ -109,7 +109,11 @@ add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
 
 function plugins_addition($plugins) {
     global $current_user;
-    get_currentuserinfo();
+    
+    // ВП написал что это устаревшая функция
+    //get_currentuserinfo();
+    wp_get_current_user();
+
     if( $current_user->ID != 0 ) {
         if( is_plugin_active('learnpress-students-list/learnpress-students-list.php') ) {
             unset( $plugins['learnpress-students-list/learnpress-students-list.php'] );
