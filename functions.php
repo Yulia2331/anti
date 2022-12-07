@@ -129,7 +129,11 @@ function theme_name_scripts() {
 	wp_enqueue_style( 'style-bundle', get_template_directory_uri() . '/assets/css/style.bundle.css' );
 	wp_enqueue_style( 'custom-style', get_template_directory_uri() . '/assets/css/custom-style.css' );
 	wp_enqueue_style( 'curs-style', get_template_directory_uri() . '/assets/css/style.css' );
-	wp_enqueue_style( 'curses', get_template_directory_uri() . '/assets/css/curses.css?<?php echo time();?>' );
+	wp_enqueue_style( 'curses', get_template_directory_uri() . '/assets/css/curses.css?1' );
+	wp_enqueue_style( 'ideas-style', get_template_directory_uri() . '/assets/css/ideas/style.min.css' );
+	wp_enqueue_style( 'all-ideas', get_template_directory_uri() . '/assets/css/ideas/all-ideas.min.css' );
+	wp_enqueue_style( 'my-reviews', get_template_directory_uri() . '/assets/css/ideas/my-reviews.min.css' );
+	wp_enqueue_style( 'tracked-ideas', get_template_directory_uri() . '/assets/css/ideas/tracked-ideas.min.css' );
 	wp_enqueue_script( 'script-global-plugins-bundle', get_template_directory_uri() . '/assets/plugins/global/plugins.bundle.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'script-bundle', get_template_directory_uri() . '/assets/js/scripts.bundle.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'user-search', get_template_directory_uri() . '/assets/js/custom/utilities/modals/users-search.js', array(), '1.0.0', true );
