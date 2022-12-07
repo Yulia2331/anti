@@ -1,5 +1,6 @@
 <?php
-function get_like_button( $post_id = false, $user_id ) {
+// Пхп ругается "Обязательный параметр $user_id следует за необязательным параметром $post_id" WP v 6.1.1
+function get_like_button( $post_id = false, $user_id=1 ) {
 	if ( ! $post_id ) {
 	  $post_id = get_the_ID();
 	}

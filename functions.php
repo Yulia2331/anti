@@ -109,7 +109,14 @@ add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
 
 function plugins_addition($plugins) {
     global $current_user;
-    get_currentuserinfo();
+
+    // WP v 6.1.1 ругается
+    //Функция get_currentuserinfo с версии 4.5.0 считается устаревшей! 
+    //Используйте wp_get_current_user(). in /var/www/html/wp-includes/functions.php on line 5383
+    //
+    //get_currentuserinfo();
+    wp_get_current_user();
+    
     if( $current_user->ID != 0 ) {
         if( is_plugin_active('learnpress-students-list/learnpress-students-list.php') ) {
             unset( $plugins['learnpress-students-list/learnpress-students-list.php'] );
