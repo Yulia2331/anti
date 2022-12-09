@@ -1,5 +1,5 @@
 
-
+let localurl = 'http://localhost:7777/antinorma.com/';
 
 if (document.getElementsByName('reg-user-type')){
 let numOfChanges = 0;
@@ -46,7 +46,7 @@ if (document.getElementsByName('analitic-checker')){
   }
 }
 
-var ajaxurl = "/wp-admin/admin-ajax.php";
+var ajaxurl = localurl + "/wp-admin/admin-ajax.php";
 
 
 
@@ -242,7 +242,7 @@ $(document).on('click','#kt_charts_widget_5 .apexcharts-yaxis-label', function()
       }
       $.ajax({
         type:'POST',
-        url: '/wp-admin/admin-ajax.php',
+        url: localurl + '/wp-admin/admin-ajax.php',
         data: {
             action: 'add_user_money',
             this_money: this_money,
@@ -348,6 +348,8 @@ $('#public-post-btn').on('click', function(e){
   let status = $('#post-privacy li.active').attr('data-vision');
   let picture = $('#uploaded_image').val();
   let image = 'None';
+
+  console.log(window.location.href);
   
   if (picture!=''){
     image = picture;
@@ -374,7 +376,7 @@ $('#public-post-btn').on('click', function(e){
     
       $.ajax({
         type:'POST',
-        url: '/wp-admin/admin-ajax.php',
+        url: localurl + '/wp-admin/admin-ajax.php',
         data: {
             action: 'add_user_post',
             user_id: id,
@@ -440,7 +442,7 @@ $('#changeProfilePhoto').change(function(){
     formData.append('image_id', image_id);
     jQuery.ajax({
       type:'POST',
-      url: '/wp-admin/admin-ajax.php',
+      url: localurl + '/wp-admin/admin-ajax.php',
       dataType: "json",
       data: {
         action:'upload_profileimage',
@@ -499,7 +501,7 @@ $(document).on("click", '.delete-post', function(e){
     if (result.isConfirmed) {
           $.ajax({
               type:'POST',
-              url: '/wp-admin/admin-ajax.php',
+              url: localurl + '/wp-admin/admin-ajax.php',
               dataType: "json",
               data: {
                 action:'delete_user_post',
@@ -745,7 +747,7 @@ $('.btn-loadmore').on('click', function(){
   }
 
   $.ajax({
-      url: '/wp-admin/admin-ajax.php',
+      url: localurl + '/wp-admin/admin-ajax.php',
       data: data,
       type: 'POST',
       success:function(data){
@@ -915,7 +917,7 @@ $('.make_user').on('click', function(e){
          
           $.ajax({
               type:'POST',
-              url:"/wp-admin/admin-ajax.php",
+              url: localurl + "/wp-admin/admin-ajax.php",
               data:{
                   action: 'make_user_user',
                   user: id,
@@ -975,7 +977,7 @@ $('.make_admin').on('click', function(e){
          
           $.ajax({
               type:'POST',
-              url:"/wp-admin/admin-ajax.php",
+              url: localurl + "/wp-admin/admin-ajax.php",
               async:false,
               data:{
                   action: 'make_user_admin',
@@ -1029,7 +1031,7 @@ $('.show_comments').on('click', function(e){
 	let t = $(this);
 	$.ajax({
 		type:'POST',
-		url:"/wp-admin/admin-ajax.php",
+		url: localurl + "/wp-admin/admin-ajax.php",
 		data:{
 			 action: 'get_comments',
 			 post_id: postId,
@@ -1067,7 +1069,7 @@ function discharge(input){
 function get_users_ages(){
   let users = [];
   $.ajax({
-    url: '/wp-admin/admin-ajax.php',
+    url: localurl + '/wp-admin/admin-ajax.php',
     data: {
       action:'get_users_ages',
     },
@@ -1090,7 +1092,7 @@ function get_users_ages(){
 function get_users_ages_pkm(){
   let users = [];
   $.ajax({
-    url: '/wp-admin/admin-ajax.php',
+    url: localurl + '/wp-admin/admin-ajax.php',
     data: {
       action:'get_users_ages_pkm',
     },
@@ -1274,7 +1276,7 @@ function make_comment(response){
 //получить посты пользователя
   function get_user_post(id, status){
     $.ajax({
-      url: '/wp-admin/admin-ajax.php',
+      url: localurl + '/wp-admin/admin-ajax.php',
       type:'POST',
       dataType: "json",
       data:{
@@ -1344,7 +1346,7 @@ function make_comment(response){
  function get_zar_rezults(){
   let result = [];
   $.ajax({
-    url: "/wp-admin/admin-ajax.php",
+    url: localurl + "/wp-admin/admin-ajax.php",
     data: {
       action:'get_analitic_zar'
     },
@@ -1364,7 +1366,7 @@ function make_comment(response){
  function get_zar_rezults_pkm(){
   let result = [];
   $.ajax({
-    url: "/wp-admin/admin-ajax.php",
+    url: localurl + "/wp-admin/admin-ajax.php",
     data: {
       action:'get_analitic_zar_pkm'
     },

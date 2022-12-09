@@ -109,6 +109,7 @@ add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
 
 function plugins_addition($plugins) {
     global $current_user;
+<<<<<<< .mine
 
     // WP v 6.1.1 ругается
     //Функция get_currentuserinfo с версии 4.5.0 считается устаревшей! 
@@ -117,6 +118,16 @@ function plugins_addition($plugins) {
     //get_currentuserinfo();
     wp_get_current_user();
     
+=======
+    
+    // ВП написал что это устаревшая функция
+    //get_currentuserinfo();
+    wp_get_current_user();
+
+
+
+
+>>>>>>> .theirs
     if( $current_user->ID != 0 ) {
         if( is_plugin_active('learnpress-students-list/learnpress-students-list.php') ) {
             unset( $plugins['learnpress-students-list/learnpress-students-list.php'] );
@@ -254,7 +265,7 @@ function theme_name_scripts() {
 }
 
 function custom_login_page() {
-	$new_login_page_url = home_url( '/auth/' ); // new login page
+	$new_login_page_url = home_url( '/antinorma.com/auth/' ); // new login page
 	global $pagenow;
 	if( $pagenow == "wp-login.php" && $_SERVER['REQUEST_METHOD'] == "GET") {
 		wp_redirect($new_login_page_url);
@@ -295,7 +306,13 @@ function getMonthName($month) {
 	  12=> array('Декабрь', 'Декабря')
 	);
 	
-	return $monthAr[(int)$month];
+	// проверяем ввод данных на правельность
+	if ($month <= 1 and $month >= 12 ){
+		return $monthAr[(int)$month];
+	}else{
+		return 'error';
+	}
+	
  }
 
 
@@ -405,17 +422,17 @@ function check_zar(){
 				$today = getdate();
 				$this_month = $today['mon'];
 				$this_day = $today['mday'];
-				if (((int)$this_month - (int)$month-1) > 1 ){
-					wp_redirect( '/get_money', 301 );
-				}
-				if ((int)$this_month-1>(int)$month && (int)$this_day>3){
-					wp_redirect( '/get_money', 301 );
+				// if (((int)$this_month - (int)$month-1) > 1 ){
+				// 	wp_redirect( '/antinorma.com/get_money', 301 );
+				// }
+				// if ((int)$this_month-1>(int)$month && (int)$this_day>3){
+				// 	wp_redirect( '/antinorma.com/get_money', 301 );
 					
-				}
+				// }
 	}
 
 	elseif(!have_rows('zarabotok', 'user_'.$user_id )){
-		wp_redirect( '/get_money', 301 );
+		wp_redirect( '/antinorma.com/get_money', 301 );
 		
 	}
 }
@@ -452,14 +469,15 @@ function get_cities(){
 add_action( 'template_redirect', function() {
 	if( ( !is_page(array('auth','remind-password', 'reg') )) ) {
 		 if (!is_user_logged_in() ) {
-			  wp_redirect( site_url( '/auth' ) );        // redirect all...
+			  wp_redirect( site_url( '/antinorma.com/auth' ) );        // redirect all...
 			  exit();
 		 }
 	}
 });
+
 function my_upload_size_limit() {
-add_filter( 'upload_size_limit', 'my_upload_size_limit' );
-return wp_convert_hr_to_bytes( '2400M' );
+	add_filter( 'upload_size_limit', 'my_upload_size_limit' );
+	return wp_convert_hr_to_bytes( '2400M' );
 }
 my_upload_size_limit();
 

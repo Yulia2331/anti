@@ -26,7 +26,7 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 			$this_day = $today['mday'];
 }
 ?>
-<?php get_header() ;
+<?php get_header();
 
 ?>
 
@@ -59,19 +59,7 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 													?>
 	
 													<div class="position-absolute translate-middle bottom-0 start-100 mb-6 <?php echo (is_user_online($user_id))? 'bg-success' : 'bg-danger' ?> rounded-circle border border-4 border-white h-20px w-20px"></div>
-													<?php
-														if( is_author() && is_user_logged_in() ){
-															if(  $current_user->ID == $user_id ){
-																?>
-																	<div class="position-absolute bottom-0 top-0 w-100 h-100 bg-dark symbol d-flex bg-opacity-75 align-items-center justify-content-center change-photo-btn">
-																		<label for="changeProfilePhoto" class="btn btn-outline-light"  style="border: 1px solid; font-weight: 500;	font-size: 13px;line-height: 16px;">Выберите фото</label>
-																		<input class="form-control d-none" data-user='<?php echo $user_id ?>' type="file" accept="image/*" id="changeProfilePhoto" multiple>
-																	</div>	
-																<?
-															}
-														}
-														
-														?>
+													
 												</div>
 											</div>
 											<!--end::Pic-->
@@ -729,4 +717,4 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 				}
 		
 		</script>
-<? get_footer() ?>
+<?php get_footer(); ?>
