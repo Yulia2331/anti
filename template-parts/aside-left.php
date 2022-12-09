@@ -140,7 +140,7 @@ $user_info = get_userdata(get_current_user_id());
 												<span class="menu-title">Список пользователей</span>
 											</a>
 										</div>
-                                        										<div class="menu-item echo (is_author())?'here':'' ?>">
+                                        	<div class="menu-item <?php echo (is_author())?'here':'' ?>">
 												<a class="menu-link" href="/spisok-kursov/">
 													<span class="menu-icon">
 														<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
@@ -159,8 +159,11 @@ $user_info = get_userdata(get_current_user_id());
 										if( is_user_role_in( [ 'administrator','contributor' ] ) ){
 										//if( current_user_can( 'administrator', 'contributor' ) ){
 										?>
+										<?php
+											echo is_page(255);
+										?>
 
-										<div class="menu-item <?php echo (is_page(255)?'here':'')?>">
+										<div class="menu-item <?php echo (is_page(255)?'here':'');?>">
 											<a class="menu-link" href="/spisok-razreshenij/">
 												<span class="menu-icon">
 													<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
