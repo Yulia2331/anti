@@ -42,7 +42,6 @@ add_action( 'after_setup_theme', 'blank_setup' );
 /**
  * Sets up theme defaults and registers the various WordPress features that
  * this theme supports.
-
  * @param class $wp_customize Customizer object.
  */
 function blank_customize_register( $wp_customize ) {
@@ -68,7 +67,6 @@ function blank_customize_register( $wp_customize ) {
 
 	/**
 	 * Checkbox sanitization function
-
 	 * @param bool $checked Whether the checkbox is checked.
 	 * @return bool Whether the checkbox is checked.
 	 */
@@ -109,25 +107,11 @@ add_action( 'wp_enqueue_scripts', 'theme_name_scripts' );
 
 function plugins_addition($plugins) {
     global $current_user;
-<<<<<<< .mine
-
-    // WP v 6.1.1 ругается
-    //Функция get_currentuserinfo с версии 4.5.0 считается устаревшей! 
-    //Используйте wp_get_current_user(). in /var/www/html/wp-includes/functions.php on line 5383
-    //
-    //get_currentuserinfo();
-    wp_get_current_user();
-    
-=======
     
     // ВП написал что это устаревшая функция
     //get_currentuserinfo();
     wp_get_current_user();
 
-
-
-
->>>>>>> .theirs
     if( $current_user->ID != 0 ) {
         if( is_plugin_active('learnpress-students-list/learnpress-students-list.php') ) {
             unset( $plugins['learnpress-students-list/learnpress-students-list.php'] );
@@ -147,11 +131,7 @@ function theme_name_scripts() {
 	wp_enqueue_style( 'style-bundle', get_template_directory_uri() . '/assets/css/style.bundle.css' );
 	wp_enqueue_style( 'custom-style', get_template_directory_uri() . '/assets/css/custom-style.css' );
 	wp_enqueue_style( 'curs-style', get_template_directory_uri() . '/assets/css/style.css' );
-	wp_enqueue_style( 'curses', get_template_directory_uri() . '/assets/css/curses.css?1' );
-	wp_enqueue_style( 'ideas-style', get_template_directory_uri() . '/assets/css/ideas/style.min.css' );
-	wp_enqueue_style( 'all-ideas', get_template_directory_uri() . '/assets/css/ideas/all-ideas.min.css' );
-	wp_enqueue_style( 'my-reviews', get_template_directory_uri() . '/assets/css/ideas/my-reviews.min.css' );
-	wp_enqueue_style( 'tracked-ideas', get_template_directory_uri() . '/assets/css/ideas/tracked-ideas.min.css' );
+	wp_enqueue_style( 'curses', get_template_directory_uri() . '/assets/css/curses.css?<?php echo time();?>' );
 	wp_enqueue_script( 'script-global-plugins-bundle', get_template_directory_uri() . '/assets/plugins/global/plugins.bundle.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'script-bundle', get_template_directory_uri() . '/assets/js/scripts.bundle.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'user-search', get_template_directory_uri() . '/assets/js/custom/utilities/modals/users-search.js', array(), '1.0.0', true );
