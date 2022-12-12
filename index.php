@@ -2,7 +2,7 @@
 
 if(is_user_logged_in()){
 	
-	echo '----------------- index ----------------'
+	echo '----------------- index ----------------';
 	// else{
 	// 	require ('user-page.php');
 	// }
