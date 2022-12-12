@@ -155,8 +155,8 @@ $user_info = get_userdata(get_current_user_id());
 													<span class="menu-title">Список курсов</span>
 												</a>
 											</div>
-											<div class="menu-item echo (is_author())?'here':'' ?>">
-												<a class="menu-link" href="/bank-idej/">
+											<div class="menu-item <? echo (is_author())?'here':'' ?>">
+												<a class="menu-link" href="<?php echo home_url(); ?>/bank-idej/">
 													<span class="menu-icon">
 														<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 														<span class="svg-icon svg-icon-2">
@@ -208,7 +208,7 @@ $user_info = get_userdata(get_current_user_id());
 											</div>
 
 											<div class="menu-item <?php echo (is_page(255)?'here':'')?>">
-												<a class="menu-link" href="<?php echo home_url(); ?>/lp-profile//">
+												<a class="menu-link" href="<?php echo home_url(); ?>/lp-profile/">
 													<span class="menu-icon">
 														<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 														<span class="svg-icon svg-icon-2">
