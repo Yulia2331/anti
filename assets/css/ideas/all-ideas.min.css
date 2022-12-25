@@ -38,3 +38,6 @@
 .select-active .select__body{
     display: block;
 }
+.select__item-radio{
+    display: none;
+}

@@ -25,8 +25,9 @@
                             <?php foreach ($cat_product as $cat_p) : ?>
                             <?php $curs_term_id = $cat_p->cat_ID; ?>
                             <div class="select__item">
-                            <input type="radio" name="idea_cat" value="7">
-                            <?php echo $cat_p->name; ?></div>     
+                            <input id="ci_<? echo $curs_term_id; ?>" type="radio" name="idea_cat" value="<? echo $curs_term_id; ?>" class="select__item-radio">
+                            <label for="ci_<? echo $curs_term_id; ?>"> <?php echo $cat_p->name; ?></label>
+                           </div>     
                             <?php endforeach; ?>
         </div>
       </div>
@@ -35,14 +36,12 @@
           <div class="select__icon"> <i class="fa-solid fa-angle-down"></i></div>
         </div>
         <div class="select__body"> 
-          <div class="select__item">Бизнес</div>
-          <div class="select__item">Маркетинг</div>
-          <div class="select__item">Финансы</div>
+     
         </div>
       </div>
     </div>
     <textarea class="create-idea__textarea" name="idea_content" cols="30" rows="10" placeholder="Опишите вашу идею"> </textarea>
-    <!-- <div class="create-idea__subtitle">Создайте до 5 критериев оценки вашей идеи</div>
+    <div class="create-idea__subtitle">Создайте до 5 критериев оценки вашей идеи</div>
     <div class="create-idea__add-criteria">
       <div class="create-idea__criteria-block">
         <div class="create-idea__criteria select">Востребованность</div>
@@ -52,8 +51,8 @@
         <div class="create-idea__criteria select">Денежность</div>
       </div>
       <button class="create-idea__plus container__icon--24"><i class="fa-solid fa-plus"></i></button>
-    </div> -->
-    <button type='submit' class="create-idea__button secondary__button">Опубликовать</button>
+    </div>
+    <button type='submit' name="submit" class="create-idea__button secondary__button">Опубликовать</button>
   </form>
 </div>
 <?  
@@ -71,17 +70,13 @@ function testfun()
     	'post_title'    => $title,
       'post_content'  => sanitize_text_field( $_POST['idea_content'] ),
     	'post_status'   => 'publish',
+      // 'meta_input'    => [ 'meta_key' => 'meta_value' ],
   ];
   $post_id = wp_insert_post( $post_data );
-  //  if(isset($_POST["idea_cat"]))
-  // {
-  //   $idea_tax = $_POST["idea_cat"];
-  //   wp_set_object_terms( $post_id, $idea_tax, 'ideas_tax' );
-  // } 
-  // $idea_tax = $_POST['idea_cat'];
-  // $idea_tax = strip_tags($_POST["idea_cat"]);
-  // // $idea_tax = 7;
-  // wp_set_object_terms( $post_id, $idea_tax, 'ideas_tax' );
+    if(!empty($_POST['idea_cat'])) {
+      $idea_tax = (int) $_POST['idea_cat'];
+      wp_set_object_terms( $post_id, $idea_tax, 'ideas_tax' );
+    }
 }
 }
 
