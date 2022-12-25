@@ -84,3 +84,45 @@ function register_post_types_ideas(){
 
 
 ?>
+<?
+add_action( 'init', 'create_taxonomy' );
+function create_taxonomy(){
+
+  // список параметров: wp-kama.ru/function/get_taxonomy_labels
+  register_taxonomy( 'ideas_tax', [ 'ideas' ], [ 
+    'label'                 => '', // определяется параметром $labels->name
+    'labels'                => [
+      'name'              => 'Категории идей',
+      'singular_name'     => 'Категория идей',
+      'search_items'      => 'Искать категорию идей',
+      'all_items'         => 'Все категории идей',
+      'view_item '        => 'Посмотреть категорию',
+      'parent_item'       => 'Родительская каегория',
+      'parent_item_colon' => 'Родительская каегория:',
+      'edit_item'         => 'Изминить каегорию',
+      'update_item'       => 'Обновить каегорию',
+      'add_new_item'      => 'Добавить новую каегорию',
+      'new_item_name'     => 'Название новоой мерыкаегории',
+      'menu_name'         => 'Каегории идей',
+    ],
+    'description'           => 'все что косается мероприятии проводимые мечетью', // описание таксономии
+    'public'                => true,
+    'publicly_queryable'    => true, // равен аргументу public
+    'show_in_nav_menus'     => true, // равен аргументу public
+    'show_ui'               => true, // равен аргументу public
+    'show_in_menu'          => true, // равен аргументу show_ui
+    'show_tagcloud'         => true, // равен аргументу show_ui
+    'show_in_quick_edit'    => true, // равен аргументу show_ui
+    'hierarchical'          => true,
+
+    'rewrite'               => true,
+    //'query_var'             => $taxonomy, // название параметра запроса
+    'capabilities'          => array(),
+    'meta_box_cb'           => null, // html метабокса. callback: `post_categories_meta_box` или `post_tags_meta_box`. false — метабокс отключен.
+    'show_admin_column'     => true, // авто-создание колонки таксы в таблице ассоциированного типа записи. (с версии 3.5)
+    'show_in_rest'          => true, // добавить в REST API
+    'rest_base'             => null, // $taxonomy
+    // '_builtin'              => false,
+    //'update_count_callback' => '_update_post_term_count',
+  ] );
+}

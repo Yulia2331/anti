@@ -1,3 +1,4 @@
+try{
 const nav = document.querySelector('.navigation-block');
 const burger = document.querySelector('.header__burger');
 const navClose = document.querySelector('.navigation-block__button');
@@ -39,3 +40,4 @@ navOpen.addEventListener('click', () => {
     el.style.paddingLeft = '295px';
   })
 })
+} catch {}

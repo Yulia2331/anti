@@ -144,7 +144,11 @@ function theme_name_scripts() {
 	wp_enqueue_script( 'swiper-js', get_template_directory_uri() . '/assets/js/custom/swiper.js', array(), null, 'all' );
 	wp_enqueue_script( 'popup-js', get_template_directory_uri() . '/assets/js/custom/popup.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'video-js', get_template_directory_uri() . '/assets/js/custom/video.js', array(), '1.0.0', true );
-	
+	wp_enqueue_script( 'ideas-app', get_template_directory_uri() . '/assets/js/ideas/app.js', array(), '1.0.0', true );
+	wp_enqueue_script( 'ideas-nav', get_template_directory_uri() . '/assets/js/ideas/navigation.js', array(), '1.0.0', true );
+	wp_enqueue_script( 'ideas-counts', get_template_directory_uri() . '/assets/js/ideas/counts.js', array(), '1.0.0', true );
+	wp_enqueue_script( 'ideas-rating', get_template_directory_uri() . '/assets/js/ideas/rating.js', array(), '1.0.0', true );
+	wp_enqueue_script( 'ideas-select', get_template_directory_uri() . '/assets/js/ideas/select.js', array(), '1.0.0', true );
 	if (is_page(array(252,311))){
 	wp_enqueue_style( 'fullcalendar.bundle.css', get_template_directory_uri() . '/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css' );
 	wp_enqueue_style( 'datatables.bundle.css', get_template_directory_uri() . '/assets/plugins/custom/datatables/datatables.bundle.css' );
@@ -154,8 +158,6 @@ function theme_name_scripts() {
 	wp_enqueue_script( 'datatables-bundle-js', get_template_directory_uri() . '/assets/plugins/custom/datatables/datatables.bundle.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'widgets-bundle-js', get_template_directory_uri() . '/assets/js/widgets.bundle.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'widgets-js', get_template_directory_uri() . '/assets/js/custom/widgets.js', array(), '1.0.0', true );
-	wp_enqueue_script( 'ideas-app', get_template_directory_uri() . '/assets/js/ideas/app.js', array(), '1.0.0', true );
-	wp_enqueue_script( 'ideas-nav', get_template_directory_uri() . '/assets/js/ideas/navigation.js', array(), '1.0.0', true );
 
 
 	}
