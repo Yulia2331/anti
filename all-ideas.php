@@ -46,7 +46,7 @@ get_header();
                 <div class="idea__category"><? if($gg){ foreach( $gg as $g ){ 
                   echo  $g->name; }
                 } ?></div>
-                <div class="idea__business-position"><?php the_field('onlajn_offlajn'); ?></div>
+                <div class="idea__business-position"><?php the_field('online_offline'); ?></div>
               </div>
             </div>
             <button class="idea__buton secondary__button">Подписаться</button>

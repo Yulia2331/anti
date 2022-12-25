@@ -60,7 +60,6 @@ reviewsButton.forEach(btn => {
 
     createReviews.classList.add('active');
 
-    console.log('hi')
   })
 })
 

@@ -31,6 +31,7 @@
 .select__item{
     margin-bottom: 10px;
     cursor: pointer;
+    display: block;
 }
 .select__item:hover{
     color:#303030;
@@ -40,4 +41,7 @@
 }
 .select__item-radio{
     display: none;
+}
+.create-reviews{
+    overflow: auto;
 }

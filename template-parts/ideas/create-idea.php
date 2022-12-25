@@ -24,10 +24,10 @@
                             $cat_product = get_categories( $course_category )?>
                             <?php foreach ($cat_product as $cat_p) : ?>
                             <?php $curs_term_id = $cat_p->cat_ID; ?>
-                            <div class="select__item">
+                            <label for="ci_<? echo $curs_term_id; ?>" class="select__item">
                             <input id="ci_<? echo $curs_term_id; ?>" type="radio" name="idea_cat" value="<? echo $curs_term_id; ?>" class="select__item-radio">
-                            <label for="ci_<? echo $curs_term_id; ?>"> <?php echo $cat_p->name; ?></label>
-                           </div>     
+                            <?php echo $cat_p->name; ?>
+                           </label>     
                             <?php endforeach; ?>
         </div>
       </div>
@@ -36,7 +36,15 @@
           <div class="select__icon"> <i class="fa-solid fa-angle-down"></i></div>
         </div>
         <div class="select__body"> 
-     
+        <label for="ci_online" class="select__item">
+            <input id="ci_online" type="radio" name="idea_tag" value="онлайн" class="select__item-radio">онлайн
+          </label>     
+          <label for="ci_offline" class="select__item">
+            <input id="ci_offline" type="radio" name="idea_tag" value="оффлайн" class="select__item-radio">оффлайн
+          </label>  
+          <label for="ci_online_offline" class="select__item">
+            <input id="ci_online_offline" type="radio" name="idea_tag" value="онлайн/оффлайн" class="select__item-radio" checked>онлайн/оффлайн
+          </label> 
         </div>
       </div>
     </div>
@@ -64,13 +72,16 @@ if($_POST){
 function testfun()
 {
   $title = sanitize_text_field( $_POST['idea_title'] );
+  if(!empty($_POST['idea_tag'])) {
+    $idea_tag = $_POST['idea_tag'];
+  }
   if (!get_page_by_title($title, 'OBJECT', 'ideas') ){
   $post_data = [
       'post_type' => 'ideas',
     	'post_title'    => $title,
       'post_content'  => sanitize_text_field( $_POST['idea_content'] ),
     	'post_status'   => 'publish',
-      // 'meta_input'    => [ 'meta_key' => 'meta_value' ],
+      'meta_input'    => [ 'online_offline' => $idea_tag ],
   ];
   $post_id = wp_insert_post( $post_data );
     if(!empty($_POST['idea_cat'])) {
