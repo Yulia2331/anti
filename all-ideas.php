@@ -41,7 +41,7 @@ get_header();
             </div>
             <div class="idea__body"> 
               <div class="idea__user-name"><?php echo get_the_author(); ?></div>
-              <button class="idea__name" data-view="goodIdea1"><? echo the_title(); ?></button>
+              <button class="idea__name" data-view="<? the_id(); ?>"><? echo the_title(); ?></button>
               <div class="idea__info"> 
                 <div class="idea__category"><? if($gg){ foreach( $gg as $g ){ 
                   echo  $g->name; }

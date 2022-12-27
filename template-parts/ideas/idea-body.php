@@ -1,73 +1,6 @@
-<div class="hidden"></div>
-<? get_template_part('template-parts/ideas/create-idea'); ?>
-<div class="create-reviews">
-  <button class="create-reviews__close close container__icon--18"><i class="fa-solid fa-xmark"></i></button>
-  <div class="create-reviews__title">Отзыв на идею</div>
-  <div class="create-reviews__form">
-    <div class="create-reviews__textarea">
-      <textarea class="create-reviews__plus" name="" placeholder="Расскажите о плюсах"></textarea>
-      <textarea class="create-reviews__minus" name="" placeholder="Расскажите о минусах"></textarea>
-      <textarea class="create-reviews__message" name="" placeholder="Общий комментарий"></textarea>
-    </div>
-    <div class="create-reviews__counters">
-      <div class="create-reviews__counter-item">
-        <div class="create-reviews__area">Востребованность</div>
-        <div class="create-reviews__count"> 
-          <div class="create-reviews__num">3</div>
-          <div class="create-reviews__count-button"> 
-            <button class="create-reviews__more"> <i class="fa-solid fa-sort-up"></i></button>
-            <button class="create-reviews__less"><i class="fa-solid fa-caret-down"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="create-reviews__counter-item">
-        <div class="create-reviews__area">Востребованность</div>
-        <div class="create-reviews__count"> 
-          <div class="create-reviews__num">3</div>
-          <div class="create-reviews__count-button"> 
-            <button class="create-reviews__more"> <i class="fa-solid fa-sort-up"></i></button>
-            <button class="create-reviews__less"><i class="fa-solid fa-caret-down"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="create-reviews__counter-item">
-        <div class="create-reviews__area">Востребованность</div>
-        <div class="create-reviews__count"> 
-          <div class="create-reviews__num">3</div>
-          <div class="create-reviews__count-button"> 
-            <button class="create-reviews__more"> <i class="fa-solid fa-sort-up"></i></button>
-            <button class="create-reviews__less"><i class="fa-solid fa-caret-down"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="create-reviews__counter-item">
-        <div class="create-reviews__area">Востребованность</div>
-        <div class="create-reviews__count"> 
-          <div class="create-reviews__num">3</div>
-          <div class="create-reviews__count-button"> 
-            <button class="create-reviews__more"> <i class="fa-solid fa-sort-up"></i></button>
-            <button class="create-reviews__less"><i class="fa-solid fa-caret-down"></i></button>
-          </div>
-        </div>
-      </div>
-      <div class="create-reviews__counter-item">
-        <div class="create-reviews__area">Востребованность</div>
-        <div class="create-reviews__count"> 
-          <div class="create-reviews__num">3</div>
-          <div class="create-reviews__count-button"> 
-            <button class="create-reviews__more"> <i class="fa-solid fa-sort-up"></i></button>
-            <button class="create-reviews__less"><i class="fa-solid fa-caret-down"></i></button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <button class="create-reviews__button secondary__button">Отправить</button>
-  </div>
-</div>
-<div class="hidden"></div>
-<? get_template_part('template-parts/ideas/idea-body'); ?>
-<!-- <div class="hidden"></div>
-<div class="view-idea" data-idea="goodIdea2">
+<div class="view-idea" data-idea="">
+    <!-- <span class="idea_id" style=""></span> -->
+    <? echo $i_id; ?>
   <button class="view-idea__close close container__icon--18"><i class="fa-solid fa-xmark"></i></button>
   <button class="view-idea__trash container__icon--18"><i class="fa-solid fa-trash"></i></button>
   <div class="view-idea__header"> 
@@ -103,6 +36,14 @@
           <button class="hypothesis__item_icon"> <i class="fa-solid fa-trash"></i></button>
         </div>
         <div class="hypothesis__content">
+           Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях.</div>
+      </div>
+      <div class="hypothesis__item">
+        <div class="hypothesis__item_header">
+          <div class="hypothesis__item_title">Гипотиза (08.09.22)</div>
+          <button class="hypothesis__item_icon"> <i class="fa-solid fa-trash"></i></button>
+        </div>
+        <div class="hypothesis__content">
            В отличии от lorem ipsum, текст рыба на русском языке наполнит любой макет непонятным смыслом и придаст неповторимый колорит советских времен.</div>
       </div>
       <div class="hypothesis__item">
@@ -125,7 +66,7 @@
   </div>
   <div class="view-idea__button-block"> 
     <button class="view-idea__button secondary__button">Подписаться</button>
-    <button class="view-idea__button additional-button">Оставить отзыв</button>
+    <button class="view-idea__button view-idea__button-reviews additional-button">Оставить отзыв</button>
   </div>
   <div class="view-idea__reviews reviews-idea">
     <div class="reviews-idea__title">Отзывы участников</div>
@@ -196,4 +137,4 @@
       </div>
     </div>
   </div>
-</div> -->
+</div>
