@@ -149,6 +149,7 @@ function theme_name_scripts() {
 	wp_enqueue_script( 'ideas-counts', get_template_directory_uri() . '/assets/js/ideas/counts.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'ideas-rating', get_template_directory_uri() . '/assets/js/ideas/rating.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'ideas-select', get_template_directory_uri() . '/assets/js/ideas/select.js', array(), '1.0.0', true );
+	
 	if (is_page(array(252,311))){
 	wp_enqueue_style( 'fullcalendar.bundle.css', get_template_directory_uri() . '/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css' );
 	wp_enqueue_style( 'datatables.bundle.css', get_template_directory_uri() . '/assets/plugins/custom/datatables/datatables.bundle.css' );
