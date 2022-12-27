@@ -155,9 +155,8 @@ $user_info = get_userdata(get_current_user_id());
 													<span class="menu-title">Список курсов</span>
 												</a>
 											</div>
-											
-											<div class="menu-item <?php echo (is_page(1406)?'here':'')?>">
-												<a class="menu-link" href="/bank-idej/">
+											<div class="menu-item <? echo (is_author())?'here':'' ?>">
+												<a class="menu-link" href="<?php echo home_url(); ?>/bank-idej/">
 													<span class="menu-icon">
 														<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 														<span class="svg-icon svg-icon-2">
@@ -175,7 +174,7 @@ $user_info = get_userdata(get_current_user_id());
 										if( is_user_role_in( [ 'administrator','contributor' ] ) ){
 										//if( current_user_can( 'administrator', 'contributor' ) ){
 										?>
-										
+
 										<div class="menu-item <?php echo (is_page(255)?'here':'')?>">
 											<a class="menu-link" href="<?php echo home_url(); ?>/spisok-razreshenij/">
 												<span class="menu-icon">
@@ -191,8 +190,8 @@ $user_info = get_userdata(get_current_user_id());
 												<span class="menu-title">Список разрешений</span>
 											</a>
 										</div>
-											
-											<div class="menu-item <?php echo (is_page(428)?'here':'')?>">
+									
+											<div class="menu-item <?php echo (is_page(255)?'here':'')?>">
 												<a class="menu-link" href="<?php echo home_url(); ?>/lp-become-a-teacher/">
 													<span class="menu-icon">
 														<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
@@ -207,9 +206,9 @@ $user_info = get_userdata(get_current_user_id());
 													<span class="menu-title">Стать учителем</span>
 												</a>
 											</div>
-											
-											<div class="menu-item <?php echo (is_page(426)?'here':'')?>">
-												<a class="menu-link" href="<?php echo home_url(); ?>/lp-profile//">
+
+											<div class="menu-item <?php echo (is_page(255)?'here':'')?>">
+												<a class="menu-link" href="<?php echo home_url(); ?>/lp-profile/">
 													<span class="menu-icon">
 														<!--begin::Svg Icon | path: icons/duotune/general/gen014.svg-->
 														<span class="svg-icon svg-icon-2">
