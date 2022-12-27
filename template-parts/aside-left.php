@@ -223,6 +223,7 @@ $user_info = get_userdata(get_current_user_id());
 													<span class="menu-title">Профиль</span>
 												</a>
 											</div>
+											
 
 											<?php	}?>
 
