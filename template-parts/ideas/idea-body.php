@@ -1,6 +1,4 @@
 <div class="view-idea" data-idea="">
-    <!-- <span class="idea_id" style=""></span> -->
-    <? echo $i_id; ?>
   <button class="view-idea__close close container__icon--18"><i class="fa-solid fa-xmark"></i></button>
   <button class="view-idea__trash container__icon--18"><i class="fa-solid fa-trash"></i></button>
   <div class="view-idea__header"> 
