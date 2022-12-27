@@ -1,3 +1,4 @@
+try{
 const reviewsBtn = document.querySelector('.banner-swiper__btn')
 const overlay = document.querySelector('.overlay')
 const popup = document.querySelector('.popup')
@@ -77,3 +78,4 @@ function mouseOutActiveClass(arr) {
         }
     }
 }
+}catch {}
