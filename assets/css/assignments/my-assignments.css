@@ -1,0 +1,115 @@
+.my-assignments {
+  margin-bottom: 30px;
+  padding-top: 30px;
+  padding-right: 30px;
+  min-height: 100vh;
+}
+
+.my-assignments__wrapper {
+  padding: 30px;
+  border-radius: 6px;
+  background-color: #ffffff;
+}
+
+.my-assignments__title {
+  font-weight: 600;
+  font-size: 17px;
+  line-height: 17px;
+  color: #303030;
+  margin-bottom: 30px;
+}
+
+.my-assignments__cuourses {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[2];
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+}
+
+.my-assignments__cours {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 30px;
+  border-radius: 6px;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.my-assignments__subtitle {
+  margin-bottom: 82px;
+  font-weight: 500;
+  font-size: 15px;
+  line-height: 17px;
+  color: #ffffff;
+}
+
+.my-assignments__btn {
+  width: -webkit-min-content;
+  width: -moz-min-content;
+  width: min-content;
+  padding-left: 58px;
+  padding-right: 58px;
+}
+
+.my-assignments__cours-1 {
+  background-image: url("../img/cours-1.png");
+}
+
+.my-assignments__cours-2 {
+  background-image: url("../img/cours-2.png");
+}
+
+.active-navigation {
+  position: absolute;
+  left: -100%;
+  display: block;
+  -webkit-transition: 0.3s ease-in-out;
+  -o-transition: 0.3s ease-in-out;
+  transition: 0.3s ease-in-out;
+}
+
+.active-animation {
+  left: 0;
+}
+
+@media (max-width: 2560px) {
+  .my-assignments__cuourses {
+    -ms-grid-columns: (1fr)[4];
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (max-width: 1920px) {
+  .my-assignments__cuourses {
+    -ms-grid-columns: (1fr)[3];
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 1200px) {
+  .my-assignments__cuourses {
+    -ms-grid-columns: (1fr)[2];
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .my-assignments__cuourses {
+    -ms-grid-columns: (1fr)[1];
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@media (max-width: 576px) {
+  .my-assignments {
+    margin-bottom: 0;
+    padding: 24px 16px;
+  }
+}

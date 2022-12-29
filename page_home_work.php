@@ -1,11 +1,11 @@
 <?php
 /**
- * Template name: Мои задания
+ * Template name: Мои задания список
  */
-        get_header();
+         get_header();
        
     ?>
-<header class="header">
+<!-- <header class="header">
       <div class="header__wrapper padding-left">
         <div class="header__title-block"> 
           <button class="header__burger"><i class="fa-solid fa-bars"></i></button>
@@ -18,26 +18,32 @@
           <button class="general-function__button general-function__user"><img src="../img/user.png" alt=""></button>
         </div>
       </div>
-    </header>
+    </header> -->
     
+    
+  
+   
     <section class="my-assignments padding-left">
       <div class="my-assignments__wrapper">
         <h2 class="my-assignments__title">Список курсов, по которым доступны домашние задания</h2>
         <div class="my-assignments__cuourses"> 
-          <div class="my-assignments__cours my-assignments__cours-1">
-            <div class="my-assignments__subtitle">Это название курса</div><a class="my-assignments__btn button-main" href="#">Перейти</a>
+          <div class="my-assignments__cours my-assignments__cours-1" style="background-image: url(' <?php echo get_template_directory_uri(); ?>/assets/img/cours-1.png');">
+            <div class="my-assignments__subtitle">Это название курса</div><a class="my-assignments__btn button-main" href="home-work-curse">Перейти</a>
           </div>
-          <div class="my-assignments__cours my-assignments__cours-2">
-            <div class="my-assignments__subtitle">Это название курса</div><a class="my-assignments__btn button-main" href="#">Перейти</a>
+          <div class="my-assignments__cours my-assignments__cours-2" style="background-image: url(' <?php echo get_template_directory_uri(); ?>/assets/img/cours-2.png');">
+            <div class="my-assignments__subtitle">Это название курса</div><a class="my-assignments__btn button-main" href="home-work-curse">Перейти</a>
           </div>
-          <div class="my-assignments__cours my-assignments__cours-1">
-            <div class="my-assignments__subtitle">Это название курса</div><a class="my-assignments__btn button-main" href="#">Перейти</a>
+          <div class="my-assignments__cours my-assignments__cours-1" style="background-image: url(' <?php echo get_template_directory_uri(); ?>/assets/img/cours-1.png');">
+            <div class="my-assignments__subtitle">Это название курса</div><a class="my-assignments__btn button-main" href="home-work-curse">Перейти</a>
           </div>
-          <div class="my-assignments__cours my-assignments__cours-2">
+          <div class="my-assignments__cours my-assignments__cours-2" style="background-image: url(' <?php echo get_template_directory_uri(); ?>/assets/img/cours-2.png');">
             <div class="my-assignments__subtitle">Это название курса</div><a class="my-assignments__btn button-main" href="#">Перейти</a>
           </div>
         </div>
       </div>
-    </section>
+   </section>
+  
+
+  
   <?php
-        get_footer();
+        // get_footer();
