@@ -45,3 +45,6 @@
 .create-reviews{
     overflow: auto;
 }
+.idea__name{
+    display: block;
+}

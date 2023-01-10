@@ -1,13 +1,16 @@
-<div class="view-idea" data-idea="">
+<? $idea = get_queried_object(); 
+$idea_id = $idea->ID;
+?>
+<div class="view-idea" data-idea="<? echo $idea_id; ?>">
   <button class="view-idea__close close container__icon--18"><i class="fa-solid fa-xmark"></i></button>
   <button class="view-idea__trash container__icon--18"><i class="fa-solid fa-trash"></i></button>
   <div class="view-idea__header"> 
-    <h2 class="view-idea__title">Хорошая идея номер 1</h2>
+    <h2 class="view-idea__title"></h2>
     <div class="view-idea__right"> 
       <div class="view-idea__rating"> <span class="view-idea__number">5</span>
         <div class="view-idea__icon container__icon--18"><i class="fa-solid fa-star"></i></div>
       </div>
-      <apsn class="view-idea__data">08.09.22</apsn>
+      <apsn class="view-idea__data"></apsn>
     </div>
   </div>
   <div class="view-idea__info"> 
@@ -66,73 +69,5 @@
     <button class="view-idea__button secondary__button">Подписаться</button>
     <button class="view-idea__button view-idea__button-reviews additional-button">Оставить отзыв</button>
   </div>
-  <div class="view-idea__reviews reviews-idea">
-    <div class="reviews-idea__title">Отзывы участников</div>
-    <div class="reviews-idea__board"> 
-      <div class="reviews-idea__item">
-        <div class="reviews-idea__header"> 
-          <div class="reviews-idea__left"> 
-            <div class="reviews-idea__user"> <img src="<?php echo bloginfo('template_url');?>/assets/img/ava-1.png" alt="avatar">
-              <div class="reviews-idea__name">
-                 Андрей Ярухин</div>
-            </div>
-          </div>
-          <div class="reviews-idea__right"> <span class="view-idea__number">5</span>
-            <div class="view-idea__icon"><i class="fa-solid fa-star"></i></div>
-          </div>
-        </div>
-        <div class="reviews-idea__block-content">
-          <div class="reviews-idea__plus container__icon--18"><i class="fa-solid fa-square-plus"></i></div>
-          <div class="reviews-idea__content">Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях.</div>
-        </div>
-        <div class="reviews-idea__block-content">
-          <div class="reviews-idea__minus container__icon--18"><i class="fa-solid fa-square-minus"></i></div>
-          <div class="reviews-idea__content">В отличии от lorem ipsum, текст рыба на русском языке наполнит любой макет непонятным смыслом и придаст неповторимый колорит советских времен.</div>
-        </div>
-        <div class="reviews-idea__block-content">
-          <div class="reviews-idea__message container__icon--18"><i class="fa-solid fa-message"></i></div>
-          <div class="reviews-idea__content">При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым для визуально-слухового восприятия. Сайт рыбатекст поможет дизайнеру</div>
-        </div>
-        <div class="reviews-idea__footer"> 
-          <button class="reviews-idea__comment">Комментировать</button>
-          <div class="reviews-idea__like"> 
-            <div class="reviews-idea__like_number">12</div>
-            <div class="reviews-idea__like_icon"><i class="fa-solid fa-heart"></i></div>
-          </div>
-        </div>
-      </div>
-      <div class="reviews-idea__item">
-        <div class="reviews-idea__header"> 
-          <div class="reviews-idea__left"> 
-            <div class="reviews-idea__user"> <img src="<?php echo bloginfo('template_url');?>/assets/img/ava-1.png" alt="avatar">
-              <div class="reviews-idea__name">
-                 Андрей Ярухин</div>
-            </div>
-          </div>
-          <div class="reviews-idea__right"> <span class="view-idea__number">5</span>
-            <div class="view-idea__icon"><i class="fa-solid fa-star"></i></div>
-          </div>
-        </div>
-        <div class="reviews-idea__block-content">
-          <div class="reviews-idea__plus"><i class="fa-solid fa-square-plus"></i></div>
-          <div class="reviews-idea__content">Сайт рыбатекст поможет дизайнеру, верстальщику, вебмастеру сгенерировать несколько абзацев более менее осмысленного текста рыбы на русском языке, а начинающему оратору отточить навык публичных выступлений в домашних условиях.</div>
-        </div>
-        <div class="reviews-idea__block-content">
-          <div class="reviews-idea__minus"><i class="fa-solid fa-square-minus"></i></div>
-          <div class="reviews-idea__content">В отличии от lorem ipsum, текст рыба на русском языке наполнит любой макет непонятным смыслом и придаст неповторимый колорит советских времен.</div>
-        </div>
-        <div class="reviews-idea__block-content">
-          <div class="reviews-idea__message"><i class="fa-solid fa-message"></i></div>
-          <div class="reviews-idea__content">При создании генератора мы использовали небезизвестный универсальный код речей. Текст генерируется абзацами случайным образом от двух до десяти предложений в абзаце, что позволяет сделать текст более привлекательным и живым для визуально-слухового восприятия. Сайт рыбатекст поможет дизайнеру</div>
-        </div>
-        <div class="reviews-idea__footer"> 
-          <button class="reviews-idea__comment">Комментировать</button>
-          <div class="reviews-idea__like"> 
-            <div class="reviews-idea__like_number">12</div>
-            <div class="reviews-idea__like_icon"><i class="fa-solid fa-heart"></i></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 </div>
+

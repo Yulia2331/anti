@@ -121,7 +121,7 @@ function plugins_addition($plugins) {
     return $plugins;
 }
 add_filter('all_plugins', 'plugins_addition');
-
+// wp_localize_script( 'truescript', 'true_obj', array( 'ajaxurl' => admin_url( 'admin-ajax.php' ) ) );
 function theme_name_scripts() {
 
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' );
@@ -325,6 +325,7 @@ require_once ('functions/post-comments.php');
 require_once ('functions/authors.php');
 require_once ('functions/analitic.php');
 require_once ('functions/curses.php');
+require_once ('functions/ideas.php');
 
 
 add_action( 'wp_ajax_questiondatahtml', 'questiondatahtml_update' );
@@ -487,3 +488,57 @@ function is_user_role_in( $roles, $user = false ) {
 	return false;
 }
 add_filter( 'learn-press/override-templates', function(){ return true; } );
+
+
+// add_action('wp_ajax_new', 'newbid_ajax');
+// add_action( 'wp_ajax_nopriv_new', 'newbid_ajax' );
+// function newbid_ajax() {
+//     $post_id = $_POST['id'];
+// 	echo $post_id;
+//     //Get current bid
+//     // $mybid = get_post_meta($post_id, 'start_price', true);
+
+//     //Increase the bid, for example the amount here is 100€
+//     // $mybid = $mybid + 100;
+
+//     //Update the database with the increased bid value
+//     // update_post_meta($post_id,'start_price',$mybid);
+
+
+// // 	$time = current_time( 'timestamp' );
+// // 	$field_key = "field_63b82d7710576";
+// // $value = array(
+// // 	array(
+// // 		"hypothesis"	=> $cont,
+// //     'hypothesis_date' => $time,
+// // 	)
+// // );
+// // update_field( $field_key, $value, $post_id );
+
+
+//     // In case you need to update another meta for the user, you 
+//     // can access the user ID with the get_current_user_id() function
+
+//     // Finally sending back the updated bid so the javascript can display it
+//     wp_die();
+// }
+// function test_function() {
+// 	// Set variables
+// 	$input_test = $_POST['hypothesis_content'];
+// 	$post_id = $_POST['hypothesis_content_id'];
+// 	// Check variables for fallbacks
+// 	// if (!isset($input_test) || $input_test == "") { $input_test = "Fall Back"; }
+// 	// // Update the field
+// 	// update_field('downloaded', $input_test);
+// 	$time = current_time( 'timestamp' );
+// 	$field_key = "field_63b82d7710576";
+// 	$value = array(
+// 	array(
+// 		"hypothesis"	=> $cont,
+//     'hypothesis_date' => $time,
+// 	)
+// );
+// update_field( $field_key, $value, $post_id );
+//  }
+// add_action( 'wp_ajax_nopriv_test_function',  'test_function' );
+// add_action( 'wp_ajax_test_function','test_function' );

@@ -63,15 +63,33 @@ reviewsButton.forEach(btn => {
   })
 })
 
-const btnIBody = document.querySelectorAll('.idea__name'),
-IBody = document.querySelector('.view-idea'),
-iId = document.querySelector('.idea_id');
-btnIBody.forEach((b) => {
-  b.addEventListener('click', () => {
-    let ideaID = b.dataset.view;
-    IBody.dataset.idea = ideaID;
-    // iId.textContent = `$idea_id = ${ideaID};`;
-    // iId.textContent = ideaID;
-  })
-})
+// const btnIBody = document.querySelectorAll('.idea__name'),
+// IBody = document.querySelector('.view-idea'),
+// iId = document.querySelector('.idea_id');
+// btnIBody.forEach((b) => {
+//   b.addEventListener('click', (e) => {
+//     // e.preventDefault();
+//     let ideaID = b.dataset.view;
+//     IBody.dataset.idea = ideaID;
 
+//     // $.post('wp-admin/admin-ajax.php', {'action':'push_idea_id', 'id':ideaID}, function(response){
+//     //   $('.modal-content.ajax').html(response);
+//     // });
+//   //   $.ajax({
+//   //     type: 'POST',
+//   //     url: '/wp-admin/admin-ajax.php',
+//   //     data: {
+//   //       action: 'push_idea_id',
+//   //       id: ideaID
+//   //     },
+//   //     success: function(data)
+//   //     {
+//   //       alert( data );
+//   //       html( data );
+//   //     },
+//   //     error: function(msg){
+//   //         console.log('error');
+//   //     }
+//   // });
+//   })
+// })
