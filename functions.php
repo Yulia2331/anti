@@ -542,3 +542,14 @@ add_filter( 'learn-press/override-templates', function(){ return true; } );
 //  }
 // add_action( 'wp_ajax_nopriv_test_function',  'test_function' );
 // add_action( 'wp_ajax_test_function','test_function' );
+
+add_action( 'comment_post', 'add_comment_metadata_field' );
+
+function add_comment_metadata_field( $comment_id ) {
+
+	$plus = sanitize_text_field( $_POST['reviews__plus'] );
+	$minus = sanitize_text_field( $_POST['reviews__minus'] );
+
+	add_comment_meta( $comment_id, 'reviews_plus', $plus );
+	add_comment_meta( $comment_id, 'reviews_minus', $minus );
+}

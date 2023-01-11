@@ -48,3 +48,7 @@
 .idea__name{
     display: block;
 }
+.create-reviews__num{
+    width: 10px;
+    background: transparent;
+}

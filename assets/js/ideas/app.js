@@ -30,7 +30,11 @@ close.forEach(el => {
 
     hidden.classList.remove('active');
     createIdeaForm.classList.remove('active');
-    createReviews.classList.remove('active');
+    const createReviews = document.querySelectorAll('.create-reviews');
+    createReviews.forEach((i) => {
+      i.classList.remove('active');
+    })
+    // createReviews.classList.remove('active');
 
     body.classList.remove('no-scroll');
   })
@@ -48,17 +52,24 @@ createIdea.addEventListener('click', () => {
 })
 
 
-
 const reviewsButton = document.querySelectorAll('.view-idea__button-reviews');
-const createReviews = document.querySelector('.create-reviews');
+// const createReviews = document.querySelector('.create-reviews');
 
 reviewsButton.forEach(btn => {
-  btn.addEventListener('click', () => {
+  btn.addEventListener('click', (e) => {
     document.querySelectorAll('.view-idea').forEach(idea => {
       idea.classList.remove('active');
     })
-
-    createReviews.classList.add('active');
+    let self = e.target;
+    let ideaId = self.dataset.rev;
+    console.log(ideaId);
+    // idea.classList.add('pale');
+    let theRev = document.getElementById(ideaId);
+    console.log(theRev);
+    theRev.classList.add('active');
+    // let theRev = self.querySelector('.create-reviews');
+    // theRev.classList.add('nopale');
+    // createReviews.classList.add('active');
 
   })
 })

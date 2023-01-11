@@ -26,3 +26,11 @@
 <?php
 //  comment_form($args = array(), $post_id = $curs_id); 
 ?>
+
+<form action="/wp-comments-post.php" method="post" id="commentform" class="create-reviews__form">
+    <div class="create-reviews__textarea">
+      <textarea class="create-reviews__plus" name="" placeholder="Расскажите о плюсах"></textarea>
+      <textarea class="create-reviews__minus" name="" placeholder="Расскажите о минусах"></textarea>
+      <textarea class="create-reviews__message" name="" placeholder="Общий комментарий"></textarea>
+    </div>
+   </form>

@@ -65,14 +65,15 @@
     <button type='submit' name="create-idea-submit" class="create-idea__button secondary__button">Опубликовать</button>
   </form>
 </div>
-<?  
+<script>
+  const gg = document.querySelector('.create-idea__form');
+  gg.addEventListener('submit', (e) =>{
+    <? testfun(); ?>
+  })
+</script>
 
-if($_POST){
-  testfun();
-}
-
-function testfun()
-{ 
+<?
+function testfun() { 
   $title = sanitize_text_field( $_POST['idea_title'] );
   $cont = sanitize_text_field( $_POST['idea_content'] );
   $time = current_time( 'timestamp' );
@@ -102,14 +103,19 @@ $value = array(
 	)
 );
 update_field( $field_key, $value, $post_id );
+$average_rating = 'average_rating';
+$average_rating_val = (int)0;
 $criteria = 'criteria_1';
 $val = sanitize_text_field( $_POST['criteria_1'] );
 $criteria_rat = 'criteria_1_rat';
-$val_rat = 0;
+$val_rat = (int) 0;
 $criteria_2 = 'criteria_2';
 $val_2 = sanitize_text_field( $_POST['criteria_2'] );
 $criteria_rat_2 = 'criteria_2_rat';
-$val_rat_2 = 0;
+$val_rat_2 = (int) 0;
+add_post_meta( $post_id, $average_rating, $average_rating_val);
+add_post_meta( $post_id, $criteria, $val);
+add_post_meta( $post_id, $criteria_rat, $val_rat);
 add_post_meta( $post_id, $criteria_2, $val_2);
 add_post_meta( $post_id, $criteria_rat_2, $val_rat_2);
 }
