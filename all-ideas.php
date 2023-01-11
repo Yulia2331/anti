@@ -37,14 +37,13 @@ get_header();
 <div id="revform<? echo $idea_id; ?>" class="create-reviews">
   <button class="create-reviews__close close container__icon--18"><i class="fa-solid fa-xmark"></i></button>
   <div class="create-reviews__title">Отзыв на идею</div>
-  <div class="create-reviews__form">
   <form action="/wp-comments-post.php" method="post" id="commentform" class="create-reviews__form">
     <div class="create-reviews__textarea">
       <textarea class="create-reviews__plus" name="reviews__plus" placeholder="Расскажите о плюсах"></textarea>
       <textarea class="create-reviews__minus" name="reviews__minus" placeholder="Расскажите о минусах"></textarea>
       <textarea id="comment" class="create-reviews__message" name="comment" placeholder="Общий комментарий" required="required"></textarea>
     </div>
-    <form action="" method="POST" class="criteria_rate_idea">
+    <div action="" method="POST" class="criteria_rate_idea">
    <input type="hidden" name="criteria_rate_id" value="<? echo $idea_id; ?>">
    <input type="hidden" name="criteria_rate_av" value="<? echo $average_rating; ?>">
    <div class="create-reviews__counters">
@@ -80,14 +79,12 @@ get_header();
       </div> <? } ?>
     </div>
     <button type="submit" class="create-reviews__button secondary__button" style="display:none;">Отправить</button>
-    </form>
     <p class="form-submit">
     <input name="submit" type="submit" id="submit" class="submit create-reviews__button secondary__button" value="Отправить"> 
     <input type="hidden" name="comment_post_ID" value="<? echo $idea_id; ?>" id="comment_post_ID">
     <input type="hidden" name="comment_parent" id="comment_parent" value="0">
     </p>
    </form>
-
       </div>
 </div>
 <!-- Карточка -->
@@ -176,10 +173,10 @@ endif; ?>
   $m = get_post_meta($mid);
   print_r($m);
    ?>
-
-
-
-<?php
+   <div class="view-idea__reviews reviews-idea">
+        <div class="reviews-idea__title">Отзывы участников</div>
+        <div class="reviews-idea__board"> 
+          <?php
 $args = array(
 	'no_found_rows'       => true,
 	'orderby'             => '',
@@ -196,23 +193,45 @@ $args = array(
 
 if( $comments = get_comments( $args ) ){
 	foreach( $comments as $comment ){ ?>
-  <?php $com_id = get_comment_ID(); ?>
-                 <span class="reviews__content"><?php echo $comment->comment_content; ?></span>
-               <?  
-               $vote = get_comment_meta ( $comment->comment_ID, 'reviews_plus', true ); 
-               $vote2 = get_comment_meta ( $comment->comment_ID, 'reviews_minus', true ); 
-               echo $vote;
-               echo $vote2;
-               ?>
-
-
-
+  <?php $com_id = get_comment_ID(); 
+        $vote = get_comment_meta ( $comment->comment_ID, 'reviews_plus', true ); 
+        $vote2 = get_comment_meta ( $comment->comment_ID, 'reviews_minus', true ); 
+  ?>
+      <div class="reviews-idea__item">
+            <div class="reviews-idea__header"> 
+              <div class="reviews-idea__left"> 
+                <div class="reviews-idea__user"> <img src="<?php echo bloginfo('template_url');?>/assets/img/ava-1.png" alt="avatar">
+                  <div class="reviews-idea__name">
+                     Андрей Ярухин</div>
+                </div>
+              </div>
+              <div class="reviews-idea__right"> <span class="view-idea__number">5</span>
+                <div class="view-idea__icon"><i class="fa-solid fa-star"></i></div>
+              </div>
+            </div>
+            <div class="reviews-idea__block-content">
+              <div class="reviews-idea__plus container__icon--18"><i class="fa-solid fa-square-plus"></i></div>
+              <div class="reviews-idea__content"><? echo $vote; ?></div>
+            </div>
+            <div class="reviews-idea__block-content">
+              <div class="reviews-idea__minus container__icon--18"><i class="fa-solid fa-square-minus"></i></div>
+              <div class="reviews-idea__content"><? echo $vote2; ?></div>
+            </div>
+            <div class="reviews-idea__block-content">
+              <div class="reviews-idea__message container__icon--18"><i class="fa-solid fa-message"></i></div>
+              <div class="reviews-idea__content"><?php echo $comment->comment_content; ?></div>
+            </div>
+            <div class="reviews-idea__footer"> 
+              <button class="reviews-idea__comment">Комментировать</button>
+              <div class="reviews-idea__like"> 
+                <div class="reviews-idea__like_number">12</div>
+                <div class="reviews-idea__like_icon"><i class="fa-solid fa-heart"></i></div>
+              </div>
+            </div>
+          </div>    
           <?php }} ?>
-
-
-
-
-
+          </div>
+      </div>
 </div>
         <?php }
         wp_reset_postdata();
@@ -253,70 +272,5 @@ function tt()
     update_post_meta( $post_id, $avr, $av);
 }
 ?>
-<? 
-// $meta_values = get_post_meta( 1511 );
-// print_r($meta_values);
-// if($_POST){ hypothesis_update(); }
-
-// function hypothesis_update() {
-// $post_id = 1511;
-// $cont = sanitize_text_field( $_POST['hypothesis_content'] );
-// $time = current_time( 'timestamp' );
-// // $field_key = "field_63b82d7710576";
-// $fruit_field_key = 'field_63b82d7710576';
-// $fruit_subfield_name = 'field_63b82d9410577';
-// $fruit_subfield_colour = 'field_63b830eb2e22c';
-
-// $value = array(
-//   array(
-//     "hypothesis_rep_1_hypothesis"	=> $cont,
-//     'hypothesis_rep_1_hypothesis_date' => $time,
-//   )
-// );
-// update_field( $field_key, $value, $post_id );
-
-// } 
-// Array ( [online_offline] => Array ( [0] => онлайн ) [hypothesis_rep_0_hypothesis] => Array ( [0] => пицца ) [_hypothesis_rep_0_hypothesis] => Array ( [0] => field_63b82d9410577 ) [hypothesis_rep_0_hypothesis_date] => Array ( [0] => 1673283089 ) [_hypothesis_rep_0_hypothesis_date] => Array ( [0] => field_63b830eb2e22c ) [hypothesis_rep] => Array ( [0] => 1 ) [_hypothesis_rep] => Array ( [0] => field_63b82d7710576 ) [_edit_lock] => Array ( [0] => 1673272579:137 ) [_last_editor_used_jetpack] => Array ( [0] => classic-editor ) )
-?>
 <?php
-    get_footer(); ?>
-
-    <!-- <script>
-      jQuery("a#btn-download").click(function(){
-   var data_count = $('#data-download').attr('data-count');    
-   data_count = parseInt(data_count)+1;
-   $('#data-download').attr('data-count',data_count);
-   $('#data-download').text(data_count +' downloads');
-			
-   var ajaxurl = 'http://'+window.location.host+'/wp-admin/admin-ajax.php';
-   var form = "#test-form";
-   jQuery.ajax({
-   url: ajaxurl + "?action=test_function",
-   type: 'POST',
-   data: {'input_test_int' : $('.hypothesis_content').val()},
-     success: function(data) {
-     console.log(data);
-     console.log("SUCCESS!");
-   },
-     error: function(data) {
-     console.log("FAILURE");
-   }
-}); });
-    </script> -->
-
-    
-    <!-- <script>
-
-jQuery('.hypothesis__button').click(function(e) {
-e.preventDefault();
-var ajaxurl = "/wp-admin/admin-ajax.php";
-jQuery.ajax({
-       type: "POST",
-       url: ajaxurl,
-       data: "action=new"+,  
-       success: function(msg){
-           alert(msg);
-       }
-   });
-})
-</script> -->
+    get_footer();
