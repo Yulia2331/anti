@@ -91,6 +91,7 @@ get_header();
 </div>
 <!-- Карточка -->
                <div class="board-ideas__item idea">
+                
           <div class="idea__wrapper"> 
             <div class="idea__header"> 
               <div class="idea__data"><?php echo get_the_date(); ?></div>

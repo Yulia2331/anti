@@ -3,6 +3,7 @@
  * Template name: Банк идей
  */
         get_header();
+       
     ?>
         <div class="hidden"></div>
     <div class="create-idea">
