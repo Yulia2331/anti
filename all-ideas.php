@@ -44,12 +44,6 @@ get_header();
       <textarea class="create-reviews__minus" name="reviews__minus" placeholder="Расскажите о минусах"></textarea>
       <textarea id="comment" class="create-reviews__message" name="comment" placeholder="Общий комментарий" required="required"></textarea>
     </div>
-    <p class="form-submit">
-    <input name="submit" type="submit" id="submit" class="submit create-reviews__button secondary__button" value="Отправить"> 
-    <input type="hidden" name="comment_post_ID" value="<? echo $idea_id; ?>" id="comment_post_ID">
-    <input type="hidden" name="comment_parent" id="comment_parent" value="0">
-    </p>
-   </form>
     <form action="" method="POST" class="criteria_rate_idea">
    <input type="hidden" name="criteria_rate_id" value="<? echo $idea_id; ?>">
    <input type="hidden" name="criteria_rate_av" value="<? echo $average_rating; ?>">
@@ -86,8 +80,15 @@ get_header();
       </div> <? } ?>
     </div>
     <button type="submit" class="create-reviews__button secondary__button" style="display:none;">Отправить</button>
-    </div>
+    </form>
+    <p class="form-submit">
+    <input name="submit" type="submit" id="submit" class="submit create-reviews__button secondary__button" value="Отправить"> 
+    <input type="hidden" name="comment_post_ID" value="<? echo $idea_id; ?>" id="comment_post_ID">
+    <input type="hidden" name="comment_parent" id="comment_parent" value="0">
+    </p>
    </form>
+
+      </div>
 </div>
 <!-- Карточка -->
                <div class="board-ideas__item idea">
