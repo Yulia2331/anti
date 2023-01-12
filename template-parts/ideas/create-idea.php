@@ -52,22 +52,20 @@
     <div class="create-idea__subtitle">Создайте до 5 критериев оценки вашей идеи</div>
     <div class="create-idea__add-criteria">
       <div class="create-idea__criteria-block">
-        <input class="create-idea__criteria select" name="criteria_1" type="text" value="">
-        <input class="create-idea__criteria select" name="criteria_2" type="text" value="">
-        <!-- <div class="create-idea__criteria select">Востребованность</div>
-        <div class="create-idea__criteria select">Легкость</div>
-        <div class="create-idea__criteria select">Возможность</div>
-        <div class="create-idea__criteria select">Статность</div>
-        <div class="create-idea__criteria select">Денежность</div> -->
+        <input id="inp1" class="create-idea__criteria hide-inp" name="criteria_1" type="text" value="">
+        <input id="inp2" class="create-idea__criteria hide-inp" name="criteria_2" type="text" value="">
+        <input id="inp3" class="create-idea__criteria hide-inp" name="criteria_3" type="text" value="">
+        <input id="inp4" class="create-idea__criteria hide-inp" name="criteria_4" type="text" value="">
+        <input id="inp5" class="create-idea__criteria hide-inp" name="criteria_5" type="text" value="">
       </div>
-      <button class="create-idea__plus container__icon--24"><i class="fa-solid fa-plus"></i></button>
+      <span class="create-idea__plus container__icon--24"><i class="fa-solid fa-plus"></i></span>
     </div>
     <button type='submit' name="create-idea-submit" class="create-idea__button secondary__button">Опубликовать</button>
   </form>
 </div>
 <script>
-  const gg = document.querySelector('.create-idea__form');
-  gg.addEventListener('submit', (e) =>{
+  const oo = document.querySelector('.create-idea__form');
+  oo.addEventListener('submit', (e) =>{
     <? testfun(); ?>
   })
 </script>
@@ -88,6 +86,9 @@ function testfun() {
     	'post_status'   => 'publish',
       'meta_input'    => [ 
         'online_offline' => $idea_tag,
+        // 'idea-cont' => $cont,
+        // 'idea-date' => $time,
+        // 'hypothesis_content' => $cont,
       ],
   ];
   $post_id = wp_insert_post( $post_data );

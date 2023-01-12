@@ -62,15 +62,8 @@ reviewsButton.forEach(btn => {
     })
     let self = e.target;
     let ideaId = self.dataset.rev;
-    console.log(ideaId);
-    // idea.classList.add('pale');
     let theRev = document.getElementById(ideaId);
-    console.log(theRev);
     theRev.classList.add('active');
-    // let theRev = self.querySelector('.create-reviews');
-    // theRev.classList.add('nopale');
-    // createReviews.classList.add('active');
-
   })
 })
 
@@ -104,3 +97,69 @@ reviewsButton.forEach(btn => {
 //   // });
 //   })
 // })
+try{
+const up = document.querySelectorAll('.create-reviews__more');
+const dwn = document.querySelectorAll('.create-reviews__less');
+up.forEach((i) => {
+  i.addEventListener('click', (e) => {
+   let ff = e.target.closest('.create-reviews__count');
+  let inp = ff.querySelector('.create-reviews__num');
+  if(inp.value < 5){
+    inp.value ++;
+  }
+  })
+})
+dwn.forEach((i) => {
+  i.addEventListener('click', (e) => {
+   let ff = e.target.closest('.create-reviews__count');
+  let inp = ff.querySelector('.create-reviews__num');
+  if(inp.value > 0){
+  inp.value --;
+  }
+  })
+})
+} catch {}
+try{
+const addInp = document.querySelector('.create-idea__plus');
+input1 = document.querySelector('#inp1');
+input2 = document.querySelector('#inp2');
+input3 = document.querySelector('#inp3');
+input4 = document.querySelector('#inp4');
+addInp.addEventListener('click', (e) => {
+  let ind;
+  if(input1.classList.contains('hide-inp')){
+    ind = 1;
+  }
+  if(!input1.classList.contains('hide-inp')){
+    ind = 2;
+  }
+  if(!input2.classList.contains('hide-inp')){
+    ind = 3;
+  }
+  if(!input3.classList.contains('hide-inp')){
+    ind = 4;
+  }
+  if(!input4.classList.contains('hide-inp')){
+    ind = 5;
+  }
+  let gr = document.querySelector(`#inp${ind}`);
+  gr.classList.remove('hide-inp');
+
+})
+
+} catch {}
+
+// $('.hypothesis__add').submit(function(e){
+//   e.preventDefault();
+//   var name = $(".hypothesis_content").val();
+//   $.ajax({ 
+//        data: {action: 'contact_form', name:name},
+//        type: 'post',
+//        url: ajaxurl,
+//        success: function(data) {
+//             console.log(data); //should print out the name since you sent it along
+
+//       }
+//   });
+
+// });

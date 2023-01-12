@@ -59,8 +59,8 @@ get_header();
         <div class="create-reviews__count"> 
           <input class="create-reviews__num" name="criteria_rate_1" value="3">
           <div class="create-reviews__count-button"> 
-            <button class="create-reviews__more"> <i class="fa-solid fa-sort-up"></i></button>
-            <button class="create-reviews__less"><i class="fa-solid fa-caret-down"></i></button>
+            <span class="create-reviews__more"><i class="fa-solid fa-caret-up"></i></i></span>
+            <span class="create-reviews__less"><i class="fa-solid fa-caret-down"></i></span>
           </div>
         </div>
       </div> <? } ?>
@@ -72,8 +72,8 @@ get_header();
         <div class="create-reviews__count"> 
           <input class="create-reviews__num" name="criteria_rate_2" value="3">
           <div class="create-reviews__count-button"> 
-            <button class="create-reviews__more"> <i class="fa-solid fa-sort-up"></i></button>
-            <button class="create-reviews__less"><i class="fa-solid fa-caret-down"></i></button>
+            <span class="create-reviews__more"><i class="fa-solid fa-caret-up"></i></i></span>
+            <span class="create-reviews__less"><i class="fa-solid fa-caret-down"></i></span>
           </div>
         </div>
       </div> <? } ?>
@@ -137,17 +137,20 @@ get_header();
     <button class="view-idea__btn button-main">Написать автору</button>
   </div>
   <div class="view-idea__hypothesis hypothesis">
-    <form method="POST" class="hypothesis__add"> 
+ 
+    <form action="" method="POST" class="hypothesis__add"> 
       <input class="input hypothesis__input" name="hypothesis_content" type="text" placeholder="Дополнить идею">
-      <!-- <input type="text" value="1511" name="hypothesis_content_id"> -->
-      <button type='submit' name="hypothesis__button" class="hypothesis__button">
+      <input type="hidden" value="<? 
+      echo $idea_id; 
+      ?>" name="hypothesis_content_id" class="hypothesis_content_id">
+      <button type='submit' class="hypothesis__button">
         <div class="hypothesis__icon"><i class="fa-solid fa-location-arrow"></i></div>
       </button>
     </form> 
-
-    
+      <span class="hypothesis__msg"></span>
     <div class="hypothesis__board"> 
-  <?  if( have_rows('hypothesis_rep') ):
+
+    <?  if( have_rows('hypothesis_rep') ):
   while ( have_rows('hypothesis_rep') ) : the_row();
 ?>
   <div class="hypothesis__item">
@@ -161,7 +164,6 @@ get_header();
   endwhile;
 else :
 endif; ?>
-
     </div>
   </div>
   <div class="view-idea__button-block"> 
@@ -250,27 +252,82 @@ if( $comments = get_comments( $args ) ){
   </div>
 </section>
 <script>
-  const gg = document.querySelectorAll('.criteria_rate_idea');
-  gg.forEach((i) => {
+  const hh = document.querySelectorAll('.hypothesis__add');
+      hh.forEach((i) => {
     i.addEventListener('submit', (e) =>{
-        <? tt(); ?>
+      e.preventDefault();
+     
+let name = e.target.querySelector('.hypothesis__input').value;
+let id = e.target.querySelector('.hypothesis_content_id').value;
+let per = e.target.closest('.view-idea__hypothesis').querySelector('.hypothesis__board');
+let date = new Date().toLocaleDateString();
+// let date = now.toLocaleDateString("ko-KR");
+// let day = getDate(now);
+// let month = getMonth(now);
+// let year = getFullYear(now);
+  $.ajax({ 
+       data: {
+        action: 'contact_form', 
+        id: id,
+        name: name,
+      },
+       type: 'post',
+       url: '/wp-admin/admin-ajax.php',
+       beforeSend: function( xhr ) {
+				$('.hypothesis__msg').text('Добавление гипотезы...');	
+			},
+       success: function(data) {
+        $('.hypothesis__msg').text('Гипотеза добавлена');	
+     
+        let html = 
+        `
+        <div class="hypothesis__item">
+    <div class="hypothesis__item_header">
+      <div class="hypothesis__item_title">Гипотеза (${date})</div>
+      <button class="hypothesis__item_icon"> <i class="fa-solid fa-trash"></i></button>
+    </div>
+    <div class="hypothesis__content">${name}</div>
+  </div>
+        `
+        per.insertAdjacentHTML('beforeEnd', html);
+
+      }
+  });
       })
   })
 </script>
+<!-- <script>
+  const comForm = document.querySelectorAll('.criteria_rate_idea');
+  comForm.forEach((i) => {
+    i.addEventListener('submit', (e) =>{
+      e.preventDefault();
+    })
+  })
+</script> -->
+
+
+<!-- <script>
+  const gg = document.querySelectorAll('.criteria_rate_idea');
+  gg.forEach((i) => {
+    i.addEventListener('submit', (e) =>{ <?
+      //  tt(); 
+       ?> })
+  })
+</script> -->
 <?
-function tt()
-{ 
-    $post_id = sanitize_text_field( (int) $_POST['criteria_rate_id'] );
-    $key_1 = 'criteria_1_rat';
-    $val_1 = sanitize_text_field( (int) $_POST['criteria_rate_1'] );
-    $key_2 = 'criteria_2_rat';
-    $val_2 = sanitize_text_field( (int) $_POST['criteria_rate_2'] );
-    $avr = 'average_rating';
-    $av = ($val_1 + $val_2)/2;
-    update_post_meta( $post_id, $key_1, $val_1);
-    update_post_meta( $post_id, $key_2, $val_2);
-    update_post_meta( $post_id, $avr, $av);
-}
+// function tt()
+// { 
+//     $post_id = sanitize_text_field( (int) $_POST['criteria_rate_id'] );
+//     $key_1 = 'criteria_1_rat';
+//     $val_1 = sanitize_text_field( (int) $_POST['criteria_rate_1'] );
+//     $key_2 = 'criteria_2_rat';
+//     $val_2 = sanitize_text_field( (int) $_POST['criteria_rate_2'] );
+//     $avr = 'average_rating';
+//     $av = ($val_1 + $val_2)/2;
+//     update_post_meta( $post_id, $key_1, $val_1);
+//     update_post_meta( $post_id, $key_2, $val_2);
+//     update_post_meta( $post_id, $avr, $av);
+// }
 ?>
 <?php
     get_footer();

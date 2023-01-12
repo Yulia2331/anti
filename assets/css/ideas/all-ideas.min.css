@@ -52,3 +52,34 @@
     width: 10px;
     background: transparent;
 }
+.create-reviews__count-button span{
+    cursor: pointer;
+    display: block;
+}
+.create-reviews__num, .create-reviews__count-button span i{
+    pointer-events: none;
+}
+.create-reviews__less{
+    margin-top: 0;
+}
+.create-idea__plus{
+    cursor: pointer;
+}
+.create-idea__plus i{
+    color: #fff;
+    pointer-events: none;
+}
+.hide-inp{
+    display: none;
+}
+.create-idea__criteria{
+    border-radius: 6px;
+    background-color: #f5f5f5;
+    font-weight: 500;
+    line-height: 15px;
+    color: #bdbdbd;
+    padding: 10px;
+}
+.select br{
+    display: none;
+}
