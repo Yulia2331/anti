@@ -10,9 +10,9 @@
  */
 
 
-echo $item->get_id();
+//echo $item->get_id();
 
-print_r($item);
+//print_r($item);
 
 ?>
 
@@ -28,7 +28,7 @@ $defaults = [
       'cookies' => 'куки',
       ],
     'comment_field'  => '<input class="module-block__input input-field" name="comment" type="text" placeholder="Ваш комментарий" aria-required="true" required="required">
-    <label class="comment-form-attachment__label module-block__btn secondary__button" for="attachment">Загрузить файл 2</label>
+    
     
       ',
     
@@ -62,10 +62,12 @@ comment_form($defaults,$item->get_id());
 
   <div class="module-block__add-file">
     <div class="module-block__all-files"> </div>
-    <label class="comment-form-attachment__label module-block__btn secondary__button" for="attachment">Загрузить файл</label>
+    <label id='open-file' class="comment-form-attachment__label module-block__btn secondary__button" for="attachment">Загрузить файл</label>
   </div>
 
 </div>
+
+<script type="text/javascript" src="http://localhost:8000/wp-content/plugins/dco-comment-attachment/assets/dco-comment-attachment.js?ver=2.4.0" id="dco-comment-attachment-js"></script>
 
 
 

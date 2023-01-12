@@ -189,7 +189,7 @@ function get_home_work_comments($id,$id_cours){
             'update_comment_post_cache'  => false,
           );
 
-	echo $id;
+	//echo $id;
 	//print_r(get_comments( $args ));
 
 	if( $comments = get_comments( $args ) ){
