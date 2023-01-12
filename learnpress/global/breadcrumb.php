@@ -1,4 +1,7 @@
 <?php
+if (mydebbug()){
+	echo '---> breadcrumb.php';
+}
 /**
  * Template for displaying archive courses breadcrumb.
  *
@@ -9,32 +12,67 @@
  * @version  3.0.0
  */
 
+
+
 defined( 'ABSPATH' ) || exit();
 
 if ( empty( $breadcrumb ) ) {
 	return;
 }
-echo wp_kses_post( $wrap_before );
+// echo wp_kses_post( $wrap_before );
 
-foreach ( $breadcrumb as $key => $crumb ) {
+// foreach ( $breadcrumb as $key => $crumb ) {
 
-	echo wp_kses_post( $before );
+// 	echo wp_kses_post( $before );
 
-	echo '<li>';
+// 	echo '<li>';
 
-	if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) {
-		echo '<a href="' . esc_url_raw( $crumb[1] ) . '"><span>' . esc_html( $crumb[0] ) . '</span></a>';
-	} else {
-		echo '<span>' . esc_html( $crumb[0] ) . '</span>';
-	}
+// 	if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) {
+// 		echo '<a href="' . esc_url_raw( $crumb[1] ) . '"><span>' . esc_html( $crumb[0] ) . '</span></a>';
+// 	} else {
+// 		echo '<span>' . esc_html( $crumb[0] ) . '</span>';
+// 	}
 
-	echo '</li>';
+// 	echo '</li>';
 
-	echo wp_kses_post( $after );
+// 	echo wp_kses_post( $after );
 
-	if ( sizeof( $breadcrumb ) !== $key + 1 ) {
-		echo wp_kses_post( $delimiter );
-	}
-}
+// 	if ( sizeof( $breadcrumb ) !== $key + 1 ) {
+// 		echo wp_kses_post( $delimiter );
+// 	}
+// }
 
-echo wp_kses_post( $wrap_after );
+// echo wp_kses_post( $wrap_after );
+
+?>
+<div class="materials__crums crums"> 
+	<ul class="crums__list">
+		<?php
+
+		foreach ( $breadcrumb as $key => $crumb ) {
+
+			//echo wp_kses_post( $before );
+
+			//echo '<li>';
+
+			if ( ! empty( $crumb[1] ) && sizeof( $breadcrumb ) !== $key + 1 ) {
+				echo '<a class="crums__link" href="' . esc_url_raw( $crumb[1] ) . '"><li class="crums__item">' . esc_html( $crumb[0] ) . '</li></a>';
+			} else {
+				echo '<li class="crums__item">' . esc_html( $crumb[0] ) . '</li>';
+			}
+
+			//echo '</li>';
+
+			//echo wp_kses_post( $after );
+
+			// if ( sizeof( $breadcrumb ) !== $key + 1 ) {
+			// 	echo wp_kses_post( $delimiter );
+			// }
+		}
+
+		?>
+
+		
+	</ul>
+</div>
+<?php

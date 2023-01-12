@@ -30,3 +30,4 @@ $bio = $user->get_description();
 
 	<?php endif; ?>
 </div>
+

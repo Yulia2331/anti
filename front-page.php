@@ -1,7 +1,7 @@
 <?php 
 if(is_user_logged_in()){
 	$current_user = wp_get_current_user();
-	wp_redirect('/antinorma.com/author/'.$current_user->user_nicename);
+	wp_redirect('/author/'.$current_user->user_nicename);
 }
 else{
 	wp_redirect('https://anti-norma.ru/login');

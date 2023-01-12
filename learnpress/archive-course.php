@@ -9,6 +9,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
+if (mydebbug()){
+    echo '---> archive-course.php';
+}
+
 /**
  * @since 4.0.0
  *

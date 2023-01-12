@@ -1,4 +1,7 @@
 <?php
+
+echo '--->price.php';
+
 /**
  * Template for displaying price of single course.
  *

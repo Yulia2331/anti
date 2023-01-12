@@ -1,4 +1,7 @@
 <?php
+
+echo '---> buttons.php';
+
 /**
  * Template for displaying buttons of single course.
  *

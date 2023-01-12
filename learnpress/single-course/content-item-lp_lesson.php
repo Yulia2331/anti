@@ -1,4 +1,8 @@
 <?php
+
+if (mydebbug()){
+    echo '---> content-item-lp_lesson.php';
+}
 /**
  * Template for displaying lesson item content in single course.
  *

@@ -2,6 +2,9 @@
 /*
 Template Name: Страница курсов
 */
+if (mydebbug()){
+    echo '---> course_page.php';
+}
 ?>
 <?php get_header() ?>
 <style>
@@ -11,14 +14,14 @@ Template Name: Страница курсов
 </style>
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						
-						<!--begin::Post-->
-						<div class="courses d-flex flex-column-fluid" id="kt_courses">
-							<!--begin::Container-->
-							<div id="kt_content_container" class="container-xxl">
-                                <!--begin::Slider-->
-                                <div class="banner-swiper swiper mb-9">
+			<!--begin::Post-->
+			<div class="courses d-flex flex-column-fluid" id="kt_courses">
+				<!--begin::Container-->
+				<div id="kt_content_container" class="container-xxl">
+                    <!--begin::Slider-->
+                    <div class="banner-swiper swiper mb-9">
 
-                                    <div class="swiper-wrapper">
+                        <div class="swiper-wrapper">
                                     <?php
 							$posts = get_posts( array(
 							'numberposts' => -1,
@@ -99,4 +102,5 @@ Template Name: Страница курсов
 						</div>
 						<!--end::Post-->
 					</div>
-			<?php get_footer() ?>
+
+<?php get_footer() ?>

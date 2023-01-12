@@ -1,4 +1,7 @@
 <?php
+if (mydebbug()){
+	echo '--->meta-primary.php';
+}
 /**
  * Template for displaying primary course meta data such as: Instructor, Categories, Reviews (addons)...
  *
@@ -53,3 +56,5 @@ if ( ! $has_meta_left && ! $has_meta_right ) {
 	<?php } ?>
 
 </div>
+
+

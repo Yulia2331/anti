@@ -8,6 +8,8 @@
  * @version  4.0.10
  */
 
+echo '---------------------> course-grid.php';
+
 defined( 'ABSPATH' ) || exit();
 
 if ( ! isset( $user ) || ! isset( $course_ids ) || ! isset( $current_page ) || ! isset( $num_pages ) ) {

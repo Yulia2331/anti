@@ -12,6 +12,8 @@ defined( 'ABSPATH' ) || exit();
 if ( ! isset( $profile ) ) {
 	return;
 }
+
+
 ?>
 
 <div id="learn-press-profile" <?php $profile->main_class(); ?>>

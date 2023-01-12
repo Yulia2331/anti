@@ -9,6 +9,8 @@
 
 defined( 'ABSPATH' ) || exit;
 
+
+
 if ( ! isset( $prev_item ) && ! isset( $next_item ) ) {
 	return;
 }
@@ -20,6 +22,7 @@ if ( $prev_item && $next_item ) {
 } else {
 	$nav = 'next';
 }
+
 ?>
 
 <div class="course-item-nav" data-nav="<?php echo esc_attr( $nav ); ?>">

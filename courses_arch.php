@@ -2,7 +2,10 @@
 /**
  * Template name: Страница категории курса
  */
-            get_header(); ?>
+            get_header(); 
+            
+            ?>
+
             <?php
 // echo get_page_uri();
 $url = $_SERVER['REQUEST_URI'];

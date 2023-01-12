@@ -1,4 +1,7 @@
 <?php
+
+echo '--->sidebar.php';
+
 /**
  * Template for displaying course sidebar.
  *

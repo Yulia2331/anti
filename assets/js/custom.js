@@ -1,5 +1,5 @@
 
-let localurl = 'http://localhost:7777/antinorma.com/';
+let localurl = 'http://localhost:7777/';
 
 if (document.getElementsByName('reg-user-type')){
 let numOfChanges = 0;

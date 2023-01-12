@@ -1,5 +1,9 @@
 <?php
 
+if (mydebbug()){
+    echo '---> index.php';    
+}
+
 if(is_user_logged_in()){
 	
 	// echo '----------------- index! ----------------';
@@ -17,6 +21,13 @@ if(is_user_logged_in()){
 	if(strcmp($wp->request,'home-work-curse')==0){
 		require ('page_home_work_curse.php');
 	}
+
+	if(strcmp($wp->request,'teacher')==0){
+		require ('page_teacher.php');
+	}
+
+	// Материалы курса
+	// learnpress/single-course.php -> learnpress/content-single-course.php -> learnpress/single-course/content.php
 
 	// else{
 	// 	require ('user-page.php');

@@ -13,6 +13,8 @@
  * Prevent loading this file directly
  */
 defined( 'ABSPATH' ) || exit();
+
+
 ?>
 
 <li id="post-<?php the_ID(); ?>" <?php post_class(); ?>>

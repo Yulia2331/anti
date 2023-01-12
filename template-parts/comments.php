@@ -1,4 +1,6 @@
 <?php
+
+
 		// Получаем комментарии поста с ID XXX из базы данных 
 		$comments = get_comments(array(
 			'post_id' => $id,

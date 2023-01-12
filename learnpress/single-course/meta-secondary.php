@@ -1,4 +1,7 @@
 <?php
+if (mydebbug()){
+	echo '--->meta-secondary.php';
+}
 /**
  * Template for displaying secondary course meta data such as: duration, level, lessons, quizzes, students, etc...
  *

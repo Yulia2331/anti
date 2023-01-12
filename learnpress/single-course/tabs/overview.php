@@ -21,6 +21,7 @@ $course = learn_press_get_course();
 if ( ! $course ) {
 	return;
 }
+
 ?>
 
 <div class="course-description" id="learn-press-course-description">

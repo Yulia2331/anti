@@ -1,4 +1,8 @@
 <?php
+
+echo '---> content-protected.php';
+
+
 /**
  * Template for displaying message for course content protected.
  *

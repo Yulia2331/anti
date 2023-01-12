@@ -1,4 +1,6 @@
 <?php
+echo '--->instructor.php';
+
 /**
  * Template for displaying instructor of single course.
  *

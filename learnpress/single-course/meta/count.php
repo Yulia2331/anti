@@ -17,7 +17,13 @@ if ( ! isset( $object ) || ! isset( $count ) ) {
 
 if (esc_attr( $object ) == 'lesson'):
 
-?><div class="meta-item 111 meta-item-<?php echo esc_attr( $object ); ?>"><?php echo wp_kses_post( $count ); ?> в модуле</div><?php
+?>
+
+<div class="content-materials-block__summary-item"> 
+    <div class="container__icon--24 icon-list"><i class="fa-solid fa-list-ul"></i></div><span><?php echo wp_kses_post( $count ); ?> в модуле</span>
+</div>
+
+<?php
 
 elseif (esc_attr( $object ) == 'quiz'): {
     null;
@@ -25,6 +31,12 @@ elseif (esc_attr( $object ) == 'quiz'): {
 
 else:
 
-?><div class="meta-item 111 meta-item-<?php echo esc_attr( $object ); ?>"><?php echo wp_kses_post( $count ); ?></div>
+?>
+
+<div class="content-materials-block__summary-item"> 
+    <div class="container__icon--24 icon-list"><i class="fa-regular fa-user"></i></div><span><?php echo wp_kses_post( $count ); ?></span>
+</div>
+
+
 
 <?php endif ?>

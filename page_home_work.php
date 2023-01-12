@@ -21,13 +21,102 @@
     </header> -->
     
     
-  
+    </div></div>
+
+    
    
     <section class="my-assignments padding-left">
       <div class="my-assignments__wrapper">
         <h2 class="my-assignments__title">Список курсов, по которым доступны домашние задания</h2>
         <div class="my-assignments__cuourses"> 
-          <div class="my-assignments__cours my-assignments__cours-1" style="background-image: url(' <?php echo get_template_directory_uri(); ?>/assets/img/cours-1.png');">
+
+          <?php 
+
+            $posts = get_posts( array(
+              'numberposts' => -1,
+              'category_name'    => '',
+              'orderby'     => 'date',
+              'order'       => 'DESC',
+              'include'     => array(),
+              'exclude'     => array(),
+              'meta_key'    => '',
+              'meta_value'  =>'',
+              'post_type'   => 'lp_course',
+              'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+            ) );
+
+            //print_r($posts);
+
+
+            foreach( $posts as $post ){ 
+
+              $values = get_field('dostup');
+              $us = get_current_user_id();
+              
+              if (in_array($us,$values)){
+              ?>
+                <div class="my-assignments__cours my-assignments__cours-2" 
+                  style="background-image: url(' <?php the_field('curs_poster'); ?>');">
+
+                  <div class="my-assignments__subtitle">
+                    <?php the_title();?>                    
+                  </div>
+                  
+                  <a class="my-assignments__btn button-main" 
+                     href="home-work-curse/?id=<?php the_id(); ?>">
+                    Перейти
+                  </a>
+
+                </div>
+              <?php
+              }
+
+            }
+
+
+              
+              
+
+              
+
+            //print_r($posts);
+
+            // foreach( $posts as $post )
+            //   setup_postdata($post);
+            //   the_title(); 
+            //   the_field('curs_author'); 
+            //   the_field('curs_descr'); 
+            //   the_field('curs_poster');
+            //   echo get_home_url(); 
+            //   the_id(); 
+            //   wp_reset_postdata();
+            //   echo bloginfo('template_url');
+            //   echo bloginfo('template_url');
+
+            //   $taxonomy     = 'course_category';
+            //   $orderby      = 'name';  
+            //   $show_count   = 0;
+            //   $pad_counts   = 0; 
+            //   $hierarchical = 1; 
+            //   $title        = '';  
+            //   $empty        = 0;
+            //   $course_category = array(
+            //     'taxonomy'     => $taxonomy,
+            //     );
+            //   $cat_product = get_categories( $course_category )
+
+                // foreach ($cat_product as $cat_p) : 
+                //   $curs_term_id = $cat_p->cat_ID;
+                //   $id_term = 'term_' . $curs_term_id . ''; 
+                //   the_field('izobrazhenie_rubriki', $id_term);
+                //   echo get_home_url();
+                //   echo $curs_term_id;
+                //   echo $cat_p->name; 
+                //endforeach; 
+          //endforeach; 
+
+          ?>
+          <!-- <div class="my-assignments__cours my-assignments__cours-1" style="background-image: url(' <?php echo get_template_directory_uri(); ?>/assets/img/cours-1.png');">
             <div class="my-assignments__subtitle">Это название курса</div><a class="my-assignments__btn button-main" href="home-work-curse">Перейти</a>
           </div>
           <div class="my-assignments__cours my-assignments__cours-2" style="background-image: url(' <?php echo get_template_directory_uri(); ?>/assets/img/cours-2.png');">
@@ -38,12 +127,13 @@
           </div>
           <div class="my-assignments__cours my-assignments__cours-2" style="background-image: url(' <?php echo get_template_directory_uri(); ?>/assets/img/cours-2.png');">
             <div class="my-assignments__subtitle">Это название курса</div><a class="my-assignments__btn button-main" href="#">Перейти</a>
-          </div>
+          </div> -->
         </div>
       </div>
    </section>
   
-
+   <div class="d-flex flex-column flex-root" style="display: none !important;">
+  <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
   
   <?php
         // get_footer();

@@ -1,4 +1,7 @@
 <?php
+
+echo '---> title.php';
+
 /**
  * Template for displaying title of single course.
  *

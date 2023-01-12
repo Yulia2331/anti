@@ -1,4 +1,7 @@
 <?php
+if (mydebbug()){
+	echo '---> content-item.php';
+}
 /**
  * Template for displaying item content in single course.
  *
@@ -13,11 +16,15 @@ defined( 'ABSPATH' ) || exit();
 
 $user   = learn_press_get_current_user();
 $course = learn_press_get_course();
+
 if ( ! $course ) {
 	return;
 }
 
-$course_item             = LP_Global::course_item();
+$course_item = LP_Global::course_item();
+//print_r(LP_Global::course_item());
+//echo $course->get_id();
+
 $can_view_content_course = $user->can_view_content_course( $course->get_id() );
 $can_view_content_item   = $user->can_view_item( $course_item->get_id(), $can_view_content_course );
 ?>

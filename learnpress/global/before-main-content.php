@@ -9,6 +9,7 @@
  * @version  3.0.0
  */
 
+echo '-----------------------------> before-main-content.php';
 
 defined( 'ABSPATH' ) || exit();
 ?>
@@ -37,6 +38,11 @@ defined( 'ABSPATH' ) || exit();
 
 	<?php } else { ?>
 
+
+
 	<div id="lp-archive-courses" class="lp-archive-courses">
 
-		<?php } ?>
+		<?php 
+		
+
+	} ?>

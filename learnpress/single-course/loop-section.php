@@ -1,4 +1,8 @@
 <?php
+if (mydebbug()){
+	echo '--->loop-section.php';
+}
+
 /**
  * Template for displaying loop course of section.
  *
@@ -31,6 +35,18 @@ if ( ! apply_filters( 'learn-press/section-visible', true, $section, $course ) )
  * @var LP_Course_Item[]
  */
 $items = $section->get_items();
+
+
+// меняем стиль вкладок от страницы
+global $wp;
+//echo home_url( $wp->request );
+
+$arr = explode('/', home_url( $wp->request ));
+
+if (isset($arr[5])!=true){	
+	include 'loop-section-new.php';
+}else{
+
 ?>
 
 <li <?php $section->main_class(); ?>
@@ -120,3 +136,7 @@ $items = $section->get_items();
 
 	<?php do_action( 'learn-press/after-section-summary', $section, $course->get_id() ); ?>
 </li>
+
+<?php 
+}
+?>

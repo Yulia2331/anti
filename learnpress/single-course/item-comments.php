@@ -1,4 +1,7 @@
 <?php
+if (mydebbug()){
+	echo '--->item-comments.php';
+}
 /**
  * Template for displaying comments of a course item.
  *
@@ -9,7 +12,10 @@
 
 defined( 'ABSPATH' ) || exit;
 
+
+
 if ( comments_open() || get_comments_number() ) {
+	
 	?>
 	<div id="learn-press-item-comments">
 		<div class="learn-press-comments">

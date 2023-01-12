@@ -6,6 +6,7 @@
  * @subpackage intentionally-blank
  */
 
+
 if ( ! function_exists( 'blank_setup' ) ) :
 	/**
 	 * Sets up theme defaults and registers the various WordPress features that
@@ -123,13 +124,17 @@ function plugins_addition($plugins) {
 add_filter('all_plugins', 'plugins_addition');
 
 function theme_name_scripts() {
+	wp_enqueue_style( 'course', get_template_directory_uri() . '/assets/css/course.min.css' );
 
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' );
 	wp_enqueue_style( 'plugins-bundle', get_template_directory_uri() . '/assets/plugins/global/plugins.bundle.css' );
 	wp_enqueue_style( 'datatables', get_template_directory_uri() . '/assets/plugins/custom/datatables/datatables.bundle.css' );
 	wp_enqueue_style( 'plugins-bundle', get_template_directory_uri() . '/assets/plugins/global/plugins.bundle.css' );
+	
 	wp_enqueue_style( 'style-bundle', get_template_directory_uri() . '/assets/css/style.bundle.css' );
+	
 	wp_enqueue_style( 'custom-style', get_template_directory_uri() . '/assets/css/custom-style.css' );
+	
 	wp_enqueue_style( 'curs-style', get_template_directory_uri() . '/assets/css/style.css' );
 	wp_enqueue_style( 'curses', get_template_directory_uri() . '/assets/css/curses.css?1' );
 	wp_enqueue_style( 'ideas-style', get_template_directory_uri() . '/assets/css/ideas/style.min.css' );
@@ -137,9 +142,11 @@ function theme_name_scripts() {
 	wp_enqueue_style( 'my-reviews', get_template_directory_uri() . '/assets/css/ideas/my-reviews.min.css' );
 	wp_enqueue_style( 'tracked-ideas', get_template_directory_uri() . '/assets/css/ideas/tracked-ideas.min.css' );
 
-	wp_enqueue_style( 'assignments', get_template_directory_uri() . '/assets/css/assignments/my-assignments.min.css' );
-	wp_enqueue_style( 'course', get_template_directory_uri() . '/assets/css/course.min.css' );
+	wp_enqueue_style( 'assignments', get_template_directory_uri() . '/assets/css/assignments/my-assignments.min.css' );	
 	wp_enqueue_style( 'new-style', get_template_directory_uri() . '/assets/css/style.min.css' );
+	wp_enqueue_style( 'general', get_template_directory_uri() . '/assets/css/general.css' );
+	//wp_enqueue_script( 'font-js', 'https://kit.fontawesome.com/72a41cb45f.js?_v=20221228185850', array(), '1.0.0', true );
+	//<script src="https://kit.fontawesome.com/72a41cb45f.js?_v=20221228185850" crossorigin="anonymous"></script>
 
 	wp_enqueue_script( 'script-global-plugins-bundle', get_template_directory_uri() . '/assets/plugins/global/plugins.bundle.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'script-bundle', get_template_directory_uri() . '/assets/js/scripts.bundle.js', array(), '1.0.0', true );
@@ -243,6 +250,7 @@ function theme_name_scripts() {
 // 	wp_enqueue_script( 'script-global-plugins-bundle', get_template_directory_uri() . '/assets/plugins/global/plugins.bundle.js', array(), '1.0.0', true );
 // 	wp_enqueue_script( 'script-bundle', get_template_directory_uri() . '/assets/js/scripts.bundle.js', array(), '1.0.0', true );
 // 	wp_enqueue_script( 'script-datatables', get_template_directory_uri() . '/assets/plugins/custom/datatables/datatables.bundle.js', array(), '1.0.0', true );
+		
 		wp_enqueue_style( 'style-city-phone', get_template_directory_uri() . '/assets/js/cityphone/css/intlTelInput.css' );
 		wp_enqueue_style( 'swiper-bundle-style', 'https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css' );
 		wp_enqueue_script( 'script-city-phone', get_template_directory_uri() . '/assets/js/cityphone/js/intlTelInput.min.js', array(), '1.0.0', true );
@@ -254,7 +262,7 @@ function theme_name_scripts() {
 }
 
 function custom_login_page() {
-	$new_login_page_url = home_url( '/antinorma.com/auth/' ); // new login page
+	$new_login_page_url = home_url( '/auth/' ); // new login page
 	global $pagenow;
 	if( $pagenow == "wp-login.php" && $_SERVER['REQUEST_METHOD'] == "GET") {
 		wp_redirect($new_login_page_url);
@@ -275,10 +283,8 @@ function custom_login_page() {
 }
 	
 
-	// Название месяца по метке UNIX
-function getMonthName($month) {
-  
-
+// Название месяца по метке UNIX
+function getMonthName($month) { 
 	
 	$monthAr = array(
 	  1 => array('Январь', 'Января'),
@@ -312,9 +318,6 @@ function after_login() {
 add_action('wp_login', 'after_login');
 add_filter( 'theme_file_path', 'wp_normalize_path' );
 
-
-
-
 require_once ('functions/authorithation.php');
 require_once ('functions/registration.php');
 require_once ('functions/reset-password.php');
@@ -325,7 +328,7 @@ require_once ('functions/likes.php');
 require_once ('functions/post-comments.php');
 require_once ('functions/authors.php');
 require_once ('functions/analitic.php');
-require_once ('functions/curses.php');
+//require_once ('functions/curses.php');
 
 
 add_action( 'wp_ajax_questiondatahtml', 'questiondatahtml_update' );
@@ -411,17 +414,17 @@ function check_zar(){
 				$today = getdate();
 				$this_month = $today['mon'];
 				$this_day = $today['mday'];
-				// if (((int)$this_month - (int)$month-1) > 1 ){
-				// 	wp_redirect( '/antinorma.com/get_money', 301 );
-				// }
-				// if ((int)$this_month-1>(int)$month && (int)$this_day>3){
-				// 	wp_redirect( '/antinorma.com/get_money', 301 );
+				if (((int)$this_month - (int)$month-1) > 1 ){
+					wp_redirect( '/get_money', 301 );
+				}
+				if ((int)$this_month-1>(int)$month && (int)$this_day>3){
+					wp_redirect( '/get_money', 301 );
 					
-				// }
+				}
 	}
 
 	elseif(!have_rows('zarabotok', 'user_'.$user_id )){
-		wp_redirect( '/antinorma.com/get_money', 301 );
+		wp_redirect( '/get_money', 301 );
 		
 	}
 }
@@ -455,10 +458,11 @@ function get_cities(){
 	return $cities;
 	wp_die();
 }
+
 add_action( 'template_redirect', function() {
 	if( ( !is_page(array('auth','remind-password', 'reg') )) ) {
 		 if (!is_user_logged_in() ) {
-			  wp_redirect( site_url( '/antinorma.com/auth' ) );        // redirect all...
+			  wp_redirect( site_url( 'auth' ) );        // redirect all...
 			  exit();
 		 }
 	}
@@ -488,3 +492,107 @@ function is_user_role_in( $roles, $user = false ) {
 	return false;
 }
 add_filter( 'learn-press/override-templates', function(){ return true; } );
+
+
+// Переводим время в число минуты
+function clear_time($string){
+  $arr = explode(' ', $string);
+
+  if ($arr[1] == 'minute'){
+  	$int = (int)$arr[0];
+  }
+  if ($arr[1] == 'hour'){
+  	$int = (int)$arr[0]*60;
+  }
+  if ($arr[1] == 'day'){
+  	$int = (int)$arr[0]*1440;
+  }
+  if ($arr[1] == 'week'){
+  	$int = (int)$arr[0]*10080;
+  }  
+
+  return $int*60;
+}
+
+
+// Расчет оставшегося времени
+function get_remaining_time($start_time,$period){
+
+	// echo '<br>';
+    // echo (strtotime(get_the_date( 'm-d-Y', $id_cours))+$time_section)-time();
+    // echo '<br>';
+    // echo date("m-d-Y",time());
+    // echo '<br>';
+    // echo get_the_date( 'm-d-Y', $id_cours);
+    // echo '<br>';
+    // echo date("m-d-Y",strtotime(get_the_date( 'd-m-Y', $id_cours))); 
+    // echo '<br>';
+    // echo date('m-d-Y',(int)strtotime(get_the_date( 'm-d-Y', $id_cours))+$time_section);
+    // echo '<br>';
+
+    $seconds = ($start_time+$period)-time();
+
+    $days = 0; $hours = 0; $minutes = 0;
+    $oneMinute = 60;
+    $oneHour = 60 * $oneMinute;
+    $oneDay = $oneHour * 24;
+     
+    if ($seconds / $oneDay > 0) {
+        $days = (int)($seconds / $oneDay);
+        $seconds -= $days * $oneDay;
+    }
+     
+    if ($seconds / $oneHour > 0) {
+        $hours = (int)($seconds / $oneHour);
+        $seconds -= $hours * $oneHour;
+    }
+     
+    if ($seconds / $oneMinute > 0) {
+        $minutes = (int)($seconds / $oneMinute);
+        $seconds -= $minutes * $oneMinute;
+    }
+
+    return $days.' д - '.$hours.' ч - '.$minutes.' мин ';
+
+}
+
+// Функция для коментария и комментариев
+function get_text_comment_num($value){
+
+	if ($value == 1){
+		return 'комментарий';
+	}
+	if ($value > 1 and $value <= 4){
+		return 'комментария';
+	}
+	if ($value > 4){
+		return 'комментариев';
+	}
+
+}
+
+// добовление поля учителя в админке
+require_once ('functions/add_teacher.php');
+
+// добовление поля дедлайна ДЗ
+//require_once ('functions/add_dead_line_home_work.php');
+
+// шаблон коментариев для домашнего задания
+require_once ('template-parts/comments/home_work_comments.php');
+
+
+
+// Content
+add_action(	'custom_content_single_meta',LearnPress::instance()->template( 'course' )->callback( 'single-course/meta-secondary' ),10);
+add_action(	'custom_content_single_tab',LearnPress::instance()->template( 'course' )->callback( 'single-course/tabs/tabs' ),60);
+add_action( 'custom_content_single',LearnPress::instance()->template( 'course' )->func( 'course_comment_template' ), 75 );
+
+
+//debug
+function mydebbug(){
+	$mydebug=false;
+	if ($mydebug) {
+		return true;
+	}
+}
+

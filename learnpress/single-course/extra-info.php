@@ -1,4 +1,7 @@
 <?php
+
+echo '--->extra-info.php';
+
 /**
  * Template for displaying extra info as toggle
  *

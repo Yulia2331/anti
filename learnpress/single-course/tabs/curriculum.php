@@ -9,6 +9,8 @@
  * @version  4.0.1
  */
 
+
+
 defined( 'ABSPATH' ) || exit();
 
 $course = learn_press_get_course();

@@ -8,6 +8,11 @@
  * @version 4.0.0
  */
 
+
+if (mydebbug()){
+    echo '---> content-single-item.php';
+}
+
 defined( 'ABSPATH' ) || exit();
 
 /**
@@ -29,7 +34,7 @@ do_action( 'learn-press/before-main-content' );
  */
 do_action( 'learn-press/before-single-item' );
 ?>
-	<div id="popup-course" class="course-summary">
+	<div id="popup-course" class="course-summary" >
 		<?php
 		/**
 		 * @since 4.0.6

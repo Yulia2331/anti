@@ -6,6 +6,9 @@
  * @package LearnPress/Templates
  * @version 4.0.0
  */
+if (mydebbug()){
+	echo '---> content-single-course.php';
+}
 
 defined( 'ABSPATH' ) || exit();
 
@@ -17,10 +20,14 @@ if ( post_password_required() ) {
 	return;
 }
 
+
+
+
+
 /**
  * LP Hook
  */
-do_action( 'learn-press/before-single-course' );
+//do_action( 'learn-press/before-single-course' );
 
 ?>
 <div id="learn-press-course" class="course-summary">
@@ -39,4 +46,7 @@ do_action( 'learn-press/before-single-course' );
 /**
  * LP Hook
  */
-do_action( 'learn-press/after-single-course' );
+//do_action( 'learn-press/after-single-course' );
+if (mydebbug()){
+    echo '---> content-single-course.php';
+}

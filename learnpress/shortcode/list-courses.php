@@ -7,6 +7,8 @@
  * @version 4.0.0
  */
 
+echo '----------------------------> +++++++';
+
 defined( 'ABSPATH' ) || exit;
 
 if ( ! isset( $query ) ) {

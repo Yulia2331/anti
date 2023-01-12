@@ -1,4 +1,7 @@
 <?php
+
+echo '--->thumbnail.php';
+
 /**
  * Template for displaying thumbnail of single course.
  *

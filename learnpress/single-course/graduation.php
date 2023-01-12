@@ -1,4 +1,6 @@
 <?php
+
+echo '--->graduation.php';
 /**
  * Template for displaying course graduation.
  *
@@ -20,7 +22,7 @@ $classes = array(
 	$graduation === 'passed' ? 'success' : ( $graduation === 'failed' ? 'error' : '' ),
 );
 ?>
-
+123
 <div class="<?php echo implode( ' ', $classes ); ?>">
 	<?php
 	if ( $graduation === 'passed' ) {

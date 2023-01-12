@@ -1,4 +1,7 @@
 <?php
+
+
+
 /**
  * Template for displaying content of single course.
  *
@@ -21,55 +24,55 @@ if ( empty( $is_block_theme ) ) {
 /**
  * @since 3.0.0
  */
- 
 
-do_action( 'learn-press/before-main-content' );
 
-do_action( 'learn-press/before-main-content-single-course' );
 
-while ( have_posts() ) {
-	the_post();
-$values = get_field('dostup');
-$us = get_current_user_id();
+?>
 
-if(is_user_role_in( [ 'administrator' ] )){
-    learn_press_get_template( 'content-single-course' );
-} 
-if($values){
-	foreach($values as $value) {
-		if($value == $us ){
-		    learn_press_get_template( 'content-single-course' );
-		} 
-	} 
-} ?>
-<div class="" style="opacity: 0;">
-<?php do_action( 'learn-press/course-buttons' ); ?>
-</div>
-<script>
-                                    document.addEventListener('DOMContentLoaded', function() { // когда весь HTML загружен
-                                    try{
-                                        const btn = document.querySelector('.button-enroll-course');
-                                        if(btn) {
-                                        setTimeout(function() { // таймер-планировщик
-                                            btn.click(); // вызвать клик на кнопку
-                                            }, 2000); // через две секунды
-                                        }
-                                    } catch {}
-                                });
-                                </script> 
-<?php
-} 
+</div></div>
 
-/**
- * @since 3.0.0
- */
-do_action( 'learn-press/after-main-content-single-course' );
-do_action( 'learn-press/after-main-content' );
+<section class="materials padding-left">
 
-/**
- * LP sidebar
- */
-do_action( 'learn-press/sidebar' );
+<?php 
+
+
+learn_press_get_template( 'content-single-course' );
+
+//do_action( 'learn-press/single-course-summary' );
+
+//do_action( 'learn-press/before-main-content' );
+//do_action( 'learn-press/course-meta-secondary-left' );
+
+
+
+// while ( have_posts() ) {
+// 	the_post();
+    
+// } 
+
+
+
+
+?>
+</section>
+
+
+
+
+<div class="d-flex flex-column flex-root" style="">
+<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+
+
+
+
+
+<?
+if (mydebbug()){
+    echo '<div style="display: block;background-color: red;width: 300px;padding: 20px;"> ---> single-course.php </div>';
+    echo '<!--/////////////////////////////////////////////////////////////////////////////////////////////////////-->';
+    echo '<!--//// > single-course.php //////-->';
+    echo '<!--/////////////////////////////////////////////////////////////////////////////////////////////////////-->';
+}
 
 /**
  * Footer for page
@@ -77,3 +80,4 @@ do_action( 'learn-press/sidebar' );
 if ( empty( $is_block_theme ) ) {
 	get_footer();
 }
+

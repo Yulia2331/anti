@@ -1,4 +1,7 @@
 <?php
+
+echo '--->featured-review.php';
+
 /**
  * Template for displaying featured review.
  *

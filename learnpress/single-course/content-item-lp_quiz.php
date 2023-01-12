@@ -1,4 +1,7 @@
 <?php
+
+echo '---> content-item-lp_quiz.php';
+
 /**
  * Template for displaying quiz item content in single course.
  *
