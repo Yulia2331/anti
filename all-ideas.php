@@ -32,6 +32,7 @@ get_header();
                         $idea_id = get_the_id();
                         $gg = get_the_terms( $idea_id, 'ideas_tax' );
                         $average_rating = get_post_meta( $idea_id, 'average_rating', true );
+                        $current_user_id = get_current_user_id(); 
                         ?>
 <div class="hidden"></div>
 <div id="revform<? echo $idea_id; ?>" class="create-reviews">
@@ -89,7 +90,7 @@ get_header();
       </div>
 </div>
 <!-- Карточка -->
-               <div class="board-ideas__item idea">
+               <div id="ideas_item<? echo $idea_id; ?>" class="board-ideas__item idea">
                 
           <div class="idea__wrapper"> 
             <div class="idea__header"> 
@@ -114,8 +115,10 @@ get_header();
           </div>
 <!-- тело -->
 <div class="view-idea" data-idea="<? the_id(); ?>">
+<? if($current_user_id == $a_id){ ?>
+  <button class="view-idea__trash container__icon--18" data-trash="<? echo $idea_id; ?>"><i class="fa-solid fa-trash"></i></button>
+  <? } ?>
   <button class="view-idea__close close container__icon--18"><i class="fa-solid fa-xmark"></i></button>
-  <button class="view-idea__trash container__icon--18"><i class="fa-solid fa-trash"></i></button>
   <div class="view-idea__header"> 
     <h2 class="view-idea__title"><? echo the_title(); ?></h2>
     <div class="view-idea__right"> 
@@ -138,7 +141,8 @@ get_header();
     <button class="view-idea__btn button-main">Написать автору</button>
   </div>
   <div class="view-idea__hypothesis hypothesis">
- 
+  <? 
+ if($current_user_id == $a_id){ ?>
     <form action="" method="POST" class="hypothesis__add"> 
       <input class="input hypothesis__input" name="hypothesis_content" type="text" placeholder="Дополнить идею">
       <input type="hidden" value="<? 
@@ -149,6 +153,7 @@ get_header();
       </button>
     </form> 
       <span class="hypothesis__msg"></span>
+   <? } ?>
     <div class="hypothesis__board"> 
 
     <?  if( have_rows('hypothesis_rep') ):
@@ -157,7 +162,9 @@ get_header();
   <div class="hypothesis__item">
     <div class="hypothesis__item_header">
       <div class="hypothesis__item_title">Гипотеза (<? the_sub_field('hypothesis_date'); ?>)</div>
+      <? if($current_user_id == $a_id){ ?>
       <button class="hypothesis__item_icon"> <i class="fa-solid fa-trash"></i></button>
+      <? } ?>
     </div>
     <div class="hypothesis__content"><? the_sub_field('hypothesis'); ?></div>
   </div>
@@ -278,6 +285,28 @@ let date = new Date().toLocaleDateString();
       }
   });
       })
+  })
+</script>
+<script>
+  const ideaTrash = document.querySelectorAll('.view-idea__trash');
+  ideaTrash.forEach((i) => {
+    i.addEventListener('click', (e) => {
+      let id = e.target.dataset.trash;
+      $.ajax({ 
+       data: {
+        action: 'trash_idea', 
+        id: id,
+      },
+       type: 'post',
+       url: '/wp-admin/admin-ajax.php',
+       beforeSend: function( xhr ) {
+				$('.hypothesis__msg').text('Удаление...');	
+			},
+       success: function(data) {
+        $('.hypothesis__msg').text('Идея удалена');	
+      }
+  });
+    })
   })
 </script>
 <?php

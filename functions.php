@@ -629,7 +629,16 @@ function add_comment_metadata_field( $comment_id ) {
 	add_comment_meta( $comment_id, 'reviews_minus', $minus );
 }
 
+add_action('wp_ajax_trash_idea', 'trash_idea');
+add_action('wp_ajax_nopriv_trash_idea', 'trash_idea');
 
+function trash_idea()
+{
+$postid = $_POST['id']; 
+echo $postid;
+wp_delete_post( $postid, true );
+wp_die(); 
+}
 
 
 

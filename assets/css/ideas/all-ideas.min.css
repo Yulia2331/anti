@@ -89,3 +89,6 @@
 .create-reviews{
     top: 10%;
   }
+  .view-idea__trash i, .hypothesis__item_icon i{
+    pointer-events: none;
+  }
