@@ -635,11 +635,22 @@ add_action('wp_ajax_nopriv_trash_idea', 'trash_idea');
 function trash_idea()
 {
 $postid = $_POST['id']; 
-echo $postid;
+
 wp_delete_post( $postid, true );
 wp_die(); 
 }
 
+add_action('wp_ajax_trash_hypothesis', 'trash_hypothesis');
+add_action('wp_ajax_nopriv_trash_hypothesis', 'trash_hypothesis');
+
+function trash_hypothesis()
+{
+$postid = $_POST['id']; 
+$row = $_POST['row']; 
+
+delete_row('field_63b82d7710576', $row, $postid);
+wp_die(); 
+}
 
 
 

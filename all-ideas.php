@@ -159,11 +159,11 @@ get_header();
     <?  if( have_rows('hypothesis_rep') ):
   while ( have_rows('hypothesis_rep') ) : the_row();
 ?>
-  <div class="hypothesis__item">
+  <div class="hypothesis__item" data-row="<?php echo get_row_index(); ?>">
     <div class="hypothesis__item_header">
       <div class="hypothesis__item_title">Гипотеза (<? the_sub_field('hypothesis_date'); ?>)</div>
       <? if($current_user_id == $a_id){ ?>
-      <button class="hypothesis__item_icon"> <i class="fa-solid fa-trash"></i></button>
+      <button class="hypothesis__item_icon" data-trash="<? echo $idea_id; ?>"> <i class="fa-solid fa-trash"></i></button>
       <? } ?>
     </div>
     <div class="hypothesis__content"><? the_sub_field('hypothesis'); ?></div>
@@ -256,6 +256,7 @@ let name = e.target.querySelector('.hypothesis__input').value;
 let id = e.target.querySelector('.hypothesis_content_id').value;
 let per = e.target.closest('.view-idea__hypothesis').querySelector('.hypothesis__board');
 let date = new Date().toLocaleDateString();
+let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypothesis__msg');
   $.ajax({ 
        data: {
         action: 'hypothesis_form', 
@@ -265,10 +266,10 @@ let date = new Date().toLocaleDateString();
        type: 'post',
        url: '/wp-admin/admin-ajax.php',
        beforeSend: function( xhr ) {
-				$('.hypothesis__msg').text('Добавление гипотезы...');	
+				msgWrapp.innerText = 'Добавление гипотезы...';	
 			},
        success: function(data) {
-        $('.hypothesis__msg').text('Гипотеза добавлена');	
+        msgWrapp.innerText ='Гипотеза добавлена';	
      
         let html = 
         `
@@ -292,6 +293,7 @@ let date = new Date().toLocaleDateString();
   ideaTrash.forEach((i) => {
     i.addEventListener('click', (e) => {
       let id = e.target.dataset.trash;
+      let msgWrapp = e.target.closest('.view-idea').querySelector('.hypothesis__msg');
       $.ajax({ 
        data: {
         action: 'trash_idea', 
@@ -300,10 +302,36 @@ let date = new Date().toLocaleDateString();
        type: 'post',
        url: '/wp-admin/admin-ajax.php',
        beforeSend: function( xhr ) {
-				$('.hypothesis__msg').text('Удаление...');	
+				msgWrapp.innerText = 'Удаление...';	
 			},
        success: function(data) {
-        $('.hypothesis__msg').text('Идея удалена');	
+        msgWrapp.innerText = 'Идея удалена';	
+      }
+  });
+    })
+  })
+</script>
+<script>
+  const hypothesisTrash = document.querySelectorAll('.hypothesis__item_icon');
+  hypothesisTrash.forEach((i) => {
+    i.addEventListener('click', (e) => {
+      let id = e.target.dataset.trash;
+      let row = i.closest('.hypothesis__item').dataset.row;
+      let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypothesis__msg');
+      $.ajax({ 
+       data: {
+        action: 'trash_hypothesis', 
+        id: id,
+        row: row
+      },
+       type: 'post',
+       url: '/wp-admin/admin-ajax.php',
+       beforeSend: function( xhr ) {
+				msgWrapp.innerText = 'Удаление...';	
+			},
+       success: function(data) {
+        msgWrapp.innerText = 'Гипотеза удалена';	
+        e.target.closest('.hypothesis__item').remove();   
       }
   });
     })
