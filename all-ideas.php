@@ -266,15 +266,15 @@ let date = new Date().toLocaleDateString();
         let html = 
         `
         <div class="hypothesis__item">
-    <div class="hypothesis__item_header">
-      <div class="hypothesis__item_title">Гипотеза (${date})</div>
-      <button class="hypothesis__item_icon"> <i class="fa-solid fa-trash"></i></button>
-    </div>
-    <div class="hypothesis__content">${name}</div>
-  </div>
+          <div class="hypothesis__item_header">
+            <div class="hypothesis__item_title">Гипотеза (${date})</div>
+            <button class="hypothesis__item_icon"> <i class="fa-solid fa-trash"></i></button>
+          </div>
+          <div class="hypothesis__content">${name}</div>
+        </div>
         `
         per.insertAdjacentHTML('beforeEnd', html);
-
+        e.target.reset();
       }
   });
       })

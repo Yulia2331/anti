@@ -117,35 +117,36 @@ dwn.forEach((i) => {
 })
 } catch {}
 try{
-const addInp = document.querySelector('.create-idea__plus');
-input1 = document.querySelector('#inp1');
-input2 = document.querySelector('#inp2');
-input3 = document.querySelector('#inp3');
-input4 = document.querySelector('#inp4');
-addInp.addEventListener('click', (e) => {
-  let ind;
-  if(input1.classList.contains('hide-inp')){
+  const addInp = document.querySelector('.create-idea__plus');
+  const per = document.querySelector('.create-idea__criteria-block');
+  addInp.addEventListener('click', (e) => {
+   let l = per.querySelectorAll('.create-idea__criteria');
+   let ind;
+   if(l.length == 0){
     ind = 1;
-  }
-  if(!input1.classList.contains('hide-inp')){
+   }
+   if(l.length == 1){
     ind = 2;
-  }
-  if(!input2.classList.contains('hide-inp')){
+   }
+   if(l.length == 2){
     ind = 3;
-  }
-  if(!input3.classList.contains('hide-inp')){
+   }
+   if(l.length == 3){
     ind = 4;
-  }
-  if(!input4.classList.contains('hide-inp')){
+   }
+   if(l.length == 4){
     ind = 5;
-  }
-  let gr = document.querySelector(`#inp${ind}`);
-  gr.classList.remove('hide-inp');
-
-})
-
+   }
+   if(l.length == 5){
+    return false;
+   }
+   let html = 
+   `
+   <input id="inp${ind}" class="create-idea__criteria" name="criteria_${ind}" type="text" value="">
+   `
+   per.insertAdjacentHTML('beforeEnd', html);
+  });
 } catch {}
-
 // $('.hypothesis__add').submit(function(e){
 //   e.preventDefault();
 //   var name = $(".hypothesis_content").val();

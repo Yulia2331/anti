@@ -545,6 +545,61 @@ add_filter( 'learn-press/override-templates', function(){ return true; } );
 
 
 
+add_action('wp_ajax_ideas_form', 'ideas_form');
+add_action('wp_ajax_nopriv_ideas_form', 'ideas_form');
+
+function ideas_form()
+{
+	$title = $_POST['title'];
+	$cont = $_POST['cont'];
+	$idea_tag = $_POST['tag'];
+	$idea_tax = (int) $_POST['tax'];
+// 	$time = current_time( 'timestamp' );
+// 	$post_data = [
+// 		'post_type' => 'ideas',
+// 		'post_title'    => $title,
+// 		'post_content'  => '',
+// 		'post_status'   => 'publish',
+// 		'meta_input'    => [ 
+// 		  'online_offline' => $idea_tag,
+// 		],
+// 	];
+// 	$post_id = wp_insert_post( $post_data );
+// 	wp_set_object_terms( $post_id, $idea_tax, 'ideas_tax' );
+//   $field_key = "field_63b82d7710576";
+//   $value = array(
+// 	  array(
+// 		  "hypothesis"	=> $cont,
+// 	  	'hypothesis_date' => $time,
+// 	  )
+//   );
+//   update_field( $field_key, $value, $post_id );
+
+
+// $arr = $_POST['criteriasArr'];
+// var_dump($arr);
+// foreach( $arr as $item=>$val ){
+// 	print_r($val);
+	
+// }
+//   $average_rating = 'average_rating';
+//   $average_rating_val = (int)0;
+//   $criteria = 'criteria_1';
+//   $val = sanitize_text_field( $_POST['criteria_1'] );
+//   $criteria_rat = 'criteria_1_rat';
+//   $val_rat = (int) 0;
+//   $criteria_2 = 'criteria_2';
+//   $val_2 = sanitize_text_field( $_POST['criteria_2'] );
+//   $criteria_rat_2 = 'criteria_2_rat';
+//   $val_rat_2 = (int) 0;
+//   add_post_meta( $post_id, $average_rating, $average_rating_val);
+//   add_post_meta( $post_id, $criteria, $val);
+//   add_post_meta( $post_id, $criteria_rat, $val_rat);
+//   add_post_meta( $post_id, $criteria_2, $val_2);
+//   add_post_meta( $post_id, $criteria_rat_2, $val_rat_2);
+wp_die(); 
+}
+
 add_action('wp_ajax_hypothesis_form', 'hypothesis_form');
 add_action('wp_ajax_nopriv_hypothesis_form', 'hypothesis_form');
 
@@ -573,6 +628,15 @@ function add_comment_metadata_field( $comment_id ) {
 	add_comment_meta( $comment_id, 'reviews_plus', $plus );
 	add_comment_meta( $comment_id, 'reviews_minus', $minus );
 }
+
+
+
+
+
+
+
+
+
 // add_action('wp_ajax_contact_form', 'rate_form');
 // add_action('wp_ajax_nopriv_contact_form', 'rate_form');
 
