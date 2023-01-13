@@ -39,13 +39,13 @@ get_header();
   <div class="create-reviews__title">Отзыв на идею</div>
   <form action="/wp-comments-post.php" method="post" id="commentform" class="create-reviews__form">
     <div class="create-reviews__textarea">
-      <textarea class="create-reviews__plus" name="reviews__plus" placeholder="Расскажите о плюсах"></textarea>
-      <textarea class="create-reviews__minus" name="reviews__minus" placeholder="Расскажите о минусах"></textarea>
+      <textarea class="create-reviews__plus" name="reviews__plus" placeholder="Расскажите о плюсах" required="required"></textarea>
+      <textarea class="create-reviews__minus" name="reviews__minus" placeholder="Расскажите о минусах" required="required"></textarea>
       <textarea id="comment" class="create-reviews__message" name="comment" placeholder="Общий комментарий" required="required"></textarea>
     </div>
-    <div action="" method="POST" class="criteria_rate_idea">
-   <input type="hidden" name="criteria_rate_id" value="<? echo $idea_id; ?>">
-   <input type="hidden" name="criteria_rate_av" value="<? echo $average_rating; ?>">
+    <div class="criteria_rate_idea">
+   <input type="hidden" name="criteria_rate_id" value="<? echo $idea_id; ?>" class="criteria_rate_id">
+   <input type="hidden" name="criteria_rate_av" value="<? echo $average_rating; ?>" class="criteria_rate_av">
    <div class="create-reviews__counters">
     <? 
     $val_1 = get_post_meta( $idea_id, 'criteria_1', true ); 
@@ -84,6 +84,7 @@ get_header();
     <input type="hidden" name="comment_post_ID" value="<? echo $idea_id; ?>" id="comment_post_ID">
     <input type="hidden" name="comment_parent" id="comment_parent" value="0">
     </p>
+    <span class="reviews_msg"></span>
    </form>
       </div>
 </div>
@@ -170,11 +171,6 @@ endif; ?>
     <button class="view-idea__button secondary__button">Подписаться</button>
     <button data-rev="revform<? echo $idea_id ?>" class="view-idea__button view-idea__button-reviews additional-button">Оставить отзыв</button>
   </div>
-  <? 
-  $mid = get_the_id();
-  $m = get_post_meta($mid);
-  print_r($m);
-   ?>
    <div class="view-idea__reviews reviews-idea">
         <div class="reviews-idea__title">Отзывы участников</div>
         <div class="reviews-idea__board"> 
@@ -183,7 +179,7 @@ $args = array(
 	'no_found_rows'       => true,
 	'orderby'             => '',
 	'order'               => 'DESC',
-	'post_id'             => $mid,
+	'post_id'             => $idea_id,
 	'post_type'           => '',
 	'status'              => 'all',
 	'count'               => false,
@@ -238,14 +234,6 @@ if( $comments = get_comments( $args ) ){
         <?php }
         wp_reset_postdata();
         ?>
-<style>
-.view-idea{
-  top: 10%;
-}
-.create-reviews{
-  top: 10%;
-}
-</style>
       </div>
       <button class="board-ideas__more">Смотреть еще</button>
     </div>
@@ -261,13 +249,9 @@ let name = e.target.querySelector('.hypothesis__input').value;
 let id = e.target.querySelector('.hypothesis_content_id').value;
 let per = e.target.closest('.view-idea__hypothesis').querySelector('.hypothesis__board');
 let date = new Date().toLocaleDateString();
-// let date = now.toLocaleDateString("ko-KR");
-// let day = getDate(now);
-// let month = getMonth(now);
-// let year = getFullYear(now);
   $.ajax({ 
        data: {
-        action: 'contact_form', 
+        action: 'hypothesis_form', 
         id: id,
         name: name,
       },
@@ -296,38 +280,5 @@ let date = new Date().toLocaleDateString();
       })
   })
 </script>
-<!-- <script>
-  const comForm = document.querySelectorAll('.criteria_rate_idea');
-  comForm.forEach((i) => {
-    i.addEventListener('submit', (e) =>{
-      e.preventDefault();
-    })
-  })
-</script> -->
-
-
-<!-- <script>
-  const gg = document.querySelectorAll('.criteria_rate_idea');
-  gg.forEach((i) => {
-    i.addEventListener('submit', (e) =>{ <?
-      //  tt(); 
-       ?> })
-  })
-</script> -->
-<?
-// function tt()
-// { 
-//     $post_id = sanitize_text_field( (int) $_POST['criteria_rate_id'] );
-//     $key_1 = 'criteria_1_rat';
-//     $val_1 = sanitize_text_field( (int) $_POST['criteria_rate_1'] );
-//     $key_2 = 'criteria_2_rat';
-//     $val_2 = sanitize_text_field( (int) $_POST['criteria_rate_2'] );
-//     $avr = 'average_rating';
-//     $av = ($val_1 + $val_2)/2;
-//     update_post_meta( $post_id, $key_1, $val_1);
-//     update_post_meta( $post_id, $key_2, $val_2);
-//     update_post_meta( $post_id, $avr, $av);
-// }
-?>
 <?php
     get_footer();

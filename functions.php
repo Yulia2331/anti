@@ -544,20 +544,11 @@ add_filter( 'learn-press/override-templates', function(){ return true; } );
 // add_action( 'wp_ajax_test_function','test_function' );
 
 
-add_action( 'comment_post', 'add_comment_metadata_field' );
 
-function add_comment_metadata_field( $comment_id ) {
+add_action('wp_ajax_hypothesis_form', 'hypothesis_form');
+add_action('wp_ajax_nopriv_hypothesis_form', 'hypothesis_form');
 
-	$plus = sanitize_text_field( $_POST['reviews__plus'] );
-	$minus = sanitize_text_field( $_POST['reviews__minus'] );
-
-	add_comment_meta( $comment_id, 'reviews_plus', $plus );
-	add_comment_meta( $comment_id, 'reviews_minus', $minus );
-}
-add_action('wp_ajax_contact_form', 'contact_form');
-add_action('wp_ajax_nopriv_contact_form', 'contact_form');
-
-function contact_form()
+function hypothesis_form()
 {
 echo $_POST['name'];   
 echo $_POST['id']; 
@@ -571,3 +562,64 @@ echo $_POST['id'];
   add_row('field_63b82d7710576', $row, $post_id);
 wp_die(); 
 }
+add_action( 'comment_post', 'add_comment_metadata_field' );
+
+function add_comment_metadata_field( $comment_id ) {
+	$plus = $_POST['plus'];
+	$minus = $_POST['minus'];
+	$plus = sanitize_text_field( $_POST['reviews__plus'] );
+	$minus = sanitize_text_field( $_POST['reviews__minus'] );
+
+	add_comment_meta( $comment_id, 'reviews_plus', $plus );
+	add_comment_meta( $comment_id, 'reviews_minus', $minus );
+}
+// add_action('wp_ajax_contact_form', 'rate_form');
+// add_action('wp_ajax_nopriv_contact_form', 'rate_form');
+
+// function rate_form()
+// { 
+
+// echo $_POST['id'];
+// echo $_POST['plus'];  
+// echo $_POST['minus'];  
+// echo $_POST['comment'];   
+//  $post_id = $_POST['id'];
+//   $plus = $_POST['plus'];
+//   $minus = $_POST['minus'];
+//   $com = $_POST['com'];
+
+// // код из файла wp-comments-post.php
+// $comment = wp_handle_comment_submission( wp_unslash( $_POST ) );
+// if ( is_wp_error( $comment ) ) {
+// 	$data = (int) $comment->get_error_data();
+// 	if ( ! empty( $data ) ) {
+// 		wp_die(
+// 			'<p>' . $comment->get_error_message() . '</p>',
+// 			__( 'Comment Submission Failure' ),
+// 			array(
+// 				'response'  => $data,
+// 				'back_link' => true,
+// 			)
+// 		);
+// 	} else {
+// 		exit;
+// 	}
+// }
+
+// $user            = wp_get_current_user();
+// $cookies_consent = ( isset( $_POST['wp-comment-cookies-consent'] ) );
+
+// do_action( 'set_comment_cookies', $comment, $user, $cookies_consent );
+
+// // код из файла comments.php вашей текущей темы
+// wp_list_comments(
+// 	array(
+// 		'avatar_size' => 60,
+// 		'style'       => 'ol',
+// 		'short_ping'  => true,
+// 	),
+// 	array( $comment )
+// );
+
+// wp_die(); 
+// }

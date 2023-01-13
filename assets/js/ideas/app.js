@@ -1,3 +1,4 @@
+try{
 const idea = document.querySelectorAll('.idea');
 const close = document.querySelectorAll('.close');
 const hidden = document.querySelector('.hidden');
@@ -20,8 +21,6 @@ idea.forEach(btn => {
   })
 })
 
-
-
 close.forEach(el => {
   el.addEventListener('click', () => {
     document.querySelectorAll('.view-idea').forEach(idea => {
@@ -39,8 +38,6 @@ close.forEach(el => {
     body.classList.remove('no-scroll');
   })
 })
-
-
 
 const createIdea = document.querySelector('.filter__button');
 const createIdeaForm = document.querySelector('.create-idea');
@@ -66,7 +63,7 @@ reviewsButton.forEach(btn => {
     theRev.classList.add('active');
   })
 })
-
+} catch {}
 // const btnIBody = document.querySelectorAll('.idea__name'),
 // IBody = document.querySelector('.view-idea'),
 // iId = document.querySelector('.idea_id');
