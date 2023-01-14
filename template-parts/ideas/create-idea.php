@@ -70,9 +70,15 @@
     let tax = e.target.querySelector('input[name="idea_cat"]:checked').value;
     let date = new Date().toLocaleDateString();
     let criterias = e.target.querySelectorAll('.create-idea__criteria');
-    // let criteriasArr = [];
+    let criteriasArr = [];
     let criteriasLength;
     criterias.forEach((c) => {
+      let obj = {};
+      // obj.name = c.name;
+      obj.val = c.value;
+      criteriasArr.push(obj);
+      // criteriasArr.push(c.name);
+      // criteriasArr.push(c.value);
       // console.log(c.length)
     })
 

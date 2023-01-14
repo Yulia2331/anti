@@ -48,36 +48,23 @@ get_header();
    <input type="hidden" name="criteria_rate_id" value="<? echo $idea_id; ?>" class="criteria_rate_id">
    <input type="hidden" name="criteria_rate_av" value="<? echo $average_rating; ?>" class="criteria_rate_av">
    <div class="create-reviews__counters">
-    <? 
-    $val_1 = get_post_meta( $idea_id, 'criteria_1', true ); 
-    $val_2 = get_post_meta( $idea_id, 'criteria_2', true );
-    ?>
-    <? if($val_1){ ?>
-      <div class="create-reviews__counter-item">
-        <div class="create-reviews__area">
-          <?  echo $val_1; ?>
-      </div>
+   <?  if( have_rows('criterias') ):
+  while ( have_rows('criterias') ) : the_row();
+?>
+<div class="create-reviews__counter-item" data-rowrate="<?php echo get_row_index(); ?>">
+        <div class="create-reviews__area"><? the_sub_field('criteria'); ?></div>
         <div class="create-reviews__count"> 
-          <input class="create-reviews__num" name="criteria_rate_1" value="3">
+          <input class="create-reviews__num" name="criteria_rate" value="5">
           <div class="create-reviews__count-button"> 
             <span class="create-reviews__more"><i class="fa-solid fa-caret-up"></i></i></span>
             <span class="create-reviews__less"><i class="fa-solid fa-caret-down"></i></span>
           </div>
         </div>
-      </div> <? } ?>
-      <? if($val_2){ ?>
-      <div class="create-reviews__counter-item">
-        <div class="create-reviews__area">
-          <?  echo $val_2; ?>
       </div>
-        <div class="create-reviews__count"> 
-          <input class="create-reviews__num" name="criteria_rate_2" value="3">
-          <div class="create-reviews__count-button"> 
-            <span class="create-reviews__more"><i class="fa-solid fa-caret-up"></i></i></span>
-            <span class="create-reviews__less"><i class="fa-solid fa-caret-down"></i></span>
-          </div>
-        </div>
-      </div> <? } ?>
+<?
+  endwhile;
+else :
+endif; ?>
     </div>
     <button type="submit" class="create-reviews__button secondary__button" style="display:none;">Отправить</button>
     <p class="form-submit">
