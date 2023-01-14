@@ -38,10 +38,10 @@ get_header();
 <div id="revform<? echo $idea_id; ?>" class="create-reviews">
   <button class="create-reviews__close close container__icon--18"><i class="fa-solid fa-xmark"></i></button>
   <div class="create-reviews__title">Отзыв на идею</div>
-  <form action="/wp-comments-post.php" method="post" id="commentform" class="create-reviews__form">
+  <form action="" method="post" id="commentform" class="create-reviews__form">
     <div class="create-reviews__textarea">
-      <textarea class="create-reviews__plus" name="reviews__plus" placeholder="Расскажите о плюсах" required="required"></textarea>
-      <textarea class="create-reviews__minus" name="reviews__minus" placeholder="Расскажите о минусах" required="required"></textarea>
+      <textarea class="create-reviews__plus" name="reviews__plus" placeholder="Расскажите о плюсах"></textarea>
+      <textarea class="create-reviews__minus" name="reviews__minus" placeholder="Расскажите о минусах"></textarea>
       <textarea id="comment" class="create-reviews__message" name="comment" placeholder="Общий комментарий" required="required"></textarea>
     </div>
     <div class="criteria_rate_idea">
@@ -323,6 +323,41 @@ let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypoth
   });
     })
   })
+</script>
+<script>
+  const revForm = document.querySelectorAll('.create-reviews__form');
+   revForm.forEach((i) => {
+    i.addEventListener('submit', (e) =>{
+      e.preventDefault();
+      let id = e.target.querySelector('.criteria_rate_id').value,
+          plus = e.target.querySelector('.create-reviews__plus').value,
+          minus = e.target.querySelector('.create-reviews__minus').value,
+          comment = e.target.querySelector('.create-reviews__message').value;
+          $.ajax({ 
+       data: {
+        action: 'rate_form', 
+        id: id,
+        plus: plus,
+        minus: minus,
+        comment: comment
+
+      },
+       type: 'post',
+       url: '/wp-admin/admin-ajax.php',
+       beforeSend: function( xhr ) {
+        $('.reviews_msg').text('Добавление отзыва...');
+			},
+      error: function (request, status, error) {
+        $('.reviews_msg').text(error);
+        console.log(data);
+},
+       success: function(data) {
+        $('.reviews_msg').text('Отзыв добавлен');	
+        console.log(data);
+      }
+      });
+    });
+    })
 </script>
 <?php
     get_footer();

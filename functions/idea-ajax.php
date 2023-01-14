@@ -59,17 +59,6 @@ echo $_POST['id'];
   add_row('field_63b82d7710576', $row, $post_id);
 wp_die(); 
 }
-add_action( 'comment_post', 'add_comment_metadata_field' );
-
-function add_comment_metadata_field( $comment_id ) {
-	$plus = $_POST['plus'];
-	$minus = $_POST['minus'];
-	$plus = sanitize_text_field( $_POST['reviews__plus'] );
-	$minus = sanitize_text_field( $_POST['reviews__minus'] );
-
-	add_comment_meta( $comment_id, 'reviews_plus', $plus );
-	add_comment_meta( $comment_id, 'reviews_minus', $minus );
-}
 
 add_action('wp_ajax_trash_idea', 'trash_idea');
 add_action('wp_ajax_nopriv_trash_idea', 'trash_idea');
@@ -94,106 +83,41 @@ delete_row('field_63b82d7710576', $row, $postid);
 wp_die(); 
 }
 
-// add_action('wp_ajax_new', 'newbid_ajax');
-// add_action( 'wp_ajax_nopriv_new', 'newbid_ajax' );
-// function newbid_ajax() {
-//     $post_id = $_POST['id'];
-// 	echo $post_id;
-//     //Get current bid
-//     // $mybid = get_post_meta($post_id, 'start_price', true);
+add_action('wp_ajax_rate_form', 'rate_form');
+add_action('wp_ajax_nopriv_rate_form', 'rate_form');
 
-//     //Increase the bid, for example the amount here is 100€
-//     // $mybid = $mybid + 100;
+function rate_form()
+{ 
 
-//     //Update the database with the increased bid value
-//     // update_post_meta($post_id,'start_price',$mybid);
+echo $_POST['id'];
+echo $_POST['plus'];  
+echo $_POST['minus'];   
+echo $_POST['comment'];  
+ $post_id = $_POST['id'];
+  $plus = $_POST['plus'];
+  $minus = $_POST['minus'];
+  $comment = $_POST['comment'];
+  $current_user_id = get_current_user_id();
+  $user       = get_userdata( $current_user_id );
+$user_email   = $user->user_email;
+$first_name = $user->first_name;
+$last_name  = $user->last_name;
 
+  $commentdata = [
+	'comment_post_ID'      => $post_id,
+	'comment_author'       => [ $first_name, $last_name],
+	'comment_author_email' => $user_email,
+	'comment_content'      =>  $comment,
+	'comment_type'         => 'comment',
+	'user_ID'              => $current_user_id,
+    'comment_meta'         => [ 
+        'reviews_plus' => $plus,
+        'reviews_minus' => $minus,
+      ],
+];
 
-// // 	$time = current_time( 'timestamp' );
-// // 	$field_key = "field_63b82d7710576";
-// // $value = array(
-// // 	array(
-// // 		"hypothesis"	=> $cont,
-// //     'hypothesis_date' => $time,
-// // 	)
-// // );
-// // update_field( $field_key, $value, $post_id );
+// добавляем данные в Базу Данных
+wp_new_comment( $commentdata );
 
-
-//     // In case you need to update another meta for the user, you 
-//     // can access the user ID with the get_current_user_id() function
-
-//     // Finally sending back the updated bid so the javascript can display it
-//     wp_die();
-// }
-// function test_function() {
-// 	// Set variables
-// 	$input_test = $_POST['hypothesis_content'];
-// 	$post_id = $_POST['hypothesis_content_id'];
-// 	// Check variables for fallbacks
-// 	// if (!isset($input_test) || $input_test == "") { $input_test = "Fall Back"; }
-// 	// // Update the field
-// 	// update_field('downloaded', $input_test);
-// 	$time = current_time( 'timestamp' );
-// 	$field_key = "field_63b82d7710576";
-// 	$value = array(
-// 	array(
-// 		"hypothesis"	=> $cont,
-//     'hypothesis_date' => $time,
-// 	)
-// );
-// update_field( $field_key, $value, $post_id );
-//  }
-// add_action( 'wp_ajax_nopriv_test_function',  'test_function' );
-// add_action( 'wp_ajax_test_function','test_function' );
-
-// add_action('wp_ajax_contact_form', 'rate_form');
-// add_action('wp_ajax_nopriv_contact_form', 'rate_form');
-
-// function rate_form()
-// { 
-
-// echo $_POST['id'];
-// echo $_POST['plus'];  
-// echo $_POST['minus'];  
-// echo $_POST['comment'];   
-//  $post_id = $_POST['id'];
-//   $plus = $_POST['plus'];
-//   $minus = $_POST['minus'];
-//   $com = $_POST['com'];
-
-// // код из файла wp-comments-post.php
-// $comment = wp_handle_comment_submission( wp_unslash( $_POST ) );
-// if ( is_wp_error( $comment ) ) {
-// 	$data = (int) $comment->get_error_data();
-// 	if ( ! empty( $data ) ) {
-// 		wp_die(
-// 			'<p>' . $comment->get_error_message() . '</p>',
-// 			__( 'Comment Submission Failure' ),
-// 			array(
-// 				'response'  => $data,
-// 				'back_link' => true,
-// 			)
-// 		);
-// 	} else {
-// 		exit;
-// 	}
-// }
-
-// $user            = wp_get_current_user();
-// $cookies_consent = ( isset( $_POST['wp-comment-cookies-consent'] ) );
-
-// do_action( 'set_comment_cookies', $comment, $user, $cookies_consent );
-
-// // код из файла comments.php вашей текущей темы
-// wp_list_comments(
-// 	array(
-// 		'avatar_size' => 60,
-// 		'style'       => 'ol',
-// 		'short_ping'  => true,
-// 	),
-// 	array( $comment )
-// );
-
-// wp_die(); 
-// }
+wp_die(); 
+}

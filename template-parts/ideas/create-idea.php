@@ -52,7 +52,6 @@
     <div class="create-idea__subtitle">Создайте до 5 критериев оценки вашей идеи</div>
     <div class="create-idea__add-criteria">
       <div class="create-idea__criteria-block">
-
       </div>
       <span class="create-idea__plus container__icon--24"><i class="fa-solid fa-plus"></i></span>
     </div>
@@ -74,12 +73,8 @@
     let criteriasLength;
     criterias.forEach((c) => {
       let obj = {};
-      // obj.name = c.name;
       obj.val = c.value;
       criteriasArr.push(obj);
-      // criteriasArr.push(c.name);
-      // criteriasArr.push(c.value);
-      // console.log(c.length)
     })
 
     $.ajax({ 
@@ -104,52 +99,3 @@
   });
   })
 </script>
-
-<?
-// function testfun() { 
-//   $title = sanitize_text_field( $_POST['idea_title'] );
-//   $cont = sanitize_text_field( $_POST['idea_content'] );
-//   $time = current_time( 'timestamp' );
-//   if(!empty($_POST['idea_tag'])) {
-//     $idea_tag = $_POST['idea_tag'];
-//   }
-//   if (!get_page_by_title($title, 'OBJECT', 'ideas') ){
-//   $post_data = [
-//       'post_type' => 'ideas',
-//     	'post_title'    => $title,
-//       'post_content'  => '',
-//     	'post_status'   => 'publish',
-//       'meta_input'    => [ 
-//         'online_offline' => $idea_tag,
-//       ],
-//   ];
-//   $post_id = wp_insert_post( $post_data );
-//     if(!empty($_POST['idea_cat'])) {
-//       $idea_tax = (int) $_POST['idea_cat'];
-//       wp_set_object_terms( $post_id, $idea_tax, 'ideas_tax' );
-//     }
-// $field_key = "field_63b82d7710576";
-// $value = array(
-// 	array(
-// 		"hypothesis"	=> $cont,
-//     'hypothesis_date' => $time,
-// 	)
-// );
-// update_field( $field_key, $value, $post_id );
-// $average_rating = 'average_rating';
-// $average_rating_val = (int)0;
-// $criteria = 'criteria_1';
-// $val = sanitize_text_field( $_POST['criteria_1'] );
-// $criteria_rat = 'criteria_1_rat';
-// $val_rat = (int) 0;
-// $criteria_2 = 'criteria_2';
-// $val_2 = sanitize_text_field( $_POST['criteria_2'] );
-// $criteria_rat_2 = 'criteria_2_rat';
-// $val_rat_2 = (int) 0;
-// add_post_meta( $post_id, $average_rating, $average_rating_val);
-// add_post_meta( $post_id, $criteria, $val);
-// add_post_meta( $post_id, $criteria_rat, $val_rat);
-// add_post_meta( $post_id, $criteria_2, $val_2);
-// add_post_meta( $post_id, $criteria_rat_2, $val_rat_2);
-// }
-// }
