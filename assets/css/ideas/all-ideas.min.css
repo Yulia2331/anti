@@ -85,10 +85,21 @@
 }
 .view-idea{
     top: 10%;
-  }
+}
 .create-reviews{
     top: 10%;
-  }
-  .view-idea__trash i, .hypothesis__item_icon i{
+}
+.view-idea__trash i, .hypothesis__item_icon i{
     pointer-events: none;
-  }
+}
+.my-idea__title{
+    display: block;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #303030;
+    margin-bottom: 15px;
+}
+.idea-sabscr{
+    background-color: #50CD89;
+}

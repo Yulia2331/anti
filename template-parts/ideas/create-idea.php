@@ -70,13 +70,11 @@
     let date = new Date().toLocaleDateString();
     let criterias = e.target.querySelectorAll('.create-idea__criteria');
     let criteriasArr = [];
-    let criteriasLength;
     criterias.forEach((c) => {
       let obj = {};
       obj.val = c.value;
       criteriasArr.push(obj);
     })
-
     $.ajax({ 
        data: {
         action: 'ideas_form', 

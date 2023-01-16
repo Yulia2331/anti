@@ -40,8 +40,8 @@ get_header();
   <div class="create-reviews__title">Отзыв на идею</div>
   <form action="" method="post" id="commentform" class="create-reviews__form">
     <div class="create-reviews__textarea">
-      <textarea class="create-reviews__plus" name="reviews__plus" placeholder="Расскажите о плюсах"></textarea>
-      <textarea class="create-reviews__minus" name="reviews__minus" placeholder="Расскажите о минусах"></textarea>
+      <textarea class="create-reviews__plus" name="reviews__plus" placeholder="Расскажите о плюсах" required="required"></textarea>
+      <textarea class="create-reviews__minus" name="reviews__minus" placeholder="Расскажите о минусах" required="required"></textarea>
       <textarea id="comment" class="create-reviews__message" name="comment" placeholder="Общий комментарий" required="required"></textarea>
     </div>
     <div class="criteria_rate_idea">
@@ -97,7 +97,19 @@ endif; ?>
                 <div class="idea__business-position"><?php the_field('online_offline'); ?></div>
               </div>
             </div>
-            <button class="idea__buton secondary__button">Подписаться</button>
+          <?  
+          $pod = false;
+          if( have_rows('subscribes_idea', 'user_'.$current_user_id) ):
+																			while ( have_rows('subscribes_idea', 'user_'.$current_user_id) ) : the_row();
+																			$sabscr_idea_id = get_sub_field('id_subscribes_idea');
+                                      if($sabscr_idea_id == $idea_id ){
+                                        $pod = true;
+																		    break;
+                                      }
+																		endwhile;
+																		endif; 
+                                    ?>
+            <button class="idea__buton secondary__button <?php echo ($pod)?'idea-sabscr ':'no' ?>" data-sabscr="<? echo $idea_id; ?>" data-user="<? echo $current_user_id ?>"><?php echo ($pod)?'Вы подписаны':'Подписаться' ?></button>
           </div>
           </div>
 <!-- тело -->
@@ -162,7 +174,7 @@ endif; ?>
     </div>
   </div>
   <div class="view-idea__button-block"> 
-    <button class="view-idea__button secondary__button">Подписаться</button>
+    <button class="view-idea__button secondary__button" data-sabscr="<? echo $idea_id; ?>" data-user="<? echo $current_user_id ?>">Подписаться</button>
     <button data-rev="revform<? echo $idea_id ?>" class="view-idea__button view-idea__button-reviews additional-button">Оставить отзыв</button>
   </div>
    <div class="view-idea__reviews reviews-idea">
@@ -182,22 +194,27 @@ $args = array(
 	'update_comment_meta_cache'  => true,
 	'update_comment_post_cache'  => false,
 );
-
 if( $comments = get_comments( $args ) ){
 	foreach( $comments as $comment ){ ?>
   <?php $com_id = get_comment_ID(); 
         $vote = get_comment_meta ( $comment->comment_ID, 'reviews_plus', true ); 
         $vote2 = get_comment_meta ( $comment->comment_ID, 'reviews_minus', true ); 
+        $rat = get_comment_meta ( $comment->comment_ID, 'reviews_rating', true ); 
+        $args = get_comment($com_id);
+        $user_id = $args->user_id;
+        $user       = get_userdata( $user_id );
+        $first_name = $user->first_name;
+        $last_name  = $user->last_name;
   ?>
       <div class="reviews-idea__item">
             <div class="reviews-idea__header"> 
               <div class="reviews-idea__left"> 
-                <div class="reviews-idea__user"> <img src="<?php echo bloginfo('template_url');?>/assets/img/ava-1.png" alt="avatar">
+                <div class="reviews-idea__user"> <img src="<?=get_user_image($user_id)?>" alt="avatar">
                   <div class="reviews-idea__name">
-                     Андрей Ярухин</div>
+                     <? echo $first_name; echo '&nbsp'; echo $last_name; ?></div>
                 </div>
               </div>
-              <div class="reviews-idea__right"> <span class="view-idea__number">5</span>
+              <div class="reviews-idea__right"> <span class="view-idea__number"><? echo $rat; ?></span>
                 <div class="view-idea__icon"><i class="fa-solid fa-star"></i></div>
               </div>
             </div>
@@ -216,7 +233,7 @@ if( $comments = get_comments( $args ) ){
             <div class="reviews-idea__footer"> 
               <button class="reviews-idea__comment">Комментировать</button>
               <div class="reviews-idea__like"> 
-                <div class="reviews-idea__like_number">12</div>
+                <div class="reviews-idea__like_number">0</div>
                 <div class="reviews-idea__like_icon"><i class="fa-solid fa-heart"></i></div>
               </div>
             </div>
@@ -233,6 +250,35 @@ if( $comments = get_comments( $args ) ){
     </div>
   </div>
 </section>
+<script>
+  const sabscrBtn = document.querySelectorAll('[data-sabscr]');
+  sabscrBtn.forEach((i) => {
+    i.addEventListener('click', (e) =>{
+      e.preventDefault();
+      let postId = e.target.dataset.sabscr;
+      let userId = e.target.dataset.user;
+      $.ajax({ 
+       data: {
+        action: 'sabscr_idea', 
+        postId: postId,
+        userId: userId,
+      },
+       type: 'post',
+       url: '/wp-admin/admin-ajax.php',
+       beforeSend: function( xhr ) {
+				e.target.innerText = 'Ожидание...';	
+			},
+      error: function (request, status, error) {
+        e.target.innerText = error;
+},
+       success: function(data) {
+        e.target.innerText ='Вы подписаны';	
+        e.target.classList.add('idea-sabscr');
+      }
+  });
+      })
+  })
+</script>
 <script>
   const hh = document.querySelectorAll('.hypothesis__add');
       hh.forEach((i) => {
@@ -333,14 +379,21 @@ let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypoth
           plus = e.target.querySelector('.create-reviews__plus').value,
           minus = e.target.querySelector('.create-reviews__minus').value,
           comment = e.target.querySelector('.create-reviews__message').value;
-          $.ajax({ 
-       data: {
+      let criterias = e.target.querySelectorAll('.create-reviews__num');
+      let criteriasArr = [];
+      criterias.forEach((c) => {
+      let obj = {};
+      obj.val = c.value;
+      criteriasArr.push(obj);
+    })
+      $.ajax({ 
+        data: {
         action: 'rate_form', 
         id: id,
         plus: plus,
         minus: minus,
-        comment: comment
-
+        comment: comment,
+        criteriasArr: criteriasArr
       },
        type: 'post',
        url: '/wp-admin/admin-ajax.php',
@@ -349,7 +402,6 @@ let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypoth
 			},
       error: function (request, status, error) {
         $('.reviews_msg').text(error);
-        console.log(data);
 },
        success: function(data) {
         $('.reviews_msg').text('Отзыв добавлен');	

@@ -30,7 +30,6 @@ function ideas_form()
   update_field( $field_key, $value, $post_id );
 
  $myArray = $_REQUEST['criteriasArr'];
- print_r($myArray);
  foreach( $myArray as $item ){
 	$row = array(
 	  'field_63c14fa8c5302'   => $item['val'],
@@ -102,6 +101,15 @@ echo $_POST['comment'];
 $user_email   = $user->user_email;
 $first_name = $user->first_name;
 $last_name  = $user->last_name;
+$myArray = $_REQUEST['criteriasArr'];
+$stack = array();
+foreach( $myArray as $item ){
+	$val = $item['val'];
+	array_push($stack, $val);
+}
+$l = count($stack);
+$s = array_sum($stack);
+$rating = $s/$l;
 
   $commentdata = [
 	'comment_post_ID'      => $post_id,
@@ -113,11 +121,25 @@ $last_name  = $user->last_name;
     'comment_meta'         => [ 
         'reviews_plus' => $plus,
         'reviews_minus' => $minus,
+		'reviews_rating' => $rating
       ],
 ];
 
-// добавляем данные в Базу Данных
 wp_new_comment( $commentdata );
+
+
+wp_die(); 
+}
+add_action('wp_ajax_sabscr_idea', 'sabscr_idea');
+add_action('wp_ajax_nopriv_sabscr_idea', 'sabscr_idea');
+
+function sabscr_idea() { 
+ $post_id = $_POST['postId'];
+ $user_id = $_POST['userId'];
+$row = array(
+	    'field_63c3c54589bb2'   => $post_id,
+	  );
+	  add_row('field_63c3c51689bb1', $row, 'user_'.$user_id);
 
 wp_die(); 
 }
