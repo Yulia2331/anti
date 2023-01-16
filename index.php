@@ -26,6 +26,18 @@ if(is_user_logged_in()){
 		require ('page_teacher.php');
 	}
 
+	if(strcmp($wp->request,'teacher-curse')==0){
+		require ('page_teacher_curse.php');
+	}
+
+	if(strcmp($wp->request,'home-work-teacher')==0){
+		require ('page_home_work_teacher.php');
+	}
+	
+	if(strcmp($wp->request,'notifications')==0){
+		require ('page_notifications.php');
+	}
+
 	// Материалы курса
 	// learnpress/single-course.php -> learnpress/content-single-course.php -> learnpress/single-course/content.php
 

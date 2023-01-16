@@ -575,18 +575,52 @@ function get_text_comment_num($value){
 require_once ('functions/add_teacher.php');
 
 // добовление поля дедлайна ДЗ
-//require_once ('functions/add_dead_line_home_work.php');
+require_once ('functions/add_home_work.php');
 
 // шаблон коментариев для домашнего задания
 require_once ('template-parts/comments/home_work_comments.php');
 
-
+// подключаем ответ на коменты
+// function enqueue_comment_reply() {
+// 	if( is_singular() )
+// 		wp_enqueue_script('comment-reply');
+// }
+// add_action( 'wp_enqueue_scripts', 'enqueue_comment_reply' );
 
 // Content
 add_action(	'custom_content_single_meta',LearnPress::instance()->template( 'course' )->callback( 'single-course/meta-secondary' ),10);
 add_action(	'custom_content_single_tab',LearnPress::instance()->template( 'course' )->callback( 'single-course/tabs/tabs' ),60);
 add_action( 'custom_content_single',LearnPress::instance()->template( 'course' )->func( 'course_comment_template' ), 75 );
 
+// добовляем мета поле комментариев для напровления комметария
+add_action( 'comment_post', 'add_comment_frome_field' );
+function add_comment_frome_field( $comment_id ) {
+	$meta_val = sanitize_text_field( $_POST['comment_frome_value'] );
+	add_comment_meta( $comment_id, 'comment_frome_key', $meta_val );
+}
+
+// добовляем мета поле комментариев для напровления комметария
+add_action( 'comment_post', 'add_comment_status_field' );
+function add_comment_status_field( $comment_id ) {
+	$meta_val = sanitize_text_field( $_POST['comment_status_value'] );
+	add_comment_meta( $comment_id, 'comment_status_key', $meta_val );
+}
+
+
+//перенаправление на /thank-you-post/ после комментирования start
+function wph_redirect_after_comment(){
+    //print_r( $_POST );
+    wp_redirect($_POST['page_comments']);
+    exit();
+}
+add_filter('comment_post_redirect', 'wph_redirect_after_comment');
+
+
+function my_notifications(){
+	$num_comm = wp_count_comments()->moderated;
+
+	return $num_comm;
+}
 
 //debug
 function mydebbug(){

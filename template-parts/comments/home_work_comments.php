@@ -28,8 +28,10 @@ function my_theme_comment_home_work($comment, $args, $depth ) {
 
     ?>
     <div class="comments__maint <?php echo $level_comment;?>">
-      <div class="main-comment__avatar"> 
-        <img src="<?php echo get_avatar_data($comment->comment_author_email)['url'];?>" alt="ava">        
+      <div class="main-comment__avatar">        
+          <div class="avatar_40">
+            <img src="<?php echo get_user_image($comment->user_id); ?>" alt="ava">
+          </div>       
         <?php
           // print_r(get_avatar_data($comment->comment_author_email));
           // print_r($comment->comment_author_email);
@@ -83,17 +85,17 @@ function my_theme_comment_home_work($comment, $args, $depth ) {
             <div class="main-comment__data"><?php printf(__( '%1$s в %2$s' ),get_comment_date(),get_comment_time()); ?></div>
             <!-- <button class="main-comment__button">Ответить</button> -->
             <?php
-          comment_reply_link(
-            array_merge(
-              $args,
-              array(                
-                'add_below' => $add_below,
-                'depth'     => $depth,
-                'max_depth' => $args['max_depth']
-              )
-            )
-          ); 
-          ?>
+              comment_reply_link(
+                array_merge(
+                  $args,
+                  array(                
+                    'add_below' => $add_below,
+                    'depth'     => $depth,
+                    'max_depth' => $args['max_depth']
+                  )
+                )
+              ); 
+              ?>
           </div>
         </div>
 
@@ -135,7 +137,7 @@ function my_theme_comment_home_work($comment, $args, $depth ) {
 
 
 // Получаем комментарии для ДЗ
-function get_home_work_comments($id,$id_cours){
+function get_home_work_comments($id,$id_cours,$user=''){
 
 	// Получаем id курса
 
@@ -145,12 +147,22 @@ function get_home_work_comments($id,$id_cours){
 	// Смотрим какой препод ведет этого учиника
 	// ...
 	// пока получаем первого препода
-	$teacher = $teachers[0];
-	
+	$teacher = get_user_by( 'email', $teachers[0] )->ID;
+
+  if ($user==''){
+    $user = wp_get_current_user()->ID;
+    $user_email = wp_get_current_user()->user_email;
+  }else{
+    echo '<pre>';
+    //print_r($user->_data['email']);
+    echo '</pre>';
+    $user_email = get_user_by( 'ID', $user )->user_email;
+  }
+  //print_r(wp_get_current_user()->user_email);
 
 	$args = array(
             'author_email'        => '',
-            'author__in'          => '',
+            'author__in'          => [$user,$teacher],
             'author__not_in'      => '',
             'include_unapproved'  => '',
             'fields'              => '',
@@ -180,8 +192,8 @@ function get_home_work_comments($id,$id_cours){
             'user_id'             => '',
             'search'              => '',
             'count'               => false,
-            'meta_key'            => '',
-            'meta_value'          => '',
+            'meta_key'            => 'comment_frome_key',
+            'meta_value'          => ['all','me',$user_email],
             'meta_query'          => '',
             'date_query'          => null, // See WP_Date_Query
             'hierarchical'        => false,
@@ -219,6 +231,7 @@ function get_home_work_comments($id,$id_cours){
 			//print_r($comment);
 
 			?>
+      <script type="text/javascript" src="http://localhost:8000/wp-content/plugins/dco-comment-attachment/assets/dco-comment-attachment.js?ver=2.4.0" id="dco-comment-attachment-js"></script>
 				<!-- <div class="comments__maint main-comment">
           <div class="main-comment__avatar"> <img src="" alt="ava"></div>
           <div class="main-comment__body"> 

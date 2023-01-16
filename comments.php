@@ -133,12 +133,16 @@ function my_theme_comment($comment, $args, $depth ) {
 				<?php echo get_comments_number();?>
 				<?php echo get_text_comment_num(get_comments_number());?>
 				<?php 
+					$frome_to = 'all';
 
 					if (isset($_GET['replytocom'])){
 						//print_r( get_comments(['comment__in'=>[$_GET['replytocom']]]));
 						echo ' Отвечаем ';
 						echo get_comment_author($_GET['replytocom']);
+						$frome_to = get_comment($_GET['replytocom'])->comment_author_email;
 					}
+
+					//print_r($frome_to);
 				?>			
 			</div>
 
@@ -151,7 +155,8 @@ function my_theme_comment($comment, $args, $depth ) {
 							'cookies' => 'куки',
 							],
 						'comment_field'  => '<input class="comments__input input-field" name="comment" type="text" placeholder="Ваш комментарий" aria-required="true" required="required">
-						<label class="comment-form-attachment__label" for="attachment">Вложения</label>
+						<input type="hidden" name="comment_frome_value" value="'.$frome_to.'">
+						
 							',
 						
 						'must_log_in'          => '',						
@@ -182,7 +187,15 @@ function my_theme_comment($comment, $args, $depth ) {
 			
 			
 			<?php
-			if ( have_comments() ) : 
+
+			$args = array(            
+	            'meta_key'            => 'comment_frome_key',
+	            'meta_value'          => 'all',            
+	          	);
+
+
+			//if ( have_comments() ) : 
+			if( $comments = get_comments( $args ) ):
 				wp_list_comments( array(
 					'walker'            => null,
 					'max_depth'         => 10,
@@ -204,6 +217,7 @@ function my_theme_comment($comment, $args, $depth ) {
 				//wp_list_comments('type=comment&callback=my_theme_comment');
 			?>	
 		</div>
+
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
 
 			<nav class="navigation comment-navigation" role="navigation">

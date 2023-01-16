@@ -55,51 +55,12 @@
         
       
    
-        <h2 class="my-assignments__title">Список курсов, по которым доступны домашние задания</h2>
+        <h2 class="my-assignments__title">Центр уведомлений</h2>
         <div class="my-assignments__cuourses"> 
 
           <?php 
 
-            $posts = get_posts( array(
-              'numberposts' => -1,
-              'category_name'    => '',
-              'orderby'     => 'date',
-              'order'       => 'DESC',
-              'include'     => array(),
-              'exclude'     => array(),
-              'meta_key'    => '',
-              'meta_value'  =>'',
-              'post_type'   => 'lp_course',
-              'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-            ) );
-
-            //print_r($posts);
-
-
-            foreach( $posts as $post ){ 
-
-              $values = get_field('dostup');
-              $us = get_current_user_id();
-              
-              if (in_array($us,$values)){
-              ?>
-                <div class="my-assignments__cours my-assignments__cours-2" 
-                  style="background-image: url(' <?php the_field('curs_poster'); ?>');">
-
-                  <div class="my-assignments__subtitle">
-                    <?php the_title();?>                    
-                  </div>
-                  
-                  <a class="my-assignments__btn button-main" 
-                     href="teacher-curse/?id=<?php the_id(); ?>">
-                    Перейти
-                  </a>
-
-                </div>
-              <?php
-              }
-
-            }
+            
 
           ?>
           

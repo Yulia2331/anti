@@ -29,9 +29,8 @@ $post = get_post($_GET['id']);
 //do_action( 'learn-press/before-single-course' );
 
 $course = learn_press_get_course();
-$user   = learn_press_get_current_user();
-
-//print_r($course);
+//$user   = learn_press_get_current_user();
+$user = learn_press_get_user($_GET['student']);
 
 if ( ! $course || ! $user ) {
   return;
@@ -44,18 +43,22 @@ $can_view_content_course = $user->can_view_content_course( $id_cours );
 $curriculum  = $course->get_curriculum();
 
 $user_course = $user->get_course_data( get_the_ID() );
-$user        = learn_press_get_current_user();
+$user = learn_press_get_user($_GET['student']);
 
-   
+
+
 ?> 
 
       </div></div>
       
       <section class="course padding-left">
       <div class="course__crums crums"> 
-        <ul class="crums__list"> <a class="crums__link" href="/home-work">
-            <li class="crums__item">Мои задания</li></a>
-            <li class="crums__item"><?php echo $post->post_title; ?></li></ul>
+        <ul class="crums__list"> 
+            <a class="crums__link" href="/home-work"><li class="crums__item">Страница учителя</li></a>
+            <a class="crums__link" href="/home-work"><li class="crums__item"><?php echo $post->post_title; ?></li></a>
+            <li class="crums__item"><?php echo get_user_by( 'ID', $_GET['student'] )->user_email; ?></li>
+        </ul>
+
       </div>
 
 <?php
@@ -192,7 +195,7 @@ foreach ( $curriculum as $section ) {
                           include ('template-parts/comments/comments-forms-home-work-2.php');
 
                           // Вывод коментариев по шаблону
-                          get_home_work_comments($item->get_id(),$id_cours); 
+                          get_home_work_comments($item->get_id(),$id_cours,$_GET['student']); 
 
                           ?> 
 

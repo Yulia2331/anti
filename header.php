@@ -30,8 +30,11 @@ $user_info = get_userdata($currrent_userID);
 	<!--begin::Body-->
 	<body id="kt_body" class="header-fixed header-tablet-and-mobile-fixed toolbar-enabled toolbar-fixed aside-enabled aside-fixed" style="--kt-toolbar-height:55px;--kt-toolbar-height-tablet-and-mobile:55px">
 		<!--begin::Main-->
+
+		
+
 		<!--begin::Root-->
-		<div class="d-flex flex-column flex-root">
+		<div class="d-flex flex-column flex-root" style="">
 			<!--begin::Page-->
 			<div class="page d-flex flex-row flex-column-fluid">
 				<?php get_template_part('/template-parts/aside-left'); ?>
@@ -42,6 +45,7 @@ $user_info = get_userdata($currrent_userID);
 					<div id="kt_header" style="" class="header align-items-stretch">
 						<!--begin::Container-->
 						<div class="container-fluid d-flex align-items-stretch justify-content-between">
+
 							<!--begin::Aside mobile toggle-->
 							<div class="d-flex align-items-center d-lg-none ms-n2 me-2" title="Show aside menu">
 								<div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_aside_mobile_toggle">
@@ -56,6 +60,7 @@ $user_info = get_userdata($currrent_userID);
 								</div>
 							</div>
 							<!--end::Aside mobile toggle-->
+
 							<!--begin::Mobile logo-->
 							<div class="d-flex align-items-center flex-grow-1 flex-lg-grow-0">
 								<div class="d-lg-none">
@@ -66,8 +71,10 @@ $user_info = get_userdata($currrent_userID);
 								</div>
 							</div>
 							<!--end::Mobile logo-->
+
 							<!--begin::Wrapper-->
 							<div class="d-flex align-items-stretch justify-content-between flex-lg-grow-1">
+
 								<!--begin::Navbar-->
 								<div class="d-flex align-items-stretch" id="kt_header_nav">
 									<!--begin::Menu wrapper-->
@@ -103,8 +110,10 @@ $user_info = get_userdata($currrent_userID);
 									<!--end::Menu wrapper-->
 								</div>
 								<!--end::Navbar-->
+
 								<!--begin::Toolbar wrapper-->
 								<div class="d-flex align-items-stretch flex-shrink-0">
+
 									<!--begin::Search-->
 									<div class="d-flex align-items-stretch ms-1 ms-lg-3">
 										<!--begin::Search--> 
@@ -124,6 +133,35 @@ $user_info = get_userdata($currrent_userID);
 															<path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black" />
 														</svg>
 													</span>
+													<!--end::Svg Icon-->
+												</div>
+											</div>
+											<div class="d-flex align-items-center" data-kt-search-element="toggle" id="kt_header_search_toggle">
+												<div class="btn btn-icon btn-icon-muted btn-active-light btn-active-color-primary w-30px h-30px w-md-40px h-md-40px">
+													
+													<!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+													<a href="/notifications">
+													<span class="svg-icon svg-icon-1">
+													<?php 
+
+													if(my_notifications()>0){
+														?>
+
+															
+															<span class="position-absolute translate-middle badge rounded-pill bg-danger" style="top: 22px;">
+															    <?php echo my_notifications();?>
+																<span class="visually-hidden">непрочитанные сообщения</span>
+															</span>
+
+														<?php
+
+													}
+
+													?>
+													
+														<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M447.1 0h-384c-35.25 0-64 28.75-64 63.1v287.1c0 35.25 28.75 63.1 64 63.1h96v83.98c0 9.836 11.02 15.55 19.12 9.7l124.9-93.68h144c35.25 0 64-28.75 64-63.1V63.1C511.1 28.75 483.2 0 447.1 0zM464 352c0 8.75-7.25 16-16 16h-160l-80 60v-60H64c-8.75 0-16-7.25-16-16V64c0-8.75 7.25-16 16-16h384c8.75 0 16 7.25 16 16V352z" fill="white"/></svg>
+													</span>
+													</a>
 													<!--end::Svg Icon-->
 												</div>
 											</div>
@@ -378,9 +416,6 @@ $user_info = get_userdata($currrent_userID);
 										<!--end::Search-->
 									</div>
 									<!--end::Search-->
-									
-				
-									
 								
 									<!--begin::User menu-->
 									<div class="d-flex align-items-center ms-1 ms-lg-3" id="kt_header_user_menu_toggle" data-user-id="<?=get_current_user_id()?>">
@@ -436,6 +471,7 @@ $user_info = get_userdata($currrent_userID);
 										<!--end::Menu wrapper-->
 									</div>
 									<!--end::User menu-->
+
 									<!--begin::Header menu toggle-->
 									<div class="d-flex d-none align-items-center d-lg-none ms-2 me-n3" title="Show header menu">
 										<div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px" id="kt_header_menu_mobile_toggle">
@@ -452,6 +488,7 @@ $user_info = get_userdata($currrent_userID);
 									<!--end::Header menu toggle-->
 								</div>
 								<!--end::Toolbar wrapper-->
+
 							</div>
 							<!--end::Wrapper-->
 						</div>

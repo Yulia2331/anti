@@ -10,6 +10,20 @@
   display: none;
 }
 
+.avatar_40{
+  margin-right: 10px;
+  width: 40px;
+  max-height: 40px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+.avatar_40 img{
+  margin-right: 0px;
+  width: 40px;  
+  border-radius: 0 !important;
+}
+
 .view-idea {
   position: fixed;
   padding: 30px;
