@@ -34,12 +34,11 @@ get_header();
     </div>
   </div>
 </section>
-<?php
-    get_footer(); ?>
 <script>
-  const sabscrBtn = document.querySelectorAll('[data-sabscr]');
-  sabscrBtn.forEach((i) => {
-    i.addEventListener('click', (e) =>{
+  // const sabscrBtn = document.querySelectorAll('.no-sabscr');
+  // sabscrBtn.forEach((i) => {
+    document.addEventListener('click', (e) =>{
+      if(e.target.classList.contains('no-sabscr')){
       e.preventDefault();
       let postId = e.target.dataset.sabscr;
       let userId = e.target.dataset.user;
@@ -59,16 +58,50 @@ get_header();
 },
        success: function(data) {
         e.target.innerText ='Вы подписаны';	
+        e.target.classList.remove('no-sabscr');
         e.target.classList.add('idea-sabscr');
       }
   });
-      })
-  })
+      }})
+  // })
 </script>
 <script>
-  const hh = document.querySelectorAll('.hypothesis__add');
-      hh.forEach((i) => {
-    i.addEventListener('submit', (e) =>{
+  // const unsabscrBtn = document.querySelectorAll('.idea-sabscr');
+  // document.forEach((i) => {
+    document.addEventListener('click', (e) =>{
+      if(e.target.classList.contains('idea-sabscr')){
+      e.preventDefault();
+      let postId = e.target.dataset.sabscr;
+      let userId = e.target.dataset.user;
+      $.ajax({ 
+       data: {
+        action: 'unsubscribe_idea', 
+        postId: postId,
+        userId: userId,
+      },
+       type: 'post',
+       url: '/wp-admin/admin-ajax.php',
+       beforeSend: function( xhr ) {
+				e.target.innerText = 'Ожидание...';	
+			},
+      error: function (request, status, error) {
+        e.target.innerText = error;
+},
+       success: function(data) {
+        e.target.innerText ='Подписаться';	
+        e.target.classList.remove('idea-sabscr');
+        e.target.classList.add('no-sabscr');
+      }
+  });
+      }})
+  // })
+</script>
+<script>
+  // const hh = document.querySelectorAll('.hypothesis__add');
+  //     hh.forEach((i) => {
+    
+        document.addEventListener('submit', (e) =>{
+          if(e.target.classList.contains('hypothesis__add')){
       e.preventDefault();
      
 let name = e.target.querySelector('.hypothesis__input').value;
@@ -104,13 +137,14 @@ let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypoth
         e.target.reset();
       }
   });
-      })
-  })
+      }})
+  // })
 </script>
 <script>
-  const ideaTrash = document.querySelectorAll('.view-idea__trash');
-  ideaTrash.forEach((i) => {
-    i.addEventListener('click', (e) => {
+  // const ideaTrash = document.querySelectorAll('.view-idea__trash');
+  // ideaTrash.forEach((i) => {
+    document.addEventListener('click', (e) => {
+      if(e.target.classList.contains('view-idea__trash')){
       let id = e.target.dataset.trash;
       let msgWrapp = e.target.closest('.view-idea').querySelector('.hypothesis__msg');
       $.ajax({ 
@@ -127,13 +161,14 @@ let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypoth
         msgWrapp.innerText = 'Идея удалена';	
       }
   });
-    })
-  })
+    }})
+  // })
 </script>
 <script>
-  const hypothesisTrash = document.querySelectorAll('.hypothesis__item_icon');
-  hypothesisTrash.forEach((i) => {
-    i.addEventListener('click', (e) => {
+  // const hypothesisTrash = document.querySelectorAll('.hypothesis__item_icon');
+  // hypothesisTrash.forEach((i) => {
+    document.addEventListener('click', (e) => {
+      if(e.target.classList.contains('hypothesis__item_icon')){
       let id = e.target.dataset.trash;
       let row = i.closest('.hypothesis__item').dataset.row;
       let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypothesis__msg');
@@ -153,13 +188,14 @@ let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypoth
         e.target.closest('.hypothesis__item').remove();   
       }
   });
-    })
-  })
+    }})
+  // })
 </script>
 <script>
-  const revForm = document.querySelectorAll('.create-reviews__form');
-   revForm.forEach((i) => {
+  // const revForm = document.querySelectorAll('.create-reviews__form');
+  //  revForm.forEach((i) => {
     i.addEventListener('submit', (e) =>{
+      if(e.target.classList.contains('create-reviews__form')){
       e.preventDefault();
       let id = e.target.querySelector('.criteria_rate_id').value,
           plus = e.target.querySelector('.create-reviews__plus').value,
@@ -194,6 +230,9 @@ let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypoth
         e.target.reset();
       }
       });
-    });
-    })
+    }});
+    // })
 </script>
+
+<?php
+    get_footer(); ?>

@@ -74,18 +74,18 @@ endif; ?>
               </div>
             </div>
           <?  
-          $pod = false;
+          $pod = FALSE;
           if( have_rows('subscribes_idea', 'user_'.$current_user_id) ):
 																			while ( have_rows('subscribes_idea', 'user_'.$current_user_id) ) : the_row();
-																			$sabscr_idea_id = get_sub_field('id_subscribes_idea');
-                                      if($sabscr_idea_id == $idea_id ){
-                                        $pod = true;
-																		    break;
+																			$sabscr_idea_id = get_sub_field('id_subscribes_idea', 'user_'.$current_user_id);
+                                      if((int)$sabscr_idea_id[0] == (int)$idea_id){
+                                        $pod = TRUE;
+                                        			break;
                                       }
 																		endwhile;
 																		endif; 
                                     ?>
-            <button class="idea__buton secondary__button <?php echo ($pod)?'idea-sabscr ':'no' ?>" data-sabscr="<? echo $idea_id; ?>" data-user="<? echo $current_user_id ?>"><?php echo ($pod)?'Вы подписаны':'Подписаться' ?></button>
+            <button class="idea__buton secondary__button <?php echo ($pod)?'idea-sabscr ':'no-sabscr' ?>" data-sabscr="<? echo $idea_id; ?>" data-user="<? echo $current_user_id ?>"><?php echo ($pod)?'Вы подписаны':'Подписаться' ?></button>
           </div>
           </div>
 <!-- тело -->
@@ -150,7 +150,7 @@ endif; ?>
     </div>
   </div>
   <div class="view-idea__button-block"> 
-    <button class="view-idea__button secondary__button" data-sabscr="<? echo $idea_id; ?>" data-user="<? echo $current_user_id ?>">Подписаться</button>
+    <button class="view-idea__button secondary__button <?php echo ($pod)?'idea-sabscr ':'no-sabscr' ?>" data-sabscr="<? echo $idea_id; ?>" data-user="<? echo $current_user_id ?>"><?php echo ($pod)?'Вы подписаны':'Подписаться' ?></button>
     <button data-rev="revform<? echo $idea_id ?>" class="view-idea__button view-idea__button-reviews additional-button">Оставить отзыв</button>
   </div>
    <div class="view-idea__reviews reviews-idea">
@@ -207,7 +207,7 @@ if( $comments = get_comments( $args ) ){
               <div class="reviews-idea__content"><?php echo $comment->comment_content; ?></div>
             </div>
             <div class="reviews-idea__footer"> 
-              <button class="reviews-idea__comment">Комментировать</button>
+              <!-- <button class="reviews-idea__comment">Комментировать</button> -->
               <div class="reviews-idea__like"> 
                 <div class="reviews-idea__like_number">0</div>
                 <div class="reviews-idea__like_icon"><i class="fa-solid fa-heart"></i></div>

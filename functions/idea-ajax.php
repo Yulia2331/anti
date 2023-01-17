@@ -159,6 +159,28 @@ $row = array(
 
 wp_die(); 
 }
+
+add_action('wp_ajax_unsubscribe_idea', 'unsubscribe_idea');
+add_action('wp_ajax_nopriv_unsubscribe_idea', 'unsubscribe_idea');
+
+function unsubscribe_idea() { 
+ $post_id = $_POST['postId'];
+ $user_id = $_POST['userId'];
+ if (have_rows('subscribes','user_'.$user_id )){
+
+	while( have_rows('subscribes_idea','user_'.$user_id ) ) {
+		the_row();
+		
+		if( get_sub_field('id_subscribes_idea')[0] == $post_id ) {
+$row = get_row_index();
+	  delete_row('field_63c3c51689bb1', $row, 'user_'.$user_id);
+	}
+		
+}
+}
+wp_die(); 
+}
+
 add_action('wp_ajax_myfilter', 'myfilter');
 add_action('wp_ajax_nopriv_myfilter', 'myfilter');
 
@@ -191,7 +213,7 @@ if( isset( $_POST[ 'filter_city' ] ) ) {
 		'value' => $_POST[ 'filter_city' ],
 	);
 }
-
+query_posts( $args );
 if ( have_posts() ) {
 	while ( have_posts() ) : the_post();
   // тут вывод шаблона поста, например через get_template_part()

@@ -31,7 +31,7 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 ?>
 
 					<!--begin::Content-->
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+					<div class="content d-flex flex-column flex-column-fluid padding-left" id="kt_content">
 						
 						<!--begin::Post-->
 						<div class="post d-flex flex-column-fluid" id="kt_post">
@@ -617,20 +617,20 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 																		
 																		if( have_rows('subscribes_idea', 'user_'.$user_id) ):
 																			while ( have_rows('subscribes_idea', 'user_'.$user_id) ) : the_row();
-																			$idea_id = get_sub_field('id_subscribes_idea');
-																			// print_r($idea_id);
-																			// $posts = get_post(array(
-																			// 	'ID' => $idea_id,
-																			// 	'post_type'   => 'ideas',
-																			// ));
-																			// foreach( $posts as $post ){
-																			// 	setup_postdata($post);
-																			 ?>
+																			$idea_id = get_sub_field('id_subscribes_idea', 'user_'.$user_id);
+																			print_r($idea_id[0]);
 																		
+																			
+																			
+																			// query_posts('p='.$idea_id[0]);
+																			// if ( have_posts() ) {
+																			// 	while ( have_posts() ) : the_post(); ?>
+																			 
+																			 <span class="my-idea__title"><? the_title(); ?></span>
 																			 
 																			 <? 
-																			//  }
-																			// wp_reset_postdata();
+																			//  endwhile;
+																			
 																		endwhile;
 																		endif; 
 																	 ?>

@@ -4,8 +4,8 @@ const close = document.querySelectorAll('.close');
 const hidden = document.querySelector('.hidden');
 const body = document.body;
 
-idea.forEach(btn => {
-  btn.addEventListener('click', e => {
+// idea.forEach(btn => {
+  document.addEventListener('click', e => {
     const target = e.target;
 
     if (target.classList.contains('idea__name')) {
@@ -19,10 +19,11 @@ idea.forEach(btn => {
       body.classList.add('no-scroll');
     }
   })
-})
+// })
 
-close.forEach(el => {
-  el.addEventListener('click', () => {
+// close.forEach(el => {
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('close')) {
     document.querySelectorAll('.view-idea').forEach(idea => {
       idea.classList.remove('active');
     })
@@ -36,8 +37,8 @@ close.forEach(el => {
     // createReviews.classList.remove('active');
 
     body.classList.remove('no-scroll');
-  })
-})
+  }})
+// })
 
 const createIdea = document.querySelector('.filter__button');
 const createIdeaForm = document.querySelector('.create-idea');
@@ -52,8 +53,9 @@ createIdea.addEventListener('click', () => {
 const reviewsButton = document.querySelectorAll('.view-idea__button-reviews');
 // const createReviews = document.querySelector('.create-reviews');
 
-reviewsButton.forEach(btn => {
-  btn.addEventListener('click', (e) => {
+// reviewsButton.forEach(btn => {
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('view-idea__button-reviews')) {
     document.querySelectorAll('.view-idea').forEach(idea => {
       idea.classList.remove('active');
     })
@@ -61,8 +63,8 @@ reviewsButton.forEach(btn => {
     let ideaId = self.dataset.rev;
     let theRev = document.getElementById(ideaId);
     theRev.classList.add('active');
-  })
-})
+  }})
+// })
 } catch {}
 // const btnIBody = document.querySelectorAll('.idea__name'),
 // IBody = document.querySelector('.view-idea'),
