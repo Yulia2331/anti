@@ -1,7 +1,11 @@
 		
-		<footer class="footer p-4">
-            <div class="footer__copyright">© Все права защищены 2022</div>
-        </footer>
+	<footer class="footer">
+      <div class="footer__wrapper padding-left">
+        <div class="footer__copyright-block"> 
+          <p>© Все права защищены 2022</p>
+        </div>
+      </div>
+    </footer>
 		<script>var hostUrl = "assets/";</script>
 		<?php wp_footer()	?> 
 		<script type="module" src="js/navigation.js?_v=20221205205444"></script>

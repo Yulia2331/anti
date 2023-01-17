@@ -118,3 +118,12 @@
     border-radius: 6px;
     margin-bottom: 3px;
 }
+/* .header{
+    z-index: -1;
+} */
+.custom-logo{
+    width: 140px !important;
+}
+.navigation-block, .navigation-block-close{
+    z-index: 10;
+}

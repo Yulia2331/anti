@@ -17,7 +17,7 @@ $course = learn_press_get_course();
 
 <div class="content d-flex flex-column flex-column-fluid" id="kt_content">
 						<!--begin::Post-->
-						<div class="courses d-flex flex-column-fluid" id="kt_courses">
+						<div class="courses d-flex flex-column-fluid padding-left" id="kt_courses">
 							<!--begin::Container-->
 							<div id="kt_content_container" class="container-xxl">
 

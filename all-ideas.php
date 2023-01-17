@@ -6,7 +6,7 @@ Template Name: Банк идей новый
 get_header();
 ?>
 <? get_template_part('template-parts/ideas/create'); ?>
-<section class="all-ideas">
+<section class="all-ideas padding-left">
   <div class="all-ideas__container"> 
     <div class="all-ideas__wrapper">
       <? get_template_part('template-parts/ideas/nav-ideas'); ?>
@@ -17,16 +17,7 @@ get_header();
     'post_type' => 'ideas',
     'orderby'     => 'date',
     'order'       => 'DESC',
-    // 'author' => 137,
-      // 'meta_query' => array(
-      //   array(
-      //     'key' => 'average_rating',
-      //     'value' => 4
-      //   ),
-
-      // )
   );
-  // print_r($args);
   query_posts( $args );
                     ?>
       <div class="board-ideas__wrapper">
@@ -43,6 +34,8 @@ get_header();
     </div>
   </div>
 </section>
+<?php
+    get_footer(); ?>
 <script>
   const sabscrBtn = document.querySelectorAll('[data-sabscr]');
   sabscrBtn.forEach((i) => {
@@ -204,5 +197,3 @@ let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypoth
     });
     })
 </script>
-<?php
-    get_footer();
