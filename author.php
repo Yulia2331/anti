@@ -618,25 +618,19 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 																		if( have_rows('subscribes_idea', 'user_'.$user_id) ):
 																			while ( have_rows('subscribes_idea', 'user_'.$user_id) ) : the_row();
 																			$idea_id = get_sub_field('id_subscribes_idea');
-																			// $post = get_post(array(
-																			// 	'id' => $idea_id,
+																			// print_r($idea_id);
+																			// $posts = get_post(array(
+																			// 	'ID' => $idea_id,
 																			// 	'post_type'   => 'ideas',
 																			// ));
-																			// setup_postdata($post);
-																			$q = new WP_Query(  [
-																				'p' => $idea_id, 
-																				'post_type' => 'ideas',
-																				] );
-
-																				while ( $q->have_posts() ) {
-																					$q->the_post();
-																					?>
-																					<span class="my-idea__title"><? echo $post->post_title; ?></span>
-																					<?
-																					}
-																			?>
-																			
-																			<? 
+																			// foreach( $posts as $post ){
+																			// 	setup_postdata($post);
+																			 ?>
+																		
+																			 
+																			 <? 
+																			//  }
+																			// wp_reset_postdata();
 																		endwhile;
 																		endif; 
 																	 ?>
@@ -644,9 +638,7 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 																				<!--end::Title-->
 																			</div>
 																			<!--end::Item-->
-																																						 
-																			 																		
-															
+
 																			<!--end::Item-->
 																		</div>
 																		<!--end::Items-->

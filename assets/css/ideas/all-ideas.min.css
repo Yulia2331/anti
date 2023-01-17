@@ -103,3 +103,18 @@
 .idea-sabscr{
     background-color: #50CD89;
 }
+.filter__button-block{
+    flex-direction: column;
+    justify-content: space-between;
+}
+.filter__button:hover{
+    color: #fff;
+}
+.filter__apply{
+    width: 100%;
+    padding: 6px 15px;
+    background-color: #29afda;
+    color: #fff;
+    border-radius: 6px;
+    margin-bottom: 3px;
+}

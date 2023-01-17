@@ -86,12 +86,7 @@ add_action('wp_ajax_rate_form', 'rate_form');
 add_action('wp_ajax_nopriv_rate_form', 'rate_form');
 
 function rate_form()
-{ 
-
-echo $_POST['id'];
-echo $_POST['plus'];  
-echo $_POST['minus'];   
-echo $_POST['comment'];  
+{  
  $post_id = $_POST['id'];
   $plus = $_POST['plus'];
   $minus = $_POST['minus'];
@@ -109,7 +104,7 @@ foreach( $myArray as $item ){
 }
 $l = count($stack);
 $s = array_sum($stack);
-$rating = $s/$l;
+$rating = ceil($s/$l);
 
   $commentdata = [
 	'comment_post_ID'      => $post_id,
@@ -127,6 +122,27 @@ $rating = $s/$l;
 
 wp_new_comment( $commentdata );
 
+$arr = array();
+$args = array(
+	'no_found_rows'       => true,
+	'post_id'             => $post_id,
+	'post_type'           => 'ideas',
+	'status'              => 'all',
+	'count'               => false,
+	'date_query'          => null, // See WP_Date_Query
+	'hierarchical'        => false,
+	'update_comment_meta_cache'  => true,
+	'update_comment_post_cache'  => false,
+);
+if( $comments = get_comments( $args ) ){
+	foreach( $comments as $comment ){ 
+	$rat = get_comment_meta ( $comment->comment_ID, 'reviews_rating', true ); 
+	array_push($arr, $rat);
+	 }} 
+	 $ll = count($arr);
+	 $ss = array_sum($arr);
+	 $rating_all = ceil($ss/$ll);
+	 update_post_meta( $post_id, 'average_rating', $rating_all);
 
 wp_die(); 
 }
@@ -140,6 +156,50 @@ $row = array(
 	    'field_63c3c54589bb2'   => $post_id,
 	  );
 	  add_row('field_63c3c51689bb1', $row, 'user_'.$user_id);
+
+wp_die(); 
+}
+add_action('wp_ajax_myfilter', 'myfilter');
+add_action('wp_ajax_nopriv_myfilter', 'myfilter');
+
+function myfilter() { 
+ $args = array(	
+	'post_type' => 'ideas',
+	'orderby' => $_POST[ 'filter_sort' ], // сортировка по дате у нас будет в любом случае (но вы можете изменить/доработать это)
+	'order'	=> 'DESC', // ASC или DESC
+	'author' => $_POST[ 'filter_author' ],
+);
+// для таксономий
+if( isset( $_POST[ 'filter_cat' ] )) {
+	$args[ 'tax_query' ] = array(
+		array(
+			'taxonomy' => 'ideas_tax',
+			'field' => 'id',
+			'terms' => $_POST[ 'filter_cat' ]
+		)
+	);
+}
+if( isset( $_POST[ 'filter_rat' ] ) ) {
+	$args[ 'meta_query' ][] = array(
+		'key' => 'average_rating',
+		'value' => $_POST[ 'filter_rat' ],
+	);
+}
+if( isset( $_POST[ 'filter_city' ] ) ) {
+	$args[ 'meta_query' ][] = array(
+		'key' => 'author_city',
+		'value' => $_POST[ 'filter_city' ],
+	);
+}
+
+if ( have_posts() ) {
+	while ( have_posts() ) : the_post();
+  // тут вывод шаблона поста, например через get_template_part()
+  get_template_part('template-parts/ideas/idea');
+endwhile;
+} else {
+echo 'Ничего не найдено';
+}
 
 wp_die(); 
 }
