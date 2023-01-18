@@ -618,22 +618,14 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 																		if( have_rows('subscribes_idea', 'user_'.$user_id) ):
 																			while ( have_rows('subscribes_idea', 'user_'.$user_id) ) : the_row();
 																			$idea_id = get_sub_field('id_subscribes_idea', 'user_'.$user_id);
-																			print_r($idea_id[0]);
+																			$tr = $idea_id[0];
+																			$post = get_post($tr);
+																			?>
+																		   <span class="my-idea__title"><? echo $post->post_title; ?></span>
+																	<?	   endwhile;
+																		 endif; 
 																		
-																			
-																			
-																			// query_posts('p='.$idea_id[0]);
-																			// if ( have_posts() ) {
-																			// 	while ( have_posts() ) : the_post(); ?>
-																			 
-																			 <span class="my-idea__title"><? the_title(); ?></span>
-																			 
-																			 <? 
-																			//  endwhile;
-																			
-																		endwhile;
-																		endif; 
-																	 ?>
+																			?>
 																				
 																				<!--end::Title-->
 																			</div>
