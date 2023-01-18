@@ -20,16 +20,16 @@ const body = document.body;
     }
   })
 // })
-
+try{
 // close.forEach(el => {
   document.addEventListener('click', (e) => {
     if (e.target.classList.contains('close')) {
     document.querySelectorAll('.view-idea').forEach(idea => {
       idea.classList.remove('active');
     })
-
+    const hidden = document.querySelector('.hidden');
     hidden.classList.remove('active');
-    createIdeaForm.classList.remove('active');
+    // createIdeaForm.classList.remove('active');
     const createReviews = document.querySelectorAll('.create-reviews');
     createReviews.forEach((i) => {
       i.classList.remove('active');
@@ -38,6 +38,18 @@ const body = document.body;
 
     body.classList.remove('no-scroll');
   }})
+} catch {}
+try{
+  // close.forEach(el => {
+    document.addEventListener('click', (e) => {
+      if (e.target.classList.contains('create-idea__close')) {
+      const hidden = document.querySelector('.hidden');
+      hidden.classList.remove('active');
+      createIdeaForm.classList.remove('active');
+  
+      body.classList.remove('no-scroll');
+    }})
+  } catch {}
 // })
 
 const createIdea = document.querySelector('.filter__button');

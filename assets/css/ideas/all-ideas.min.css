@@ -44,6 +44,7 @@
 }
 .create-reviews{
     overflow: auto;
+    z-index: 210;
 }
 .idea__name{
     display: block;
@@ -130,4 +131,11 @@
 .tracked-ideas, .all-ideas{
     min-height: auto !important;
 }
-
+.single-idea-body{
+    position: relative;
+    background: #fff;
+    padding: 60px 40px;
+}
+.single-idea-body .view-idea__trash {
+    top: 20px;
+}

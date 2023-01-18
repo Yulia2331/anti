@@ -546,7 +546,7 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 																				
 																			<?	while ( $idea_query->have_posts() ) {
 																			$idea_query->the_post(); ?>
-																			<span class="my-idea__title"><? the_title(); ?></span>
+																			<a href="<? the_permalink(); ?>" class="my-idea__title"><? the_title(); ?></a>
 																			<?	} 
 																			?>
 																				
@@ -621,7 +621,7 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 																			$tr = $idea_id[0];
 																			$post = get_post($tr);
 																			?>
-																		   <span class="my-idea__title"><? echo $post->post_title; ?></span>
+																		   <a href="<? echo $post->guid; ?>" class="my-idea__title"><? echo $post->post_title; ?></a>
 																	<?	   endwhile;
 																		 endif; 
 																		

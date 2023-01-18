@@ -1,16 +1,16 @@
 <?php
-                      
 
-                    // foreach( $posts as $post ){
-                        // setup_postdata($post);
-                      $postData = get_post( get_the_id());
-                      $a_id = $postData->post_author;
-                        $idea_id = get_the_id();
-                        $gg = get_the_terms( $idea_id, 'ideas_tax' );
-                        $average_rating = get_post_meta( $idea_id, 'average_rating', true );
-                        $current_user_id = get_current_user_id(); 
-                        ?>
-<div class="hidden"></div>
+get_header(); ?>
+<div class="single-idea__wrap padding-left">
+   <?php
+ while ( have_posts() ) : the_post();
+   $idea_id = get_the_id();
+   $a_id = get_the_author_meta('ID');
+   $gg = get_the_terms( $idea_id, 'ideas_tax' );
+   $average_rating = get_post_meta( $idea_id, 'average_rating', true );
+   $current_user_id = get_current_user_id(); 
+   ?>
+ <div class="hidden"></div>
 <div id="revform<? echo $idea_id; ?>" class="create-reviews">
   <button class="create-reviews__close close container__icon--18"><i class="fa-solid fa-xmark"></i></button>
   <div class="create-reviews__title">Отзыв на идею</div>
@@ -52,48 +52,10 @@ endif; ?>
    </form>
       </div>
 </div>
-<!-- Карточка -->
-               <div id="ideas_item<? echo $idea_id; ?>" class="board-ideas__item idea">
-                
-          <div class="idea__wrapper"> 
-            <div class="idea__header"> 
-              <div class="idea__data"><?php echo get_the_date(); ?></div>
-              <div class="idea__avatar"> <img src="<?=get_user_image($a_id)?>" alt=""></div>
-              <div class="idea__rating"> <span class="idea__rating_number">
-              <? echo $average_rating; ?>
-              </span><i class="fa-solid fa-star"></i></div>
-            </div>
-            <div class="idea__body"> 
-              <div class="idea__user-name"><?php echo get_the_author(); ?></div>
-              <button class="idea__name" data-view="<? the_id(); ?>"><? echo the_title(); ?></button>
-              <div class="idea__info"> 
-                <div class="idea__category"><? if($gg){ foreach( $gg as $g ){ 
-                  echo  $g->name; }
-                } ?></div>
-                <div class="idea__business-position"><?php the_field('online_offline'); ?></div>
-              </div>
-            </div>
-          <?  
-          $pod = FALSE;
-          if( have_rows('subscribes_idea', 'user_'.$current_user_id) ):
-																			while ( have_rows('subscribes_idea', 'user_'.$current_user_id) ) : the_row();
-																			$sabscr_idea_id = get_sub_field('id_subscribes_idea', 'user_'.$current_user_id);
-                                      if((int)$sabscr_idea_id[0] == (int)$idea_id){
-                                        $pod = TRUE;
-                                        			break;
-                                      }
-																		endwhile;
-																		endif; 
-                                    ?>
-            <button class="idea__buton secondary__button <?php echo ($pod)?'idea-sabscr ':'no-sabscr' ?>" data-sabscr="<? echo $idea_id; ?>" data-user="<? echo $current_user_id ?>"><?php echo ($pod)?'Вы подписаны':'Подписаться' ?></button>
-          </div>
-          </div>
-<!-- тело -->
-<div class="view-idea" data-idea="<? the_id(); ?>">
+<div class="single-idea-body" data-idea="<? the_id(); ?>">
 <? if($current_user_id == $a_id){ ?>
   <button class="view-idea__trash container__icon--18" data-trash="<? echo $idea_id; ?>"><i class="fa-solid fa-trash"></i></button>
   <? } ?>
-  <button class="view-idea__close close container__icon--18"><i class="fa-solid fa-xmark"></i></button>
   <div class="view-idea__header"> 
     <h2 class="view-idea__title"><? echo the_title(); ?></h2>
     <div class="view-idea__right"> 
@@ -150,6 +112,18 @@ endif; ?>
     </div>
   </div>
   <div class="view-idea__button-block"> 
+  <?  
+          $pod = FALSE;
+          if( have_rows('subscribes_idea', 'user_'.$current_user_id) ):
+																			while ( have_rows('subscribes_idea', 'user_'.$current_user_id) ) : the_row();
+																			$sabscr_idea_id = get_sub_field('id_subscribes_idea', 'user_'.$current_user_id);
+                                      if((int)$sabscr_idea_id[0] == (int)$idea_id){
+                                        $pod = TRUE;
+                                        			break;
+                                      }
+																		endwhile;
+																		endif; 
+                                    ?>
     <button class="view-idea__button secondary__button <?php echo ($pod)?'idea-sabscr ':'no-sabscr' ?>" data-sabscr="<? echo $idea_id; ?>" data-user="<? echo $current_user_id ?>"><?php echo ($pod)?'Вы подписаны':'Подписаться' ?></button>
     <button data-rev="revform<? echo $idea_id ?>" class="view-idea__button view-idea__button-reviews additional-button">Оставить отзыв</button>
   </div>
@@ -213,12 +187,13 @@ if( $comments = get_comments( $args ) ){
                 <div class="reviews-idea__like_icon"><i class="fa-solid fa-heart"></i></div>
               </div> -->
             </div>
-          </div>    
+          </div> 
           <?php }} ?>
           </div>
-      </div>
+      </div>       
+      </div>             
+<? endwhile;
+?>
 </div>
-        <?php 
-        // }
-        // wp_reset_postdata();
-        ?>
+<?php
+get_footer();
