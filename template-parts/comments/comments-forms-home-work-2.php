@@ -19,12 +19,17 @@
 <div class="module-block__new-comment">
   <!-- <input class="module-block__input" type="text" placeholder="Написать преподавателю"> -->
 
-  
-  
-
-
-
 <?php
+
+if(isset($_GET['student'])){
+  $frome_user = get_user_by('ID',$_GET['student'])->user_email;
+}else{
+  $frome_user = wp_get_current_user()->user_email;
+}
+
+
+
+
 
 $defaults = [
     'fields'  => [
@@ -35,7 +40,7 @@ $defaults = [
       ],
     'comment_field'  => '
     <input class="module-block__input input-field" name="comment" type="text" placeholder="Ваш комментарий" aria-required="true" required="required">
-    <input type="hidden" name="comment_frome_value" value="'.wp_get_current_user()->user_email.'">
+    <input type="hidden" name="comment_frome_value" value="'.$frome_user.'">
     <input type="hidden" name="page_comments" value="'.$_SERVER['REQUEST_URI'].'">
     <div class="module-block__all-files" style="margin-top: 10px;"> </div>
     <label id="open-file" class="module-block__btn-file module-block__send-file" for="attachment">

@@ -599,21 +599,41 @@ function add_comment_frome_field( $comment_id ) {
 	add_comment_meta( $comment_id, 'comment_frome_key', $meta_val );
 }
 
-// добовляем мета поле комментариев для напровления комметария
-add_action( 'comment_post', 'add_comment_status_field' );
-function add_comment_status_field( $comment_id ) {
-	$meta_val = sanitize_text_field( $_POST['comment_status_value'] );
-	add_comment_meta( $comment_id, 'comment_status_key', $meta_val );
-}
+// // добовляем мета поле комментариев для напровления комметария
+// add_action( 'comment_post', 'add_comment_status_field' );
+// function add_comment_status_field( $comment_id ) {
+// 	$meta_val = sanitize_text_field( $_POST['comment_status_value'] );
+// 	add_comment_meta( $comment_id, 'comment_status_key', $meta_val );
+// }
 
 
 //перенаправление на /thank-you-post/ после комментирования start
 function wph_redirect_after_comment(){
     //print_r( $_POST );
+
+	// Добовление уведомлений пользователей
+	if ($_POST['comment_frome_value'] != 'All' ){
+		if ($_POST['comment_frome_value'] != wp_get_current_user()->user_email){
+
+			add_user_meta( get_user_by('email',$_POST['comment_frome_value'])->ID, 'notifications', [$_POST['comment'],'id-curs/id-page'] );
+
+		}    	
+	}
+
     wp_redirect($_POST['page_comments']);
     exit();
 }
 add_filter('comment_post_redirect', 'wph_redirect_after_comment');
+
+
+add_action( 'wp_ajax_del_notifications', 'del_notifications' );
+function del_notifications(){
+		$notification_id = $_POST['notification_id'];
+		echo 'good'.$notification_id;
+
+		delete_metadata( 'user', wp_get_current_user()->ID, 'notifications', $notification_id );
+		wp_die();
+	}
 
 
 function my_notifications(){
@@ -624,7 +644,7 @@ function my_notifications(){
 
 //debug
 function mydebbug(){
-	$mydebug=false;
+	$mydebug=true;
 	if ($mydebug) {
 		return true;
 	}

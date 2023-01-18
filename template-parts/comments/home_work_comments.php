@@ -158,11 +158,18 @@ function get_home_work_comments($id,$id_cours,$user=''){
     echo '</pre>';
     $user_email = get_user_by( 'ID', $user )->user_email;
   }
+
+  $show_comments = [$user,$teacher];
+  //print_r(get_users(['role'=>'administrator','fields'=>'ID']));
+  $admins = get_users(['role'=>'administrator','fields'=>'ID']);
+  foreach($admins as $admin){
+    array_push($show_comments,$admin);
+  }
   //print_r(wp_get_current_user()->user_email);
 
 	$args = array(
             'author_email'        => '',
-            'author__in'          => [$user,$teacher],
+            'author__in'          => $show_comments,
             'author__not_in'      => '',
             'include_unapproved'  => '',
             'fields'              => '',
@@ -193,7 +200,7 @@ function get_home_work_comments($id,$id_cours,$user=''){
             'search'              => '',
             'count'               => false,
             'meta_key'            => 'comment_frome_key',
-            'meta_value'          => ['all','me',$user_email],
+            'meta_value'          => ['all',$user_email],
             'meta_query'          => '',
             'date_query'          => null, // See WP_Date_Query
             'hierarchical'        => false,

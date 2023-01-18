@@ -1,5 +1,5 @@
 
-let localurl = 'http://localhost:7777/';
+let localurl = 'http://localhost:8000/';
 
 if (document.getElementsByName('reg-user-type')){
 let numOfChanges = 0;
@@ -342,6 +342,7 @@ $('.filter-links a').on('click', function(e){
 
 $('#public-post-btn').on('click', function(e){
   $(this).attr('disabled', true);
+  console.log(window.location.href);
   e.preventDefault();
   let content = $('#post_text').val();
   let id = $(this).attr('data-user');
@@ -1053,6 +1054,37 @@ $('.show_comments').on('click', function(e){
 		error: function(resp){
 			 console.log(resp)
 		}
+
+  })
+})
+
+
+$('.del_notification').on('click', function(e){
+  e.preventDefault();
+
+  let notificationId = $(this).attr('notificationId');
+  let t = $(this).parent();
+
+  t.css('opacity','0.3'); 
+
+  $.ajax({
+    type:'POST',
+    url: localurl + "/wp-admin/admin-ajax.php",
+    data:{
+       action: 'del_notifications',
+       notification_id: notificationId,
+    },
+    success:function(response){
+     console.log(response);
+     //t.remove();
+     console.log(t);      
+    },
+    complete:function(response){
+      t.remove();
+    },
+    error: function(resp){
+       console.log(resp)
+    }
 
   })
 })

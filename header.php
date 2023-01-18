@@ -143,13 +143,14 @@ $user_info = get_userdata($currrent_userID);
 													<a href="/notifications">
 													<span class="svg-icon svg-icon-1">
 													<?php 
+													$notifications_int = count(get_user_meta( wp_get_current_user()->ID,'notifications'));
 
-													if(my_notifications()>0){
+													if($notifications_int>0){
 														?>
 
 															
 															<span class="position-absolute translate-middle badge rounded-pill bg-danger" style="top: 22px;">
-															    <?php echo my_notifications();?>
+															    <?php echo $notifications_int;?>
 																<span class="visually-hidden">непрочитанные сообщения</span>
 															</span>
 

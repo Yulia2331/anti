@@ -27,7 +27,10 @@ $defaults = [
       'url'    => 'урл',
       'cookies' => 'куки',
       ],
-    'comment_field'  => '<input class="module-block__input input-field" name="comment" type="text" placeholder="Ваш комментарий" aria-required="true" required="required">
+    'comment_field'  => '
+    <input class="module-block__input input-field" name="comment" type="text" placeholder="Ваш комментарий" aria-required="true" required="required">
+    <input type="hidden" name="comment_frome_value" value="'.wp_get_current_user()->user_email.'">
+    <input type="hidden" name="page_comments" value="'.$_SERVER['REQUEST_URI'].'">
     
     
       ',

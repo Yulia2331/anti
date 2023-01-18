@@ -56,15 +56,28 @@
       
    
         <h2 class="my-assignments__title">Центр уведомлений</h2>
-        <div class="my-assignments__cuourses"> 
+        
+           <pre>
+          <?php 
+          print_r(get_user_meta( $current_user->ID,'notifications' ));
+          ?>
+          </pre> 
 
           <?php 
-
             
-
+            $notifications = get_user_meta( wp_get_current_user()->ID,'notifications');
+            foreach($notifications as $key => $notification){
+              ?>
+                <div class="module-block__menu">
+                  <?php echo $notification; ?>
+                  <label id="open-file" class="del_notification comment-form-attachment__label module-block__btn secondary__button" notificationId='<?php echo $notification;?>' >Просмотренно</label>
+                  
+                </div>
+              <?php
+            }
           ?>
           
-        </div>
+        
       </div>
    </section>
   
@@ -72,4 +85,4 @@
   <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
   
   <?php
-        // get_footer();
+         get_footer();
