@@ -30,19 +30,17 @@
             
             if (in_array($idea_id,$sub['id_subscribes_idea'])){
               get_template_part('template-parts/ideas/idea');
-            }
+            } 
           }
          
         endwhile;
-        } else {
-        echo 'Вы еще не подписались на идеи';
-        } 
+        }
       
       }
     ?>
 
         </div>
-        <button class="board-ideas__more">Смотреть еще</button>
+        <!-- <button class="board-ideas__more">Смотреть еще</button> -->
       </div>
     </section>
 <?php

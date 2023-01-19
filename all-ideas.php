@@ -30,7 +30,7 @@ get_header();
     echo 'Ничего не найдено';
     } ?>
       </div>
-      <button class="board-ideas__more">Смотреть еще</button>
+      <!-- <button class="board-ideas__more">Смотреть еще</button> -->
     </div>
   </div>
 </section>

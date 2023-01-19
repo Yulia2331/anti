@@ -553,9 +553,7 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 																				<!--end::Title-->
 																			</div>
 																			<!--end::Item-->
-																																						 
-																			 																		
-															
+
 																			<!--end::Item-->
 																		</div>
 																		<!--end::Items-->
@@ -590,7 +588,6 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 																<!--begin::Label-->
 																<div class="fw-bold fs-6 text-gray-400">Подп. на идеи</div>
 																<!--end::Label-->
-																<!-- тут будет всплывашка окно	 -->
 																<div class="position-absolute top-100 bg-white z-index-3 shadow rounded flex-column subs" style="width: 300px; height: 307px; right: 0; display: none;">
 																	<div class="subs__search">
 																		<!--begin::Input-->

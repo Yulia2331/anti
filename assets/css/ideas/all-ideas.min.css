@@ -128,7 +128,7 @@
 .close i{
     pointer-events: none;
 }
-.tracked-ideas, .all-ideas{
+.tracked-ideas, .all-ideas, .reviews{
     min-height: auto !important;
 }
 .single-idea-body{
@@ -138,4 +138,10 @@
 }
 .single-idea-body .view-idea__trash {
     top: 20px;
+}
+.board-ideas__wrapper, .reviews__wrapper{
+    min-height: 65vh;
+}
+.single-idea__wrap{
+    min-height: 85vh;
 }
