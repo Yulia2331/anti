@@ -57,11 +57,11 @@
    
         <h2 class="my-assignments__title">Центр уведомлений</h2>
         
-           <pre>
+          
           <?php 
-          print_r(get_user_meta( $current_user->ID,'notifications' ));
+          //print_r(get_user_meta( $current_user->ID,'notifications' ));
           ?>
-          </pre> 
+          
 
           <?php 
             
@@ -69,8 +69,9 @@
             foreach($notifications as $key => $notification){
               ?>
                 <div class="module-block__menu">
-                  <?php echo $notification; ?>
-                  <label id="open-file" class="del_notification comment-form-attachment__label module-block__btn secondary__button" notificationId='<?php echo $notification;?>' >Просмотренно</label>
+                  <?php echo $notification[0]; ?>
+                  <br><br>
+                  <label id="open-file" class="del_notification comment-form-attachment__label module-block__btn secondary__button" notificationId='<?php echo $notification[1];?>' notificationContent='<?php echo $notification[0]; ?>' >Просмотренно</label>
                   
                 </div>
               <?php

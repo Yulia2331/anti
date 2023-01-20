@@ -516,42 +516,14 @@ function clear_time($string){
 
 
 // Расчет оставшегося времени
-function get_remaining_time($start_time,$period){
+function get_remaining_time($end_time){
 
-	// echo '<br>';
-    // echo (strtotime(get_the_date( 'm-d-Y', $id_cours))+$time_section)-time();
-    // echo '<br>';
-    // echo date("m-d-Y",time());
-    // echo '<br>';
-    // echo get_the_date( 'm-d-Y', $id_cours);
-    // echo '<br>';
-    // echo date("m-d-Y",strtotime(get_the_date( 'd-m-Y', $id_cours))); 
-    // echo '<br>';
-    // echo date('m-d-Y',(int)strtotime(get_the_date( 'm-d-Y', $id_cours))+$time_section);
-    // echo '<br>';
+    $seconds = $end_time - time();
 
-    $seconds = ($start_time+$period)-time();
-
-    $days = 0; $hours = 0; $minutes = 0;
-    $oneMinute = 60;
-    $oneHour = 60 * $oneMinute;
-    $oneDay = $oneHour * 24;
-     
-    if ($seconds / $oneDay > 0) {
-        $days = (int)($seconds / $oneDay);
-        $seconds -= $days * $oneDay;
-    }
-     
-    if ($seconds / $oneHour > 0) {
-        $hours = (int)($seconds / $oneHour);
-        $seconds -= $hours * $oneHour;
-    }
-     
-    if ($seconds / $oneMinute > 0) {
-        $minutes = (int)($seconds / $oneMinute);
-        $seconds -= $minutes * $oneMinute;
-    }
-
+    $days = date('d',$seconds);
+    $hours = date('h',$seconds);
+    $minutes = date('m',$seconds);
+    
     return $days.' д - '.$hours.' ч - '.$minutes.' мин ';
 
 }
@@ -612,12 +584,21 @@ function wph_redirect_after_comment(){
     //print_r( $_POST );
 
 	// Добовление уведомлений пользователей
-	if ($_POST['comment_frome_value'] != 'All' ){
+	if ($_POST['comment_frome_value'] != 'all' ){
 		if ($_POST['comment_frome_value'] != wp_get_current_user()->user_email){
-
 			add_user_meta( get_user_by('email',$_POST['comment_frome_value'])->ID, 'notifications', [$_POST['comment'],'id-curs/id-page'] );
-
 		}    	
+	}else{
+
+		
+
+		$users = get_field('dostup',$_POST['course_id']);
+		//print_r(get_post($_POST['comment_post_ID']));
+		//print_r($users);
+		foreach($users as $user){
+			add_user_meta( $user, 'notifications', [$_POST['comment'],'id-curs/id-page'] );
+		}
+
 	}
 
     wp_redirect($_POST['page_comments']);
@@ -625,13 +606,15 @@ function wph_redirect_after_comment(){
 }
 add_filter('comment_post_redirect', 'wph_redirect_after_comment');
 
-
+// Удаление уведомлений пользователя
 add_action( 'wp_ajax_del_notifications', 'del_notifications' );
 function del_notifications(){
 		$notification_id = $_POST['notification_id'];
-		echo 'good'.$notification_id;
-
-		delete_metadata( 'user', wp_get_current_user()->ID, 'notifications', $notification_id );
+		$notification_content = $_POST['notification_content'];
+		//echo 'good'.$notification_id.' '.$notification_content;
+		//print_r([$notification_content,$notification_id]);
+		
+		delete_metadata( 'user', wp_get_current_user()->ID, 'notifications', [$notification_content,$notification_id] );
 		wp_die();
 	}
 

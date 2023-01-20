@@ -8,8 +8,24 @@ function add_home_work_fields() {
 
 function add_home_work_box_func( $post ){
 	//print_r(get_current_screen());
-	//print_r($_POST);
+	//$course_item = LP_Global::course();
+	//$course_id = array_values( (array) array_values($course_item)[5])[1];
+	//echo $course_id;
+	//global $post;
+	$courses = learn_press_get_item_courses( $post->ID );
+	$course_id = 0;
+	foreach ( $courses as $course ){
+		$course_id = $course->ID;
+	}
+
+		
 	?>
+	<?php 
+		
+	?>
+
+	<input type="hidden" name="course_id" value="<?php echo $course_id; ?>">
+	
 	<style type="text/css">
 
 		.module-block__send-file {
@@ -129,13 +145,30 @@ function add_home_work_box_func( $post ){
 			<?php 
 
 			//echo get_post_meta($post->ID, 'date_home_work', 1);
-			$date = explode('/',get_post_meta($post->ID, 'date_home_work', 1));
+			if (empty(get_post_meta($post->ID, 'date_home_work', 1))){
+				$date = ['01','1','2023','14','00'];
+			}else{
+				$date = explode('/',get_post_meta($post->ID, 'date_home_work', 1));
+			}
+			
+			//print_r(get_post_meta($post->ID, 'mypost', 1));
+			
+			
+			$checked = '';
+			
+			if (get_post_meta($post->ID, 'time_home_work', 1) == 'on'){
+				$checked = 'checked';
+			}
+			
 
 			$month_arr = ['Янв','Фев','Мар','Апр','Май','Июн','Июл','Авг','Сен','Окт','Ноя','Дек'];
 
 			?>			
 			
 			<div style="display:block; float: left;">
+				<input id="html" type="checkbox" name="time_home_work" <?php echo $checked; ?>>
+  				<label for="html">Назначить окончание проверки ДЗ</label>
+  				</br>
 				<label>Дата и время здачи : </label>
 				<div class="timestamp-wrap">
 					<label>
@@ -301,6 +334,14 @@ function home_work_box_update( $post_id ){
 
 		return $post_id;
 	}
+
+	if(isset( $_POST['time_home_work'])){		
+		$time_home_work = $_POST['time_home_work'];	
+	}else{
+		$time_home_work = '';	
+	}
+	update_post_meta( $post_id, 'time_home_work', $time_home_work );
+	
 	
 	// Коментарий
 	$comments = $_POST['home_work_comments'];
@@ -318,10 +359,20 @@ function home_work_box_update( $post_id ){
 
 	//$upload = wp_upload_bits( $_FILES["field1"]["name"], null, file_get_contents( $_FILES["field1"]["tmp_name"]) );
 
-	$file = $_POST["files_home_work"];	
+	$file = $_POST["files_home_work"];
+
+	if (isset($file)){
+		$users = get_field('dostup',$_POST['course_id']);
+		//print_r(get_post($_POST['comment_post_ID']));
+		//print_r($users);
+		foreach($users as $user){
+			add_user_meta( $user, 'notifications', ['Вам доступно домашнее задание',$_POST['course_id'].'/id-page'] );
+		}
+	}
+
 	update_post_meta( $post_id, 'files_home_work', $file );
 
-
+	//update_post_meta( $post_id, 'mypost', $_POST );
 
 	// if ( empty( $_POST['taggles'] )){
 	// 	//echo 'work';

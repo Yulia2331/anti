@@ -124,6 +124,14 @@ function my_theme_comment($comment, $args, $depth ) {
 			</div>
 
 			<?php 
+				$course_item = (array)LP_Global::course_item();
+				$course_id = array_values( (array) array_values($course_item)[5])[1];
+				// echo '<pre>';
+				// print_r(array_values( (array) array_values($course_item)[5])[1] );
+				// echo '</pre>';
+
+				
+
 				$defaults = [
 						'fields'  => [
 							'author' => 'автор',
@@ -133,6 +141,8 @@ function my_theme_comment($comment, $args, $depth ) {
 							],
 						'comment_field'  => '<input class="comments__input input-field" name="comment" type="text" placeholder="Ваш комментарий" aria-required="true" required="required">
 						<input type="hidden" name="comment_frome_value" value="'.$frome_to.'">
+						<input type="hidden" name="course_id" value="'.$course_id.'">
+						<input type="hidden" name="page_comments" value="'.$_SERVER['REQUEST_URI'].'">
 						
 							',
 						

@@ -1063,6 +1063,7 @@ $('.del_notification').on('click', function(e){
   e.preventDefault();
 
   let notificationId = $(this).attr('notificationId');
+  let notificationContent = $(this).attr('notificationContent');
   let t = $(this).parent();
 
   t.css('opacity','0.3'); 
@@ -1073,6 +1074,7 @@ $('.del_notification').on('click', function(e){
     data:{
        action: 'del_notifications',
        notification_id: notificationId,
+       notification_content:notificationContent,
     },
     success:function(response){
      console.log(response);
