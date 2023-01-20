@@ -1,5 +1,5 @@
 
-let localurl = 'http://localhost:8000/';
+let localurl = window.location.host;
 
 if (document.getElementsByName('reg-user-type')){
 let numOfChanges = 0;

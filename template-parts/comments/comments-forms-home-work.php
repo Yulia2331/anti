@@ -70,7 +70,7 @@ comment_form($defaults,$item->get_id());
 
 </div>
 
-<script type="text/javascript" src="http://localhost:8000/wp-content/plugins/dco-comment-attachment/assets/dco-comment-attachment.js?ver=2.4.0" id="dco-comment-attachment-js"></script>
+<script type="text/javascript" src="<?php echo plugins_url();?>/dco-comment-attachment/assets/dco-comment-attachment.js?ver=2.4.0" id="dco-comment-attachment-js"></script>
 
 
 
