@@ -145,3 +145,27 @@
 .single-idea__wrap{
     min-height: 85vh;
 }
+.view-idea__info{
+    position: relative;
+}
+.msg-form{
+    position: absolute;
+    bottom: -215px;
+    right: 0;
+    z-index: 20;
+    background: #f5f5f5;
+    padding: 20px;
+}
+.msg-btn{
+    display: block;
+    margin-top: 10px;
+}
+.response-msg{
+    display: block;
+    margin-top: 5px;
+}
+.filter__rating-choice .select__item-radio{
+    display: block;
+    margin-right: 2px;
+    transform: scale(.9);
+}

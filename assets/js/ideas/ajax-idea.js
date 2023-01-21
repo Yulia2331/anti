@@ -12,7 +12,6 @@ try {
 
   document.addEventListener('click', (e) => {
    if (e.target.classList.contains('close ')) {
-
      hidden.classList.remove('active');
      const createReviews = document.querySelectorAll('.create-reviews');
     createReviews.forEach((i) => {
@@ -219,6 +218,37 @@ try{
 },
        success: function(data) {
         $('.reviews_msg').text('Отзыв добавлен');	
+        e.target.reset();
+      }
+      });
+    }});
+    // })
+} catch { }
+try{
+  // const revForm = document.querySelectorAll('.create-reviews__form');
+  //  revForm.forEach((i) => {
+    document.addEventListener('submit', (e) =>{
+      if(e.target.classList.contains('msg-form')){
+      e.preventDefault();
+      let id = e.target.querySelector('.msg-author').value;
+      let text = e.target.querySelector('.create-reviews__message').value;
+      let msgWrapp = e.target.querySelector('.response-msg');
+      $.ajax({ 
+        data: {
+        action: 'private_message', 
+        id: id,
+        text: text
+      },
+       type: 'post',
+       url: '/wp-admin/admin-ajax.php',
+       beforeSend: function( xhr ) {
+        msgWrapp.innerText = 'Отправка сообщения...';	
+			},
+      error: function (request, status, error) {
+        msgWrapp.innerText = error;	
+},
+       success: function(data) {
+        msgWrapp.innerText = 'Сообщение отправлено!';	
         e.target.reset();
       }
       });

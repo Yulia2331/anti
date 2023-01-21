@@ -39,7 +39,7 @@
                   $first_name = $user->first_name;
                   $last_name  = $user->last_name;?>
                 <label for="author_<? echo $first_name ?>" class="select__item">
-                <input id="author_<? echo $first_name ?>" type="radio" name="filter_author" class="idea_term" value="<? echo $author; ?>" class="select__item-radio">
+                <input id="author_<? echo $first_name ?>" type="radio" name="filter_author"  value="<? echo $author; ?>" class="select__item-radio">
                 <?php echo $first_name; echo '&nbsp'; echo $last_name; ?>
                 </label> 
               <?  } ?>
@@ -54,7 +54,7 @@
                 <div class="select__body"> 
                 <? foreach( array_unique($author_city) as $city ){ ?>
                   <label for="city_<? echo $city ?>" class="select__item">
-                <input id="city_<? echo $city ?>" type="radio" name="filter_city" class="idea_term" value="<? echo $city; ?>" class="select__item-radio">
+                <input id="city_<? echo $city ?>" type="radio" name="filter_city"  value="<? echo $city; ?>" class="select__item-radio">
                 <?php echo $city; ?>
                 </label> 
                   <?  } ?>
@@ -82,7 +82,7 @@
                             <?php foreach ($cat_product as $cat_p) : ?>
                             <?php $idea_term_id = $cat_p->cat_ID; ?>
                             <label for="cat_<? echo $idea_term_id; ?>" class="select__item">
-                            <input id="cat_<? echo $idea_term_id; ?>" type="radio" name="filter_cat" class="idea_term" value="<? echo $idea_term_id; ?>" class="select__item-radio">
+                            <input id="cat_<? echo $idea_term_id; ?>" type="radio" name="filter_cat"  value="<? echo $idea_term_id; ?>" class="select__item-radio">
                             <?php echo $cat_p->name; ?>
                            </label> 
                             <?php endforeach; ?>
@@ -94,23 +94,23 @@
             <div class="filter__block filter__rating"><span class="filter__block_title">Рейтинг</span>
               <div class="filter__rating-choice rating">
               <label for="rat_1" class="rating__button">
-                            <input id="rat_1" type="radio" name="filter_rat" class="idea_term" value="1" class="select__item-radio">
+                            <input id="rat_1" type="radio" name="filter_rat" value="1" class="select__item-radio">
                            <span class="rating__number">1</span>
                            </label> 
                            <label for="rat_2" class="rating__button">
-                            <input id="rat_2" type="radio" name="filter_rat" class="idea_term" value="2" class="select__item-radio">
+                            <input id="rat_2" type="radio" name="filter_rat"  value="2" class="select__item-radio">
                             <span class="rating__number">2</span>
                            </label> 
                            <label for="rat_3" class="rating__button">
-                            <input id="cat_3" type="radio" name="filter_rat" class="idea_term" value="3" class="select__item-radio">
+                            <input id="cat_3" type="radio" name="filter_rat"  value="3" class="select__item-radio">
                             <span class="rating__number">3</span>
                            </label> 
                            <label for="rat_4" class="rating__button">
-                            <input id="rat_4" type="radio" name="filter_rat" class="idea_term" value="4" class="select__item-radio">
+                            <input id="rat_4" type="radio" name="filter_rat"  value="4" class="select__item-radio">
                            <span class="rating__number">4</span>
                            </label> 
                            <label for="rat_5" class="rating__button">
-                            <input id="rat_5" type="radio" name="filter_rat" class="idea_term" value="5" class="select__item-radio">
+                            <input id="rat_5" type="radio" name="filter_rat"  value="5" class="select__item-radio">
                            <span class="rating__number">5</span>
                            </label> 
               </div>
@@ -122,15 +122,15 @@
                 </div>
                 <div class="select__body"> 
                   <label for="sort_date" class="select__item">
-                    <input id="sort_date" type="radio" name="filter_sort" class="idea_term" value="date" class="select__item-radio">
+                    <input id="sort_date" type="radio" name="filter_sort"  value="date" class="select__item-radio">
                     <span class="rating__number">Дате</span>
                   </label> 
                   <label for="sort_rating" class="select__item">
-                    <input id="sort_rating" type="radio" name="filter_sort" class="idea_term" value="rating" class="select__item-radio">
+                    <input id="sort_rating" type="radio" name="filter_sort"  value="rating" class="select__item-radio">
                     <span class="rating__number">Рейтингу</span>
                   </label> 
                   <label for="sort_title" class="select__item">
-                    <input id="sort_title" type="radio" name="filter_sort" class="idea_term" value="title" class="select__item-radio">
+                    <input id="sort_title" type="radio" name="filter_sort"  value="title" class="select__item-radio">
                     <span class="rating__number">Алфавиту</span>
                   </label> 
                 </div>

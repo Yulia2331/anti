@@ -176,19 +176,25 @@ function unsubscribe_idea() {
 			delete_row('field_63c3c51689bb1', $row, 'user_'.$user_id);
 		}
 	  }
-//  if (have_rows('subscribes_idea','user_'.$user_id )){
-
-// 	while( have_rows('subscribes_idea','user_'.$user_id ) ) {
-// 		the_row();
-// $f = get_sub_field('id_subscribes_idea');
-// 		if( $f == $post_id ) {
-// 		$row = get_row_index();
-// 		echo $row;	
-// 	  delete_row('field_63c3c51689bb1', $row, 'user_'.$user_id);
-// 	}
-	
-// }
 }
+wp_die(); 
+}
+
+add_action('wp_ajax_private_message', 'private_message');
+add_action('wp_ajax_nopriv_private_message', 'private_message');
+
+function private_message() { 
+$user_id = $_POST['id'];
+ $text = $_POST['text'];
+ $time = current_time( 'timestamp' );
+ $current_user_id = get_current_user_id();
+$row = array(
+	    'field_63cc34ce2a7bb'   => $text,
+		'field_63cc35002a7bc'   => $time,
+		'field_63cc35272a7bd'   => $current_user_id,
+	  );
+	  add_row('field_63cc34b12a7ba', $row, 'user_'.$user_id);
+
 wp_die(); 
 }
 

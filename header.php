@@ -77,6 +77,7 @@ $user_info = get_userdata($currrent_userID);
 		<div class="d-flex flex-shrink-0 header__general-function general-function">
 		<button class="general-function__button general-function__notifications container__icon--24"> <i class="fa-solid fa-bell"></i></button>
           <button class="general-function__button general-function__messages container__icon--24"> <i class="fa-regular fa-message"></i></button>
+		  
 									<!--begin::Search-->
 									<div class="d-flex align-items-stretch ms-1 ms-lg-3">
 										<!--begin::Search--> 

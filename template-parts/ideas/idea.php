@@ -114,6 +114,12 @@ endif; ?>
       <div class="view-idea__meaning"><?php the_field('online_offline'); ?></div>
     </div>
     <button class="view-idea__btn button-main">Написать автору</button>
+    <form action="" class="msg-form">
+      <input type="hidden" class="msg-author" value="<? echo $a_id; ?>">
+      <textarea class="create-reviews__message" name="user-msg" id="" cols="30" rows="10"></textarea>
+      <span class="response-msg"></span>
+      <button class="msg-btn secondary__button">Отправить сообщение</button>
+    </form>
   </div>
   <div class="view-idea__hypothesis hypothesis">
   <? 
