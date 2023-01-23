@@ -6,9 +6,11 @@ const body = document.body;
 
 // idea.forEach(btn => {
   document.addEventListener('click', e => {
-    const target = e.target;
+    // const target = e.target.closest('.idea');
 
-    if (target.classList.contains('idea__name')) {
+    if (e.target.closest('.idea') && !e.target.closest('.idea__info')) {
+      if(!e.target.classList.contains('idea__buton')){
+      const target = e.target.closest('.idea');
       const path = target.dataset.view;
 
       document.querySelectorAll(`[data-idea="${path}"]`).forEach(idea => {
@@ -17,6 +19,7 @@ const body = document.body;
 
       hidden.classList.add('active');
       body.classList.add('no-scroll');
+    }
     }
   })
 // })
@@ -77,38 +80,6 @@ const reviewsButton = document.querySelectorAll('.view-idea__button-reviews');
     theRev.classList.add('active');
   }})
 // })
-} catch {}
-// const btnIBody = document.querySelectorAll('.idea__name'),
-// IBody = document.querySelector('.view-idea'),
-// iId = document.querySelector('.idea_id');
-// btnIBody.forEach((b) => {
-//   b.addEventListener('click', (e) => {
-//     // e.preventDefault();
-//     let ideaID = b.dataset.view;
-//     IBody.dataset.idea = ideaID;
-
-//     // $.post('wp-admin/admin-ajax.php', {'action':'push_idea_id', 'id':ideaID}, function(response){
-//     //   $('.modal-content.ajax').html(response);
-//     // });
-//   //   $.ajax({
-//   //     type: 'POST',
-//   //     url: '/wp-admin/admin-ajax.php',
-//   //     data: {
-//   //       action: 'push_idea_id',
-//   //       id: ideaID
-//   //     },
-//   //     success: function(data)
-//   //     {
-//   //       alert( data );
-//   //       html( data );
-//   //     },
-//   //     error: function(msg){
-//   //         console.log('error');
-//   //     }
-//   // });
-//   })
-// })
-try{
 const up = document.querySelectorAll('.create-reviews__more');
 const dwn = document.querySelectorAll('.create-reviews__less');
 up.forEach((i) => {
@@ -161,17 +132,3 @@ try{
    per.insertAdjacentHTML('beforeEnd', html);
   });
 } catch {}
-// $('.hypothesis__add').submit(function(e){
-//   e.preventDefault();
-//   var name = $(".hypothesis_content").val();
-//   $.ajax({ 
-//        data: {action: 'contact_form', name:name},
-//        type: 'post',
-//        url: ajaxurl,
-//        success: function(data) {
-//             console.log(data); //should print out the name since you sent it along
-
-//       }
-//   });
-
-// });

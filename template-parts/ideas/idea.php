@@ -53,7 +53,7 @@ endif; ?>
       </div>
 </div>
 <!-- Карточка -->
-               <div id="ideas_item<? echo $idea_id; ?>" class="board-ideas__item idea">
+               <div id="ideas_item<? echo $idea_id; ?>" class="board-ideas__item idea" data-view="<? the_id(); ?>">
                 
           <div class="idea__wrapper"> 
             <div class="idea__header"> 
@@ -65,7 +65,7 @@ endif; ?>
             </div>
             <div class="idea__body"> 
               <div class="idea__user-name"><?php echo get_the_author(); ?></div>
-              <button class="idea__name" data-view="<? the_id(); ?>"><? echo the_title(); ?></button>
+              <button class="idea__name" ><? echo the_title(); ?></button>
               <div class="idea__info"> 
                 <div class="idea__category"><? if($gg){ foreach( $gg as $g ){ 
                   echo  $g->name; }
@@ -116,7 +116,7 @@ endif; ?>
     <button class="view-idea__btn button-main">Написать автору</button>
     <form action="" class="msg-form">
       <input type="hidden" class="msg-author" value="<? echo $a_id; ?>">
-      <textarea class="create-reviews__message" name="user-msg" id="" cols="30" rows="10"></textarea>
+      <textarea class="create-reviews__message" name="user-msg" id="" cols="30" rows="8"></textarea>
       <span class="response-msg"></span>
       <button class="msg-btn secondary__button">Отправить сообщение</button>
     </form>
