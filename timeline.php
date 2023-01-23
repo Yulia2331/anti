@@ -20,7 +20,7 @@ foreach ($subscribes as $sub){
 }
 }
 ?>
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+<div class="content d-flex flex-column flex-column-fluid padding-left" id="kt_content">
 
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
@@ -40,11 +40,11 @@ foreach ($subscribes as $sub){
 											<?php
 											
 												$arr = array(
-													'author__in' =>$subs,
+													// 'author__in' =>$subs,
 													'posts_per_page' => 10,
 													'paged' => $paged,
 													'post_status' => 'publish',
-													'post_type' => 'user_post',
+													'post_type' => array('user_post', 'ideas'),
 													'orderby'   => array(
 														'date' =>'DESC',
 													)
@@ -56,15 +56,19 @@ foreach ($subscribes as $sub){
 											
 												while ( $query->have_posts() ) {
 													$query->the_post();
-													
-													get_template_part('template-parts/user-post');
+													$p = get_post_type();
+													if($p == 'user_post'){
+														get_template_part('template-parts/user-post');
+													}
+													if($p == 'ideas'){
+														get_template_part('template-parts/user-idea-timeline');
+													}
 													// выведем заголовок поста
 												}
 												 
 												}
 											else{
 												get_template_part('template-parts/no-posts');
-
 											}
 										?>
 									</div>

@@ -1,4 +1,4 @@
-try {
+try{
 const reviewsBtn = document.querySelector('.banner-swiper__btn')
 const overlay = document.querySelector('.overlay')
 const popup = document.querySelector('.popup')
@@ -16,11 +16,9 @@ popupClose.addEventListener('click', () => {
     popup.classList.remove('active-p')
     body.classList.remove('no-scroll')
 })
-} catch {}
 
-
-try {
 // rating >>>
+
 const rating = document.querySelector('.rating')
 const ratingItem = document.querySelectorAll('.rating__item')
 
@@ -45,7 +43,6 @@ rating.addEventListener('mouseout', e => {
     addClass(ratingItem, 'active')
     mouseOutActiveClass(ratingItem)
 })
-} catch {}
 
 function removeClass(arr) {
     for(let i = 0, ilen = arr.length; i < ilen; i++) {
@@ -81,3 +78,4 @@ function mouseOutActiveClass(arr) {
         }
     }
 }
+}catch {}

@@ -31,7 +31,7 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 ?>
 
 					<!--begin::Content-->
-					<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+					<div class="content d-flex flex-column flex-column-fluid padding-left" id="kt_content">
 						
 						<!--begin::Post-->
 						<div class="post d-flex flex-column-fluid" id="kt_post">
@@ -209,10 +209,20 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 													</div>
 													<!--end::Actions-->
 												</div>
-											
+																								<!--begin::Progress-->
+													
+													<?php 
+													if( is_author() && is_user_logged_in() ){
+														if(  $current_user->ID == $user_id ){
+													
+																get_template_part('template-parts/user-profile-progress') ;
+														}
+													}
+													?>
+													<!--end::Progress-->
 												<!--end::Title-->
 												<!--begin::Stats-->
-												<div class="d-flex flex-wrap flex-stack">
+												<div class="d-flex flex-wrap flex-stack mt-4">
 													<!--begin::Wrapper-->
 													<div class="d-flex flex-column flex-grow-1 pe-8">
 														<!--begin::Stats-->
@@ -486,24 +496,150 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 															
 															
 																</div>
+																
 															</div>
 															<!--end::Stat-->
-														
+														<!-- вот тут -->
+														<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-lg-6 me-2 mb-3 position-relative"
+																id='my-ideas' data-user='<?php echo get_queried_object()->ID ?>'>
+																<!--begin::Number-->
+																<div class="d-flex align-items-center">
+																	<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="<?php 
+																	$idea_query = new WP_Query(  [
+																		'author' => $user_id, 
+																		'post_type' => 'ideas',
+																		] );
+																		$count = 0;
+																		while ( $idea_query->have_posts() ) {
+																			$idea_query->the_post();
+																			$count++; // выведем заголовок поста
+																			}
+																			echo $count;
+																	?>" data-kt-countup-prefix="">0</div>
+																</div>
+																<!--end::Number-->
+																<!--begin::Label-->
+																<div class="fw-bold fs-6 text-gray-400">Идеи</div>
+																<!--end::Label-->
+																<!-- тут будет всплывашка окно	 -->
+																<div class="position-absolute top-100 bg-white z-index-3 shadow rounded flex-column subs" style="width: 300px; height: 307px; right: 0; display: none;">
+																	<div class="subs__search">
+																		<!--begin::Input-->
+																		<input type="text" class="search-input form-control form-control-flush fw-500 " name="search" id="my-ideas_search" value="" placeholder="Поиск..." data-kt-search-element="input">
+																		<!--end::Input-->
+																	</div>
+																	<div class="mb-5" data-kt-search-element="main">
+																		<!--begin::Heading-->
+																		<div class="d-flex flex-stack fw-bold mb-4">
+																			<!--begin::Label-->
+																			<!-- <span class="text-muted fs-6 me-2">Идеи:</span> -->
+																			<!--end::Label-->
+																		</div>
+																		<!--end::Heading-->
+																		<!--begin::Items-->
+																		<div class="scroll-y mh-200px mh-lg-200px search_results" id="my-ideas_list">
+																			
+																			
+																			<!--begin::Item-->
+																			<div class="d-block mb-5">
+																				<!--begin::Symbol-->
+																				
+																			<?	while ( $idea_query->have_posts() ) {
+																			$idea_query->the_post(); ?>
+																			<a href="<? the_permalink(); ?>" class="my-idea__title"><? the_title(); ?></a>
+																			<?	} 
+																			?>
+																				
+																				<!--end::Title-->
+																			</div>
+																			<!--end::Item-->
+
+																			<!--end::Item-->
+																		</div>
+																		<!--end::Items-->
+																	</div>
+																	
+															
+																</div>
+																<!-- конец подписок на идеи -->
 														</div>
 														<!--end::Stats-->
+														<div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-lg-6 me-2 mb-3 position-relative"
+																id='my-sabscr-ideas' data-user='<?php echo get_queried_object()->ID ?>'>
+																<!--begin::Number-->
+																<div class="d-flex align-items-center">
+																	<div class="fs-2 fw-bolder" data-kt-countup="true" data-kt-countup-value="<?php 
+																	if (have_rows('subscribes_idea', 'user_'.$user_id)){
+																		$count=0;
+																		foreach(get_field('subscribes_idea', 'user_'.$user_id) as $key=>$value){
+																			if($value['id_subscribes_idea']){
+																				$count++;
+																			}
+																		}
+																		echo $count;
+																		
+																	}
+																	else{
+																		echo 0;
+																	}
+																	?>" data-kt-countup-prefix="">0</div>
+																</div>
+																<!--end::Number-->
+																<!--begin::Label-->
+																<div class="fw-bold fs-6 text-gray-400">Подп. на идеи</div>
+																<!--end::Label-->
+																<div class="position-absolute top-100 bg-white z-index-3 shadow rounded flex-column subs" style="width: 300px; height: 307px; right: 0; display: none;">
+																	<div class="subs__search">
+																		<!--begin::Input-->
+																		<input type="text" class="search-input form-control form-control-flush fw-500 " name="search" id="my-sabscr-ideas_search" value="" placeholder="Поиск..." data-kt-search-element="input">
+																		<!--end::Input-->
+																	</div>
+																	<div class="mb-5" data-kt-search-element="main">
+																		<!--begin::Heading-->
+																		<div class="d-flex flex-stack fw-bold mb-4">
+																			<!--begin::Label-->
+																			<!-- <span class="text-muted fs-6 me-2">Идеи:</span> -->
+																			<!--end::Label-->
+																		</div>
+																		<!--end::Heading-->
+																		<!--begin::Items-->
+																		<div class="scroll-y mh-200px mh-lg-200px search_results" id="my-sabscr-ideas_list">
+																			
+																			
+																			<!--begin::Item-->
+																			<div class="d-block mb-5">
+																				<!--begin::Symbol-->
+																				
+																		<?		
+																		
+																		if( have_rows('subscribes_idea', 'user_'.$user_id) ):
+																			while ( have_rows('subscribes_idea', 'user_'.$user_id) ) : the_row();
+																			$idea_id = get_sub_field('id_subscribes_idea', 'user_'.$user_id);
+																			$tr = $idea_id[0];
+																			$post = get_post($tr);
+																			?>
+																		   <a href="<? echo $post->guid; ?>" class="my-idea__title"><? echo $post->post_title; ?></a>
+																	<?	   endwhile;
+																		 endif; 
+																		
+																			?>
+																				
+																				<!--end::Title-->
+																			</div>
+																			<!--end::Item-->
+
+																			<!--end::Item-->
+																		</div>
+																		<!--end::Items-->
+																	</div>
+																	
+															
+																</div>
+																<!-- конец подписок на идеи -->
+														</div>
 													</div>
 													<!--end::Wrapper-->
-													<!--begin::Progress-->
-													
-													<?php 
-													if( is_author() && is_user_logged_in() ){
-														if(  $current_user->ID == $user_id ){
-													
-																get_template_part('template-parts/user-profile-progress') ;
-														}
-													}
-													?>
-													<!--end::Progress-->
+
 												</div>
 												<!--end::Stats-->
 											</div>

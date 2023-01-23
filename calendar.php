@@ -14,7 +14,7 @@ Template Name: Календарь клуба
 
 
 <!--begin::Content-->
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+<div class="content d-flex flex-column flex-column-fluid padding-left" id="kt_content">
 					
 					<!--begin::Post-->
 					<div class="post d-flex flex-column-fluid" id="kt_post">

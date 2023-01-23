@@ -160,9 +160,48 @@ $(document).on('click','#kt_charts_widget_5 .apexcharts-yaxis-label', function()
    
   })
 
+  $(document).click( function(e){
+    if ( $(e.target).closest('#my-ideas').length ) {
+        $('#my-ideas .subs').css({'display':'flex'});
+        console.log($(window).width());
+        if ($(window).width()<499){
+          $('#my-ideas .subs').css({'transform': 'translateX(-90px)'});
+        }
+        return;
+    }
+// клик снаружи элемента 
+  $('#my-ideas .subs').css({'display':'none'});
+  });
+  $(document).click( function(e){
+    if ( $(e.target).closest('#my-ideas').length ) {
+        $('#my-ideas .subs').css({'display':'flex'});
+        return;
+    }
+// клик снаружи элемента 
+  $('#my-ideas .subs').css({'display':'none'});
+  });
 
 
-
+  $(document).click( function(e){
+    if ( $(e.target).closest('#my-sabscr-ideas').length ) {
+        $('#my-sabscr-ideas .subs').css({'display':'flex'});
+        console.log($(window).width());
+        if ($(window).width()<499){
+          $('#my-sabscr-ideas .subs').css({'transform': 'translateX(-90px)'});
+        }
+        return;
+    }
+// клик снаружи элемента 
+  $('#my-sabscr-ideas .subs').css({'display':'none'});
+  });
+  $(document).click( function(e){
+    if ( $(e.target).closest('#my-sabscr-ideas').length ) {
+        $('#my-sabscr-ideas .subs').css({'display':'flex'});
+        return;
+    }
+// клик снаружи элемента 
+  $('#my-sabscr-ideas .subs').css({'display':'none'});
+  });
 
   $(document).click( function(e){
     if ( $(e.target).closest('#subscriptions').length ) {
