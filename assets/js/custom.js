@@ -381,7 +381,7 @@ $('.filter-links a').on('click', function(e){
 
 $('#public-post-btn').on('click', function(e){
   $(this).attr('disabled', true);
-  console.log(window.location.href);
+  // console.log(window.location.href);
   e.preventDefault();
   let content = $('#post_text').val();
   let id = $(this).attr('data-user');
@@ -389,7 +389,7 @@ $('#public-post-btn').on('click', function(e){
   let picture = $('#uploaded_image').val();
   let image = 'None';
 
-  console.log(window.location.href);
+  // console.log(window.location.href);
   
   if (picture!=''){
     image = picture;

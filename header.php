@@ -75,7 +75,7 @@ $user_info = get_userdata($currrent_userID);
 
 		<!--begin::Toolbar wrapper-->
 		<div class="d-flex flex-shrink-0 header__general-function general-function">
-		<button class="general-function__button general-function__notifications container__icon--24"> <i class="fa-solid fa-bell"></i></button>
+		<!-- <button class="general-function__button general-function__notifications container__icon--24"> <i class="fa-solid fa-bell"></i></button> -->
 		<a href="/notifications" class="general-function__button general-function__messages container__icon--24">
 													<span class="svg-icon svg-icon-1">
 													<?php 
@@ -95,12 +95,36 @@ $user_info = get_userdata($currrent_userID);
 													}
 
 													?>
-													
-														<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--! Font Awesome Pro 6.2.1 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M447.1 0h-384c-35.25 0-64 28.75-64 63.1v287.1c0 35.25 28.75 63.1 64 63.1h96v83.98c0 9.836 11.02 15.55 19.12 9.7l124.9-93.68h144c35.25 0 64-28.75 64-63.1V63.1C511.1 28.75 483.2 0 447.1 0zM464 352c0 8.75-7.25 16-16 16h-160l-80 60v-60H64c-8.75 0-16-7.25-16-16V64c0-8.75 7.25-16 16-16h384c8.75 0 16 7.25 16 16V352z" fill="white"/></svg>
+													<i class="fa-solid fa-bell"></i>
+														
 													</span>
 													</a>
 
-          <!-- <button class="general-function__button general-function__messages container__icon--24"> <i class="fa-regular fa-message"></i></button> -->
+          <button class="general-function__button general-function__messages container__icon--24"> <i class="fa-regular fa-message"></i></button>
+		  <div class="private-messages">
+		  <?  if( have_rows('messages', 'user_'.$currrent_userID) ):
+			while ( have_rows('messages', 'user_'.$currrent_userID) ) : the_row();
+			$user_id = get_sub_field('message_sender');
+			$user = get_userdata( $user_id );
+			$first_name = $user->first_name;
+        	$last_name  = $user->last_name;
+			?>
+			<div class="private-messages__item" date-msgind="<?php echo get_row_index(); ?>">
+				<div class="d-flex">
+				<div class="symbol symbol-50px me-5"> <img src="<?=get_user_image($user_id)?>"></div>
+					<div class="">
+						<span class="private-messages__name reviews-idea__name"><? echo $first_name; echo '&nbsp'; echo $last_name; ?></span>
+						<div class="fw-bold text-muted text-hover-primary fs-7 mt-2"><? the_sub_field('message_date'); ?></div>
+					</div>
+				</div>
+				<div class="private-messages__text">
+				<? the_sub_field('message'); ?>
+				</div>
+			</div>
+			<?
+			endwhile;
+			endif; ?>
+		  </div>
 		  
 									<!--begin::Search-->
 									<div class="d-flex align-items-stretch ms-1 ms-lg-3">

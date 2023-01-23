@@ -28,7 +28,9 @@ $user_info = get_userdata(get_current_user_id());
                 <div class="container__icon--18 navigation-close__icon"><i class="fa-regular fa-window-restore"></i></div></a></li>
             <li class="navigation__item"><a class="navigation__link" href="<?php echo home_url(); ?>/bank-idej/">
                 <div class="container__icon--18 navigation-close__icon"><i class="fa-regular fa-lightbulb"></i></div></a></li>
-            <li class="navigation__item"><a class="navigation__link" href="#">
+            <li class="navigation__item"><a class="navigation__link" href="<?php echo home_url(); ?>/teacher">
+                <div class="container__icon--18 navigation-close__icon"><i class="fa-solid fa-list-check"></i></div></a></li>
+            <li class="navigation__item"><a class="navigation__link"  href="<?php echo home_url(); ?>/home-work">
                 <div class="container__icon--18 navigation-close__icon"><i class="fa-solid fa-list-check"></i></div></a></li>
           </ul>
         </nav>
@@ -98,13 +100,13 @@ $user_info = get_userdata(get_current_user_id());
                     <p>Банк идей</p>
                   </div>
                   <div class="navigation__marker"><i class="fa-solid fa-angle-right"></i></div></a></li>
-                  <li class="navigation__item <?php echo (is_page(428)?'here':'')?>""><a class="navigation__link" href="<?php echo home_url(); ?>/teacher">
+                  <li class="navigation__item <?php echo (is_page(428)?'here':'')?>"><a class="navigation__link" href="<?php echo home_url(); ?>/teacher">
                   <div class="navigation__link-name">
                     <div class="container__icon--18 navigation__icon"><i class="fa-solid fa-list-check"></i></div>
                     <p>Страница учителя</p>
                   </div>
                   <div class="navigation__marker"><i class="fa-solid fa-angle-right"></i></div></a></li>
-              <li class="navigation__item <?php echo (is_page(428)?'here':'')?>""><a class="navigation__link" href="<?php echo home_url(); ?>/home-work">
+              <li class="navigation__item <?php echo (is_page(428)?'here':'')?>"><a class="navigation__link" href="<?php echo home_url(); ?>/home-work">
                   <div class="navigation__link-name">
                     <div class="container__icon--18 navigation__icon"><i class="fa-solid fa-list-check"></i></div>
                     <p>Мои задания</p>

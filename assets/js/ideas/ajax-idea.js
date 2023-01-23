@@ -255,3 +255,19 @@ try{
     }});
     // })
 } catch { }
+try{
+document.addEventListener('click', (e) => {
+  if(e.target.classList.contains('view-idea__btn')){
+   let msgForm = e.target.closest('.view-idea__info').querySelector('.msg-form');
+   msgForm.classList.toggle('active');
+  }
+})
+} catch { }
+try{
+  document.addEventListener('click', (e) => {
+    if(e.target.classList.contains('general-function__messages')){
+     let msgForm = document.querySelector('.private-messages');
+     msgForm.classList.toggle('active');
+    }
+  })
+} catch { }
