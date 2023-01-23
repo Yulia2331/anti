@@ -1,8 +1,8 @@
 <?php
 get_header();
-// if (mydebbug()){
-//     echo '---> index.php';    
-// }
+if (mydebbug()){
+    echo '---> index.php';    
+}
 
 if(is_user_logged_in()){
 	

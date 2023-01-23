@@ -16,7 +16,7 @@ parse_str($parts['query'], $query);
 $curs_id = $query['id'];
 ?>
 
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+<div class="content d-flex flex-column flex-column-fluid padding-left" id="kt_content">
 						
 						<!--begin::Post-->
 						<div class="courses d-flex flex-column-fluid padding-left" id="kt_courses">

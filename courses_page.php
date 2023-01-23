@@ -12,7 +12,7 @@ if (mydebbug()){
         background: #000;
     }
 </style>
-<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+<div class="content d-flex flex-column flex-column-fluid padding-left" id="kt_content">
 						
 
                         <div class="swiper-wrapper">
