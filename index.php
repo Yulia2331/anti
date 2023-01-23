@@ -1,8 +1,8 @@
 <?php
-
-if (mydebbug()){
-    echo '---> index.php';    
-}
+get_header();
+// if (mydebbug()){
+//     echo '---> index.php';    
+// }
 
 if(is_user_logged_in()){
 	
@@ -48,5 +48,5 @@ if(is_user_logged_in()){
 else{
 	wp_redirect( '/auth' );
 }
-
+get_footer();
 ?>

@@ -122,7 +122,10 @@ function plugins_addition($plugins) {
     return $plugins;
 }
 add_filter('all_plugins', 'plugins_addition');
+
 function theme_name_scripts() {
+	wp_enqueue_style( 'course', get_template_directory_uri() . '/assets/css/course.min.css' );
+
 	wp_enqueue_style( 'google-fonts', 'https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700' );
 	wp_enqueue_style( 'plugins-bundle', get_template_directory_uri() . '/assets/plugins/global/plugins.bundle.css' );
 	wp_enqueue_style( 'datatables', get_template_directory_uri() . '/assets/plugins/custom/datatables/datatables.bundle.css' );
@@ -135,13 +138,12 @@ function theme_name_scripts() {
 	wp_enqueue_style( 'curs-style', get_template_directory_uri() . '/assets/css/style.css' );
 	wp_enqueue_style( 'curses', get_template_directory_uri() . '/assets/css/curses.css?1' );
 	wp_enqueue_style( 'ideas-style', get_template_directory_uri() . '/assets/css/ideas/style.min.css' );
-	wp_enqueue_style( 'all-ideas', get_template_directory_uri() . '/assets/css/ideas/all-ideas.min.css' );
-	wp_enqueue_style( 'my-reviews', get_template_directory_uri() . '/assets/css/ideas/my-reviews.min.css' );
-	wp_enqueue_style( 'tracked-ideas', get_template_directory_uri() . '/assets/css/ideas/tracked-ideas.min.css' );
-
 	wp_enqueue_style( 'assignments', get_template_directory_uri() . '/assets/css/assignments/my-assignments.min.css' );	
 	wp_enqueue_style( 'new-style', get_template_directory_uri() . '/assets/css/style.min.css' );
 	wp_enqueue_style( 'general', get_template_directory_uri() . '/assets/css/general.css' );
+	wp_enqueue_style( 'all-ideas', get_template_directory_uri() . '/assets/css/ideas/all-ideas.min.css' );
+	wp_enqueue_style( 'my-reviews', get_template_directory_uri() . '/assets/css/ideas/my-reviews.min.css' );
+	wp_enqueue_style( 'tracked-ideas', get_template_directory_uri() . '/assets/css/ideas/tracked-ideas.min.css' );
 	//wp_enqueue_script( 'font-js', 'https://kit.fontawesome.com/72a41cb45f.js?_v=20221228185850', array(), '1.0.0', true );
 	//<script src="https://kit.fontawesome.com/72a41cb45f.js?_v=20221228185850" crossorigin="anonymous"></script>
 
@@ -493,4 +495,145 @@ function is_user_role_in( $roles, $user = false ) {
 		}
 	}
 	return false;
+}
+add_filter( 'learn-press/override-templates', function(){ return true; } );
+
+
+// Переводим время в число минуты
+function clear_time($string){
+  $arr = explode(' ', $string);
+
+  if ($arr[1] == 'minute'){
+  	$int = (int)$arr[0];
+  }
+  if ($arr[1] == 'hour'){
+  	$int = (int)$arr[0]*60;
+  }
+  if ($arr[1] == 'day'){
+  	$int = (int)$arr[0]*1440;
+  }
+  if ($arr[1] == 'week'){
+  	$int = (int)$arr[0]*10080;
+  }  
+
+  return $int*60;
+}
+
+
+// Расчет оставшегося времени
+function get_remaining_time($end_time){
+
+    $seconds = $end_time - time();
+
+    $days = date('d',$seconds);
+    $hours = date('h',$seconds);
+    $minutes = date('m',$seconds);
+    
+    return $days.' д - '.$hours.' ч - '.$minutes.' мин ';
+
+}
+
+// Функция для коментария и комментариев
+function get_text_comment_num($value){
+
+	if ($value == 1){
+		return 'комментарий';
+	}
+	if ($value > 1 and $value <= 4){
+		return 'комментария';
+	}
+	if ($value > 4){
+		return 'комментариев';
+	}
+
+}
+
+// добовление поля учителя в админке
+require_once ('functions/add_teacher.php');
+
+// добовление поля дедлайна ДЗ
+require_once ('functions/add_home_work.php');
+
+// шаблон коментариев для домашнего задания
+require_once ('template-parts/comments/home_work_comments.php');
+
+// подключаем ответ на коменты
+// function enqueue_comment_reply() {
+// 	if( is_singular() )
+// 		wp_enqueue_script('comment-reply');
+// }
+// add_action( 'wp_enqueue_scripts', 'enqueue_comment_reply' );
+
+// Content
+add_action(	'custom_content_single_meta',LearnPress::instance()->template( 'course' )->callback( 'single-course/meta-secondary' ),10);
+add_action(	'custom_content_single_tab',LearnPress::instance()->template( 'course' )->callback( 'single-course/tabs/tabs' ),60);
+add_action( 'custom_content_single',LearnPress::instance()->template( 'course' )->func( 'course_comment_template' ), 75 );
+
+// добовляем мета поле комментариев для напровления комметария
+add_action( 'comment_post', 'add_comment_frome_field' );
+function add_comment_frome_field( $comment_id ) {
+	$meta_val = sanitize_text_field( $_POST['comment_frome_value'] );
+	add_comment_meta( $comment_id, 'comment_frome_key', $meta_val );
+}
+
+// // добовляем мета поле комментариев для напровления комметария
+// add_action( 'comment_post', 'add_comment_status_field' );
+// function add_comment_status_field( $comment_id ) {
+// 	$meta_val = sanitize_text_field( $_POST['comment_status_value'] );
+// 	add_comment_meta( $comment_id, 'comment_status_key', $meta_val );
+// }
+
+
+//перенаправление на /thank-you-post/ после комментирования start
+function wph_redirect_after_comment(){
+    //print_r( $_POST );
+
+	// Добовление уведомлений пользователей
+	if ($_POST['comment_frome_value'] != 'all' ){
+		if ($_POST['comment_frome_value'] != wp_get_current_user()->user_email){
+			add_user_meta( get_user_by('email',$_POST['comment_frome_value'])->ID, 'notifications', [$_POST['comment'],'id-curs/id-page'] );
+		}    	
+	}else{
+
+		
+
+		$users = get_field('dostup',$_POST['course_id']);
+		//print_r(get_post($_POST['comment_post_ID']));
+		//print_r($users);
+		foreach($users as $user){
+			add_user_meta( $user, 'notifications', [$_POST['comment'],'id-curs/id-page'] );
+		}
+
+	}
+
+    wp_redirect($_POST['page_comments']);
+    exit();
+}
+add_filter('comment_post_redirect', 'wph_redirect_after_comment');
+
+// Удаление уведомлений пользователя
+add_action( 'wp_ajax_del_notifications', 'del_notifications' );
+function del_notifications(){
+		$notification_id = $_POST['notification_id'];
+		$notification_content = $_POST['notification_content'];
+		//echo 'good'.$notification_id.' '.$notification_content;
+		//print_r([$notification_content,$notification_id]);
+		
+		delete_metadata( 'user', wp_get_current_user()->ID, 'notifications', [$notification_content,$notification_id] );
+		wp_die();
+	}
+
+
+function my_notifications(){
+	$num_comm = wp_count_comments()->moderated;
+
+	return $num_comm;
+}
+
+//debug
+function mydebbug(){
+	$mydebug=true;
+	if ($mydebug) {
+		return true;
+	}
 }

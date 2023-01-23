@@ -173,3 +173,10 @@
 .msg-form .create-reviews__message{
     padding: 8px;
 }
+.navigation__item{
+    margin: 0;
+    padding: 10px 5px;
+}
+.navigation__item:not(:last-child){
+    margin-bottom: 0;
+}
