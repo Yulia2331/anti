@@ -17,14 +17,26 @@ $user_id = $user->ID;
 			</span>
 			</div>
 		<?php 
-		$age = get_age(get_field('data_birth'), 'user_'.$user_id);
+		$data_b = get_user_meta($user_id,'data_birth')[0];
+		$age = get_age($data_b, 'user_'.$user_id);
+		//print_r(get_user_meta($user_id));
+
+		// print_r(get_user_meta($user_id,'_data_birth')[0]);
+		// echo '<br>';
+		//print_r(get_user_meta($user_id,'data_birth')[0]);
+		//echo '<br>';
+		//echo the_field('data_birth');
+		//echo '<br>';
+		
+
+		//echo date('d.m.Y',$data_b);
 		if ($age>0){
 
-			print_r(get_fields());
+
 		?>
 			<div class="d-flex mb-5">
 				<span class="fw-bold fs-6 text-gray-400 w-25">Возраст</span>
-				<span class="fw-bold fs-6 text-black-400 w-75"><?=$age?> <?php  echo YearTextArg($age); echo get_field('data_birth'); ?></span>
+				<span class="fw-bold fs-6 text-black-400 w-75"><?=$age?> <?php  echo YearTextArg($age); ?></span>
 			</div>
 		<?php }?>
 			<div class="d-flex mb-5">
