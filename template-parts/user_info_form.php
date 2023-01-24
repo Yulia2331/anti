@@ -19,10 +19,12 @@ $user_id = $user->ID;
 		<?php 
 		$age = get_age(get_field('data_birth'), 'user_'.$user_id);
 		if ($age>0){
+
+			print_r(get_fields());
 		?>
 			<div class="d-flex mb-5">
 				<span class="fw-bold fs-6 text-gray-400 w-25">Возраст</span>
-				<span class="fw-bold fs-6 text-black-400 w-75"><?=$age?> <?php  echo YearTextArg($age) ?></span>
+				<span class="fw-bold fs-6 text-black-400 w-75"><?=$age?> <?php  echo YearTextArg($age); echo get_field('data_birth'); ?></span>
 			</div>
 		<?php }?>
 			<div class="d-flex mb-5">

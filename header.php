@@ -62,7 +62,7 @@ $user_info = get_userdata($currrent_userID);
                           $postname = get_the_title( $curs_id );
                           echo $postname;
 												}																							
-												else if (the_title()==''){	
+												else if (get_the_title()==''){	
 													echo $args['title'];
 												}else{
 													the_title();

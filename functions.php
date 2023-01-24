@@ -279,11 +279,15 @@ function custom_login_page() {
 	}
 
 	function get_age( $birthday ){
+		
 		$birthday_timestamp = strtotime($birthday);
+
 		$age = date('Y') - date('Y', $birthday_timestamp);
+
 		if ((int)date('md', $birthday_timestamp) > (int)date('md')) {
 			$age--;
 			}
+
 		return $age;
 }
 	
