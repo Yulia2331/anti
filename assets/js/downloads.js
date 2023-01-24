@@ -1,3 +1,4 @@
+try{
 function upload(selector) {
   const input = document.querySelector(selector)
   const open = document.querySelector('.module-block__btn')
@@ -142,3 +143,4 @@ function show_me(){
 }
 
 show_me();
+} catch { }
