@@ -111,4 +111,4 @@
   <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
   
   <?php
-        // get_footer();
+        get_footer();
