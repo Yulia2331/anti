@@ -187,18 +187,22 @@
     border-radius: 0.475rem;
     background-color: #ffffff;
     box-shadow: 0px 0px 50px 0px rgb(82 63 105 / 15%);
-    bottom: -120px;
+    top: 60px;
     right: 130px;
     display: none;
+    max-width: 240px;
 }
 .private-messages__text{
     margin-top: 15px;
     font-size: 14px;
 }
 .private-messages__item{
-    border-bottom: 1px solid rgb(93, 93, 93);
+    border-bottom: 1px solid rgb(157, 157, 157);
     padding-bottom: 10px;
     margin-bottom: 12px;
+}
+.general-function__button i{
+    pointer-events: none;
 }
 .active{
     display: block;
