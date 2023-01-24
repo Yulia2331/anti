@@ -1,12 +1,15 @@
 <?php
-get_header();
+//get_header();
+
+
+
 if (mydebbug()){
     echo '---> index.php';    
 }
 
 if(is_user_logged_in()){
 	
-	// echo '----------------- index! ----------------';
+	//echo '----------------- index! ----------------';
 	// global $wp;
 	// echo '<br>';
 	// echo $wp->request;
@@ -48,5 +51,7 @@ if(is_user_logged_in()){
 else{
 	wp_redirect( '/auth' );
 }
-get_footer();
+
+//get_footer();
+
 ?>

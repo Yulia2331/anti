@@ -1,12 +1,25 @@
 <?php
 /**
  * Template name: Мои задания список
- */
-         get_header();
+ */       
+
+
+
+get_header(null, array('title'=>'Мои задания список'));    
+
+          //$GLOBALS['wp_query']->query_vars['title'] = 'Мои задания список';
+          //set_query_var('my_title', '23');
+
+          
+          //do_action( 'get_header', 'null', array('title'=>'Мои задания список') );
+          //locate_template( 'header.php', true, true, 'Мои задания список' )
+          //$my_sup_title = '12312';
+          //include 'header.php';
 
          
        
     ?>
+
 <!-- <header class="header">
       <div class="header__wrapper padding-left">
         <div class="header__title-block"> 
@@ -24,11 +37,11 @@
     
     
     </div></div>
-
-    
    
     <section class="my-assignments padding-left">
+
       <div class="my-assignments__wrapper">
+          
         <h2 class="my-assignments__title">Список курсов, по которым доступны домашние задания</h2>
         <div class="my-assignments__cuourses"> 
 
@@ -138,4 +151,4 @@
   <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
   
   <?php
-        // get_footer();
+         get_footer();

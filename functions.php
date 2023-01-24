@@ -140,8 +140,9 @@ function theme_name_scripts() {
 	wp_enqueue_style( 'ideas-style', get_template_directory_uri() . '/assets/css/ideas/style.min.css' );
 	wp_enqueue_style( 'assignments', get_template_directory_uri() . '/assets/css/assignments/my-assignments.min.css' );	
 	wp_enqueue_style( 'new-style', get_template_directory_uri() . '/assets/css/style.min.css' );
-	wp_enqueue_style( 'general', get_template_directory_uri() . '/assets/css/general.css' );
+	
 	wp_enqueue_style( 'all-ideas', get_template_directory_uri() . '/assets/css/ideas/all-ideas.min.css' );
+	wp_enqueue_style( 'general', get_template_directory_uri() . '/assets/css/general.css' );
 	wp_enqueue_style( 'my-reviews', get_template_directory_uri() . '/assets/css/ideas/my-reviews.min.css' );
 	wp_enqueue_style( 'tracked-ideas', get_template_directory_uri() . '/assets/css/ideas/tracked-ideas.min.css' );
 	//wp_enqueue_script( 'font-js', 'https://kit.fontawesome.com/72a41cb45f.js?_v=20221228185850', array(), '1.0.0', true );
@@ -632,7 +633,7 @@ function my_notifications(){
 
 //debug
 function mydebbug(){
-	$mydebug=true;
+	$mydebug=false;
 	if ($mydebug) {
 		return true;
 	}
