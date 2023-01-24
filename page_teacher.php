@@ -2,7 +2,7 @@
 /**
  * Template name: Страница учителя
  */
-         get_header();
+         get_header(null, array('title'=>'Страница учителя'));
        
     ?>
 <!-- <header class="header">

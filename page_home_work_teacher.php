@@ -5,7 +5,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-get_header();
+get_header(null, array('title'=>'Страница учителя'));
 
 // function clear_time($string){
 //   $arr = explode(' ', $string);

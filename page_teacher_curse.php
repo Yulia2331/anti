@@ -2,7 +2,7 @@
 /**
  * Template name: Страница учителя
  */
-        get_header();
+        get_header(null, array('title'=>'Страница учителя'));
 
         $post = get_post($_GET['id']);
         $course = learn_press_get_course();
@@ -401,4 +401,4 @@
   <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
   
   <?php
-        // get_footer();
+         get_footer();

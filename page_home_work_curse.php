@@ -5,7 +5,7 @@
 
 defined( 'ABSPATH' ) || exit;
 
-get_header();
+
 
 // function clear_time($string){
 //   $arr = explode(' ', $string);
@@ -24,6 +24,8 @@ get_header();
 
 //$id_cours = $_GET['id'];
 $post = get_post($_GET['id']);
+
+get_header(null, array('title'=>''));
 
 //print_r(learn_press_get_course( $id_cours ));
 //do_action( 'learn-press/before-single-course' );

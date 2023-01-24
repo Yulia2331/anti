@@ -1,8 +1,8 @@
 <?php
 /**
- * Template name: Страница учителя
+ * Template name: Оповищения
  */
-         get_header();
+         get_header(null, array('title'=>'Оповищения'));
        
     ?>
 <!-- <header class="header">
