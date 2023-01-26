@@ -1,5 +1,3 @@
-?>
-
 <?php
 
 ///////////////////////////////// Тема комментария ////////////////////////////////////
@@ -85,13 +83,11 @@ function my_theme_comment($comment, $args, $depth ) {
 			</div>
 		</div>
 
-<?php
-}
-///////////////////////////////// Тема комментария ////////////////////////////////////
 
+<?php }?>
 
+<?php  ?>
 
-?>
 
 <div class="materials__comments comments">
 
@@ -124,11 +120,19 @@ function my_theme_comment($comment, $args, $depth ) {
 			</div>
 
 			<?php 
-				$course_item = (array)LP_Global::course_item();
-				$course_id = array_values( (array) array_values($course_item)[5])[1];
 				// echo '<pre>';
-				// print_r(array_values( (array) array_values($course_item)[5])[1] );
+				// print_r((array)LP_Global::course_item());
 				// echo '</pre>';
+
+				$course_item = (array)LP_Global::course_item();
+
+				if ($course_item!=[]){
+				
+					$course_id = array_values( (array) array_values($course_item)[5])[1];
+				}else{
+					$course_id = $course->get_id();
+				}
+				
 
 				
 
@@ -170,10 +174,7 @@ function my_theme_comment($comment, $args, $depth ) {
 						'format'               => 'xhtml',
 					];
 
-				comment_form($defaults); ?>
-			
-			
-			<?php
+				comment_form($defaults); 
 
 			$args = array(            
 	            'meta_key'            => 'comment_frome_key',

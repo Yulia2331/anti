@@ -29,7 +29,7 @@ if ( empty( $is_block_theme ) ) {
 
 ?>
 
-</div></div>
+
 
 <section class="materials padding-left">
 
@@ -59,14 +59,13 @@ learn_press_get_template( 'content-single-course' );
 
 
 
-<div class="d-flex flex-column flex-root" style="">
-<div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
 
 
 
 
 
-<?
+
+<?php
 if (mydebbug()){
     echo '<div style="display: block;background-color: red;width: 300px;padding: 20px;"> ---> single-course.php </div>';
     echo '<!--/////////////////////////////////////////////////////////////////////////////////////////////////////-->';
