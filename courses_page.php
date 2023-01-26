@@ -14,39 +14,39 @@ if (mydebbug()){
 </style>
 <div class="content d-flex flex-column flex-column-fluid padding-left" id="kt_content">
 						
+    <div class="banner-swiper swiper mb-9 swiper-initialized swiper-horizontal swiper-pointer-events swiper-backface-hidden">
+        <div class="swiper-wrapper">
+            <?php
+				$posts = get_posts( array(
+				'numberposts' => -1,
+				'category_name'    => '',
+				'orderby'     => 'date',
+				'order'       => 'DESC',
+				'include'     => array(),
+				'exclude'     => array(),
+				'meta_key'    => '',
+				'meta_value'  =>'',
+				'post_type'   => 'lp_course',
+				'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
+			) );
 
-                        <div class="swiper-wrapper">
-                                    <?php
-							$posts = get_posts( array(
-							'numberposts' => -1,
-							'category_name'    => '',
-							'orderby'     => 'date',
-							'order'       => 'DESC',
-							'include'     => array(),
-							'exclude'     => array(),
-							'meta_key'    => '',
-							'meta_value'  =>'',
-							'post_type'   => 'lp_course',
-							'suppress_filters' => true, // подавление работы фильтров изменения SQL запроса
-						) );
-
-						foreach( $posts as $post ){
-							setup_postdata($post);
-							?>
-                            <div class="banner-swiper__slide swiper-slide">
-                                        <div class="overflow w-100 h-100"></div>
-                                            <div class="banner-swiper__content">
-                                                <h1 class="banner-swiper__title"><?php the_title(); ?></h1>
-                                                <span class="banner-swiper__autor"><?php the_field('curs_author'); ?></span>
-                                                <p class="banner-swiper__descr"><?php the_field('curs_descr'); ?></p>
-                                            </div>
-                                            <img src="<?php the_field('curs_poster'); ?>" alt="Обложка курса">
-                                            <a href="<?php echo get_home_url(); ?>/course_sing?id=<?php the_id(); ?>" class="banner-swiper__btn btn btn-sm btn-danger">Перейти к курсу</a>
-                                        </div>
-                                        	<?php }
-									wp_reset_postdata();
-									?>
-                                    </div>
+			foreach( $posts as $post ){
+				setup_postdata($post);
+				?>
+                <div class="banner-swiper__slide swiper-slide">
+                    <div class="overflow w-100 h-100"></div>
+                        <div class="banner-swiper__content">
+                            <h1 class="banner-swiper__title"><?php the_title(); ?></h1>
+                            <span class="banner-swiper__autor"><?php the_field('curs_author'); ?></span>
+                            <p class="banner-swiper__descr"><?php the_field('curs_descr'); ?></p>
+                        </div>
+                        <img src="<?php the_field('curs_poster'); ?>" alt="Обложка курса">
+                        <a href="<?php echo get_home_url(); ?>/course_sing?id=<?php the_id(); ?>" class="banner-swiper__btn btn btn-sm btn-danger">Перейти к курсу</a>
+                    </div>
+            <?php }
+				wp_reset_postdata();
+			?>
+        </div>
 										
 								
 
@@ -96,5 +96,6 @@ if (mydebbug()){
 						</div>
 						<!--end::Post-->
 					</div>
+                </div>
 
 <?php get_footer() ?>
