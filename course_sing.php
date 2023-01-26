@@ -63,7 +63,7 @@ $course = learn_press_get_course();
                     </div>
                 </div>
                 
-                <div class="module-block__add">
+                <!-- <div class="module-block__add">
                   <div class="module-block__add-message"> 
                     <input class="module-block__input" type="text" placeholder="Написать сообщение">
                     <button class="module-block__send">
@@ -75,7 +75,7 @@ $course = learn_press_get_course();
                     <input type="file" id="open-file" accept=".pdf,.rar,.zip">
                     <button class="module-block__btn secondary__button">Загрузить файл</button>
                   </div>
-                </div>
+                </div> -->
 
                 <div class="card__reviews reviews">
                     <?php

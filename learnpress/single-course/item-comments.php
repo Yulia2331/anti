@@ -14,7 +14,8 @@ defined( 'ABSPATH' ) || exit;
 
 
 
-if ( comments_open() || get_comments_number() ) {
+//if ( comments_open() || get_comments_number() ) {
+if ( comments_open() ) {
 	
 	?>
 	<div id="learn-press-item-comments">

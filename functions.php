@@ -637,7 +637,7 @@ function my_notifications(){
 
 //debug
 function mydebbug(){
-	$mydebug=false;
+	$mydebug=true;
 	if ($mydebug) {
 		return true;
 	}
