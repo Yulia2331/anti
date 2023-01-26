@@ -1387,7 +1387,7 @@
   padding-top: 30px;
   padding-right: 30px;
   padding-bottom: 30px;
-  min-height: 100vh;
+  /*min-height: 100vh;*/
 }
 
 .materials__wrapper {
