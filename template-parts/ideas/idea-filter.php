@@ -120,17 +120,21 @@
                   <div class="select__icon"><i class="fa-solid fa-angle-down"></i></div>
                 </div>
                 <div class="select__body"> 
+                  <label for="sort_date_desc" class="select__item">
+                    <input id="sort_date_desc" type="radio" name="filter_sort_date"  value="DESC" class="select__item-radio">
+                    <span class="rating__number">Дате (сначала новые)</span>
+                  </label> 
                   <label for="sort_date" class="select__item">
-                    <input id="sort_date" type="radio" name="filter_sort"  value="date" class="select__item-radio">
-                    <span class="rating__number">Дате</span>
+                    <input id="sort_date" type="radio" name="filter_sort_date"  value="ASC" class="select__item-radio">
+                    <span class="rating__number">Дате (сначала старые)</span>
                   </label> 
-                  <label for="sort_rating" class="select__item">
-                    <input id="sort_rating" type="radio" name="filter_sort"  value="rating" class="select__item-radio">
-                    <span class="rating__number">Рейтингу</span>
+                  <label for="sort_rating_desc" class="select__item">
+                    <input id="sort_rating_desc" type="radio" name="filter_sort"  value="DESC" class="select__item-radio">
+                    <span class="rating__number">Рейтинг (по убыванию)</span>
                   </label> 
-                  <label for="sort_title" class="select__item">
-                    <input id="sort_title" type="radio" name="filter_sort"  value="title" class="select__item-radio">
-                    <span class="rating__number">Алфавиту</span>
+                  <label for="sort_rating_asc" class="select__item">
+                    <input id="sort_rating_asc" type="radio" name="filter_sort"  value="ASC" class="select__item-radio">
+                    <span class="rating__number">Рейтинг (по возрастанию)</span>
                   </label> 
                 </div>
               </div>

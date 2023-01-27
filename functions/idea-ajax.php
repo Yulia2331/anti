@@ -217,11 +217,26 @@ add_action('wp_ajax_myfilter', 'myfilter');
 add_action('wp_ajax_nopriv_myfilter', 'myfilter');
 
 function myfilter() { 
+	$d;
+	$o;
+	if($_POST[ 'filter_sort_date' ]){
+		$d = 'date';
+		$o = $_POST[ 'filter_sort_date' ];
+	};
+	if($_POST[ 'filter_sort' ]){
+		$d = 'meta_value_num';
+		$o = $_POST[ 'filter_sort' ];
+	};
  $args = array(	
 	'post_type' => 'ideas',
-	'orderby' => $_POST[ 'filter_sort' ], // сортировка по дате у нас будет в любом случае (но вы можете изменить/доработать это)
-	'order'	=> 'DESC', // ASC или DESC
 	'author' => $_POST[ 'filter_author' ],
+	'orderby' => $d, // сортировка по дате у нас будет в любом случае (но вы можете изменить/доработать это)
+	'order'	=> $o, // ASC или DESC
+	'meta_query' => array(
+		array(
+			'key' => 'average_rating',
+		)
+	)
 );
 // для таксономий
 if( isset( $_POST[ 'filter_cat' ] )) {
