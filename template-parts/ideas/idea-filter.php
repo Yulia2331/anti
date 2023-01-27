@@ -17,7 +17,6 @@
   add_post_meta( $i_id, 'author_city', $meta, true);
   $m = get_post_meta( $i_id, 'author_city', true);
   array_push($author_city, $m);
-  // update_post_meta($i_id, 'av_city', $meta);
   endwhile;
   } else {
   echo 'Ничего не найдено';

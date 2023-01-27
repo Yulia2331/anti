@@ -141,10 +141,12 @@ function theme_name_scripts() {
 	wp_enqueue_style( 'assignments', get_template_directory_uri() . '/assets/css/assignments/my-assignments.min.css' );	
 	wp_enqueue_style( 'new-style', get_template_directory_uri() . '/assets/css/style.min.css' );
 	
-	wp_enqueue_style( 'all-ideas', get_template_directory_uri() . '/assets/css/ideas/all-ideas.min.css' );
-	wp_enqueue_style( 'general', get_template_directory_uri() . '/assets/css/general.css' );
-	wp_enqueue_style( 'my-reviews', get_template_directory_uri() . '/assets/css/ideas/my-reviews.min.css' );
-	wp_enqueue_style( 'tracked-ideas', get_template_directory_uri() . '/assets/css/ideas/tracked-ideas.min.css' );
+
+	wp_enqueue_style( 'general', get_template_directory_uri() . '/assets/css/general.min.css' );
+	wp_enqueue_style( 'my-style-idea', get_template_directory_uri() . '/assets/css/ideas/my-style-idea.css' );
+	// wp_enqueue_style( 'all-ideas', get_template_directory_uri() . '/assets/css/ideas/all-ideas.min.css' );
+	// wp_enqueue_style( 'my-reviews', get_template_directory_uri() . '/assets/css/ideas/my-reviews.min.css' );
+	// wp_enqueue_style( 'tracked-ideas', get_template_directory_uri() . '/assets/css/ideas/tracked-ideas.min.css' );
 	//wp_enqueue_script( 'font-js', 'https://kit.fontawesome.com/72a41cb45f.js?_v=20221228185850', array(), '1.0.0', true );
 	//<script src="https://kit.fontawesome.com/72a41cb45f.js?_v=20221228185850" crossorigin="anonymous"></script>
 
@@ -159,8 +161,6 @@ function theme_name_scripts() {
 	wp_enqueue_script( 'ideas-app', get_template_directory_uri() . '/assets/js/ideas/app.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'ideas-nav', get_template_directory_uri() . '/assets/js/ideas/navigation.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'ideas-counts', get_template_directory_uri() . '/assets/js/ideas/counts.js', array(), '1.0.0', true );
-	// wp_enqueue_script( 'ideas-rating', get_template_directory_uri() . '/assets/js/ideas/rating.js', array(), '1.0.0', true );
-	wp_enqueue_script( 'ideas-select', get_template_directory_uri() . '/assets/js/ideas/select.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'ideas-ajax', get_template_directory_uri() . '/assets/js/ideas/ajax-idea.js', array(), '1.0.0', true );
 	if (is_page(array(252,311))){
 	wp_enqueue_style( 'fullcalendar.bundle.css', get_template_directory_uri() . '/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css' );

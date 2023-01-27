@@ -271,3 +271,63 @@ try{
     }
   })
 } catch { }
+try{
+  document.addEventListener('click', (e) => {
+    if(e.target.classList.contains('comments__button')){
+      e.preventDefault();
+      let self = e.target.closest('.comments__add');
+      let id = self.querySelector('.comments__input_par').value;
+      let postId = self.querySelector('.comments__input_pid').value;
+      let text = self.querySelector('.comments__input').value;
+      let msgWrapp = e.target.closest('.comments__wrapper').querySelector('.comments__add_msg');
+      e.target.disabled = true;
+      $.ajax({ 
+        data: {
+        action: 'answ_idearev', 
+        postId: postId,
+        id: id,
+        text: text
+      },
+       type: 'post',
+       url: '/wp-admin/admin-ajax.php',
+       beforeSend: function( xhr ) {
+        msgWrapp.innerText = 'Публикация...';	
+			},
+      error: function (request, status, error) {
+        msgWrapp.innerText = error;	
+        e.target.disabled = false;
+},
+       success: function(data) {
+        msgWrapp.innerText = 'Опубликованно!';	
+        self.reset();
+        e.target.disabled = false;
+      }
+      });
+    }
+  })
+} catch { }
+try{
+  document.addEventListener('click', (e) => {
+    if(e.target.classList.contains('main-comment__button')){
+      let par = e.target.closest('.comments__block');
+      let val = par.dataset.subcommid;
+      let name = par.querySelector('.main-comment__firstname').textContent;
+      let blockPar = par.closest('.comment-idea');
+      blockPar.querySelector('.comments__input_par').value = val;
+      blockPar.querySelector('.comments__input').value = name + ',';
+    }
+  })
+} catch { }
+try{
+  document.addEventListener('click', (e) => {
+    if(e.target.classList.contains('sub-comment__button')){
+      let par = e.target.closest('.comments__block');
+      let val = par.dataset.subcommid;
+      let name = par.querySelector('.sub-comment__firstname').textContent;
+      let blockPar = par.closest('.comment-idea');
+      console.log(val);
+      blockPar.querySelector('.comments__input_par').value = val;
+      blockPar.querySelector('.comments__input').value = name + ',';
+    }
+  })
+} catch { }

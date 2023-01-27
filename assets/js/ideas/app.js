@@ -132,3 +132,55 @@ try{
    per.insertAdjacentHTML('beforeEnd', html);
   });
 } catch {}
+document.addEventListener('click', (e) => {
+  if(e.target.classList.contains('reviews-idea__comment')){
+    let par = e.target.closest('.reviews-idea__item');
+    let comWr = par.querySelector('.comment-idea');
+    comWr.classList.add('active');
+
+  }
+})
+document.addEventListener('click', (e) => {
+  if(e.target.classList.contains('comment-idea__back')){
+    let par = e.target.closest('.comment-idea');
+    par.classList.remove('active');
+
+  }
+})
+// const btnComment = document.querySelectorAll('.reviews-idea__comment')
+// const backComment = document.querySelectorAll('.comment-idea__back')
+// const vommentIdea = document.querySelectorAll('.comment-idea')
+
+// btnComment.forEach(btn => {
+//   btn.addEventListener('click', e => {
+//     const target = e.target
+//     const path = target.dataset.btncomment
+
+//     document.querySelectorAll('.view-idea').forEach(idea => {
+//       idea.classList.remove('active')
+//     })
+
+//     hidden.classList.remove('active');
+
+//     document.querySelectorAll(`[data-vievcomment="${path}"]`).forEach(comment => {
+//       comment.closest('.comment-idea').classList.add('active')
+//     })
+//   })
+// })
+
+// backComment.forEach(back => {
+//   back.addEventListener('click', e => {
+//     const target = e.target
+//     const path = target.dataset.backcomment
+//     console.log(path)
+
+//     vommentIdea.forEach(el => {
+//       el.classList.remove('active')
+//     })
+
+//     hidden.classList.add('active');
+//     document.querySelectorAll(`[data-idea="${path}"]`).forEach(idea => {
+//       idea.closest('.view-idea').classList.add('active')
+//     })
+//   })
+// })

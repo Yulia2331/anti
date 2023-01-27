@@ -1,0 +1,244 @@
+.idea__avatar{
+    height: 50px;
+    width: 50px;
+    overflow: hidden;
+    border-radius: 100%;
+}
+.idea__avatar img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.select{
+    position: relative;
+    padding: 0;
+}
+.select__header{
+    padding: 7px 10px;
+    cursor: pointer;
+}
+.select__body{
+    top: 29px;
+    position: absolute;
+    background: #f5f5f5;
+    width: 100%;
+    padding: 0 10px;
+    padding-top: 20px;
+    box-shadow: 0px 10px 30px rgba(48, 48, 48, 0.13);
+    border-radius: 6px;
+}
+/* .select__item{
+    margin-bottom: 10px;
+    cursor: pointer;
+    display: block;
+}
+.select__item:hover{
+    color:#303030;
+} */
+.select-active .select__body{
+    display: block;
+}
+.select__item-radio{
+    display: none;
+}
+.create-reviews{
+    overflow: auto;
+    z-index: 210;
+}
+.idea__name{
+    display: block;
+}
+.create-reviews__num{
+    width: 10px;
+    background: transparent;
+}
+.create-reviews__count-button span{
+    cursor: pointer;
+    display: block;
+}
+.create-reviews__num, .create-reviews__count-button span i{
+    pointer-events: none;
+}
+.create-reviews__less{
+    margin-top: 0;
+}
+.create-idea__plus{
+    cursor: pointer;
+}
+.create-idea__plus i{
+    color: #fff;
+    pointer-events: none;
+}
+.hide-inp{
+    display: none;
+}
+.create-idea__criteria{
+    border-radius: 6px;
+    background-color: #f5f5f5;
+    font-weight: 500;
+    line-height: 15px;
+    color: #bdbdbd;
+    padding: 10px;
+    width: 46%;
+}
+.select br{
+    display: none;
+}
+.view-idea{
+    top: 10%;
+}
+.create-reviews{
+    top: 10%;
+}
+.view-idea__trash i, .hypothesis__item_icon i{
+    pointer-events: none;
+}
+.my-idea__block{
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(206, 206, 206);
+    padding-bottom: 5px;
+}
+.my-idea__title{
+    display: block;
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 15px;
+    color: #303030;
+    margin-bottom: 3px;
+}
+.idea-sabscr{
+    background-color: #50CD89;
+}
+.filter__button-block{
+    flex-direction: column;
+    justify-content: space-between;
+}
+.filter__button:hover{
+    color: #fff;
+}
+.filter__apply{
+    width: 100%;
+    padding: 6px 15px;
+    background-color: #29afda;
+    color: #fff;
+    border-radius: 6px;
+    margin-bottom: 3px;
+}
+.custom-logo{
+    width: 140px !important;
+}
+.navigation-block, .navigation-block-close{
+    z-index: 10;
+}
+.close i{
+    pointer-events: none;
+}
+.tracked-ideas, .all-ideas, .reviews{
+    min-height: auto !important;
+}
+.single-idea-body{
+    position: relative;
+    background: #fff;
+    padding: 60px 40px;
+}
+.single-idea-body .view-idea__trash {
+    top: 20px;
+}
+.board-ideas__wrapper, .reviews__wrapper{
+    min-height: 65vh;
+}
+.single-idea__wrap{
+    min-height: 85vh;
+}
+.view-idea__info{
+    position: relative;
+}
+.msg-form{
+    position: absolute;
+    bottom: -210px;
+    right: 0;
+    z-index: 20;
+    background: #f5f5f5;
+    padding: 20px;
+    display: none;
+}
+.msg-btn{
+    display: block;
+    margin-top: 10px;
+}
+.response-msg{
+    display: block;
+    margin-top: 5px;
+}
+.filter__rating-choice .select__item-radio{
+    display: block;
+    margin-right: 2px;
+    transform: scale(.9);
+}
+.msg-form .create-reviews__message{
+    padding: 8px;
+}
+.navigation__item{
+    margin: 0;
+    padding: 10px 5px;
+}
+.navigation__item:not(:last-child){
+    margin-bottom: 0;
+}
+.private-messages{
+    position: absolute;
+    background: #fff;
+    padding: 20px;
+    border-radius: 0.475rem;
+    background-color: #ffffff;
+    box-shadow: 0px 0px 50px 0px rgb(82 63 105 / 15%);
+    top: 60px;
+    right: 130px;
+    display: none;
+    max-width: 240px;
+}
+.private-messages__text{
+    margin-top: 15px;
+    font-size: 14px;
+}
+.private-messages__item{
+    border-bottom: 1px solid rgb(157, 157, 157);
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+}
+.general-function__button i{
+    pointer-events: none;
+}
+.rating__button{
+    display: flex;
+}
+.create-comment-idea{
+    display: block;
+}
+.container-idea{
+    top: auto;
+    padding: 45px;
+    align-items: flex-start;
+    height: auto;
+}
+.comment-idea__back{
+    top: -37px;
+}
+.main-comment__data{
+    text-transform: lowercase;
+}
+.main-comment__avatar img{
+    height: 40px;
+    object-fit: cover;
+}
+.sub-comment__avatar img{
+    height: 25px;
+    object-fit: cover;
+}
+.comments__add_msg{
+    display: block;
+    margin-bottom: 5px;
+}
+.active{
+    display: block;
+}

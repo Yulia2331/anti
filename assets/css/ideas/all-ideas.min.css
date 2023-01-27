@@ -80,6 +80,7 @@
     line-height: 15px;
     color: #bdbdbd;
     padding: 10px;
+    width: 46%;
 }
 .select br{
     display: none;
@@ -93,13 +94,18 @@
 .view-idea__trash i, .hypothesis__item_icon i{
     pointer-events: none;
 }
+.my-idea__block{
+    margin-bottom: 10px;
+    border-bottom: 1px solid rgb(206, 206, 206);
+    padding-bottom: 5px;
+}
 .my-idea__title{
     display: block;
     font-weight: 500;
     font-size: 12px;
     line-height: 15px;
     color: #303030;
-    margin-bottom: 15px;
+    margin-bottom: 3px;
 }
 .idea-sabscr{
     background-color: #50CD89;

@@ -156,6 +156,10 @@ $row = array(
 	    'field_63c3c54589bb2'   => $post_id,
 	  );
 	  add_row('field_63c3c51689bb1', $row, 'user_'.$user_id);
+$sbc = array(
+	    'field_63d233373622f'   => $user_id,
+	  );
+	  add_row('field_63d232dc3622e', $sbc, $post_id);
 
 wp_die(); 
 }
@@ -174,6 +178,17 @@ function unsubscribe_idea() {
 		if (in_array($post_id,$sub['id_subscribes_idea'])){
 			$row = get_row_index();
 			delete_row('field_63c3c51689bb1', $row, 'user_'.$user_id);
+		}
+	  }
+}
+if (have_rows('subscribes_idea_post', $post_id)){
+	the_row();
+	$subs = get_field('subscribes_idea_post', $post_id);
+	foreach($subs as $sub){
+            
+		if (in_array($user_id,$sub['subscriber_id_post'])){
+			$row = get_row_index();
+			delete_row('field_63d232dc3622e', $row, $post_id);
 		}
 	  }
 }
@@ -239,6 +254,34 @@ endwhile;
 } else {
 echo 'Ничего не найдено';
 }
+
+wp_die(); 
+}
+add_action('wp_ajax_answ_idearev', 'answ_idearev');
+add_action('wp_ajax_nopriv_answ_idearev', 'answ_idearev');
+
+function answ_idearev()
+{  
+  $post_id = $_POST['postId'];
+  $parent = $_POST['id'];
+  $comment = $_POST['text'];
+  $current_user_id = get_current_user_id();
+  $user       = get_userdata( $current_user_id );
+$user_email   = $user->user_email;
+$first_name = $user->first_name;
+$last_name  = $user->last_name;
+
+  $commentdata = [
+	'comment_post_ID'      => $post_id,
+	'comment_author'       => [ $first_name, $last_name],
+	'comment_author_email' => $user_email,
+	'comment_content'      =>  $comment,
+	'comment_type'         => 'comment',
+	'user_ID'              => $current_user_id,
+	'comment_parent'       => $parent,
+];
+
+wp_new_comment( $commentdata );
 
 wp_die(); 
 }
