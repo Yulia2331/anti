@@ -1703,7 +1703,7 @@
 
 .download__title div {
   margin-right: 10px;
-  color: #ff0000;
+  color: #ff0000 !important;
 }
 
 .download__wrapper {

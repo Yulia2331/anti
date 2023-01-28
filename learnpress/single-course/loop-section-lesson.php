@@ -15,10 +15,12 @@ if (mydebbug()){
 
 
 $active = '';
+$marker_down = '';
+
 
 ?>
 
-<li class="navigation__item" >
+<li class="navigation__item" style="padding: 10px 25px !important;" >
     <button class="navigation__button" data-value="module-<?php echo $section->get_id();?>">
       <div class="navigation__block nav-structure__header">
         <div class="navigation__link-name nav-structure__name">
@@ -27,16 +29,16 @@ $active = '';
           	<?php
 							$title = $section->get_title();
 							echo wp_kses_post( ! $title ? _x( 'Untitled', 'template title empty', 'learnpress' ) : $title );
+
+							
+
+
+							if ( $user->has_enrolled_or_finished( $section->get_course_id() ) ) : 
+                $percent = $user_course->get_percent_completed_items( '', $section->get_id() );
+            	endif; 
 						?>
 
-          </p>
-        </div>
-        <div class="navigation__marker" data-marker="module-<?php echo $section->get_id();?>"><i class="fa-solid fa-angle-right"></i></div>
-      </div>
-      <div class="nav-structure__progress progress">
-        <div class="progress__line"></div>
-      </div>
-    </button>
+          
 
     <?php  
     // echo $section->get_id();
@@ -72,11 +74,23 @@ $active = '';
 
 				if($item_link == 'http://localhost:8000/'.$wp->request){
 					$active = 'active-flex';
+					$marker_down = 'marker-down';
 				}	
 				
 			}
 
 		?>
+
+			</p>
+        </div>
+        <div class="navigation__marker <?php echo $marker_down;?>" data-marker="module-<?php echo $section->get_id();?>"><i class="fa-solid fa-angle-right"></i></div>
+      </div>
+      <div class="nav-structure__progress progress">
+        <div class="progress__line" style="width:<?php echo $percent; ?>%;"></div>
+      </div>
+    </button>
+
+
 			<div class="navigation__sub-menu nav-structure__submenu <?php echo $active;?>" data-target="module-<?php echo $section->get_id();?>">
 		<?php
 

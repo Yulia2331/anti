@@ -35,13 +35,9 @@ $item = LP_Global::course_item();
                 $percent = $user_course->get_percent_completed_items( '', array_values((array)$item)[5]->get_id() );
                 $arr_completed_items = $user_course->get_completed_items( '',true, array_values((array)$item)[5]->get_id());
 
-                $user_items = array_values((array)$item)[5];
-                $val_items = count(array_values((array)$user_items)[6]['items']);
-
-                //echo '<pre>';
-                //print_r($user_course->get_completed_items( '',true, array_values((array)$item)[5]->get_id() ));
-                //echo '</pre>';
-                //do_action( 'learnpress/single-course/section-header/after', $section ); 
+                // $user_items = array_values((array)$item)[5];
+                // $val_items = count(array_values((array)$user_items)[6]['items']);
+                
             endif; 
         ?>
         <div class="structure__progress"> 

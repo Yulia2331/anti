@@ -50,8 +50,8 @@ $user_info = get_userdata(get_current_user_id());
  
           <button class="navigation-block__button"> <i class="fa-solid fa-angles-left"></i></button>
         </div>
-        <div class="navigation-block__body">
-          
+
+        <div class="navigation-block__body" style="padding: 30px 0px !important;">          
 
           <nav class="navigation-block__pages navigation">
             <ul class="navigation__list">
