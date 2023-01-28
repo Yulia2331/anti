@@ -574,6 +574,14 @@ add_action(	'custom_content_single_meta',LearnPress::instance()->template( 'cour
 add_action(	'custom_content_single_tab',LearnPress::instance()->template( 'course' )->callback( 'single-course/tabs/tabs' ),60);
 add_action( 'custom_content_single',LearnPress::instance()->template( 'course' )->func( 'course_comment_template' ), 75 );
 
+// хук для уроков
+//add_action( 'custom_single-item-summary', LearnPress::instance()->template( 'course' )->func( 'popup_header' ), 10 );
+//add_action( 'custom_single-item-summary', LearnPress::instance()->template( 'course' )->func( 'popup_sidebar' ), 20 );
+add_action( 'custom_single-item-summary', LearnPress::instance()->template( 'course' )->func( 'popup_content' ), 30 );
+add_action( 'custom_single-item-summary', LearnPress::instance()->template( 'course' )->func( 'popup_footer' ), 40 );
+
+
+
 // добовляем мета поле комментариев для напровления комметария
 add_action( 'comment_post', 'add_comment_frome_field' );
 function add_comment_frome_field( $comment_id ) {
@@ -637,7 +645,7 @@ function my_notifications(){
 
 //debug
 function mydebbug(){
-	$mydebug=true;
+	$mydebug=false;
 	if ($mydebug) {
 		return true;
 	}

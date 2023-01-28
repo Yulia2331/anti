@@ -1,4 +1,8 @@
 <?php
+if (mydebbug()){
+    echo '---> item-lesson.php';
+}
+
 /**
  * Template for displaying lesson item section in single course.
  *

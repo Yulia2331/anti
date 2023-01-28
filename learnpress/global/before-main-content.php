@@ -40,7 +40,7 @@ defined( 'ABSPATH' ) || exit();
 
 
 
-	<div id="lp-archive-courses" class="lp-archive-courses">
+	<div id="lp-archive-courses" class="lp-archive-courses ">
 
 		<?php 
 		

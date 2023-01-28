@@ -1,4 +1,7 @@
 <?php
+if (mydebbug()){
+	echo '--->popup-sidebar.php';
+}
 /**
  * Template for displaying course currciulum in popup
  *
@@ -10,7 +13,7 @@
 defined( 'ABSPATH' ) || exit;
 ?>
 
-<div id="popup-sidebar">
+<div id="popup-sidebar" >
 	<form method="post" class="search-course">
 		<input type="text" name="s" autocomplete="off" placeholder="<?php echo esc_attr_x( 'Search for course content', 'search course input placeholder', 'learnpress' ); ?>">
 		<button name="submit"></button>

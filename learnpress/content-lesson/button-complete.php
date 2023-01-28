@@ -52,7 +52,7 @@ if ( $completed ) :
 		<input type="hidden" name="type" value="lp_lesson"/>
 		<input type="hidden" name="lp-ajax" value="complete-lesson"/>
 		<input type="hidden" name="noajax" value="yes"/>
-		<button class="lp-button button button-complete-item button-complete-lesson lp-btn-complete-item">
+		<button class="button-main lp-button button button-complete-item button-complete-lesson lp-btn-complete-item">
 			<?php echo esc_html__( 'Complete', 'learnpress' ); ?>
 		</button>
 

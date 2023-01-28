@@ -116,6 +116,9 @@ function my_theme_comment($comment, $args, $depth ) {
 					}
 
 					//print_r($frome_to);
+					
+					//echo $post->ID;
+					//print_r($post);
 				?>			
 			</div>
 
@@ -174,36 +177,39 @@ function my_theme_comment($comment, $args, $depth ) {
 						'format'               => 'xhtml',
 					];
 
-				comment_form($defaults); 
+				comment_form($defaults);
 
-			$args = array(            
-	            'meta_key'            => 'comment_frome_key',
-	            'meta_value'          => 'all',            
-	          	);
+				global $post;
+				
+				$args = array( 
+					'post_id'             => $post->ID,
+		            'meta_key'            => 'comment_frome_key',
+		            'meta_value'          => 'all',            
+		          	);
 
 
-			//if ( have_comments() ) : 
-			if( $comments = get_comments( $args ) ):
-				wp_list_comments( array(
-					'walker'            => null,
-					'max_depth'         => 10,
-					'style'             => 'div',
-					'callback'          => 'my_theme_comment',
-					'end-callback'      => null,
-					'type'              => 'comment',
-					'reply_text'        => 'Ответить',
-					'page'              => '',
-					'per_page'          => '',
-					'avatar_size'       => 32,
-					'reverse_top_level' => null,
-					'reverse_children'  => '',
-					'format'            => 'html5', // или xhtml, если HTML5 не поддерживается темой
-					'short_ping'        => false,    // С версии 3.6,
-					'echo'              => true,     // true или false
-						) );
+				//if ( have_comments() ) : 
+				if( $comments = get_comments( $args ) ):
+					wp_list_comments( array(
+						'walker'            => null,
+						'max_depth'         => 10,
+						'style'             => 'div',
+						'callback'          => 'my_theme_comment',
+						'end-callback'      => null,
+						'type'              => 'comment',
+						'reply_text'        => 'Ответить',
+						'page'              => '',
+						'per_page'          => '',
+						'avatar_size'       => 32,
+						'reverse_top_level' => null,
+						'reverse_children'  => '',
+						'format'            => 'html5', // или xhtml, если HTML5 не поддерживается темой
+						'short_ping'        => false,    // С версии 3.6,
+						'echo'              => true,     // true или false
+							) );
 
-				//wp_list_comments('type=comment&callback=my_theme_comment');
-			?>	
+					//wp_list_comments('type=comment&callback=my_theme_comment');
+				?>	
 		</div>
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>

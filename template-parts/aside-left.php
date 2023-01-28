@@ -2,6 +2,8 @@
 
 $user_info = get_userdata(get_current_user_id());
 
+
+
 ?>
     <section class="navigation-block-close">
       <div class="navigation-block-close__header">
@@ -36,6 +38,7 @@ $user_info = get_userdata(get_current_user_id());
         </nav>
       </div>
     </section>
+
     <section class="navigation-block">
       <div class="navigation-block__wrapper"> 
       
@@ -48,6 +51,8 @@ $user_info = get_userdata(get_current_user_id());
           <button class="navigation-block__button"> <i class="fa-solid fa-angles-left"></i></button>
         </div>
         <div class="navigation-block__body">
+         
+
           <nav class="navigation-block__pages navigation">
             <ul class="navigation__list">
               <li class="navigation__item <?php echo (is_author())?'here':'' ?>"><a class="navigation__link" href="<?php echo home_url(); ?>/author/<?php echo $user_info->user_nicename ?>">

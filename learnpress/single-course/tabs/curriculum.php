@@ -1,4 +1,8 @@
 <?php
+
+if (mydebbug()){
+	echo '--->curriculum.php';
+}
 /**
  * Template for displaying curriculum tab of single course.
  *
@@ -23,8 +27,8 @@ if ( ! $course || ! $user ) {
 $can_view_content_course = $user->can_view_content_course( $course->get_id() );
 ?>
 
-<div class="course-curriculum" id="learn-press-course-curriculum">
-	<div class="curriculum-scrollable">
+<!-- <div class="course-curriculum" id="learn-press-course-curriculum">
+	<div class="curriculum-scrollable"> -->
 
 		<?php do_action( 'learn-press/before-single-course-curriculum' ); ?>
 
@@ -35,7 +39,7 @@ $can_view_content_course = $user->can_view_content_course( $course->get_id() );
 
 		if ( $curriculum ) :
 			?>
-			<ul class="curriculum-sections">
+			<!-- <ul class="curriculum-sections v1"> -->
 				<?php
 				foreach ( $curriculum as $section ) {
 					$args = [
@@ -48,7 +52,7 @@ $can_view_content_course = $user->can_view_content_course( $course->get_id() );
 					learn_press_get_template( 'single-course/loop-section.php', $args );
 				}
 				?>
-			</ul>
+			<!-- </ul> -->
 
 		<?php else : ?>
 			<?php
@@ -63,5 +67,5 @@ $can_view_content_course = $user->can_view_content_course( $course->get_id() );
 
 		<?php do_action( 'learn-press/after-single-course-curriculum' ); ?>
 
-	</div>
-</div>
+<!-- 	</div>
+</div> -->

@@ -43,13 +43,22 @@ global $wp;
 
 $arr = explode('/', home_url( $wp->request ));
 
+
+// смотрим где показываем
 if (isset($arr[5])!=true){	
 	include 'loop-section-new.php';
-}else{
+}
+else{
+	include 'loop-section-lesson.php';
+}
 
+
+//старая гармонь !)
+if (false){
 ?>
 
-<li <?php $section->main_class(); ?>
+
+<li <?php $section->main_class(); ?> 
 	id="section-<?php echo esc_attr( $section->get_slug() ); ?>"
 	data-id="<?php echo esc_attr( $section->get_slug() ); ?>"
 	data-section-id="<?php echo esc_attr( $section->get_id() ); ?>">

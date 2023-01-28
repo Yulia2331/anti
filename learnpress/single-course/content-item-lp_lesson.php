@@ -17,63 +17,56 @@ defined( 'ABSPATH' ) || exit();
 
 $item = LP_Global::course_item();
 ?>
+    <!-- Хедер урока -->
+    <div class="structure__header">
+        <div class="structure__title">
+            <?php do_action( 'learn-press/before-content-item-summary/' . $item->get_item_type() ); ?>
+        </div>
+        
 
-<div <?php learn_press_content_item_summary_class(); ?>>
+        <?php 
+            $user   = learn_press_get_current_user();
+            $user_course = $user->get_course_data( get_the_ID() );
+            echo '<pre>';
+            //print_r(array_values((array)$user_course));
+            echo '</pre>';
 
-	<?php
-	do_action( 'learn-press/before-content-item-summary/' . $item->get_item_type() );
+            if ( $user->has_enrolled_or_finished( $item->get_course_id() ) ) : 
+                $percent = $user_course->get_percent_completed_items( '', array_values((array)$item)[5]->get_id() );
+                $arr_completed_items = $user_course->get_completed_items( '',true, array_values((array)$item)[5]->get_id());
 
-	do_action( 'learn-press/content-item-summary/' . $item->get_item_type() );
+                $user_items = array_values((array)$item)[5];
+                $val_items = count(array_values((array)$user_items)[6]['items']);
 
-	do_action( 'learn-press/after-content-item-summary/' . $item->get_item_type() );
-
-    //echo get_post_meta($item->get_id(), 'comments_home_work', 1);
-    $files = explode('/*/',get_post_meta($item->get_id(), 'files_home_work', 1));
-    //print_r($files);
-    $date = explode('/',get_post_meta($item->get_id(), 'date_home_work', 1));
-    //print_r($date);
-	?>
-
-</div>
-
-<?php 
-    if (isset($files)){
+                //echo '<pre>';
+                //print_r($val_items);
+                //echo '</pre>';
+                //do_action( 'learnpress/single-course/section-header/after', $section ); 
+            endif; 
         ?>
-
-        <div class="structure__download download">
-            <div class="download__title"> 
-                <div class="container__icon--24"><i class="fa-solid fa-circle-exclamation"></i></div>Для вас есть домашнее задание
-            </div>
-            <div class="download__wrapper">
-              <div class="download__files"> 
-                <?php 
-                    foreach($files as $item){
-                        if ($item!=''){
-                            $name = explode(',',$item)[0];
-                            $file = explode(',',$item)[1];
-                            ?>
-                                <div class="download__item"> <a class="download__link" href="<?php echo $file;?>" download>
-                                    <div class="container__icon--18 download__icon"><i class="fa-solid fa-file"></i></div>
-                                    <div class="download__name"><?php echo $name; ?> </div></a>
-                                </div>
-                            <?php
-                        }
-                    }
-                ?>
-                <!-- <div class="download__item"> <a class="download__link" href="../../img/ava-1.png" download>
-                    <div class="container__icon--18 download__icon"><i class="fa-solid fa-file"></i></div>
-                    <div class="download__name">ava-1.png </div></a>
-                </div>
-                <div class="download__item"> <a class="download__link" href="../../img/ava-1.png" download>
-                    <div class="container__icon--18 download__icon"><i class="fa-solid fa-file"></i></div>
-                    <div class="download__name">ava-1.png </div></a>
-                </div> -->
-              </div>
-              <!-- <button class="secondary__button download__btn">Скачать файлы</button> -->
+        <div class="structure__progress"> 
+            <div class="structure__pas">Пройдено</div>
+            <div class="structure__value"><span><?php echo count($arr_completed_items);?></span>/<?php echo $val_items; ?></div>
+            <div class="progress">
+                <div class="progress__line" style="width:<?php echo $percent;?>%"></div>
             </div>
         </div>
 
-        <?php
-    }
-?>
+    </div>
+
+    <!-- Контент урока -->
+    <div class="structure__content content-video__review">
+	   <?php do_action( 'learn-press/content-item-summary/' . $item->get_item_type() ); ?>
+    </div>
+
+    <!-- Остольное урока -->
+    <!-- <button class="button-main">Завершить</button> -->
+
+
+
+	<?php do_action( 'learn-press/after-content-item-summary/' . $item->get_item_type() );?>
+
+
+
+
 
