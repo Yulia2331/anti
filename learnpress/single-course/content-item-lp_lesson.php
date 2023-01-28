@@ -39,14 +39,14 @@ $item = LP_Global::course_item();
                 $val_items = count(array_values((array)$user_items)[6]['items']);
 
                 //echo '<pre>';
-                //print_r($val_items);
+                //print_r($user_course->get_completed_items( '',true, array_values((array)$item)[5]->get_id() ));
                 //echo '</pre>';
                 //do_action( 'learnpress/single-course/section-header/after', $section ); 
             endif; 
         ?>
         <div class="structure__progress"> 
             <div class="structure__pas">Пройдено</div>
-            <div class="structure__value"><span><?php echo count($arr_completed_items);?></span>/<?php echo $val_items; ?></div>
+            <div class="structure__value"><span><?php echo $arr_completed_items[0];?></span>/<?php echo $arr_completed_items[1]; ?></div>
             <div class="progress">
                 <div class="progress__line" style="width:<?php echo $percent;?>%"></div>
             </div>
