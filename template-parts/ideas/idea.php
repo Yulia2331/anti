@@ -75,15 +75,19 @@ endif; ?>
             </div>
           <?  
           $pod = FALSE;
-          if( have_rows('subscribes_idea', 'user_'.$current_user_id) ):
-																			while ( have_rows('subscribes_idea', 'user_'.$current_user_id) ) : the_row();
-																			$sabscr_idea_id = get_sub_field('id_subscribes_idea', 'user_'.$current_user_id);
-                                      if((int)$sabscr_idea_id[0] == (int)$idea_id){
-                                        $pod = TRUE;
-                                        			break;
-                                      }
-																		endwhile;
-																		endif; 
+          if (have_rows('subscribes_idea', 'user_'.$current_user_id)){
+            $subs = get_field('subscribes_idea', 'user_'.$current_user_id);
+
+            
+            foreach($subs as $sub){
+              if (in_array($idea_id, $sub['id_subscribes_idea'])){
+                
+                $pod = TRUE;
+                break;
+              }
+              
+            }
+          }
                                     ?>
             <button class="idea__buton secondary__button <?php echo ($pod)?'idea-sabscr ':'no-sabscr' ?>" data-sabscr="<? echo $idea_id; ?>" data-user="<? echo $current_user_id ?>"><?php echo ($pod)?'Вы подписаны':'Подписаться' ?></button>
           </div>
@@ -216,7 +220,6 @@ if( $comments = get_comments( $args ) ){
             <div class="reviews-idea__footer"> 
               <button class="reviews-idea__comment">Комментировать</button>
               <? $b = get_comment_meta($com_id, '_liked', false);
-              print_r($b);
               $da = FALSE;
               if( in_array( $current_user_id, $b )){
                 $da = TRUE;

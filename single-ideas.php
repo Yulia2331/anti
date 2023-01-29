@@ -183,10 +183,16 @@ if( $comments = get_comments( $args ) ){
             </div>
             <div class="reviews-idea__footer"> 
              <button class="reviews-idea__comment">Комментировать</button>
-              <!-- <div class="reviews-idea__like"> 
-                <div class="reviews-idea__like_number">0</div>
+             <? $b = get_comment_meta($com_id, '_liked', false);
+              $da = FALSE;
+              if( in_array( $current_user_id, $b )){
+                $da = TRUE;
+              }
+              ?> 
+              <div class="reviews-idea__like <?php echo ($da)?'liked ':'' ?>" data-likeid="<? echo $com_id; ?>" data-count="" data-user="<? echo $current_user_id; ?>"> 
+                <div class="reviews-idea__like_number"><? echo count($b) ?></div>
                 <div class="reviews-idea__like_icon"><i class="fa-solid fa-heart"></i></div>
-              </div> -->
+              </div>
             </div>
             <div class="comment-idea" data-vievcomment="<? echo $com_id; ?>">
       <div class="container-idea">
