@@ -9,7 +9,7 @@ try {
      theRev.classList.add('active');
    }})
  } catch {}
-
+ try{
   document.addEventListener('click', (e) => {
    if (e.target.classList.contains('close ')) {
      hidden.classList.remove('active');
@@ -18,7 +18,52 @@ try {
       i.classList.remove('active');
     })
   }})
-
+} catch {}
+try{
+  const oo = document.querySelector('.create-idea__form');
+  oo.addEventListener('submit', (e) =>{
+    e.preventDefault();
+    let title = e.target.querySelector('#idea_title').value;
+    let cont = e.target.querySelector('.create-idea__textarea').value;
+    let tag = e.target.querySelector('input[name="idea_tag"]:checked').value;
+    let tax = e.target.querySelector('input[name="idea_cat"]:checked').value;
+    let date = new Date().toLocaleDateString();
+    let btn = e.target.querySelector('.create-idea__button');
+    let criterias = e.target.querySelectorAll('.create-idea__criteria');
+    let criteriasArr = [];
+    criterias.forEach((c) => {
+      let obj = {};
+      obj.val = c.value;
+      criteriasArr.push(obj);
+    })
+    btn.disabled = true;
+    $.ajax({ 
+       data: {
+        action: 'ideas_form', 
+        title: title,
+        cont: cont,
+        tag: tag,
+        tax: tax,
+        criteriasArr: criteriasArr
+      },
+       type: 'post',
+       url: '/wp-admin/admin-ajax.php',
+       beforeSend: function( xhr ) {
+				$('.create-idea__msg').text('Добавление идеи...');	
+			},
+      error: function (request, status, error) {
+        $('.create-idea__msg').text(error);
+        btn.disabled = false;	
+},
+       success: function(data) {
+        console.log(data);
+        $('.create-idea__msg').text('Идея добавлена');
+        btn.disabled = false;	
+        e.target.reset();
+      }
+  });
+  })
+} catch {}
 try{
   // const sabscrBtn = document.querySelectorAll('.no-sabscr');
   // sabscrBtn.forEach((i) => {
@@ -218,6 +263,7 @@ try{
 },
        success: function(data) {
         $('.reviews_msg').text('Отзыв добавлен');	
+        console.log(data);
         e.target.reset();
       }
       });
@@ -331,3 +377,33 @@ try{
     }
   })
 } catch { }
+document.addEventListener('click', (e) => {
+  if(e.target.closest('.reviews-idea__like')){
+    let self = e.target.closest('.reviews-idea__like');
+    let id = self.dataset.likeid;
+    let user = self.dataset.user;
+    let c = Number(self.querySelector('.reviews-idea__like_number').textContent);
+    $.ajax({ 
+      data: {
+      action: 'com_liked', 
+      id: id,
+      user: user
+    },
+     type: 'GET',
+     url: '/wp-admin/admin-ajax.php',
+success: function ( answer ) {
+  console.log(answer.data.action);
+  console.log(c);
+  if ( answer.data.action == 'add' ) {
+    self.classList.add( 'liked' );
+    c++;
+    self.querySelector('.reviews-idea__like_number').textContent = c;
+  } else {
+    self.classList.remove( 'liked' );
+    c--;
+    self.querySelector('.reviews-idea__like_number').textContent = c;
+  }
+ },
+    });
+  }
+})

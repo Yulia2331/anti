@@ -38,6 +38,18 @@ function ideas_form()
 	add_row('field_63c14f5ec5301', $row, $post_id);
  }
  add_post_meta( $post_id, 'average_rating', 0);
+
+ $idea_data = [
+	'post_type' => 'ideas_timeline',
+	'post_title'    => $title,
+	'post_content'  => '',
+	'post_status'   => 'publish',
+	'meta_input'    => [ 
+		'idea_action' => 'creation',
+		'idea_id' => $post_id,
+	  ],
+];
+$idea_timeline_id = wp_insert_post( $idea_data );
 wp_die(); 
 }
 
@@ -131,6 +143,7 @@ $args = array(
 	'count'               => false,
 	'date_query'          => null, // See WP_Date_Query
 	'hierarchical'        => false,
+	'parent'       => 0,
 	'update_comment_meta_cache'  => true,
 	'update_comment_post_cache'  => false,
 );
@@ -144,6 +157,18 @@ if( $comments = get_comments( $args ) ){
 	 $rating_all = ceil($ss/$ll);
 	 update_post_meta( $post_id, 'average_rating', $rating_all);
 
+	 $title = get_the_title( $post_id );
+	 $idea_data = [
+		'post_type' => 'ideas_timeline',
+		'post_title'    => $title,
+		'post_content'  => '',
+		'post_status'   => 'publish',
+		'meta_input'    => [ 
+			'idea_action' => 'review',
+			'idea_id' => $post_id,
+		  ],
+	];
+	$idea_timeline_id = wp_insert_post( $idea_data );
 wp_die(); 
 }
 add_action('wp_ajax_sabscr_idea', 'sabscr_idea');
@@ -160,7 +185,18 @@ $sbc = array(
 	    'field_63d233373622f'   => $user_id,
 	  );
 	  add_row('field_63d232dc3622e', $sbc, $post_id);
-
+	  $title = get_the_title( $post_id );
+	  $idea_data = [
+		'post_type' => 'ideas_timeline',
+		'post_title'    => $title,
+		'post_content'  => '',
+		'post_status'   => 'publish',
+		'meta_input'    => [ 
+			'idea_action' => 'subscription',
+			'idea_id' => $post_id,
+		  ],
+	];
+	$idea_timeline_id = wp_insert_post( $idea_data );
 wp_die(); 
 }
 
@@ -300,3 +336,27 @@ wp_new_comment( $commentdata );
 
 wp_die(); 
 }
+
+ add_action( 'wp_ajax_com_liked', 'com_liked' );
+ add_action( 'wp_ajax_nopriv_com_liked', 'com_liked' );
+
+ function com_liked(){
+	$com_id = $_GET[ 'id' ];
+	$user = $_GET[ 'user' ];
+	$liked = get_comment_meta(  $com_id, '_liked', false );
+	$action = '';
+	if ( in_array( $user, $liked ) ) {
+					// усли ставил, то удаляем лайк, и присваиваем соответствующий ответ для переменной $action
+					delete_comment_meta( $com_id, '_liked', $user );
+					$action = 'delete';
+				 } else {
+					// добавляем новый лайт и ответ в переменной $action
+					add_comment_meta( sanitize_key( $com_id ), '_liked', $user, false );
+					$action = 'add';
+				 }
+				 wp_send_json_success( array(
+					'action' => $action,
+					'count'  => count( get_post_meta(  $com_id, '_liked', false ) ),
+				 ) );
+	wp_die();
+ }

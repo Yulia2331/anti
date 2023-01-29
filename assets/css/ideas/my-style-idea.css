@@ -65,6 +65,8 @@
 }
 .create-idea__plus{
     cursor: pointer;
+    position: absolute;
+    right: 48px;
 }
 .create-idea__plus i{
     color: #fff;
@@ -80,8 +82,8 @@
     line-height: 15px;
     color: #bdbdbd;
     padding: 10px;
-    width: 46%;
 }
+
 .select br{
     display: none;
 }
@@ -239,6 +241,12 @@
 .comments__add_msg{
     display: block;
     margin-bottom: 5px;
+}
+.reviews-idea__like_icon i{
+    pointer-events: none;
+}
+.liked .reviews-idea__like_icon i{
+    color: red;
 }
 .active{
     display: block;

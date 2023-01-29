@@ -44,7 +44,7 @@ foreach ($subscribes as $sub){
 													'posts_per_page' => 10,
 													'paged' => $paged,
 													'post_status' => 'publish',
-													'post_type' => array('user_post', 'ideas'),
+													'post_type' => array('user_post', 'ideas_timeline'),
 													'orderby'   => array(
 														'date' =>'DESC',
 													)
@@ -60,7 +60,7 @@ foreach ($subscribes as $sub){
 													if($p == 'user_post'){
 														get_template_part('template-parts/user-post');
 													}
-													if($p == 'ideas'){
+													if($p == 'ideas_timeline'){
 														get_template_part('template-parts/user-idea-timeline');
 													}
 													// выведем заголовок поста

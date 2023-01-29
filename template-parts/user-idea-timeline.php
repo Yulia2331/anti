@@ -28,8 +28,19 @@ $current_id = $current_user -> ID
 					<a href = '/author/<?php echo  get_the_author_meta( 'nicename' ) ?>' class="author__name">
 					<?php echo get_the_author_meta( 'first_name' ) ?> <?php echo get_the_author_meta( 'last_name' ) ?> 
 					</a>
-					создал гипотезу
-					<a href="<? the_permalink(); ?>" style="font-weight: 600;">"<? the_title(); ?>"</a>
+					<? $action = get_post_meta( $id, 'idea_action', true ); 
+					if($action == 'creation'){
+						echo 'создал гипотезу';
+					}
+					if($action == 'review'){
+						echo 'оставил отзыв гипотезу';
+					}
+					if($action == 'subscription'){
+						echo 'подписался на гипотезу';
+					}
+					$link = get_post_meta( $id, 'idea_id', true );
+					?>
+					<a href="<? echo get_permalink( $link ); ?>" style="font-weight: 600;">"<? the_title(); ?>"</a>
 					</div>
 					
 					<div class="author__date">

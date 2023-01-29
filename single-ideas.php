@@ -141,6 +141,7 @@ $args = array(
 	'count'               => false,
 	'date_query'          => null, // See WP_Date_Query
 	'hierarchical'        => false,
+  'parent'       => 0,
 	'update_comment_meta_cache'  => true,
 	'update_comment_post_cache'  => false,
 );
@@ -181,12 +182,113 @@ if( $comments = get_comments( $args ) ){
               <div class="reviews-idea__content"><?php echo $comment->comment_content; ?></div>
             </div>
             <div class="reviews-idea__footer"> 
-              <!-- <button class="reviews-idea__comment">Комментировать</button> -->
+             <button class="reviews-idea__comment">Комментировать</button>
               <!-- <div class="reviews-idea__like"> 
                 <div class="reviews-idea__like_number">0</div>
                 <div class="reviews-idea__like_icon"><i class="fa-solid fa-heart"></i></div>
               </div> -->
             </div>
+            <div class="comment-idea" data-vievcomment="<? echo $com_id; ?>">
+      <div class="container-idea">
+        <div class="comment-idea__wrapper"> 
+          <button class="comment-idea__back" data-backcomment="<? echo $com_id; ?>"> <i class="fa-solid fa-chevron-left"></i></button>
+          <div class="comments-idea__content comments">
+            <div class="comments__wrapper">
+            <span class="comments__add_msg"></span>
+              <form class="comments__add">
+                <input class="comments__input input-field" type="text" placeholder="Ваш комментарий">
+                <input class="comments__input_pid" type="hidden" value="<? echo $idea_id; ?>">
+                <input class="comments__input_par" type="hidden" value="<? echo $com_id; ?>">
+                <button class="comments__button secondary__button">Отправить</button>
+              </form>
+          <?    
+          $subcommargs = array(
+	'no_found_rows'       => true,
+	'orderby'             => '',
+	'order'               => 'DESC',
+	'post_id'             => $idea_id,
+	'post_type'           => 'ideas',
+	'status'              => 'all',
+	'count'               => false,
+	'date_query'          => null, // See WP_Date_Query
+	'hierarchical'        => false,
+  'parent'       => $com_id,
+	'update_comment_meta_cache'  => true,
+	'update_comment_post_cache'  => false,
+);
+if( $subcomments = get_comments( $subcommargs ) ){
+  foreach( $subcomments as $subcomment ){ 
+    $subcom_id = $subcomment->comment_ID;
+    $comment_date = get_comment_date( 'j M в H:i', $subcom_id );
+    $args = get_comment($subcom_id);
+    $user_id = $args->user_id;
+    $user       = get_userdata( $user_id );
+    $first_name = $user->first_name;
+    $last_name  = $user->last_name;
+    ?>
+              <div class="comments__block" data-subcommid="<? echo $subcomment->comment_ID;?>">
+                <div class="comments__maint main-comment">
+                  <div class="main-comment__avatar"> <img src="<?=get_user_image($user_id)?>" alt="ava"></div>
+                  <div class="main-comment__body"> 
+                    <div class="main-comment__name">
+                      <span class="main-comment__firstname"><? echo $first_name;?></span>
+                      <span class="main-comment__lastname"><? echo $last_name; ?></span>
+                       </div>
+                    <div class="main-comment__message"><?php echo $subcomment->comment_content; ?></div>
+                    <div class="main-comment__footer"> 
+                      <div class="main-comment__data"><?php echo $comment_date; ?></div>
+                      <button class="main-comment__button">Ответить</button>
+                    </div>
+                  </div>
+                </div>
+                <?    
+                $g = $subcomment->comment_ID;
+          $subsubcommargs = array(
+	'no_found_rows'       => true,
+	'orderby'             => '',
+	'order'               => 'ASC',
+	'post_id'             => $idea_id,
+	'post_type'           => 'ideas',
+	'status'              => 'all',
+	'count'               => false,
+	'date_query'          => null, // See WP_Date_Query
+	'hierarchical'        => false,
+  'parent'       => $g,
+	'update_comment_meta_cache'  => true,
+	'update_comment_post_cache'  => false,
+);
+if( $subsubcomments = get_comments( $subsubcommargs ) ){
+  foreach( $subsubcomments as $subsubcomment ){ 
+    $subsubcom_id = $subsubcomment->comment_ID;
+    $comment_date = get_comment_date( 'j M в H:i', $subsubcom_id );
+    $args = get_comment($subsubcom_id);
+    $user_id = $args->user_id;
+    $user       = get_userdata( $user_id );
+    $first_name = $user->first_name;
+    $last_name  = $user->last_name;
+    ?>
+                <div class="comments__sub sub-comment">
+                  <div class="sub-comment__avatar"> <img src="<?=get_user_image($user_id)?>" alt="ava"></div>
+                  <div class="sub-comment__body"> 
+                    <div class="sub-comment__name">
+                    <span class="sub-comment__firstname"><? echo $first_name;?></span>
+                      <span class="sub-comment__lastname"><? echo $last_name; ?></span>
+                    </div>
+                    <div class="sub-comment__message"><?php echo $subsubcomment->comment_content; ?></div>
+                    <div class="sub-comment__footer"> 
+                      <div class="sub-comment__data"><?php echo $comment_date; ?></div>
+                      <button class="sub-comment__button">Ответить</button>
+                    </div>
+                  </div>
+                </div>
+        <? }} ?>
+              </div>
+  <? }} ?>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
           </div> 
           <?php }} ?>
           </div>
