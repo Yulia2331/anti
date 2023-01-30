@@ -16,7 +16,7 @@ if ( ! isset( $query ) ) {
 }
 
 ?>
-<div class="lp-archive-courses">
+<div class="lp-archive-courses ">
 	<div class="lp-content-area">
 		<?php if ( ! empty( $title ) ) : ?>
 			<header class="learn-press-courses-header">

@@ -9,9 +9,8 @@
  */
 
 
-if (mydebbug()){
-    echo '---> content-single-item.php';
-}
+
+$tmp_lesson = true;
 
 defined( 'ABSPATH' ) || exit();
 
@@ -24,17 +23,21 @@ if ( empty( $is_block_theme ) ) {
 	do_action( 'learn-press/template-header' );
 }
 
+if (mydebbug()){
+    echo '---> content-single-item.php';
+}
+
 /**
  * LP Hook
  */
-do_action( 'learn-press/before-main-content' );
+//do_action( 'learn-press/before-main-content' );
 
 /**
  * LP Hook
  */
 do_action( 'learn-press/before-single-item' );
 ?>
-	<div id="popup-course" class="course-summary" >
+	<!-- <div id="popup-course" class="course-summary" > -->
 		<?php
 		/**
 		 * @since 4.0.6
@@ -49,9 +52,11 @@ do_action( 'learn-press/before-single-item' );
 		 *
 		 * @see LP_Template_Course::popup_content() - 30
 		 */
-		do_action( 'learn-press/single-item-summary' );
+		//do_action( 'learn-press/single-item-summary' );
+        //LearnPress::instance()->template( 'course' )->course_curriculum();
+        do_action('custom_single-item-summary');
 		?>
-	</div>
+	<!-- </div> -->
 <?php
 
 /**
@@ -59,7 +64,7 @@ do_action( 'learn-press/before-single-item' );
  *
  * @since 3.0.0
  */
-do_action( 'learn-press/after-main-content' );
+//do_action( 'learn-press/after-main-content' );
 
 /**
  * LP Hook

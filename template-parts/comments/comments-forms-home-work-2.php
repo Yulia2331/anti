@@ -42,10 +42,11 @@ $defaults = [
     <input class="module-block__input input-field" name="comment" type="text" placeholder="Ваш комментарий" aria-required="true" required="required">
     <input type="hidden" name="comment_frome_value" value="'.$frome_user.'">
     <input type="hidden" name="page_comments" value="'.$_SERVER['REQUEST_URI'].'">
-    <div class="module-block__all-files" style="margin-top: 10px;"> </div>
+    
     <label id="open-file" class="module-block__btn-file module-block__send-file" for="attachment">
       <div class="container__icon--18"><i class="fa-solid fa-file"></i></div>
     </label>
+
     
     
     
@@ -70,7 +71,7 @@ $defaults = [
     'cancel_reply_link'    => '',
     'comment_notes_after'  => '<div style="display: none;">',
     'label_submit'         => 'Отправить',
-    'submit_button'        => '</div><button name="%1$s" type="submit" id="%2$s" class="module-block__send-comment module-block__send %3$s"/><div class="container__icon--18"><i class="fa-solid fa-share"></i></div></button>',
+    'submit_button'        => '</div><button name="%1$s" type="submit" id="%2$s" class="module-block__send-comment module-block__send %3$s"/><div class="container__icon--18"><i class="fa-solid fa-share"></i></div></button> <div class="module-block__all-files" style="margin-top: 10px;"> </div>',
     'submit_field'         => '<p class=" form-submit">%1$s %2$s</p>',
     'format'               => 'xhtml',
   ];

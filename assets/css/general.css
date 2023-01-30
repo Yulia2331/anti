@@ -10,20 +10,6 @@
   display: none;
 }
 
-.avatar_40{
-  margin-right: 10px;
-  width: 40px;
-  max-height: 40px;
-  border-radius: 100%;
-  overflow: hidden;
-}
-
-.avatar_40 img{
-  margin-right: 0px;
-  width: 40px;  
-  border-radius: 0 !important;
-}
-
 .view-idea {
   position: fixed;
   padding: 30px;
@@ -457,6 +443,68 @@
 
 .active {
   display: block;
+}
+
+.comment-idea {
+  display: none;
+}
+
+.comment-idea .comments {
+  width: 700px;
+}
+
+.comment-idea__wrapper {
+  position: relative;
+}
+
+.comment-idea__back {
+  padding: 12px 14px;
+  border-radius: 6px;
+  background-color: #ffffff;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-transition: color 0.3s ease-in-out;
+  -o-transition: color 0.3s ease-in-out;
+  transition: color 0.3s ease-in-out;
+  font-size: 18px;
+  color: #BDBDBD;
+  position: absolute;
+  top: -43px;
+  left: -43px;
+}
+
+.comment-idea__back i {
+  pointer-events: none;
+}
+
+.comment-idea__back:hover {
+  color: #1B1B1B;
+}
+
+.container-idea {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  background-color: rgba(27, 27, 27, 0.7);
+  z-index: 11111;
+  top: 0;
+  left: 0;
 }
 
 .board-ideas {
@@ -963,13 +1011,6 @@
   color: #29afda;
 }
 
-.comment-reply-link {
-  font-size: 15px;
-  font-weight: 500;
-  line-height: 15px;
-  color: #29afda;
-}
-
 .sub-comment {
   position: relative;
   display: -webkit-box;
@@ -1388,6 +1429,7 @@
   padding-right: 30px;
   padding-bottom: 30px;
   min-height: 100vh;
+  display: table;
 }
 
 .materials__wrapper {
@@ -1492,6 +1534,10 @@
   background-color: #F5F5F5;
 }
 
+.curriculum__modul:not(:last-child) {
+  margin-bottom: 30px;
+}
+
 .curriculum__header {
   padding: 15px 15px 6px 15px;
   cursor: pointer;
@@ -1529,6 +1575,10 @@
   background-color: #43cb92;
 }
 
+.curriculum [data-progress=name-module] {
+  width: 60%;
+}
+
 .curriculum__body {
   padding-top: 20px;
   padding-left: 15px;
@@ -1554,7 +1604,7 @@
 }
 
 .curriculum__item:not(:last-child) {
-  margin-bottom: 10px;
+  margin-bottom: 10px ;
 }
 
 .curriculum__btn-name {
@@ -1625,6 +1675,7 @@
   padding-right: 30px;
   padding-bottom: 30px;
   min-height: 100vh;
+  display: table;
 }
 
 .structure__crums {
@@ -1793,7 +1844,75 @@
   position: relative;
   border-radius: 6px;
   background-color: #ffffff;
-/*  min-height: 100%;*/
+  min-height: 100%;
+}
+
+.module-block__time {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-right: 20px;
+}
+
+.module-block__clock {
+  margin-left: 10px;
+}
+
+.module-block__buttons {
+  margin-right: 10px;
+}
+
+.module-block__buttons-item {
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.module-block__button-check {
+  margin-right: 10px;
+  background-color: #43cb92;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.module-block__button-check .container__icon--24 {
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  color: #ffffff;
+}
+
+.module-block__button-check:hover {
+  background-color: #ECFAF4;
+}
+
+.module-block__button-check:hover .container__icon--24 {
+  color: #43cb92;
+}
+
+.module-block__button-not {
+  background-color: #ff0000;
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+.module-block__button-not .container__icon--24 {
+  -webkit-transition: all 0.3s ease-in-out;
+  -o-transition: all 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+  color: #ffffff;
+}
+
+.module-block__button-not:hover {
+  background-color: #FFE6E6;
+}
+
+.module-block__button-not:hover .container__icon--24 {
+  color: #ff0000;
 }
 
 .module-block__header {
@@ -1890,10 +2009,6 @@
   -webkit-transition: 0.3s ease-in-out;
   -o-transition: 0.3s ease-in-out;
   transition: 0.3s ease-in-out;
-}
-
-.module-block__item .tab_active span{
-  color: #29afda !important;
 }
 
 .module-block__item span:hover {

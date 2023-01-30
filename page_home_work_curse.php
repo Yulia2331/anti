@@ -53,7 +53,7 @@ $user        = learn_press_get_current_user();
 
       </div></div>
       
-      <section class="course padding-left">
+      <section class="course padding-left" style="display: table;">
       <div class="course__crums crums"> 
         <ul class="crums__list"> <a class="crums__link" href="/home-work">
             <li class="crums__item">Мои задания</li></a>
@@ -176,8 +176,10 @@ foreach ( $curriculum as $section ) {
                   foreach($arr_dead_line as $arr_dead ){
                     echo "['".$arr_dead[0]."','";
                     
-                    $time_end = mktime(0, $arr_dead[1][4], $arr_dead[1][3], $arr_dead[1][0], $arr_dead[1][1], $arr_dead[1][2]);
+                    //mktime( $arr_dead[4], $arr_dead[3], 0, $arr_dead[1], $arr_dead[0], $arr_dead[2]);
+                    $time_end = mktime( $arr_dead[1][4], $arr_dead[1][3], 00, $arr_dead[1][1], $arr_dead[1][0], $arr_dead[1][2]);
                     $time_section = get_remaining_time($time_end);
+                    //$time_section = $arr_dead[1][4].' '.$arr_dead[1][3].' 00 '.$arr_dead[1][1].' '.$arr_dead[1][0].' '.$arr_dead[1][2].'-'.date('h i s m d Y',time());
 
                     echo $time_section."'],";
                   }
@@ -235,24 +237,25 @@ foreach ( $curriculum as $section ) {
                           // вывод формы комментария ( обязательный параметр $item )
                           include ('template-parts/comments/comments-forms-home-work.php');
                           
-                        }else{
+                        }else if(get_post_meta($id_cours, 'teachers', 1) != []){
 
                           // Получаем преподов
                           $teachers = get_post_meta($id_cours, 'teachers', 1);
                           // Получаем данные юзера
                           $data_teacher = get_user_by('email',$teachers[0]);  
-                          //print_r($data_teacher);
+                          //print_r($teachers);
                           //echo get_user_image($data_teacher->ID);                    
 
                           ?>
                           <div class="module-block__comments comments">
                             <div class="comments__wrapper">
                               <div class="module-block__teacher"> 
-                                <div class="avatar_40">
-                                  <img src="<?php echo get_user_image($data_teacher->ID); ?>" alt="teacher">
+                                <div class="avatar_40" style="width: 40px;height: 40px;overflow: hidden;border-radius: 100%;margin-right: 10px;">
+                                  <img src="<?php echo get_user_image($data_teacher->ID); ?>" alt="teacher" style="border-radius: 0% !important;">                                  
                                 </div>
-
-                                <span><?php echo $data_teacher->display_name; ?></span></div>
+                                <span style="font-weight: 500;line-height: 15px;color: #303030; font-size:14px;"> <?php echo $data_teacher->display_name; ?></span>
+                                
+                              </div>
                               <?php
 
                               // вывод формы 2 комментария ( обязательный параметр $item )
@@ -268,7 +271,9 @@ foreach ( $curriculum as $section ) {
                             </div>
                           </div>
 
-                        <?php } 
+                        <?php }else{
+                          echo 'Вам не назначен учитель';
+                        } 
                       }else{
                         echo 'Домашнего задания нет!';
                       }
@@ -294,14 +299,15 @@ foreach ( $curriculum as $section ) {
           
     }
 
+
       
 
 ?>
     </section>
    
-  <div class="d-flex flex-column flex-root" style="display: none !important;">
-  <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+  
 
   
   <?php
-         get_footer();
+      get_footer();
+

@@ -1,5 +1,3 @@
-?>
-
 <?php
 
 ///////////////////////////////// Тема комментария ////////////////////////////////////
@@ -26,8 +24,8 @@ function my_theme_comment($comment, $args, $depth ) {
 
 		?>
 		<div class="comments__maint <?php echo $level_comment;?>">
-			<div class="main-comment__avatar"> 
-				<img src="<?php echo get_user_image($comment->user_id); ?>" alt="ava">				
+			<div class="main-comment__avatar" style="width: 40px;height: 40px;overflow: hidden;border-radius: 100%;"> 
+				<img src="<?php echo get_user_image($comment->user_id); ?>" alt="ava" style="border-radius: 0% !important;">				
 				<?php
 					// print_r(get_avatar_data($comment->comment_author_email));
 					// print_r($comment->comment_author_email);
@@ -85,19 +83,32 @@ function my_theme_comment($comment, $args, $depth ) {
 			</div>
 		</div>
 
-<?php
-}
-///////////////////////////////// Тема комментария ////////////////////////////////////
 
+<?php }?>
 
+<?php  
+
+if (get_post_meta($post->ID, 'dont_visible', 1) != 'on'):
 
 ?>
+
 
 <div class="materials__comments comments">
 
 	<?php 
 
 	$course = learn_press_get_course();
+
+	global $post;				
+				
+	$args = array( 
+		'post_id'             => $post->ID,
+        'meta_key'            => 'comment_frome_key',
+        'meta_value'          => 'all',            
+      	);
+
+	
+
 	//print_r($course);
 	//$post_id = $course->get_id();
 
@@ -107,8 +118,14 @@ function my_theme_comment($comment, $args, $depth ) {
 		<div class="comments__wrapper">
 
 			<div class="comments__title">
-				<?php echo get_comments_number();?>
-				<?php echo get_text_comment_num(get_comments_number());?>
+				<?php 
+				if( $comments = get_comments( $args ) ){
+
+					echo count($comments); 
+					echo ' '.get_text_comment_num(count($comments));
+				}
+
+				?>
 				<?php 
 					$frome_to = 'all';
 
@@ -120,15 +137,26 @@ function my_theme_comment($comment, $args, $depth ) {
 					}
 
 					//print_r($frome_to);
+					
+					//echo $post->ID;
+					//print_r($post);
 				?>			
 			</div>
 
 			<?php 
-				$course_item = (array)LP_Global::course_item();
-				$course_id = array_values( (array) array_values($course_item)[5])[1];
 				// echo '<pre>';
-				// print_r(array_values( (array) array_values($course_item)[5])[1] );
+				// print_r((array)LP_Global::course_item());
 				// echo '</pre>';
+
+				$course_item = (array)LP_Global::course_item();
+
+				if ($course_item!=[]){
+				
+					$course_id = array_values( (array) array_values($course_item)[5])[1];
+				}else{
+					$course_id = $course->get_id();
+				}
+				
 
 				
 
@@ -170,39 +198,33 @@ function my_theme_comment($comment, $args, $depth ) {
 						'format'               => 'xhtml',
 					];
 
-				comment_form($defaults); ?>
-			
-			
-			<?php
-
-			$args = array(            
-	            'meta_key'            => 'comment_frome_key',
-	            'meta_value'          => 'all',            
-	          	);
+				comment_form($defaults);
 
 
-			//if ( have_comments() ) : 
-			if( $comments = get_comments( $args ) ):
-				wp_list_comments( array(
-					'walker'            => null,
-					'max_depth'         => 10,
-					'style'             => 'div',
-					'callback'          => 'my_theme_comment',
-					'end-callback'      => null,
-					'type'              => 'comment',
-					'reply_text'        => 'Ответить',
-					'page'              => '',
-					'per_page'          => '',
-					'avatar_size'       => 32,
-					'reverse_top_level' => null,
-					'reverse_children'  => '',
-					'format'            => 'html5', // или xhtml, если HTML5 не поддерживается темой
-					'short_ping'        => false,    // С версии 3.6,
-					'echo'              => true,     // true или false
-						) );
 
-				//wp_list_comments('type=comment&callback=my_theme_comment');
-			?>	
+
+				//if ( have_comments() ) : 
+				if( $comments = get_comments( $args ) ):
+					wp_list_comments( array(
+						'walker'            => null,
+						'max_depth'         => 10,
+						'style'             => 'div',
+						'callback'          => 'my_theme_comment',
+						'end-callback'      => null,
+						'type'              => 'comment',
+						'reply_text'        => 'Ответить',
+						'page'              => '',
+						'per_page'          => '',
+						'avatar_size'       => 32,
+						'reverse_top_level' => null,
+						'reverse_children'  => '',
+						'format'            => 'html5', // или xhtml, если HTML5 не поддерживается темой
+						'short_ping'        => false,    // С версии 3.6,
+						'echo'              => true,     // true или false
+							) );
+
+					//wp_list_comments('type=comment&callback=my_theme_comment');
+				?>	
 		</div>
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) : ?>
@@ -239,3 +261,6 @@ function my_theme_comment($comment, $args, $depth ) {
 	
 
 </div><!-- #comments -->
+
+<?php
+endif;

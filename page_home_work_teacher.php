@@ -45,13 +45,17 @@ $curriculum  = $course->get_curriculum();
 $user_course = $user->get_course_data( get_the_ID() );
 $user = learn_press_get_user($_GET['student']);
 
+$arr_dead_line = [];
+
+
+
 
 
 ?> 
 
       </div></div>
       
-      <section class="course padding-left">
+      <section class="course padding-left" style="display: table;">
       <div class="course__crums crums"> 
         <ul class="crums__list"> 
             <a class="crums__link" href="/home-work"><li class="crums__item">Страница учителя</li></a>
@@ -60,10 +64,15 @@ $user = learn_press_get_user($_GET['student']);
         </ul>
 
       </div>
+      <script>
+        let arr_deadline = [];
+      </script>
 
 <?php
 
 foreach ( $curriculum as $section ) {
+
+      $modul_home_work = false;
           
       // пример для вывода
       // learn_press_get_template( 'single-course/loop-section.php', $args );
@@ -89,6 +98,8 @@ foreach ( $curriculum as $section ) {
       $string_list_tutorial = '';
 
       foreach ( $items as $item ) :
+        if(get_post_meta($item->get_id(), 'files_home_work', 1)!=''){
+
           $ordinal++;
           $can_view_item = $user->can_view_item( $item->get_id(), $can_view_content_course );
 
@@ -105,21 +116,32 @@ foreach ( $curriculum as $section ) {
           $string_list_tutorial .= '<li class="module-block__item">';
           $string_list_tutorial .= '<button class="tutor_btn'; 
           $string_list_tutorial .= ($ordinal==1)?' tab_active':'';
-          $string_list_tutorial .= '" data-tab="modul'.$section->get_id().'_tutorial_'.$ordinal .'">';
+          $string_list_tutorial .= '" data-tab="modul'.$section->get_id().'_tutorial_'.$ordinal .'" data-id='.$item->get_id().'>';
           $string_list_tutorial .=  $ordinal .'.<span>'. $title_tutorial .'</span>';
           $string_list_tutorial .= '</button>';                                      
           $string_list_tutorial .= '</li>';
+
+          $modul_home_work = true;
 
           //
           //$coments_tutorial = (array)$item;
           //get_home_work_comments(array_values($coments_tutorial)[9],$id_cours);
           //$coments_tutorial = json_decode(json_encode($item), true);
+
+          if (get_post_meta($item->get_id(), 'time_home_work', 1) == 'on'){
+            array_push($arr_dead_line,[$item->get_id(), explode('/',get_post_meta($item->get_id(), 'date_home_work', 1))] );            
+          }
+
+          $end_time = explode('/',get_post_meta($item->get_id(), 'date_home_work', 1));
          
+        }
 
       endforeach; 
 
       ////////////////////////////////////// Список уроков ////////////////////////////////////////
 
+
+      if ($modul_home_work){
     ?>
 
       <div class="course__wrapper ">
@@ -132,7 +154,36 @@ foreach ( $curriculum as $section ) {
             </div>
             <div class="module-block__right"> 
               <div class="module-block__clock container__icon--24"><i class="fa-regular fa-clock"></i></div>
-              <div class="module-block__time"><?php echo get_remaining_time(strtotime(get_the_date( 'd-m-Y', $id_cours)),$time_section); ?></div>
+
+              <script type="text/javascript">
+                  
+                  arr_deadline.push(                
+                <?php 
+                 
+                  foreach($arr_dead_line as $arr_dead ){
+                    echo "['".$arr_dead[0]."','";
+                    
+                    $time_end = mktime( $arr_dead[1][4], $arr_dead[1][3], 00, $arr_dead[1][1], $arr_dead[1][0], $arr_dead[1][2]);
+                    $time_section = get_remaining_time($time_end);
+                    //$time_section = $arr_dead[1][4].' '.$arr_dead[1][3].' 00 '.$arr_dead[1][1].' '.$arr_dead[1][0].' '.$arr_dead[1][2].'-'.date('h i s m d Y',time());
+
+                    echo $time_section."'],";
+                  }
+                 
+                ?>
+                );
+                </script>
+              <div class="module-block__time">
+                <?php 
+
+                  //echo get_remaining_time(strtotime(get_the_date( 'd-m-Y', $id_cours)),$time_section); 
+                  echo $time_section;
+
+                ?>
+              </div>
+
+              
+
               <div class="module-block__arrow container__icon--18"><i class="fa-solid fa-angle-down"></i></div>
             </div>
           </div>
@@ -183,12 +234,51 @@ foreach ( $curriculum as $section ) {
                       ?>
                       <div class="module-block__comments comments">
                         <div class="comments__wrapper">
-                          <div class="module-block__teacher"> 
+                          <div class="module-block__teacher" style="justify-content:space-between;"> 
+                            
                             <div class="avatar_40">
                               <img src="<?php echo get_user_image($data_teacher->ID); ?>" alt="teacher">
+                              <span style="padding-top: 0px !important; margin-top: 20px !important;display: inline-block;"><?php echo $data_teacher->display_name; ?></span>
                             </div>
 
-                            <span><?php echo $data_teacher->display_name; ?></span></div>
+
+                            
+                           
+                            <!-- Зачет ДЗ -->
+                            <?php 
+                              //print_r(get_user_meta( $_GET['student'],'home_works_status'));
+
+                              $old_status = get_status_home_work_students_by_id($item->get_id(),get_user_meta( $_GET['student'],'home_works_status'));
+
+                              if ($old_status=='non'){
+                                echo 'Оценки нет';
+                              }else if($old_status=='yes'){
+                                echo 'Зачет';
+                              }else if($old_status=='no'){
+                                echo 'Не зачет';
+                              }
+                              //echo $_GET['student'];
+                            ?>
+                            <div class="module-block__buttons" style="margin-left: 30px; text-align:right;"> 
+                              <button class="module-block__button-check module-block__buttons-item add_status_home_work" 
+                              zach="yes" 
+                              studens="<?php echo $_GET['student']; ?>" 
+                              old-status="<?php echo $old_status; ?>"
+                              tutorial="<?php echo $item->get_id();?>"
+                              >
+                                <div class="container__icon--24"><i class="fa-solid fa-check"></i></div>
+                              </button>
+                              <button class="module-block__button-not module-block__buttons-item add_status_home_work" 
+                              zach="no" 
+                              studens="<?php echo $_GET['student']; ?>" 
+                              old-status="<?php echo $old_status; ?>"
+                              tutorial="<?php echo $item->get_id();?>"
+                              >
+                                <div class="container__icon--24"><i class="fa-solid fa-xmark"></i></div>
+                              </button>
+                            </div>
+
+                          </div>
                           <?php
 
                           // вывод формы 2 комментария ( обязательный параметр $item )
@@ -223,12 +313,11 @@ foreach ( $curriculum as $section ) {
     }
 
       
-
+}
 ?>
     </section>
    
-  <div class="d-flex flex-column flex-root" style="display: none !important;">
-  <div class="wrapper d-flex flex-column flex-row-fluid" id="kt_wrapper">
+  
 
   
   <?php

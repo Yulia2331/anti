@@ -23,12 +23,16 @@ if (mydebbug()){
 		    	<?php
 					$title = $section->get_title();
 					echo wp_kses_post( ! $title ? _x( 'Untitled', 'template title empty', 'learnpress' ) : $title );
+
+					if ( $user->has_enrolled_or_finished( $section->get_course_id() ) ) : 
+                		$percent = $user_course->get_percent_completed_items( '', $section->get_id() );
+            		endif;
 				?>
 			
 	    </div>
 	    <div class="container__icon--18"><i class="fa-solid fa-angle-down"></i></div>
 	  </div>
-	  <div class="curriculum__progress"></div>
+	  <div class="curriculum__progress" style="width:<?php echo $percent; ?>%;border-radius: 0;"></div>
 	</div>
 	<div class="curriculum__body">
 	

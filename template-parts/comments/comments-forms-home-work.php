@@ -54,7 +54,7 @@ $defaults = [
     'cancel_reply_link'    => '',
     'comment_notes_after'  => '<div style="display: none;">',
     'label_submit'         => 'Отправить',
-    'submit_button'        => '</div><button name="%1$s" type="submit" id="%2$s" class="module-block__send secondary__button %3$s"/><div class="container__icon--18"><i class="fa-solid fa-share"></i></div></button>',
+    'submit_button'        => '</div><button name="%1$s" type="submit" id="%2$s" class="module-block__send secondary__button %3$s" autofocus><div class="container__icon--18"><i class="fa-solid fa-share"></i></div></button>',
     'submit_field'         => '<p class=" form-submit">%1$s %2$s</p>',
     'format'               => 'xhtml',
   ];
@@ -64,8 +64,9 @@ comment_form($defaults,$item->get_id());
   </div>
 
   <div class="module-block__add-file">
-    <div class="module-block__all-files"> </div>
+    
     <label id='open-file' class="comment-form-attachment__label module-block__btn secondary__button" for="attachment">Загрузить файл</label>
+    <div class="module-block__all-files"> </div>
   </div>
 
 </div>

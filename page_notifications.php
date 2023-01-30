@@ -66,7 +66,7 @@
           <?php 
             
             $notifications = get_user_meta( wp_get_current_user()->ID,'notifications');
-            print_r(get_user_meta(wp_get_current_user()->ID,'notifications-idea'));
+            // print_r(get_user_meta(wp_get_current_user()->ID,'notifications-idea'));
             foreach($notifications as $key => $notification){
               ?>
                 <div class="module-block__menu">

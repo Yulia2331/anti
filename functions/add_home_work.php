@@ -183,9 +183,9 @@ function add_home_work_box_func( $post ){
 									$key = sprintf('%02d',$key + 1);
 
 									if ($key==$date[1]){
-										echo "<option value='01' data-text='{$value}' selected='selected'>{$key}-{$value}</option>";
+										echo "<option value='{$key}' data-text='{$value}' selected='selected'>{$key}-{$value}</option>";
 									}else{
-										echo "<option value='01' data-text='{$value}'>{$key}-{$value}</option>";
+										echo "<option value='{$key}' data-text='{$value}'>{$key}-{$value}</option>";
 									}
 									
 

@@ -1,6 +1,5 @@
 
 // let localurl = 'https://'+window.location.host;
-
 if (document.getElementsByName('reg-user-type')){
 let numOfChanges = 0;
 const radioButtons = document.getElementsByName('reg-user-type');
@@ -46,7 +45,7 @@ if (document.getElementsByName('analitic-checker')){
   }
 }
 
-var ajaxurl = '/wp-admin/admin-ajax.php';
+// var ajaxurl = '/wp-admin/admin-ajax.php';
 
 
 
@@ -697,7 +696,7 @@ $('#user_prof_form').submit(function(e){
   let data = $(this).serialize() + '&action='+ action;
   console.log(data);
   $.ajax({
-    url:ajaxurl,
+    url:'/wp-admin/admin-ajax.php',
     type:'POST',
     data,
     error: function (response) {
@@ -1123,9 +1122,49 @@ $('.del_notification').on('click', function(e){
     },
     complete:function(response){
       t.remove();
+
     },
     error: function(resp){
        console.log(resp)
+    }
+
+  })
+})
+
+$('.add_status_home_work').on('click', function(e){
+  e.preventDefault();
+  
+  console.log($(this).attr('zach'));
+  console.log($(this).attr('studens'));
+  console.log($(this).attr('old-status'));
+  console.log($(this).attr('tutorial'));
+
+  //wp_ajax_add_status_home_work
+
+  // let notificationId = $(this).attr('notificationId');
+  // let notificationContent = $(this).attr('notificationContent');
+  // let t = $(this).parent();
+
+  // t.css('opacity','0.3'); 
+
+  $.ajax({
+    type:'POST',
+    url: "/wp-admin/admin-ajax.php",
+    data:{
+       action: 'status_students_add',       
+       zach: $(this).attr('zach'),
+       studens: $(this).attr('studens'),
+       old_status: $(this).attr('old-status'),
+       tutorial: $(this).attr('tutorial'),
+    },
+    success:function(response){
+     console.log('work');         
+    },
+    complete:function(response){
+     console.log(response);
+    },
+    error: function(resp){
+      console.log(resp);
     }
 
   })
@@ -1242,7 +1281,7 @@ function send_comment(text, post_id, answer){
 
   $.ajax({
     type : 'POST',
-    url: ajaxurl,
+    url: '/wp-admin/admin-ajax.php',
     data:{
       action: 'sendcomment',
       text:text,
@@ -1377,7 +1416,7 @@ function make_comment(response){
     formData.append('updoc', files);
     formData.append('action', 'questiondatahtml');
     let r =$.ajax({
-          url: ajaxurl,
+          url: '/wp-admin/admin-ajax.php',
           async:false,
           type: 'POST',
           dataType: "json",
@@ -1398,7 +1437,7 @@ function make_comment(response){
   function  filter_users_posts(user, target){
     let block = $('#posts-lists');
     $.ajax({
-      url: ajaxurl,
+      url: '/wp-admin/admin-ajax.php',
       type: 'POST',
       dataType: "json",
       data:{

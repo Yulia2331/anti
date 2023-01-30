@@ -26,7 +26,7 @@ if ( isset( $args['sections'] ) && isset( $args['filters'] ) ) {
 <div class="course-curriculum" id="learn-press-course-curriculum">
 	<div class="curriculum-scrollable">
 		<?php if ( $sections['total'] > 0 ) : ?>
-			<ul class="curriculum-sections">
+			<ul class="curriculum-sections v2">
 				<?php
 				foreach ( $sections['results'] as $section ) :
 					$args['section'] = $section;

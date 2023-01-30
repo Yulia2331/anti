@@ -528,12 +528,23 @@ function clear_time($string){
 // Расчет оставшегося времени
 function get_remaining_time($end_time){
 
-    $seconds = $end_time - time();
+	if( time() < $end_time ){
 
-    $days = date('d',$seconds);
-    $hours = date('h',$seconds);
-    $minutes = date('m',$seconds);
+	    $seconds = $end_time - time();
+
+	    $days = date('d',$seconds);
+	    $hours = date('h',$seconds);
+	    $minutes = date('m',$seconds);
+
+	}else{
+
+		$days = 0;
+	    $hours = 0;
+	    $minutes = 0;
+
+	}
     
+    //return time().' - '.$end_time;
     return $days.' д - '.$hours.' ч - '.$minutes.' мин ';
 
 }
@@ -556,11 +567,17 @@ function get_text_comment_num($value){
 // добовление поля учителя в админке
 require_once ('functions/add_teacher.php');
 
+// отоброжение комментариев 
+require_once ('functions/visible_comments.php');
+
 // добовление поля дедлайна ДЗ
 require_once ('functions/add_home_work.php');
 
 // шаблон коментариев для домашнего задания
 require_once ('template-parts/comments/home_work_comments.php');
+
+// добовление прав ролям
+require_once ('functions/add_cap_roles.php');
 
 // подключаем ответ на коменты
 // function enqueue_comment_reply() {
@@ -573,6 +590,14 @@ require_once ('template-parts/comments/home_work_comments.php');
 add_action(	'custom_content_single_meta',LearnPress::instance()->template( 'course' )->callback( 'single-course/meta-secondary' ),10);
 add_action(	'custom_content_single_tab',LearnPress::instance()->template( 'course' )->callback( 'single-course/tabs/tabs' ),60);
 add_action( 'custom_content_single',LearnPress::instance()->template( 'course' )->func( 'course_comment_template' ), 75 );
+
+// хук для уроков
+//add_action( 'custom_single-item-summary', LearnPress::instance()->template( 'course' )->func( 'popup_header' ), 10 );
+//add_action( 'custom_single-item-summary', LearnPress::instance()->template( 'course' )->func( 'popup_sidebar' ), 20 );
+add_action( 'custom_single-item-summary', LearnPress::instance()->template( 'course' )->func( 'popup_content' ), 30 );
+add_action( 'custom_single-item-summary', LearnPress::instance()->template( 'course' )->func( 'popup_footer' ), 40 );
+
+
 
 // добовляем мета поле комментариев для напровления комметария
 add_action( 'comment_post', 'add_comment_frome_field' );
@@ -590,6 +615,7 @@ function add_comment_frome_field( $comment_id ) {
 
 
 //перенаправление на /thank-you-post/ после комментирования start
+add_filter('comment_post_redirect', 'wph_redirect_after_comment');
 function wph_redirect_after_comment(){
     //print_r( $_POST );
 
@@ -597,10 +623,15 @@ function wph_redirect_after_comment(){
 	if ($_POST['comment_frome_value'] != 'all' ){
 		if ($_POST['comment_frome_value'] != wp_get_current_user()->user_email){
 			add_user_meta( get_user_by('email',$_POST['comment_frome_value'])->ID, 'notifications', [$_POST['comment'],'id-curs/id-page'] );
-		}    	
-	}else{
+		}
 
-		
+		// Добовляем все сообщения с уроков учителю
+		if (wp_get_current_user()->roles!='lp_teacher'){
+			$teachers = get_post_meta($_POST['comment-post-item-course'], 'teachers', 1);
+
+			add_user_meta( get_user_by('email',$teachers[0])->ID, 'notifications', [$_POST['comment'],'id-curs/id-page'] );
+		}   	
+	}else{		
 
 		$users = get_field('dostup',$_POST['course_id']);
 		//print_r(get_post($_POST['comment_post_ID']));
@@ -614,26 +645,70 @@ function wph_redirect_after_comment(){
     wp_redirect($_POST['page_comments']);
     exit();
 }
-add_filter('comment_post_redirect', 'wph_redirect_after_comment');
+
+
+// add_user_meta( $ID_user, 'notifications', ['контент','id-curs/id-page'] );
+// $str = 'id-curs/id-page';
+// $arr = explode("/", $str);
+// echo $arr[0];
+// add_user_meta($a_id, 'notifications', ['sbc', $user_id, $post_id]);
 
 // Удаление уведомлений пользователя
 add_action( 'wp_ajax_del_notifications', 'del_notifications' );
 function del_notifications(){
-	    $notification_key = $_POST['notification_key'];
+		$notification_key = $_POST['notification_id'];
 		$notification_id = $_POST['notification_id'];
 		$notification_content = $_POST['notification_content'];
 		//echo 'good'.$notification_id.' '.$notification_content;
 		//print_r([$notification_content,$notification_id]);
 		
 		delete_metadata( 'user', wp_get_current_user()->ID, $notification_key, [$notification_content,$notification_id] );
+
 		wp_die();
 	}
-
 
 function my_notifications(){
 	$num_comm = wp_count_comments()->moderated;
 
 	return $num_comm;
+}
+
+
+
+// Добовление статуса домашнего задания
+add_action( 'wp_ajax_status_students_add', 'status_students_add' );
+function status_students_add(){
+
+	$id_tutorial = $_POST['tutorial'];
+	$student = $_POST['studens'];
+
+	$old_status = $_POST['old_status'];
+	$new_status = $_POST['zach'];
+
+	// echo '$new_status';
+	if ($old_status!='non'){
+		delete_metadata( 'user', $student, 'home_works_status', [$id_tutorial,$old_status] );
+	}
+
+	add_user_meta( $student, 'home_works_status', [$id_tutorial,$new_status] );
+	//echo'work';
+	//wp_die();
+}
+
+
+
+function get_status_home_work_students_by_id($id_cours,$arr){
+
+	if($arr!=[]){
+
+		foreach($arr as $item){
+			if ($item[0]==$id_cours){
+				return $item[1];
+			}
+		}
+	}
+
+	return 'non';
 }
 
 //debug
@@ -643,3 +718,4 @@ function mydebbug(){
 		return true;
 	}
 }
+

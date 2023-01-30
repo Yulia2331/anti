@@ -67,7 +67,7 @@ if ( $lp_user && ! $lp_user instanceof LP_User_Guest ) {
         // Учебная программа
         if ($key == 'curriculum'){
           ?>
-          <div class="content-materials-block__curriculum curriculum">
+          <div class="content-materials-block__curriculum curriculum v1">
             <?php call_user_func( $tab['callback'], $key, $tab ); ?>
           </div>
           <?php
