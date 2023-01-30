@@ -24,8 +24,8 @@ function my_theme_comment($comment, $args, $depth ) {
 
 		?>
 		<div class="comments__maint <?php echo $level_comment;?>">
-			<div class="main-comment__avatar"> 
-				<img src="<?php echo get_user_image($comment->user_id); ?>" alt="ava">				
+			<div class="main-comment__avatar" style="width: 40px;height: 40px;overflow: hidden;border-radius: 100%;"> 
+				<img src="<?php echo get_user_image($comment->user_id); ?>" alt="ava" style="border-radius: 0% !important;">				
 				<?php
 					// print_r(get_avatar_data($comment->comment_author_email));
 					// print_r($comment->comment_author_email);
@@ -86,7 +86,11 @@ function my_theme_comment($comment, $args, $depth ) {
 
 <?php }?>
 
-<?php  ?>
+<?php  
+
+if (get_post_meta($post->ID, 'dont_visible', 1) != 'on'):
+
+?>
 
 
 <div class="materials__comments comments">
@@ -94,6 +98,17 @@ function my_theme_comment($comment, $args, $depth ) {
 	<?php 
 
 	$course = learn_press_get_course();
+
+	global $post;				
+				
+	$args = array( 
+		'post_id'             => $post->ID,
+        'meta_key'            => 'comment_frome_key',
+        'meta_value'          => 'all',            
+      	);
+
+	
+
 	//print_r($course);
 	//$post_id = $course->get_id();
 
@@ -103,8 +118,14 @@ function my_theme_comment($comment, $args, $depth ) {
 		<div class="comments__wrapper">
 
 			<div class="comments__title">
-				<?php echo get_comments_number();?>
-				<?php echo get_text_comment_num(get_comments_number());?>
+				<?php 
+				if( $comments = get_comments( $args ) ){
+
+					echo count($comments); 
+					echo ' '.get_text_comment_num(count($comments));
+				}
+
+				?>
 				<?php 
 					$frome_to = 'all';
 
@@ -179,13 +200,7 @@ function my_theme_comment($comment, $args, $depth ) {
 
 				comment_form($defaults);
 
-				global $post;
-				
-				$args = array( 
-					'post_id'             => $post->ID,
-		            'meta_key'            => 'comment_frome_key',
-		            'meta_value'          => 'all',            
-		          	);
+
 
 
 				//if ( have_comments() ) : 
@@ -246,3 +261,6 @@ function my_theme_comment($comment, $args, $depth ) {
 	
 
 </div><!-- #comments -->
+
+<?php
+endif;

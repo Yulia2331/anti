@@ -18,6 +18,7 @@
     	
     <script src="https://kit.fontawesome.com/72a41cb45f.js?_v=20221228185850" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/72a41cb45f.js?_v=20221231001853" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/72a41cb45f.js?_v=20230128122841" crossorigin="anonymous"></script>
 	</body>
 
 	<!--end::Body-->

@@ -1,5 +1,5 @@
 
-let localurl = 'https://'+window.location.host;
+let localurl = 'http://'+window.location.host;
 
 if (document.getElementsByName('reg-user-type')){
 let numOfChanges = 0;
@@ -1122,9 +1122,49 @@ $('.del_notification').on('click', function(e){
     },
     complete:function(response){
       t.remove();
+
     },
     error: function(resp){
        console.log(resp)
+    }
+
+  })
+})
+
+$('.add_status_home_work').on('click', function(e){
+  e.preventDefault();
+  
+  console.log($(this).attr('zach'));
+  console.log($(this).attr('studens'));
+  console.log($(this).attr('old-status'));
+  console.log($(this).attr('tutorial'));
+
+  //wp_ajax_add_status_home_work
+
+  // let notificationId = $(this).attr('notificationId');
+  // let notificationContent = $(this).attr('notificationContent');
+  // let t = $(this).parent();
+
+  // t.css('opacity','0.3'); 
+
+  $.ajax({
+    type:'POST',
+    url: localurl + "/wp-admin/admin-ajax.php",
+    data:{
+       action: 'status_students_add',       
+       zach: $(this).attr('zach'),
+       studens: $(this).attr('studens'),
+       old_status: $(this).attr('old-status'),
+       tutorial: $(this).attr('tutorial'),
+    },
+    success:function(response){
+     console.log('work');         
+    },
+    complete:function(response){
+     console.log(response);
+    },
+    error: function(resp){
+      console.log(resp);
     }
 
   })

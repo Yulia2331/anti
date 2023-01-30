@@ -83,7 +83,7 @@ let tutorial = function(button,content){
         console.log(time_head);
         let flag = true;
         //console.log(idmodul);
-        //console.log(arr_deadline);
+        console.log(arr_deadline);
         arr_deadline.forEach(item =>{
             
             //console.log(idmodul);
@@ -99,7 +99,7 @@ let tutorial = function(button,content){
         });
 
         if(flag){
-           time_head[0].innerHTML = 'Без срочно!'; 
+           time_head[0].innerHTML = 'Бессрочно!'; 
         }
     }
 

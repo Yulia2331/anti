@@ -76,18 +76,53 @@
 
                         foreach($users as $id_user){
 
+                            ## собираем ячейку для таблицы
+
                             if ($id_user == $get_user){
                         
                                 $comments = get_comments( [
                                     'post_id' => $item->get_id(),
                                     'user_id' => $id_user,
-                                  ] );                           
+                                  ] ); 
 
-                                if ($comments != []){
-                                    array_push($student,'<a href="/home-work-teacher/?id='.$_GET['id'].'&student='.$id_user.'" class="badge badge-light-success fs-7 m-1">Зач</a>');
+                                $old_status = get_status_home_work_students_by_id($item->get_id(),get_user_meta( $id_user,'home_works_status'));
+                                $end_link = '';                         
+
+                                if ($comments != []){ 
+
+                                    if ($old_status=='non'){                                        
+                                        $end_link = 'class="badge badge-light-warning fs-7 m-1"> + ';
+                                    }else if($old_status=='yes'){
+                                        
+                                        $end_link = ' class="badge badge-light-success fs-7 m-1">Зач';
+                                    }else if($old_status=='no'){
+                                        
+                                        $end_link = ' class="badge badge-light-danger fs-7 m-1">Нет';
+                                    }
+
                                 }else{
-                                    array_push($student,'<a href="/home-work-teacher/?id='.$_GET['id'].'&student='.$id_user.'" class="badge badge-light-warning fs-7 m-1">no</a>');
+                                     $end_link = ' class="badge badge-light-warning fs-7 m-1"> - ';
+                                }
+
+                                if (get_post_meta($item->get_id(), 'date_home_work', 1) != '' and get_post_meta($item->get_id(), 'time_home_work', 1) == 'on'){
+
+
+
+                                    $arr_dead = explode('/',get_post_meta($item->get_id(), 'date_home_work', 1));                                    
+                                    $time_end = mktime( $arr_dead[4], $arr_dead[3], 00, $arr_dead[1], $arr_dead[0], $arr_dead[2]);
+
+                                    //echo $arr_dead[4].' '.$arr_dead[3].' '.$arr_dead[0].' '.$arr_dead[1].' '.$arr_dead[2].'  / ';
+                                    //echo time().' '.$time_end.'  / ';
+                                    //echo time() > $time_end;
+
+                                    if (time() > $time_end and $comments != [] || time() > $time_end and $old_status=='non'){
+                                        
+                                        $end_link = ' class="badge badge-light-danger fs-7 m-1"> ! ';
+                                    }
                                 } 
+
+                                $end_link .= '</a>';
+                                array_push($student,'<a href="/home-work-teacher/?id='.$_GET['id'].'&student='.$id_user.'" '.$end_link);
 
                             }
 

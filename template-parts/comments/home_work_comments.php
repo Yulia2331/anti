@@ -29,8 +29,8 @@ function my_theme_comment_home_work($comment, $args, $depth ) {
     ?>
     <div class="comments__maint <?php echo $level_comment;?>">
       <div class="main-comment__avatar">        
-          <div class="avatar_40">
-            <img src="<?php echo get_user_image($comment->user_id); ?>" alt="ava">
+          <div class="avatar_40" style="width: 40px;height: 40px;overflow: hidden;border-radius: 100%;">
+            <img src="<?php echo get_user_image($comment->user_id); ?>" alt="ava" style="border-radius: 0% !important;">
           </div>       
         <?php
           // print_r(get_avatar_data($comment->comment_author_email));
@@ -85,16 +85,16 @@ function my_theme_comment_home_work($comment, $args, $depth ) {
             <div class="main-comment__data"><?php printf(__( '%1$s в %2$s' ),get_comment_date(),get_comment_time()); ?></div>
             <!-- <button class="main-comment__button">Ответить</button> -->
             <?php
-              comment_reply_link(
-                array_merge(
-                  $args,
-                  array(                
-                    'add_below' => $add_below,
-                    'depth'     => $depth,
-                    'max_depth' => $args['max_depth']
-                  )
-                )
-              ); 
+              // comment_reply_link(
+              //   array_merge(
+              //     $args,
+              //     array(                
+              //       'add_below' => $add_below,
+              //       'depth'     => $depth,
+              //       'max_depth' => $args['max_depth']
+              //     )
+              //   )
+              // ); 
               ?>
           </div>
         </div>
