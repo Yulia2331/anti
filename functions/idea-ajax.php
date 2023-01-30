@@ -350,22 +350,24 @@ wp_die();
 	$user = $_GET[ 'user' ];
 	$liked = get_comment_meta(  $com_id, '_liked', false );
 	$action = '';
+	$args = get_comment($com_id);
+	$a_id = $args->user_id;
+	$post_id = $args->comment_post_ID;
 	if ( in_array( $user, $liked ) ) {
 					// усли ставил, то удаляем лайк, и присваиваем соответствующий ответ для переменной $action
 					delete_comment_meta( $com_id, '_liked', $user );
 					$action = 'delete';
+					delete_user_meta( $a_id, 'notifications-idea', ['like', $user. '/' . $post_id] );
 				 } else {
 					// добавляем новый лайт и ответ в переменной $action
 					add_comment_meta( sanitize_key( $com_id ), '_liked', $user, false );
 					$action = 'add';
+					add_user_meta($a_id, 'notifications-idea', ['like', $user. '/' . $post_id]);
 				 }
 				 wp_send_json_success( array(
 					'action' => $action,
 					'count'  => count( get_post_meta(  $com_id, '_liked', false ) ),
 				 ) );
-				// $args = get_comment($com_id);
-        		// $a_id = $args->user_id;
-				// $post_id = $args->comment_post_ID;
-				//  add_user_meta($a_id, 'notifications-idea', ['like', $user. '/' . $post_id]);
+				
 	wp_die();
  }

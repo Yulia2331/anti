@@ -656,7 +656,7 @@ function wph_redirect_after_comment(){
 // Удаление уведомлений пользователя
 add_action( 'wp_ajax_del_notifications', 'del_notifications' );
 function del_notifications(){
-		$notification_key = $_POST['notification_id'];
+		$notification_key = $_POST['notification_key'];
 		$notification_id = $_POST['notification_id'];
 		$notification_content = $_POST['notification_content'];
 		//echo 'good'.$notification_id.' '.$notification_content;
