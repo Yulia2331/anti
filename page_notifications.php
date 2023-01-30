@@ -66,61 +66,103 @@
           <?php 
             
             $notifications = get_user_meta( wp_get_current_user()->ID,'notifications');
-            // print_r(get_user_meta(wp_get_current_user()->ID,'notifications-idea'));
+            //print_r(get_user_meta(wp_get_current_user()->ID,'notifications-idea'));
+            //print_r($notifications);
+
             foreach($notifications as $key => $notification){
-              ?>
-                <div class="module-block__menu">
-                  <?php echo $notification[0]; ?>
-                  <br><br>
-                  <label id="open-file" class="del_notification comment-form-attachment__label module-block__btn secondary__button" notificationKey='notifications' notificationId='<?php echo $notification[1];?>' notificationContent='<?php echo $notification[0]; ?>' >Просмотренно</label>
-                  
+
+                $data_message = explode('/',$notification[1]);
+
+                if ($data_message[0] == 'message_tutorial'){
+
+                    if(wp_get_current_user()->roles[0] != 'lp_teacher'){
+                        ?>
+
+                            <div class="module-block__menu">
+                                <?php echo $notification[0]; ?>
+                                <br><br>
+                                <a class="module-block__btn secondary__button" href="/home-work-curse/?id=<?php echo $data_message[1];?>&tutorial=<?php echo $data_message[2];?>">Смотреть</a>
+                                
+                                <label id="open-file" class="del_notification comment-form-attachment__label module-block__btn secondary__button" notificationKey='notifications' notificationId='<?php echo $notification[1];?>' notificationContent='<?php echo $notification[0]; ?>' >Просмотренно</label>
+                                  
+                            </div>
+                        <?php
+                    }else{
+                        
+                        ?>
+                        
+                            <div class="module-block__menu">
+                                <?php echo $notification[0]; ?>
+                                <br><br>
+                                <a class="module-block__btn secondary__button" href="/home-work-teacher/?id=<?php echo $data_message[1];?>&tutorial=<?php echo $data_message[2];?><?php echo $data_message[3]!=''? '&student='.$data_message[3]:''; ?>">Смотреть</a>
+                                
+                                <label id="open-file" class="del_notification comment-form-attachment__label module-block__btn secondary__button" notificationKey='notifications' notificationId='<?php echo $notification[1];?>' notificationContent='<?php echo $notification[0]; ?>' >Просмотренно</label>
+                                  
+                            </div>
+                        <?php
+                    }
+                }else if ($data_message[0] == 'add_home_work'){
+                    ?>
+                        
+                            <div class="module-block__menu">
+                                <?php echo $notification[0]; ?>
+                                <br><br>
+                                <a class="module-block__btn secondary__button" href="/home-work-teacher/?id=<?php echo $data_message[1];?>&tutorial=<?php echo $data_message[2];?><?php echo $data_message[3]!=''? '&student='.$data_message[3]:''; ?>">Смотреть</a>
+                                
+                                <label id="open-file" class="del_notification comment-form-attachment__label module-block__btn secondary__button" notificationKey='notifications' notificationId='<?php echo $notification[1];?>' notificationContent='<?php echo $notification[0]; ?>' >Просмотренно</label>
+                                  
+                            </div>
+                        <?php
+                }else{
+                    ?>
+                        <div class="module-block__menu">
+                            <?php echo $notification[0]; ?>
+                            <a href="">Смотреть</a>
+                            <br><br>
+                            <label id="open-file" class="del_notification comment-form-attachment__label module-block__btn secondary__button" notificationKey='notifications' notificationId='<?php echo $notification[1];?>' notificationContent='<?php echo $notification[0]; ?>' >Просмотренно</label>
+                              
+                        </div>
+                    <?php
+                }
+            }
+            
+            // Юля
+            $notifications_idea = get_user_meta( wp_get_current_user()->ID,'notifications-idea');
+            foreach($notifications_idea as $key => $notification_idea){
+                // delete_user_meta( $user_id, 'notifications-idea', [$notification_idea[0], $notification_idea[1], $notification_idea[2]]);
+                // $user_id = $notification_idea[1];
+                // $post_id = $notification_idea[2];
+                // echo $notification_idea[0];
+                // echo $notification_idea[1];
+                $str = $notification_idea[1];
+                $arr = explode("/", $str);
+                $user_id = $arr[0];
+                $post_id = $arr[1];
+                $user       = get_userdata( $user_id );
+                $first_name = $user->first_name;
+                $last_name  = $user->last_name;
+                $user_url = $user->user_url;
+                $postData = get_post( $post_id);
+                ?>
+               <div class="module-block__menu">
+                Пользователь
+                <a href="/author/<?php echo  get_the_author_meta( 'nicename', $user_id) ?>"><? echo $first_name; echo '&nbsp'; echo $last_name; ?></a>
+                <? if($notification_idea[0] == 'rev'){ 
+                 echo 'оставил отзыв на идею:';
+                } 
+                if($notification_idea[0] == 'sbc'){
+                  echo 'подписался на идею:';
+                }
+                if($notification_idea[0] == 'comment'){
+                  echo 'оставил комментарий на идею:';
+                }
+                if($notification_idea[0] == 'like'){
+                  echo 'поставил лайк на ваш отзыв к идее:';
+                }
+                ?> 
+                 <a href="<? echo $postData->guid; ?>"><? echo $postData->post_title; ?></a> 
+                 <button class="del_notification comment-form-attachment__label module-block__btn secondary__button" style="display: block; margin-top: 10px;" notificationKey='notifications-idea' notificationId='<?php echo $notification_idea[1];?>' notificationContent='<?php echo $notification_idea[0]; ?>'>Просмотренно</button>
                 </div>
-              <?php
-            }
-          ?>
-          <? 
-           $notifications_idea = get_user_meta( wp_get_current_user()->ID,'notifications-idea');
-           foreach($notifications_idea as $key => $notification_idea){
-            // delete_user_meta( $user_id, 'notifications-idea', [$notification_idea[0], $notification_idea[1], $notification_idea[2]]);
-            // $user_id = $notification_idea[1];
-            // $post_id = $notification_idea[2];
-            // echo $notification_idea[0];
-            // echo $notification_idea[1];
-            $str = $notification_idea[1];
-            $arr = explode("/", $str);
-            $user_id = $arr[0];
-            $post_id = $arr[1];
-            $user       = get_userdata( $user_id );
-            $first_name = $user->first_name;
-            $last_name  = $user->last_name;
-            $user_url = $user->user_url;
-            $postData = get_post( $post_id);
-           ?>
-           <div class="module-block__menu">
-            Пользователь
-            <a href="/author/<?php echo  get_the_author_meta( 'nicename', $user_id) ?>"><? echo $first_name; echo '&nbsp'; echo $last_name; ?></a>
-            <? if($notification_idea[0] == 'rev'){ 
-             echo 'оставил отзыв на идею:';
-            } 
-            if($notification_idea[0] == 'sbc'){
-              echo 'подписался на идею:';
-            }
-            if($notification_idea[0] == 'comment'){
-              echo 'оставил комментарий на идею:';
-            }
-            if($notification_idea[0] == 'like'){
-              echo 'поставил лайк на ваш отзыв к идее:';
-            }
-            if($notification_idea[0] == 'answ'){
-              echo 'оставил комментарий на ваш отзыв к идее:';
-            }
-            if($notification_idea[0] == 'answ-timeline'){
-              echo 'оставил комментарий в ленте к идее:';
-            }
-            ?> 
-             <a href="<? echo $postData->guid; ?>"><? echo $postData->post_title; ?></a> 
-             <button class="del_notification comment-form-attachment__label module-block__btn secondary__button" style="display: block; margin-top: 10px;" notificationKey='notifications-idea' notificationId='<?php echo $notification_idea[1];?>' notificationContent='<?php echo $notification_idea[0]; ?>'>Просмотренно</button>
-            </div>
           <? } ?>
         
       </div>

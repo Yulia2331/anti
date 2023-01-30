@@ -83,12 +83,6 @@ function mytheme_comment( $comment, $args, $depth ) {
 		$result['post_id'] = $post_id;
 		
 		echo json_encode($result);
-		$postData = get_post( $post_id);
-		$p_type = $postData->post_type;
-		$a_id = $postData->post_author;
-		if($p_type == 'ideas_timeline'){
-			add_user_meta($a_id, 'notifications-idea', ['answ-timeline', $user_id. '/' . $post_id]);
-		}
 		wp_die();
 
 

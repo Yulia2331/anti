@@ -339,9 +339,6 @@ $last_name  = $user->last_name;
 ];
 
 wp_new_comment( $commentdata );
-$args = get_comment($parent);
-$a_id = $args->user_id;
-add_user_meta($a_id, 'notifications-idea', ['answ', $current_user_id. '/' . $post_id]);
 wp_die(); 
 }
 
