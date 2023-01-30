@@ -619,12 +619,13 @@ add_filter('comment_post_redirect', 'wph_redirect_after_comment');
 // Удаление уведомлений пользователя
 add_action( 'wp_ajax_del_notifications', 'del_notifications' );
 function del_notifications(){
+	    $notification_key = $_POST['notification_key'];
 		$notification_id = $_POST['notification_id'];
 		$notification_content = $_POST['notification_content'];
 		//echo 'good'.$notification_id.' '.$notification_content;
 		//print_r([$notification_content,$notification_id]);
 		
-		delete_metadata( 'user', wp_get_current_user()->ID, 'notifications', [$notification_content,$notification_id] );
+		delete_metadata( 'user', wp_get_current_user()->ID, $notification_key, [$notification_content,$notification_id] );
 		wp_die();
 	}
 

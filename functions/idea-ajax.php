@@ -169,6 +169,9 @@ if( $comments = get_comments( $args ) ){
 		  ],
 	];
 	$idea_timeline_id = wp_insert_post( $idea_data );
+	$postData = get_post( $post_id);
+	$a_id = $postData->post_author;
+	add_user_meta($a_id, 'notifications-idea', ['rev', $current_user_id. '/' . $post_id]);
 wp_die(); 
 }
 add_action('wp_ajax_sabscr_idea', 'sabscr_idea');
@@ -197,6 +200,9 @@ $sbc = array(
 		  ],
 	];
 	$idea_timeline_id = wp_insert_post( $idea_data );
+	$postData = get_post( $post_id);
+	$a_id = $postData->post_author;
+	add_user_meta($a_id, 'notifications-idea', ['sbc', $user_id . '/' . $post_id]);
 wp_die(); 
 }
 
@@ -333,7 +339,6 @@ $last_name  = $user->last_name;
 ];
 
 wp_new_comment( $commentdata );
-
 wp_die(); 
 }
 
@@ -358,5 +363,9 @@ wp_die();
 					'action' => $action,
 					'count'  => count( get_post_meta(  $com_id, '_liked', false ) ),
 				 ) );
+				// $args = get_comment($com_id);
+        		// $a_id = $args->user_id;
+				// $post_id = $args->comment_post_ID;
+				//  add_user_meta($a_id, 'notifications-idea', ['like', $user. '/' . $post_id]);
 	wp_die();
  }

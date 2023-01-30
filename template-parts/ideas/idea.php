@@ -225,7 +225,7 @@ if( $comments = get_comments( $args ) ){
                 $da = TRUE;
               }
               ?> 
-              <div class="reviews-idea__like <?php echo ($da)?'liked ':'' ?>" data-likeid="<? echo $com_id; ?>" data-count="" data-user="<? echo $current_user_id; ?>"> 
+              <div class="reviews-idea__like <?php echo ($da)?'liked ':'' ?>" data-likeid="<? echo $com_id; ?>" data-user="<? echo $current_user_id; ?>"> 
                 <div class="reviews-idea__like_number"><? echo count($b) ?></div>
                 <div class="reviews-idea__like_icon"><i class="fa-solid fa-heart"></i></div>
               </div>

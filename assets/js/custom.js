@@ -1100,7 +1100,7 @@ $('.show_comments').on('click', function(e){
 
 $('.del_notification').on('click', function(e){
   e.preventDefault();
-
+  let notificationKey = $(this).attr('notificationKey');
   let notificationId = $(this).attr('notificationId');
   let notificationContent = $(this).attr('notificationContent');
   let t = $(this).parent();
@@ -1112,6 +1112,7 @@ $('.del_notification').on('click', function(e){
     url: "/wp-admin/admin-ajax.php",
     data:{
        action: 'del_notifications',
+       notification_key: notificationKey,
        notification_id: notificationId,
        notification_content:notificationContent,
     },

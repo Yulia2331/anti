@@ -66,18 +66,56 @@
           <?php 
             
             $notifications = get_user_meta( wp_get_current_user()->ID,'notifications');
+            print_r(get_user_meta(wp_get_current_user()->ID,'notifications-idea'));
             foreach($notifications as $key => $notification){
               ?>
                 <div class="module-block__menu">
                   <?php echo $notification[0]; ?>
                   <br><br>
-                  <label id="open-file" class="del_notification comment-form-attachment__label module-block__btn secondary__button" notificationId='<?php echo $notification[1];?>' notificationContent='<?php echo $notification[0]; ?>' >Просмотренно</label>
+                  <label id="open-file" class="del_notification comment-form-attachment__label module-block__btn secondary__button" notificationKey='notifications' notificationId='<?php echo $notification[1];?>' notificationContent='<?php echo $notification[0]; ?>' >Просмотренно</label>
                   
                 </div>
               <?php
             }
           ?>
-          
+          <? 
+           $notifications_idea = get_user_meta( wp_get_current_user()->ID,'notifications-idea');
+           foreach($notifications_idea as $key => $notification_idea){
+            // delete_user_meta( $user_id, 'notifications-idea', [$notification_idea[0], $notification_idea[1], $notification_idea[2]]);
+            // $user_id = $notification_idea[1];
+            // $post_id = $notification_idea[2];
+            // echo $notification_idea[0];
+            // echo $notification_idea[1];
+            $str = $notification_idea[1];
+            $arr = explode("/", $str);
+            $user_id = $arr[0];
+            $post_id = $arr[1];
+            $user       = get_userdata( $user_id );
+            $first_name = $user->first_name;
+            $last_name  = $user->last_name;
+            $user_url = $user->user_url;
+            $postData = get_post( $post_id);
+           ?>
+           <div class="module-block__menu">
+            Пользователь
+            <a href="/author/<?php echo  get_the_author_meta( 'nicename', $user_id) ?>"><? echo $first_name; echo '&nbsp'; echo $last_name; ?></a>
+            <? if($notification_idea[0] == 'rev'){ 
+             echo 'оставил отзыв на идею:';
+            } 
+            if($notification_idea[0] == 'sbc'){
+              echo 'подписался на идею:';
+            }
+            if($notification_idea[0] == 'comment'){
+              echo 'оставил комментарий на идею:';
+            }
+            if($notification_idea[0] == 'like'){
+              echo 'поставил лайк на ваш отзыв к идее:';
+            }
+            ?> 
+             <a href="<? echo $postData->guid; ?>"><? echo $postData->post_title; ?></a> 
+             <button class="del_notification comment-form-attachment__label module-block__btn secondary__button" notificationKey='notifications-idea' notificationId='<?php echo $notification_idea[1];?>' notificationContent='<?php echo $notification_idea[0]; ?>'>Просмотренно</button>
+            </div>
+          <? } ?>
         
       </div>
    </section>
