@@ -732,7 +732,7 @@ function get_status_home_work_students_by_id($id_cours,$arr){
 
 //debug
 function mydebbug(){
-	$mydebug=true;
+	$mydebug=false;
 	if ($mydebug) {
 		return true;
 	}
