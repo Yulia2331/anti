@@ -142,7 +142,7 @@ function theme_name_scripts() {
 	wp_enqueue_style( 'new-style', get_template_directory_uri() . '/assets/css/style.min.css' );
 	
 
-	wp_enqueue_style( 'general', get_template_directory_uri() . '/assets/css/general.min.css' );
+	wp_enqueue_style( 'general', get_template_directory_uri() . '/assets/css/general.css' );
 	wp_enqueue_style( 'my-style-idea', get_template_directory_uri() . '/assets/css/ideas/my-style-idea.css' );
 	// wp_enqueue_style( 'all-ideas', get_template_directory_uri() . '/assets/css/ideas/all-ideas.min.css' );
 	// wp_enqueue_style( 'my-reviews', get_template_directory_uri() . '/assets/css/ideas/my-reviews.min.css' );
@@ -538,9 +538,7 @@ function get_remaining_time($end_time){
 
 	}else{
 
-		$days = 0;
-	    $hours = 0;
-	    $minutes = 0;
+		return 'Просрочено!';
 
 	}
     
@@ -618,18 +616,21 @@ function add_comment_frome_field( $comment_id ) {
 add_filter('comment_post_redirect', 'wph_redirect_after_comment');
 function wph_redirect_after_comment(){
     //print_r( $_POST );
+    $data_message = 'message_tutorial'.'/';
+    $data_message .= $_POST['comment-post-item-course'].'/';
+    $data_message .=$_POST['comment_post_ID'].'/';
 
 	// Добовление уведомлений пользователей
 	if ($_POST['comment_frome_value'] != 'all' ){
 		if ($_POST['comment_frome_value'] != wp_get_current_user()->user_email){
-			add_user_meta( get_user_by('email',$_POST['comment_frome_value'])->ID, 'notifications', [$_POST['comment'],'id-curs/id-page'] );
+			add_user_meta( get_user_by('email',$_POST['comment_frome_value'])->ID, 'notifications', [$_POST['comment'],$data_message] );
 		}
 
 		// Добовляем все сообщения с уроков учителю
-		if (wp_get_current_user()->roles!='lp_teacher'){
+		if (wp_get_current_user()->roles[0]!='lp_teacher'){
+			$data_message .= wp_get_current_user()->ID;
 			$teachers = get_post_meta($_POST['comment-post-item-course'], 'teachers', 1);
-
-			add_user_meta( get_user_by('email',$teachers[0])->ID, 'notifications', [$_POST['comment'],'id-curs/id-page'] );
+			add_user_meta( get_user_by('email',$teachers[0])->ID, 'notifications', [$_POST['comment'],$data_message] );
 		}   	
 	}else{		
 
@@ -637,12 +638,12 @@ function wph_redirect_after_comment(){
 		//print_r(get_post($_POST['comment_post_ID']));
 		//print_r($users);
 		foreach($users as $user){
-			add_user_meta( $user, 'notifications', [$_POST['comment'],'id-curs/id-page'] );
+			add_user_meta( $user, 'notifications', [$_POST['comment'],$data_message] );
 		}
 
 	}
 
-    wp_redirect($_POST['page_comments']);
+    wp_redirect($_POST['page_comments'].'&tutorial='.$_POST['comment_post_ID']);
     exit();
 }
 
@@ -695,6 +696,24 @@ function status_students_add(){
 	//wp_die();
 }
 
+function search_new_message($id_teacher,$id_studens,$id_tutorial){
+	$notifications = get_user_meta( $id_teacher,'notifications');
+	// echo $id_tutorial.' ';
+	// echo $id_studens.' ';
+
+	foreach($notifications as $key => $notification){
+
+        $data_message = explode('/',$notification[1]);
+        if (isset($data_message[3])){        	
+
+	        if ($data_message[3] ==  $id_studens and $id_tutorial == $data_message[2]){
+	        	//echo 'work';
+	        	return 'new';
+
+	        }
+	    }
+    }
+}
 
 
 function get_status_home_work_students_by_id($id_cours,$arr){
@@ -713,7 +732,7 @@ function get_status_home_work_students_by_id($id_cours,$arr){
 
 //debug
 function mydebbug(){
-	$mydebug=false;
+	$mydebug=true;
 	if ($mydebug) {
 		return true;
 	}

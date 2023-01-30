@@ -25,6 +25,13 @@ defined( 'ABSPATH' ) || exit;
 //$id_cours = $_GET['id'];
 $post = get_post($_GET['id']);
 
+if (isset($_GET['tutorial'])){
+  $tutorial = $_GET['tutorial'];
+}else{
+  $tutorial = '';
+}
+
+
 get_header(null, array('title'=>''));
 
 //print_r(learn_press_get_course( $id_cours ));
@@ -48,7 +55,7 @@ $curriculum  = $course->get_curriculum();
 $user_course = $user->get_course_data( get_the_ID() );
 $user        = learn_press_get_current_user();
 
-   
+//print_r($tutorial); 
 ?> 
 
       </div></div>
@@ -81,6 +88,8 @@ foreach ( $curriculum as $section ) {
       // Пременная для проверки наличия ДЗ
       $modul_home_work = false;
 
+      // переменная открытогго модуля
+      $module_visible = false;
 
       $time = learn_press_get_post_translated_duration( get_the_ID(), esc_html__( 'Lifetime access', 'learnpress' ) ); 
 
@@ -117,7 +126,13 @@ foreach ( $curriculum as $section ) {
           //<button class="tutor_btn active" data-tab="modul1_tutorial_1">1.<span>Урок в модуле целеполагание</span></button>
           $string_list_tutorial .= '<li class="module-block__item">';
           $string_list_tutorial .= '<button class="tutor_btn'; 
-          $string_list_tutorial .= ($ordinal==1)?' tab_active':'';
+
+          if($item->get_id() == $tutorial){
+            $string_list_tutorial .= ' tab_active';
+          }else if($tutorial == ''){
+            $string_list_tutorial .= ($ordinal==1)?' tab_active':'';
+          }
+
           $string_list_tutorial .= '" data-tab="modul'.$section->get_id().'_tutorial_'.$ordinal .'" data-id='.$item->get_id().'>';
           $string_list_tutorial .=  $ordinal .'.<span>'. $title_tutorial .'</span>';
           $string_list_tutorial .= '</button>';                                      
@@ -128,6 +143,10 @@ foreach ( $curriculum as $section ) {
           //get_home_work_comments(array_values($coments_tutorial)[9],$id_cours);
           //$coments_tutorial = json_decode(json_encode($item), true);
           $modul_home_work = true;
+
+          if($item->get_id() == $tutorial){
+            $module_visible = true;
+          }
 
           //$test_string .=$item->get_id();
           //$test_string .= get_post_meta($item->get_id(), 'time_home_work', 1);
@@ -155,10 +174,12 @@ foreach ( $curriculum as $section ) {
       //echo $test_string;
 
       if ($modul_home_work){  
+        ///module-block-active
+        //echo $module_visible;
         ?>
 
         <div class="course__wrapper ">
-          <div class="course__module module-block" style="margin-bottom:15px;">
+          <div class="course__module module-block <?php echo $module_visible ?'module-block-active' : '';?>" style="margin-bottom:15px;">
 
             <div class="module-block__header">
               <div class="module-block__left"> 
@@ -190,8 +211,31 @@ foreach ( $curriculum as $section ) {
               
                 <div class="module-block__time"><?php 
 
-                  //echo get_remaining_time(strtotime(get_the_date( 'd-m-Y', $id_cours)),$time_section); 
+                if($tutorial != ''){
+                  $flag = true;
+                  foreach($arr_dead_line as $arr_dead ){ 
+                    
+                    if($tutorial == $arr_dead[0]){
+                      $time_end = mktime( $arr_dead[1][4], $arr_dead[1][3], 00, $arr_dead[1][1], $arr_dead[1][0], $arr_dead[1][2]);
+                      $time_section2 = get_remaining_time($time_end);
+                      echo $time_section2;
+                      $flag = false;
+                      break;
+                    }else{
+                      $flag = true;
+                      //echo $time_section;
+                      //break;
+                    }
+
+                  }
+                  if($flag){
+                    echo $time_section;
+                  }
+                }else if($tutorial == ''){
                   echo $time_section;
+                }
+                  
+                  
 
                 ?></div>
                 <div class="module-block__arrow container__icon--18"><i class="fa-solid fa-angle-down"></i></div>
@@ -213,8 +257,20 @@ foreach ( $curriculum as $section ) {
                 $ordinal++;
 
                 // собираем атрибуты дива
-                $modul = $section->get_id();              
-                $display = ($ordinal == 1)?'display:block;':'display:none;';
+                $modul = $section->get_id();
+                //echo $module_visible ?'module-block-active' : '';
+                
+
+                // Открываем нужный урок
+                $display ='display:none;';
+
+                if($tutorial == $item->get_id()){
+                  $display ='display:block;';
+                }else{
+                  $display = ($ordinal == 1 )?'display:block;':'display:none;';
+                }
+                
+                
                 $ferst_div = 'id="modul'.$modul.'_tutorial_'.$ordinal.'" class="tutorial" style="'.$display.' grid-area: A"';
 
                 ?>
@@ -224,7 +280,7 @@ foreach ( $curriculum as $section ) {
                       //echo get_current_user_id();
                       $comments = get_comments( [
                           'post_id' => $item->get_id(),
-                          'user_id' => get_current_user_id(),
+                          'author__in' => get_current_user_id(),
                         ] );
 
                       //echo get_post_meta($item->get_id(), 'files_home_work', 1);

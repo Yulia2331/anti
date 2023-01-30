@@ -366,7 +366,7 @@ function home_work_box_update( $post_id ){
 		//print_r(get_post($_POST['comment_post_ID']));
 		//print_r($users);
 		foreach($users as $user){
-			add_user_meta( $user, 'notifications', ['Вам доступно домашнее задание',$_POST['course_id'].'/id-page'] );
+			add_user_meta( $user, 'notifications', ['Вам доступно домашнее задание','add_home_work/'.$_POST['course_id'].'/'.$post_id.'/'] );
 		}
 	}
 

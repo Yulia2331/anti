@@ -25,6 +25,12 @@ get_header(null, array('title'=>'Страница учителя'));
 //$id_cours = $_GET['id'];
 $post = get_post($_GET['id']);
 
+if (isset($_GET['tutorial'])){
+  $tutorial = $_GET['tutorial'];
+}else{
+  $tutorial = '';
+}
+
 //print_r(learn_press_get_course( $id_cours ));
 //do_action( 'learn-press/before-single-course' );
 
@@ -115,13 +121,23 @@ foreach ( $curriculum as $section ) {
           //<button class="tutor_btn active" data-tab="modul1_tutorial_1">1.<span>Урок в модуле целеполагание</span></button>
           $string_list_tutorial .= '<li class="module-block__item">';
           $string_list_tutorial .= '<button class="tutor_btn'; 
-          $string_list_tutorial .= ($ordinal==1)?' tab_active':'';
+
+          if($item->get_id() == $tutorial){
+            $string_list_tutorial .= ' tab_active';
+          }else if($tutorial == ''){
+            $string_list_tutorial .= ($ordinal==1)?' tab_active':'';
+          }
+          
           $string_list_tutorial .= '" data-tab="modul'.$section->get_id().'_tutorial_'.$ordinal .'" data-id='.$item->get_id().'>';
           $string_list_tutorial .=  $ordinal .'.<span>'. $title_tutorial .'</span>';
           $string_list_tutorial .= '</button>';                                      
           $string_list_tutorial .= '</li>';
 
           $modul_home_work = true;
+
+          if($item->get_id() == $tutorial){
+            $module_visible = true;
+          }
 
           //
           //$coments_tutorial = (array)$item;
@@ -145,7 +161,7 @@ foreach ( $curriculum as $section ) {
     ?>
 
       <div class="course__wrapper ">
-        <div class="course__module module-block" style="margin-bottom:15px;">
+        <div class="course__module module-block <?php echo $module_visible ?'module-block-active' : '';?>" style="margin-bottom:15px;">
 
           <div class="module-block__header">
             <div class="module-block__left"> 
@@ -176,8 +192,29 @@ foreach ( $curriculum as $section ) {
               <div class="module-block__time">
                 <?php 
 
-                  //echo get_remaining_time(strtotime(get_the_date( 'd-m-Y', $id_cours)),$time_section); 
+                  if($tutorial != ''){
+                  $flag = true;
+                  foreach($arr_dead_line as $arr_dead ){ 
+                    
+                    if($tutorial == $arr_dead[0]){
+                      $time_end = mktime( $arr_dead[1][4], $arr_dead[1][3], 00, $arr_dead[1][1], $arr_dead[1][0], $arr_dead[1][2]);
+                      $time_section2 = get_remaining_time($time_end);
+                      echo $time_section2;
+                      $flag = false;
+                      break;
+                    }else{
+                      $flag = true;
+                      //echo $time_section;
+                      //break;
+                    }
+
+                  }
+                  if($flag){
+                    echo $time_section;
+                  }
+                }else if($tutorial == ''){
                   echo $time_section;
+                }
 
                 ?>
               </div>
@@ -203,22 +240,36 @@ foreach ( $curriculum as $section ) {
               $ordinal++;
 
               // собираем атрибуты дива
-              $modul = $section->get_id();              
-              $display = ($ordinal == 1)?'display:block;':'display:none;';
+              $modul = $section->get_id();
+
+              // Открываем нужный урок
+                $display ='display:none;';
+
+                if($tutorial == $item->get_id()){
+                  $display ='display:block;';
+                }else{
+                  //$display = ($ordinal == 1 )?'display:block;':'display:none;';
+                }
+
+
+
               $ferst_div = 'id="modul'.$modul.'_tutorial_'.$ordinal.'" class="tutorial" style="'.$display.' grid-area: A"';
 
               ?>
                 <div <?php echo $ferst_div;?> >
                   <!-- <h1>Урок <?php echo $ordinal;?></h1> -->
                   <?php 
+                    $teachers = get_post_meta($id_cours, 'teachers', 1);
+                    $teacher = get_user_by( 'email', $teachers[0] )->ID;
+
                     //echo get_current_user_id();
                     $comments = get_comments( [
                         'post_id' => $item->get_id(),
-                        'user_id' => get_current_user_id(),
+                        'author__in' => $_GET['student'],
                       ] );
                       
                     if ($comments == []){  
-
+                      //echo 'чет не так';
                       // вывод формы комментария ( обязательный параметр $item )
                       include ('template-parts/comments/comments-forms-home-work.php');
                       

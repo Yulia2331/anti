@@ -45,6 +45,10 @@
 
           echo '<br><br><br>';
 
+          //$notifications = get_user_meta( wp_get_current_user()->ID,'notifications');
+          // echo '<pre>';
+          // print_r($notifications);
+          // echo '</pre>';
 
 
 
@@ -90,15 +94,24 @@
 
                                 if ($comments != []){ 
 
-                                    if ($old_status=='non'){                                        
-                                        $end_link = 'class="badge badge-light-warning fs-7 m-1"> + ';
-                                    }else if($old_status=='yes'){
-                                        
-                                        $end_link = ' class="badge badge-light-success fs-7 m-1">Зач';
-                                    }else if($old_status=='no'){
-                                        
-                                        $end_link = ' class="badge badge-light-danger fs-7 m-1">Нет';
+                                    $new_message = search_new_message(get_current_user_id(),$id_user,$item->get_id());
+
+                                    if($new_message=='new'){
+                                        $end_link = 'class="badge badge-light-warning fs-7 m-1">'.search_new_message(get_current_user_id(),$id_user,$item->get_id());
+                                    }else{
+                                        if ($old_status=='non'){ 
+
+                                            $end_link = 'class="badge badge-light-warning fs-7 m-1"> -';
+                                        }else if($old_status=='yes'){
+                                            
+                                            $end_link = ' class="badge badge-light-success fs-7 m-1">Зач';
+                                        }else if($old_status=='no'){
+                                            
+                                            $end_link = ' class="badge badge-light-danger fs-7 m-1">Нет';
+                                        }
                                     }
+
+                                    
 
                                 }else{
                                      $end_link = ' class="badge badge-light-warning fs-7 m-1"> - ';
@@ -122,7 +135,7 @@
                                 } 
 
                                 $end_link .= '</a>';
-                                array_push($student,'<a href="/home-work-teacher/?id='.$_GET['id'].'&student='.$id_user.'" '.$end_link);
+                                array_push($student,'<a href="/home-work-teacher/?id='.$_GET['id'].'&student='.$id_user.'&tutorial='.$item->get_id().'" '.$end_link);
 
                             }
 

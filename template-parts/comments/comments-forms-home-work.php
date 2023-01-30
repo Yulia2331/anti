@@ -14,6 +14,8 @@
 
 //print_r($item);
 
+$message_frome = '';
+
 ?>
 
 <div class="module-block__add">
