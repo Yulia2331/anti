@@ -111,6 +111,12 @@
             if($notification_idea[0] == 'like'){
               echo 'поставил лайк на ваш отзыв к идее:';
             }
+            if($notification_idea[0] == 'answ'){
+              echo 'оставил комментарий на ваш отзыв к идее:';
+            }
+            if($notification_idea[0] == 'answ-timeline'){
+              echo 'оставил комментарий в ленте к идее:';
+            }
             ?> 
              <a href="<? echo $postData->guid; ?>"><? echo $postData->post_title; ?></a> 
              <button class="del_notification comment-form-attachment__label module-block__btn secondary__button" style="display: block; margin-top: 10px;" notificationKey='notifications-idea' notificationId='<?php echo $notification_idea[1];?>' notificationContent='<?php echo $notification_idea[0]; ?>'>Просмотренно</button>
