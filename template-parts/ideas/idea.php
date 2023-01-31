@@ -140,7 +140,25 @@ endif; ?>
       <span class="hypothesis__msg"></span>
    <? } ?>
     <div class="hypothesis__board"> 
+      <?
+//           if (have_rows('hypothesis_rep', $idea_id)){
+// 	the_row();
+// 	$subs = get_field('hypothesis_rep', $idea_id);
+//   $end = end($subs);
+//   $date = strtotime(end($end));
+//   $time = current_time( 'timestamp' );
+//   $check = $time - $date;
+//   $d = 84400;
+//   $ind = count($subs);
+//   echo $ind;
+// //   $da = 'net';
+// //   if($check<=$d){
+// //   $da = 'da';
+// // }
 
+// // echo $da;
+// }
+?>
     <?  if( have_rows('hypothesis_rep') ):
   while ( have_rows('hypothesis_rep') ) : the_row();
 ?>

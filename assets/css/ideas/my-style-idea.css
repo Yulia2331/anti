@@ -245,8 +245,11 @@
 .reviews-idea__like_icon i{
     pointer-events: none;
 }
+.reviews-idea__like_icon i{
+    color: #595757;
+}
 .liked .reviews-idea__like_icon i{
-    color: red;
+    color: #FF0000;
 }
 .active{
     display: block;

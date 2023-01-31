@@ -156,7 +156,8 @@ let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypoth
        beforeSend: function( xhr ) {
 				msgWrapp.innerText = 'Добавление гипотезы...';	
 			},
-       success: function(data) {
+       success: function(answer) {
+        if ( answer.data.action == 'add' ) {
         msgWrapp.innerText ='Гипотеза добавлена';	
      
         let html = 
@@ -170,6 +171,14 @@ let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypoth
         </div>
         `
         per.insertAdjacentHTML('beforeEnd', html);
+        }
+        if ( answer.data.action == 'update' ) {
+          msgWrapp.innerText = 'Гипотеза обновлена';	
+          let len = per.querySelectorAll('.hypothesis__item').length;
+          let k = '[data-row="'+len+'"]';
+          let che = per.querySelector(k);
+          che.querySelector('.hypothesis__content').textContent = name;
+        }
         e.target.reset();
       }
   });
