@@ -50,6 +50,20 @@ function ideas_form()
 	  ],
 ];
 $idea_timeline_id = wp_insert_post( $idea_data );
+$args = array(
+    'post_type' => 'ideas',
+    'orderby'     => 'date',
+    'order'       => 'DESC',
+  );
+query_posts( $args );
+if ( have_posts() ) {
+	while ( have_posts() ) : the_post();
+  // тут вывод шаблона поста, например через get_template_part()
+  get_template_part('template-parts/ideas/idea');
+endwhile;
+} else {
+echo 'Ничего не найдено';
+}
 wp_die(); 
 }
 
@@ -106,6 +120,20 @@ function trash_idea()
 $postid = $_POST['id']; 
 
 wp_delete_post( $postid, true );
+$args = array(
+    'post_type' => 'ideas',
+    'orderby'     => 'date',
+    'order'       => 'DESC',
+  );
+query_posts( $args );
+if ( have_posts() ) {
+	while ( have_posts() ) : the_post();
+  // тут вывод шаблона поста, например через get_template_part()
+  get_template_part('template-parts/ideas/idea');
+endwhile;
+} else {
+echo 'Ничего не найдено';
+}
 wp_die(); 
 }
 

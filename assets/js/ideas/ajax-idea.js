@@ -24,9 +24,9 @@ try{
   oo.addEventListener('submit', (e) =>{
     e.preventDefault();
     let title = e.target.querySelector('#idea_title').value;
-    let cont = e.target.querySelector('.create-idea__textarea').value;
-    let tag = e.target.querySelector('input[name="idea_tag"]:checked').value;
-    let tax = e.target.querySelector('input[name="idea_cat"]:checked').value;
+    let cont;
+    let tag;
+    let tax
     let date = new Date().toLocaleDateString();
     let btn = e.target.querySelector('.create-idea__button');
     let criterias = e.target.querySelectorAll('.create-idea__criteria');
@@ -36,6 +36,28 @@ try{
       obj.val = c.value;
       criteriasArr.push(obj);
     })
+    if(e.target.querySelector('input[name="idea_cat"]:checked')){
+      tax = e.target.querySelector('input[name="idea_cat"]:checked').value;
+    } else {
+      $('.create-idea__msg').text('Выбирите категорию');	
+      return false;
+    }
+    if(e.target.querySelector('input[name="idea_tag"]:checked')){
+      tag = e.target.querySelector('input[name="idea_tag"]:checked').value;
+    } else {
+      $('.create-idea__msg').text('Выбирите тег');	
+      return false;
+    }
+    if(e.target.querySelector('.create-idea__textarea').value == ''){
+      $('.create-idea__msg').text('Опишите вашу идею');
+      return false;
+    } else {
+      cont = e.target.querySelector('.create-idea__textarea').value;
+    }
+    if(criteriasArr.length == 0){
+      $('.create-idea__msg').text('Создайте критерий для оценки идеи');
+      return false;
+    } 
     btn.disabled = true;
     $.ajax({ 
        data: {
@@ -60,13 +82,31 @@ try{
         $('.create-idea__msg').text('Идея добавлена');
         btn.disabled = false;	
         e.target.reset();
+        setTimeout(() => {
+          document.querySelector('.create-idea').classList.remove('active');
+          document.querySelector('.hidden').classList.remove('active');
+          document.body.classList.remove('no-scroll');
+        }, "2000");
+        $( '.board-ideas__wrapper' ).html(data);
       }
   });
   })
 } catch {}
+jQuery( function( $ ){
+	$( '#filter' ).submit(function(){
+		var filter = $(this);
+		$.ajax({
+			url : '/wp-admin/admin-ajax.php', // обработчик
+			data : filter.serialize(), // данные
+			type : 'POST', // тип запроса
+			success : function( data ){
+				$( '.board-ideas__wrapper' ).html(data);
+			}
+		});
+		return false;
+	});
+});
 try{
-  // const sabscrBtn = document.querySelectorAll('.no-sabscr');
-  // sabscrBtn.forEach((i) => {
     document.addEventListener('click', (e) =>{
       if(e.target.classList.contains('no-sabscr')){
       e.preventDefault();
@@ -96,11 +136,8 @@ try{
       }
   });
       }})
-  // })
 } catch { }
 try{
-  // const unsabscrBtn = document.querySelectorAll('.idea-sabscr');
-  // document.forEach((i) => {
     document.addEventListener('click', (e) =>{
       if(e.target.classList.contains('idea-sabscr')){
       e.preventDefault();
@@ -130,12 +167,8 @@ try{
       }
   });
       }})
-  // })
 } catch { }
 try{
-  // const hh = document.querySelectorAll('.hypothesis__add');
-  //     hh.forEach((i) => {
-    
         document.addEventListener('submit', (e) =>{
           if(e.target.classList.contains('hypothesis__add')){
       e.preventDefault();
@@ -183,11 +216,8 @@ let msgWrapp = e.target.closest('.view-idea__hypothesis').querySelector('.hypoth
       }
   });
       }})
-  // })
 } catch { }
 try{
-  // const ideaTrash = document.querySelectorAll('.view-idea__trash');
-  // ideaTrash.forEach((i) => {
     document.addEventListener('click', (e) => {
       if(e.target.classList.contains('view-idea__trash')){
       let id = e.target.dataset.trash;
@@ -204,14 +234,19 @@ try{
 			},
        success: function(data) {
         msgWrapp.innerText = 'Идея удалена';	
+        setTimeout(() => {
+          document.querySelectorAll('.view-idea').forEach((i) => {
+            i.classList.remove('active');
+          })
+          document.querySelector('.hidden').classList.remove('active');
+          document.body.classList.remove('no-scroll');
+        }, "2000");
+        $( '.board-ideas__wrapper' ).html(data);
       }
   });
     }})
-  // })
 } catch { }
 try{
-  // const hypothesisTrash = document.querySelectorAll('.hypothesis__item_icon');
-  // hypothesisTrash.forEach((i) => {
     document.addEventListener('click', (e) => {
       if(e.target.classList.contains('hypothesis__item_icon')){
       let id = e.target.dataset.trash;
@@ -234,11 +269,8 @@ try{
       }
   });
     }})
-  // })
 } catch { }
 try{
-  // const revForm = document.querySelectorAll('.create-reviews__form');
-  //  revForm.forEach((i) => {
     document.addEventListener('submit', (e) =>{
       if(e.target.classList.contains('create-reviews__form')){
       e.preventDefault();
@@ -277,11 +309,8 @@ try{
       }
       });
     }});
-    // })
 } catch { }
 try{
-  // const revForm = document.querySelectorAll('.create-reviews__form');
-  //  revForm.forEach((i) => {
     document.addEventListener('submit', (e) =>{
       if(e.target.classList.contains('msg-form')){
       e.preventDefault();
@@ -308,7 +337,6 @@ try{
       }
       });
     }});
-    // })
 } catch { }
 try{
 document.addEventListener('click', (e) => {
@@ -380,7 +408,6 @@ try{
       let val = par.dataset.subcommid;
       let name = par.querySelector('.sub-comment__firstname').textContent;
       let blockPar = par.closest('.comment-idea');
-      console.log(val);
       blockPar.querySelector('.comments__input_par').value = val;
       blockPar.querySelector('.comments__input').value = name + ',';
     }

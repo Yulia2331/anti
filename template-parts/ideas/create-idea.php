@@ -1,8 +1,8 @@
 <div class="create-idea">
   <button class="create-idea__close close container__icon--18"><i class="fa-solid fa-xmark"></i></button>
   <div class="create-idea__title">Создать идею</div>
-  <form id="create-idea__form" action="<? get_permalink(); ?>" method="POST" class="create-idea__form"> 
-    <input id="idea_title" class="create-idea__input input-field" name="idea_title" type="text" required="required" placeholder="Придумайте название идеи">
+  <form  id="create-idea__form" action="<? get_permalink(); ?>" method="POST" class="create-idea__form" name="createidea"> 
+    <input id="idea_title" class="create-idea__input input-field" minlength="2" name="idea_title" type="text" required="required" placeholder="Придумайте название идеи">
     <div class="create-idea__select-block">
       <div class="create-idea__select select"> 
         <div class="select__header"> <span class="select__current" name="idea_cat">Категория</span>
@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-    <textarea class="create-idea__textarea" name="idea_content" cols="30" rows="10" required="required" placeholder="Опишите вашу идею"> </textarea>
+    <textarea minlength="6" class="create-idea__textarea" name="idea_content" cols="30" rows="10" placeholder="Опишите вашу идею" required="required"></textarea>
     <div class="create-idea__subtitle">Создайте до 5 критериев оценки вашей идеи</div>
     <div class="create-idea__add-criteria">
       <div class="create-idea__criteria-block">

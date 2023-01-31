@@ -67,6 +67,7 @@
     cursor: pointer;
     position: absolute;
     right: 48px;
+    margin-top: -30px;
 }
 .create-idea__plus i{
     color: #fff;
