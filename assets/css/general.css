@@ -1997,6 +1997,18 @@
   background-color: #F5F5F5;
 }
 
+.module-block__notification {
+  -ms-grid-row: 1;
+  -ms-grid-row-span: 3;
+  -ms-grid-column: 1;
+  grid-area: M;
+  margin-bottom: 20px;
+  margin-right: 10px;
+  padding: 20px 15px;
+  border-radius: 6px;
+  background-color: #F5F5F5;
+}
+
 .module-block__item {
   font-size: 15px;
   font-weight: 500;

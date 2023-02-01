@@ -315,11 +315,25 @@ function add_home_work_box_func( $post ){
 		}
 
 		show_me();
-    </script>
-   
+    </script>   
+
 
 	<?php
+	// echo '<pre>';
+	// //print_r(array_keys($GLOBALS));
+	// print_r();
+	// echo '</pre>';
 
+	$url_data = strip_tags($GLOBALS['sample_permalink_html']);
+	$url_arr = explode(' ',$url_data);
+	$url_tutorial = explode('Edit',$url_arr[1])[0];
+	//print_r(explode('Edit',$url_arr[1])[0] );
+	//echo $url_tutorial;
+	?>
+	<input type="hidden" name="link_tutorial" value="<?php echo $url_tutorial;?>">
+
+	<?php
+	
 	
 }
 
@@ -366,7 +380,7 @@ function home_work_box_update( $post_id ){
 		//print_r(get_post($_POST['comment_post_ID']));
 		//print_r($users);
 		foreach($users as $user){
-			add_user_meta( $user, 'notifications', ['Вам доступно домашнее задание','add_home_work/'.$_POST['course_id'].'/'.$post_id.'/'] );
+			add_user_meta( $user, 'notifications', ['Вам доступно домашнее задание','add_home_work/'.$_POST['link_tutorial']] );
 		}
 	}
 
