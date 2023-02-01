@@ -413,6 +413,7 @@ try{
     }
   })
 } catch { }
+try{
 document.addEventListener('click', (e) => {
   if(e.target.closest('.reviews-idea__like')){
     let self = e.target.closest('.reviews-idea__like');
@@ -443,3 +444,19 @@ success: function ( answer ) {
     });
   }
 })
+} catch { }
+try{
+document.addEventListener('click', (e) => {
+  if (e.target.classList.contains('view-idea__button-reviews')) {
+    console.log(e.target);
+  document.querySelectorAll('.view-idea').forEach(idea => {
+    idea.classList.remove('active');
+    console.log(idea);
+  })
+  console.log(e.target);
+  let self = e.target;
+  let ideaId = self.dataset.rev;
+  let theRev = document.getElementById(ideaId);
+  theRev.classList.add('active');
+}})
+} catch { }

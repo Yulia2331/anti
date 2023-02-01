@@ -69,16 +69,7 @@ const reviewsButton = document.querySelectorAll('.view-idea__button-reviews');
 // const createReviews = document.querySelector('.create-reviews');
 
 // reviewsButton.forEach(btn => {
-  document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('view-idea__button-reviews')) {
-    document.querySelectorAll('.view-idea').forEach(idea => {
-      idea.classList.remove('active');
-    })
-    let self = e.target;
-    let ideaId = self.dataset.rev;
-    let theRev = document.getElementById(ideaId);
-    theRev.classList.add('active');
-  }})
+
 // })
 const up = document.querySelectorAll('.create-reviews__more');
 const dwn = document.querySelectorAll('.create-reviews__less');

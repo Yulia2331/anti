@@ -252,6 +252,9 @@
 .liked .reviews-idea__like_icon i{
     color: #FF0000;
 }
+.select__item:hover .rating__number{
+    color: #303030;
+}
 .active{
     display: block;
 }
