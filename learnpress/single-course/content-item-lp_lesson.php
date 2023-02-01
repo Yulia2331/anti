@@ -33,6 +33,7 @@ $item = LP_Global::course_item();
 
             if ( $user->has_enrolled_or_finished( $item->get_course_id() ) ) : 
                 $percent = $user_course->get_percent_completed_items( '', array_values((array)$item)[5]->get_id() );
+                $percent = $percent < 0 ? '0':$percent ;
                 $arr_completed_items = $user_course->get_completed_items( '',true, array_values((array)$item)[5]->get_id());
 
                 // $user_items = array_values((array)$item)[5];

@@ -1432,8 +1432,9 @@
   padding-top: 30px;
   padding-right: 30px;
   padding-bottom: 30px;
-  min-height: 100vh;
+  min-height: 100%;
   display: table;
+  width: 100%;
 }
 
 .materials__wrapper {
@@ -1680,6 +1681,7 @@
   padding-bottom: 30px;
   min-height: 100vh;
   display: table;
+  width: 100%;
 }
 
 .structure__crums {

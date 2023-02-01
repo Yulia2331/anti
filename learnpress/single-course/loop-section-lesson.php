@@ -35,6 +35,7 @@ $marker_down = '';
 
 							if ( $user->has_enrolled_or_finished( $section->get_course_id() ) ) : 
                 $percent = $user_course->get_percent_completed_items( '', $section->get_id() );
+                $percent = $percent < 0 ? '0':$percent ;
             	endif; 
 						?>
 
