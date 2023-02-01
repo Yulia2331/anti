@@ -103,6 +103,10 @@ function add_home_work_box_func( $post ){
 
 	<section>
 
+		<div style="color: #fff;background-color: #d63638; border: 1px solid #d63638; padding: 10px; border-radius: 7px; margin: 10px 0px;  display: <?php echo get_post_meta($post->ID, 'home_work_error', 1)==''? 'none':'block';?>;">
+			<?php echo get_post_meta($post->ID, 'home_work_error', 1);?>
+		</div>
+
 		<div style="display: block; min-height: 100px; overflow: hidden;">
 			<div style="display:block; float: left; margin-right: 20px;">
 				<label style="display:block;">Комментарий:</label>
@@ -143,6 +147,7 @@ function add_home_work_box_func( $post ){
 			</div>
 
 			<?php 
+			//echo get_post_meta($post->ID, 'files_home_work', 1);
 
 			//echo get_post_meta($post->ID, 'date_home_work', 1);
 			if (empty(get_post_meta($post->ID, 'date_home_work', 1))){
@@ -344,8 +349,16 @@ add_action( 'save_post', 'home_work_box_update', 0 );
 ## Сохраняем данные, при сохранении поста
 function home_work_box_update( $post_id ){
 
+	update_post_meta( $post_id, 'home_work_error', '' );
+
+	if (empty($_POST['link_tutorial'])){
+		update_post_meta( $post_id, 'home_work_error', 'Нет ссылки на урок' );
+		return $post_id;
+	}	
+
 	if ( empty( $_POST['home_work_comments'] )){
 
+		update_post_meta( $post_id, 'home_work_error', 'Не заполненно поле комментария' );
 		return $post_id;
 	}
 
@@ -375,7 +388,9 @@ function home_work_box_update( $post_id ){
 
 	$file = $_POST["files_home_work"];
 
-	if (isset($file)){
+	if (empty($_POST['link_tutorial'])){
+		update_post_meta( $post_id, 'home_work_error', 'Нет ссылки на урок обратитесь к разрабочику' );
+	}else{
 		$users = get_field('dostup',$_POST['course_id']);
 		//print_r(get_post($_POST['comment_post_ID']));
 		//print_r($users);
@@ -385,30 +400,6 @@ function home_work_box_update( $post_id ){
 	}
 
 	update_post_meta( $post_id, 'files_home_work', $file );
-
-	//update_post_meta( $post_id, 'mypost', $_POST );
-
-	// if ( empty( $_POST['taggles'] )){
-	// 	//echo 'work';
-	// 	update_post_meta( $post_id, 'taggles', [] );
-	// 	return $post_id;
-	// }
-
-
-
-	
-
-
-	// Все ОК! Теперь, нужно сохранить/удалить данные
-	// $_POST['extra'] = array_map( 'sanitize_text_field', $_POST['extra'] ); // чистим все данные от пробелов по краям
-	// foreach( $_POST['extra'] as $key => $value ){
-	// 	if( empty($value) ){
-	// 		delete_post_meta( $post_id, $key ); // удаляем поле если значение пустое
-	// 		continue;
-	// 	}
-
-	// 	update_post_meta( $post_id, $key, $value ); // add_post_meta() работает автоматически
-	// }
 
 	return $post_id;
 }
