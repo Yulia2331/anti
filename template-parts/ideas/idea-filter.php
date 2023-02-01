@@ -141,6 +141,9 @@
             </div>
             <div class="filter__block filter__button-block">
             <input type="hidden" name="action" value="myfilter">
+            <!-- <div class="" style="display: flex;">
+            <input class="filter__rem" type="submit" value="Сбросить фильтр">
+          </div> -->
             <input class="filter__apply" type="submit" value="Фильтровать">
               <a href="#" class="filter__button button-main">Добавить идею</a>
             </div>
@@ -148,20 +151,3 @@
         </form>
       </div>
     </div>
-    <script>
-      jQuery( function( $ ){
-	$( '#filter' ).submit(function(){
-		var filter = $(this);
-		$.ajax({
-			url : '/wp-admin/admin-ajax.php', // обработчик
-			data : filter.serialize(), // данные
-			type : 'POST', // тип запроса
-			success : function( data ){
-				$( '.board-ideas__wrapper' ).html(data);
-        // console.log(data);
-			}
-		});
-		return false;
-	});
-});
-    </script>

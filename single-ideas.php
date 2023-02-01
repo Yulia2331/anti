@@ -81,7 +81,7 @@ endif; ?>
   <? 
  if($current_user_id == $a_id){ ?>
     <form action="" method="POST" class="hypothesis__add"> 
-      <input class="input hypothesis__input" name="hypothesis_content" type="text" placeholder="Дополнить идею">
+      <input class="input hypothesis__input" minlength="6" name="hypothesis_content" type="text" placeholder="Дополнить идею">
       <input type="hidden" value="<? 
       echo $idea_id; 
       ?>" name="hypothesis_content_id" class="hypothesis_content_id">

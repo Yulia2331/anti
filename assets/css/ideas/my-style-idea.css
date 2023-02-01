@@ -67,6 +67,7 @@
     cursor: pointer;
     position: absolute;
     right: 48px;
+    margin-top: -30px;
 }
 .create-idea__plus i{
     color: #fff;
@@ -245,8 +246,11 @@
 .reviews-idea__like_icon i{
     pointer-events: none;
 }
+.reviews-idea__like_icon i{
+    color: #595757;
+}
 .liked .reviews-idea__like_icon i{
-    color: red;
+    color: #FF0000;
 }
 .active{
     display: block;

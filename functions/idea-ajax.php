@@ -50,6 +50,20 @@ function ideas_form()
 	  ],
 ];
 $idea_timeline_id = wp_insert_post( $idea_data );
+$args = array(
+    'post_type' => 'ideas',
+    'orderby'     => 'date',
+    'order'       => 'DESC',
+  );
+query_posts( $args );
+if ( have_posts() ) {
+	while ( have_posts() ) : the_post();
+  // тут вывод шаблона поста, например через get_template_part()
+  get_template_part('template-parts/ideas/idea');
+endwhile;
+} else {
+echo 'Ничего не найдено';
+}
 wp_die(); 
 }
 
@@ -58,16 +72,43 @@ add_action('wp_ajax_nopriv_hypothesis_form', 'hypothesis_form');
 
 function hypothesis_form()
 {
-echo $_POST['name'];   
-echo $_POST['id']; 
  $post_id = $_POST['id'];
   $cont = $_POST['name'];
   $time = current_time( 'timestamp' );
-  $row = array(
-    'field_63b82d9410577'   => $cont,
-    'field_63b830eb2e22c'   => $time,
-  );
-  add_row('field_63b82d7710576', $row, $post_id);
+  $action = '';
+if (have_rows('hypothesis_rep', $post_id)){
+	the_row();
+	$subs = get_field('hypothesis_rep', $post_id);
+	$end = end($subs);
+	  $date = strtotime(end($end));
+	  $row_ind = count($subs);
+	  $check = $time - $date;
+	  $d = 84400;
+	  if($check<=$d){
+	  $row = array(
+		'field_63b82d9410577'   => $cont,
+	);
+	update_row('field_63b82d7710576', $row_ind, $row, $post_id);
+	$action = 'update';
+	} else {
+		$row = array(
+			'field_63b82d9410577'   => $cont,
+			'field_63b830eb2e22c'   => $time,
+		  );
+	add_row('field_63b82d7710576', $row, $post_id);
+	$action = 'add';
+	}
+} else {
+	$row = array(
+		'field_63b82d9410577'   => $cont,
+		'field_63b830eb2e22c'   => $time,
+	  );
+	add_row('field_63b82d7710576', $row, $post_id);
+	$action = 'add';
+}
+wp_send_json_success( array(
+	'action' => $action,
+ ) );
 wp_die(); 
 }
 
@@ -79,6 +120,20 @@ function trash_idea()
 $postid = $_POST['id']; 
 
 wp_delete_post( $postid, true );
+$args = array(
+    'post_type' => 'ideas',
+    'orderby'     => 'date',
+    'order'       => 'DESC',
+  );
+query_posts( $args );
+if ( have_posts() ) {
+	while ( have_posts() ) : the_post();
+  // тут вывод шаблона поста, например через get_template_part()
+  get_template_part('template-parts/ideas/idea');
+endwhile;
+} else {
+echo 'Ничего не найдено';
+}
 wp_die(); 
 }
 

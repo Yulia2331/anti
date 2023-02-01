@@ -127,7 +127,7 @@ try{
    }
    let html = 
    `
-   <input id="inp${ind}" class="create-idea__criteria" name="criteria_${ind}" type="text" value="">
+   <input id="inp${ind}" class="create-idea__criteria" name="criteria_${ind}" minlength="3" required="required" type="text" value="">
    `
    per.insertAdjacentHTML('beforeEnd', html);
   });
@@ -147,40 +147,3 @@ document.addEventListener('click', (e) => {
 
   }
 })
-// const btnComment = document.querySelectorAll('.reviews-idea__comment')
-// const backComment = document.querySelectorAll('.comment-idea__back')
-// const vommentIdea = document.querySelectorAll('.comment-idea')
-
-// btnComment.forEach(btn => {
-//   btn.addEventListener('click', e => {
-//     const target = e.target
-//     const path = target.dataset.btncomment
-
-//     document.querySelectorAll('.view-idea').forEach(idea => {
-//       idea.classList.remove('active')
-//     })
-
-//     hidden.classList.remove('active');
-
-//     document.querySelectorAll(`[data-vievcomment="${path}"]`).forEach(comment => {
-//       comment.closest('.comment-idea').classList.add('active')
-//     })
-//   })
-// })
-
-// backComment.forEach(back => {
-//   back.addEventListener('click', e => {
-//     const target = e.target
-//     const path = target.dataset.backcomment
-//     console.log(path)
-
-//     vommentIdea.forEach(el => {
-//       el.classList.remove('active')
-//     })
-
-//     hidden.classList.add('active');
-//     document.querySelectorAll(`[data-idea="${path}"]`).forEach(idea => {
-//       idea.closest('.view-idea').classList.add('active')
-//     })
-//   })
-// })
