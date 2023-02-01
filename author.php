@@ -630,12 +630,14 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 																			$idea_id = get_sub_field('id_subscribes_idea', 'user_'.$user_id);
 																			$tr = $idea_id[0];
 																			$post = get_post($tr);
+																			$pd = $post->post_date;
+																			$ff = date('d.m.Y', strtotime($pd));
 																			?>
 
 																		<div class="my-idea__block">
 																		   <a href="<? echo $post->guid; ?>" class="my-idea__title"><? echo $post->post_title; ?></a>
-																		   <span class="text-muted"><?php echo $post->post_date; ?></span>
-																		   <!-- date('n.j.Y', strtotime($post['post_date'])); -->
+																		   <span class="text-muted"><?php echo $ff; ?></span>
+																		   
 																		   <?  $spc = 0;
 																			if( have_rows('subscribers_idea_post', $tr) ):
 																				while ( have_rows('subscribers_idea_post', $tr) ) : the_row();
@@ -643,6 +645,7 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 																				endwhile;
 																				endif; 
 																				?>
+																				<span class="text-muted" style="display: block; margin-top: 3px;"><?php echo $spc; ?> подписчик(ов)</span>
 																		</div>
 																	<?	   endwhile;
 																		 endif; 
