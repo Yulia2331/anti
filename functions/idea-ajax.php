@@ -189,6 +189,8 @@ $rating = ceil($s/$l);
 
 wp_new_comment( $commentdata );
 
+
+
 $arr = array();
 $args = array(
 	'no_found_rows'       => true,

@@ -142,8 +142,8 @@ function theme_name_scripts() {
 	wp_enqueue_style( 'new-style', get_template_directory_uri() . '/assets/css/style.min.css' );
 	
 
-	wp_enqueue_style( 'general', get_template_directory_uri() . '/assets/css/general.css' );
-	wp_enqueue_style( 'my-style-idea', get_template_directory_uri() . '/assets/css/ideas/my-style-idea.css?7' );
+	wp_enqueue_style( 'general', get_template_directory_uri() . '/assets/css/general.css?3' );
+	wp_enqueue_style( 'my-style-idea', get_template_directory_uri() . '/assets/css/ideas/my-style-idea.css?8' );
 	// wp_enqueue_style( 'all-ideas', get_template_directory_uri() . '/assets/css/ideas/all-ideas.min.css' );
 	// wp_enqueue_style( 'my-reviews', get_template_directory_uri() . '/assets/css/ideas/my-reviews.min.css' );
 	// wp_enqueue_style( 'tracked-ideas', get_template_directory_uri() . '/assets/css/ideas/tracked-ideas.min.css' );
@@ -161,7 +161,7 @@ function theme_name_scripts() {
 	wp_enqueue_script( 'ideas-app', get_template_directory_uri() . '/assets/js/ideas/app.js?7', array(), '1.0.0', true );
 	wp_enqueue_script( 'ideas-nav', get_template_directory_uri() . '/assets/js/ideas/navigation.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'ideas-counts', get_template_directory_uri() . '/assets/js/ideas/counts.js', array(), '1.0.0', true );
-	wp_enqueue_script( 'ideas-ajax', get_template_directory_uri() . '/assets/js/ideas/ajax-idea.js?7', array(), '1.0.0', true );
+	wp_enqueue_script( 'ideas-ajax', get_template_directory_uri() . '/assets/js/ideas/ajax-idea.js?8', array(), '1.0.0', true );
 	if (is_page(array(252,311))){
 	wp_enqueue_style( 'fullcalendar.bundle.css', get_template_directory_uri() . '/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css' );
 	wp_enqueue_style( 'datatables.bundle.css', get_template_directory_uri() . '/assets/plugins/custom/datatables/datatables.bundle.css' );
@@ -732,7 +732,7 @@ function get_status_home_work_students_by_id($id_cours,$arr){
 
 //debug
 function mydebbug(){
-	$mydebug=false;
+	$mydebug=true;
 	if ($mydebug) {
 		return true;
 	}

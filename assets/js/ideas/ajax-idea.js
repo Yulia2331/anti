@@ -460,3 +460,10 @@ document.addEventListener('click', (e) => {
   theRev.classList.add('active');
 }})
 } catch { }
+try{
+  document.addEventListener('click', (e) => {
+    if (e.target.classList.contains('curriculum__item')) {
+      e.target.querySelector('a').click();
+    }
+  })
+} catch { }
