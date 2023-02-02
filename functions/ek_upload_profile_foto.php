@@ -5,7 +5,7 @@ function ek_form_upload_images(){
 	?>
 		<div style="display: flex; ">
 			<input type="file" name="my_image_upload" class="ek_image_upload" id="ek_image_upload"  multiple="false" style="display:block;" />
-			<button class="btn btn-sm btn-danger me-2 upload_user_images">Загрузить</button>
+			<button class="btn btn-sm btn-danger me-2 upload_user_images">Выберете фаил</button>
 			<input type="hidden" name="new_avatar" class="upload_image_avatar">
 		</div>
 

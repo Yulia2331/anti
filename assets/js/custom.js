@@ -1136,41 +1136,49 @@ var files;
 
 $('input[type=file]').on('change', function(){
   files = this.files;
+  $('.upload_user_images').html('Загрузить');
 });
 
 $('.upload_user_images').on('click', function(e){
   e.preventDefault();
 
-  var ek_data = new FormData();
+  if($('.upload_user_images').html()=='Загрузить'){
 
-  $.each( files, function( key, value ){
-    console.log(key);
-    ek_data.append( key, value );
-  });
+    $('.upload_user_images').html('Идет загрузка ...');
 
-  ek_data.append( 'action', 'ek_upload_profile_foto' );
-  
-  $.ajax({
-    type:'POST',
-    url: "/wp-admin/admin-ajax.php",    
-    cache       : false,
-    dataType    : 'json',    
-    processData : false,    
-    contentType : false,
-    data:ek_data,
-    success:function(response){
-     console.log(response);         
-    },
-    complete:function(response){
-      console.log(response.responseText);
-      $('.upload_image_avatar').val(response.responseText);
+    var ek_data = new FormData();
 
-    },
-    error: function(resp){
-       console.log(resp);
-    }
+    $.each( files, function( key, value ){
+      console.log(key);
+      ek_data.append( key, value );
+    });
 
-  })
+    ek_data.append( 'action', 'ek_upload_profile_foto' );
+    
+    $.ajax({
+      type:'POST',
+      url: "/wp-admin/admin-ajax.php",    
+      cache       : false,
+      dataType    : 'json',    
+      processData : false,    
+      contentType : false,
+      data:ek_data,
+      success:function(response){
+       console.log(response);         
+      },
+      complete:function(response){
+        console.log(response.responseText);
+        $('.upload_image_avatar').val(response.responseText);
+        $('.ek_image_upload').css('display','none');
+        $('.upload_user_images').html('Загрузка завершена');
+
+      },
+      error: function(resp){
+         console.log(resp);
+      }
+
+    })
+  }
 })
 
 $('.add_status_home_work').on('click', function(e){
