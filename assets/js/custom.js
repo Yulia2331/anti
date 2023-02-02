@@ -1096,7 +1096,7 @@ $('.show_comments').on('click', function(e){
   })
 })
 
-
+// удаление уведомлений
 $('.del_notification').on('click', function(e){
   e.preventDefault();
   let notificationKey = $(this).attr('notificationKey');
@@ -1126,6 +1126,48 @@ $('.del_notification').on('click', function(e){
     },
     error: function(resp){
        console.log(resp)
+    }
+
+  })
+})
+
+// Загрузка аватара пользователя
+var files;
+
+$('input[type=file]').on('change', function(){
+  files = this.files;
+});
+
+$('.upload_user_images').on('click', function(e){
+  e.preventDefault();
+
+  var ek_data = new FormData();
+
+  $.each( files, function( key, value ){
+    console.log(key);
+    ek_data.append( key, value );
+  });
+
+  ek_data.append( 'action', 'ek_upload_profile_foto' );
+  
+  $.ajax({
+    type:'POST',
+    url: "/wp-admin/admin-ajax.php",    
+    cache       : false,
+    dataType    : 'json',    
+    processData : false,    
+    contentType : false,
+    data:ek_data,
+    success:function(response){
+     console.log(response);         
+    },
+    complete:function(response){
+      console.log(response.responseText);
+      $('.upload_image_avatar').val(response.responseText);
+
+    },
+    error: function(resp){
+       console.log(resp);
     }
 
   })
@@ -1495,5 +1537,8 @@ function make_comment(response){
   })
   return result;
  }
+
+
+
   
 

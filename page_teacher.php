@@ -1,6 +1,6 @@
 <?php
 /**
- * Template name: Страница учителя
+ * Template name: Страница учителя список курсов
  */
          get_header(null, array('title'=>'Страница учителя'));
        
@@ -30,28 +30,28 @@
         <h2 class="my-assignments__title">Опции</h2>
         <div class="my-assignments__cuourses"> 
 
-          <?php
+            <?php
 
-          $current_user = wp_get_current_user();
+            $current_user = wp_get_current_user();
 
-          //echo $current_user->roles[0];
+            //echo $current_user->roles[0];
 
-          if ($current_user->roles[0]=='lp_teacher'){
-            echo 'вы учитель';
-          }elseif($current_user->roles[0]=='administrator'){
-            echo 'вы админ';
-          }else{
-            echo 'тут тебе делать не чего';
-          }
+            if ($current_user->roles[0]=='lp_teacher'){
+              echo 'вы учитель';
+            }elseif($current_user->roles[0]=='administrator'){
+              echo 'вы админ';
+            }else{
+              echo 'тут тебе делать не чего';
+            }
 
-          echo '<br>';
-          //print_r($current_user);
+            echo '<br>';
+            //print_r($current_user);
 
-          echo '<br><br><br>';
+            echo '<br><br><br>';
 
-          ?>
+            ?>
          
-          </div> 
+        </div> 
         
       
    
@@ -104,7 +104,12 @@
           ?>
           
         </div>
+
+        
       </div>
+   </section>
+
+   <section>
    </section>
   
    <div class="d-flex flex-column flex-root" style="display: none !important;">

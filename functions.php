@@ -588,6 +588,9 @@ require_once ('template-parts/comments/home_work_comments.php');
 // добовление прав ролям
 require_once ('functions/add_cap_roles.php');
 
+// загрузка аватара пользователя
+require_once ('functions/ek_upload_profile_foto.php');
+
 // подключаем ответ на коменты
 // function enqueue_comment_reply() {
 // 	if( is_singular() )

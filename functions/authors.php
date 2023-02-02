@@ -24,6 +24,11 @@ function change_user_info_callback(){
 	update_field('kod_strany',$_POST['code'], 'user_'.$id);
 	$result['type']= gettype($_POST['date']);
 
+	if ($_POST['new_avatar']!=''){
+		update_field('photo',$_POST['new_avatar'], 'user_'.$id);
+		//update_field('field_512e085a9372a',$att['url'],$watch);
+	}
+
 	$result['status'] = 'ok';
 	echo json_encode($result);
 	wp_die();

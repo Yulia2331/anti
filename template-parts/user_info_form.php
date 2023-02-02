@@ -50,8 +50,25 @@ $user_id = $user->ID;
 			</div>
 		</div>
 			<?php if( is_author() && is_user_logged_in() ){ ?>
+
 				<div id='user_form' style='display:none'>
 					<form action="change_user_info" id="user_prof_form">
+
+						
+
+						<div class="row fv-row mb-7 fv-plugins-icon-container">
+							<div class="col-3">
+								<label class='fw-bold fs-6 text-gray-400'  for="last-name">Аватар</label>
+							</div>
+							<div class="col-9 col-lg-6">
+								<!-- <img src="<?php echo get_field('photo', 'user_'.get_current_user_id() );?>" style="max-height: 100px;">
+								<button class="btn btn-sm btn-danger me-2">Загрузить</button>
+								<input type="hidden" value='<?php echo get_field('photo', 'user_'.get_current_user_id() );?>' name="photo"> -->
+
+								<?php ek_form_upload_images();?> 
+							</div>
+						</div>
+
 						<div class="row fv-row mb-7 fv-plugins-icon-container">
 							<div class="col-3">
 								<label class='fw-bold fs-6 text-gray-400'  for="last-name">Имя</label>
