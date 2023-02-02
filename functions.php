@@ -311,7 +311,7 @@ function getMonthName($month) {
 	);
 	
 	// проверяем ввод данных на правельность
-	if ($month <= 1 and $month >= 12 ){
+	if ($month >= 1 and $month <= 12 ){
 		return $monthAr[(int)$month];
 	}else{
 		return 'error';
@@ -406,10 +406,12 @@ add_action('template_redirect', 'check_zar');
 function check_zar(){
 	if(!is_page(49)){
 		if (is_user_logged_in()){
-	$currrent_userID =  get_current_user_id();
 
-	$user_id = $currrent_userID;
-	if (have_rows('zarabotok', 'user_'.$user_id )){
+			$currrent_userID =  get_current_user_id();
+			$user_id = $currrent_userID;
+
+			if (have_rows('zarabotok', 'user_'.$user_id )){
+
 				$money = get_field('zarabotok', 'user_'.$user_id );
 				$end_money = end($money);
 				$money_this_month=$end_money['money_this_month'];
@@ -424,6 +426,15 @@ function check_zar(){
 				$today = getdate();
 				$this_month = $today['mon'];
 				$this_day = $today['mday'];
+
+				// echo $this_month;
+				// echo '<br>';
+				// echo $month;
+				// echo '<br>';
+				// if ($this_month > $month ){
+				// 	wp_redirect( '/get_money');
+				// }
+
 				if (((int)$this_month - (int)$month-1) > 1 ){
 					wp_redirect( '/get_money', 301 );
 				}
@@ -431,14 +442,14 @@ function check_zar(){
 					wp_redirect( '/get_money', 301 );
 					
 				}
-	}
+			}
 
-	elseif(!have_rows('zarabotok', 'user_'.$user_id )){
-		wp_redirect( '/get_money', 301 );
-		
+			elseif(!have_rows('zarabotok', 'user_'.$user_id )){
+				wp_redirect( '/get_money', 301 );
+				
+			}
+		}
 	}
-}
-}
 }
 
 
@@ -732,7 +743,7 @@ function get_status_home_work_students_by_id($id_cours,$arr){
 
 //debug
 function mydebbug(){
-	$mydebug=true;
+	$mydebug=false;
 	if ($mydebug) {
 		return true;
 	}

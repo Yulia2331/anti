@@ -31,12 +31,12 @@ $can_view_content_item   = $user->can_view_item( $course_item->get_id(), $can_vi
 
 <div class="structure__wrapper">
 	
-		<?php //do_action( 'learn-press/course-item-content-header' ); ?>
+		<?php do_action( 'learn-press/course-item-content-header' ); ?>
 	
 
 	
 		<?php
-		//do_action( 'learn-press/before-course-item-content' );
+		do_action( 'learn-press/before-course-item-content' );
 
 		if ( $can_view_content_item->flag ) {
 

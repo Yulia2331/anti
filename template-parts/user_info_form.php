@@ -57,7 +57,7 @@ $user_id = $user->ID;
 								<label class='fw-bold fs-6 text-gray-400'  for="last-name">Имя</label>
 							</div>
 							<div class="col-9 col-lg-6">
-								<input class="form-control form-control-lg form-control-solid required position-relative textonly" value='<?=$user->last_name?>' id="last-name" type="text" placeholder="Имя" name="last-name" autocomplete="off">
+								<input class="form-control form-control-lg form-control-solid required position-relative textonly" value='<?=$user->first_name?>' id="last-name" type="text" placeholder="Имя" name="last-name" autocomplete="off">
 							</div>
 						</div>
 						<div class="row fv-row mb-7 fv-plugins-icon-container">
@@ -73,7 +73,7 @@ $user_id = $user->ID;
 								<label class='fw-bold fs-6 text-gray-400'  for="fathers_name">Фамилия</label>
 							</div>
 							<div class="col-9 col-lg-6">
-								<input class="form-control form-control-lg form-control-solid required position-relative textonly" id="first-name" value='<?=$user->first_name?>' type="text" placeholder="Фамилия" name="first-name" autocomplete="off">
+								<input class="form-control form-control-lg form-control-solid required position-relative textonly" id="first-name" value='<?=$user->last_name?>' type="text" placeholder="Фамилия" name="first-name" autocomplete="off">
 							</div>
 						</div>
 						<div class="row fv-row mb-7 fv-plugins-icon-container">

@@ -45,14 +45,28 @@ defined( 'ABSPATH' ) || exit();
                 <?php do_action( 'custom_content_single_meta' ); ?>
               </div>
               <div class="content-materials-block__tabs"> 
+                
+                <?php 
+                  $values = get_field('dostup');
+                  $us = get_current_user_id();
+
+
+              
+                  if (in_array($us,$values)){
+                 ?>
                 <button class="content-materials-block__tab review-btn">Обзор</button>
                 <button class="content-materials-block__tab curriculum-btn">Учебный план</button>
+                <?php } ?>
               </div>
             </div>
 
 
             <!-- Обзор курса и Учебный план -->
              <?php 
+             // echo '<pre>';
+             // print_r(LearnPress::instance()->template( 'course' ));
+             // echo '</pre>';
+
              // tabs.php
              do_action( 'custom_content_single_tab' ); 
              ?>

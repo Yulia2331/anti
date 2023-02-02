@@ -42,6 +42,7 @@ do_action( 'learn-press/before-single-item' );
 		/**
 		 * @since 4.0.6
 		 * @see single-button-toggle-sidebar - 5
+         * чек бокс не понятный
 		 */
 		do_action( 'learn-press/single-button-toggle-sidebar' );
 
@@ -63,6 +64,7 @@ do_action( 'learn-press/before-single-item' );
  * LP Hook
  *
  * @since 3.0.0
+ * следуйщий урок
  */
 //do_action( 'learn-press/after-main-content' );
 

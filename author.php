@@ -7,8 +7,8 @@ $current_user = wp_get_current_user();
 $user = get_queried_object();
 $user_id = $user->ID;
 $currrent_userID =  get_current_user_id();
-
-
+get_header();
+//check_zar();
 if (have_rows('zarabotok', 'user_'.$user_id )){
 			$money = get_field('zarabotok', 'user_'.$user_id );
 			$end_money = end($money);
@@ -24,9 +24,10 @@ if (have_rows('zarabotok', 'user_'.$user_id )){
 			$today = getdate();
 			$this_month = $today['mon'];
 			$this_day = $today['mday'];
+
+			//print_r(end($money));
 }
-?>
-<?php get_header();
+
 
 ?>
 
