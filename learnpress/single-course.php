@@ -12,12 +12,25 @@
 
 defined( 'ABSPATH' ) || exit;
 
+
+/**
+ * Проверяем доступ к курсу если нет редиректим на страницу профиля
+ */
+$user = learn_press_get_current_user();
+$user_course = $user->get_course_data( get_the_ID() );
+
+if (isset(array_values((array)$user_course)[19]['status'])){
+    if (array_values((array)$user_course)[19]['status']!='enrolled'){
+        wp_redirect('/');
+    }
+}else{
+   wp_redirect('/');
+}
+
+
 /**
  * Header for page
  */
-
-
-
 if ( empty( $is_block_theme ) ) {
 	get_header();
 }
