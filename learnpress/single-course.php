@@ -21,10 +21,10 @@ $user_course = $user->get_course_data( get_the_ID() );
 
 if (isset(array_values((array)$user_course)[19]['status'])){
     if (array_values((array)$user_course)[19]['status']!='enrolled'){
-        wp_redirect('/');
+        wp_redirect('https://antinorma.com/dostup-k-kursu-zakryt/');
     }
 }else{
-   wp_redirect('/');
+   wp_redirect('https://antinorma.com/dostup-k-kursu-zakryt/');
 }
 
 
