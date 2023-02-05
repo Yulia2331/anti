@@ -305,6 +305,14 @@ try{
        success: function(data) {
         $('.reviews_msg').text('Отзыв добавлен');	
         console.log(data);
+        $( '.board-ideas__wrapper' ).html(data);
+        setTimeout(() => {
+          document.querySelectorAll('.create-reviews').forEach((i) => {
+            i.classList.remove('active');
+          })
+          document.querySelector('.hidden').classList.remove('active');
+          document.body.classList.remove('no-scroll');
+        }, "1000");
         e.target.reset();
       }
       });
@@ -359,7 +367,8 @@ try{
     if(e.target.classList.contains('comments__button')){
       e.preventDefault();
       let self = e.target.closest('.comments__add');
-      let id = self.querySelector('.comments__input_par').value;
+      let id = self.querySelector('.comments__input_mainpar').value;
+      let subid = self.querySelector('.comments__input_par').value;
       let postId = self.querySelector('.comments__input_pid').value;
       let text = self.querySelector('.comments__input').value;
       let msgWrapp = e.target.closest('.comments__wrapper').querySelector('.comments__add_msg');
@@ -369,6 +378,7 @@ try{
         action: 'answ_idearev', 
         postId: postId,
         id: id,
+        subid: subid,
         text: text
       },
        type: 'post',
@@ -384,6 +394,8 @@ try{
         msgWrapp.innerText = 'Опубликованно!';	
         self.reset();
         e.target.disabled = false;
+        self.querySelector('.comments__input_par').value = id;
+        $( '.sub-comment__wrap' ).html(data);
       }
       });
     }
@@ -429,8 +441,6 @@ document.addEventListener('click', (e) => {
      type: 'GET',
      url: '/wp-admin/admin-ajax.php',
 success: function ( answer ) {
-  console.log(answer.data.action);
-  console.log(c);
   if ( answer.data.action == 'add' ) {
     self.classList.add( 'liked' );
     c++;

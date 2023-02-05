@@ -217,7 +217,6 @@ if( $comments = get_comments( $comargs ) ){
 	}
 }
 if($h){
-	echo $com_id;
 	$commentarr = [
 		'comment_ID'      => $com_id,
 		'comment_content' => $comment,
@@ -271,6 +270,20 @@ if( $comments = get_comments( $args ) ){
 	$postData = get_post( $post_id);
 	$a_id = $postData->post_author;
 	add_user_meta($a_id, 'notifications-idea', ['rev', $current_user_id. '/' . $post_id]);
+	$qargs = array(
+		'post_type' => 'ideas',
+		'orderby'     => 'date',
+		'order'       => 'DESC',
+	  );
+	query_posts( $qargs );
+	if ( have_posts() ) {
+		while ( have_posts() ) : the_post();
+	  // тут вывод шаблона поста, например через get_template_part()
+	  get_template_part('template-parts/ideas/idea');
+	endwhile;
+	} else {
+	echo 'Ничего не найдено';
+	}
 wp_die(); 
 }
 add_action('wp_ajax_sabscr_idea', 'sabscr_idea');
@@ -371,8 +384,8 @@ function myfilter() {
  $args = array(	
 	'post_type' => 'ideas',
 	'author' => $_POST[ 'filter_author' ],
-	'orderby' => $d, // сортировка по дате у нас будет в любом случае (но вы можете изменить/доработать это)
-	'order'	=> $o, // ASC или DESC
+	'orderby' => $d,
+	'order'	=> $o,
 	'meta_query' => array(
 		array(
 			'key' => 'average_rating',
@@ -419,7 +432,8 @@ add_action('wp_ajax_nopriv_answ_idearev', 'answ_idearev');
 function answ_idearev()
 {  
   $post_id = $_POST['postId'];
-  $parent = $_POST['id'];
+  $mainparent = $_POST['id'];
+  $parent = $_POST['subid'];
   $comment = $_POST['text'];
   $current_user_id = get_current_user_id();
   $user       = get_userdata( $current_user_id );
@@ -438,6 +452,90 @@ $last_name  = $user->last_name;
 ];
 
 wp_new_comment( $commentdata );
+
+$subcommargs = array(
+'no_found_rows'       => true,
+'orderby'             => '',
+'order'               => 'DESC',
+'post_id'             => $post_id,
+'post_type'           => 'ideas',
+'status'              => 'all',
+'count'               => false,
+'date_query'          => null, // See WP_Date_Query
+'hierarchical'        => false,
+'parent'       => $mainparent,
+'update_comment_meta_cache'  => true,
+'update_comment_post_cache'  => false,
+);
+if( $subcomments = get_comments( $subcommargs ) ){
+foreach( $subcomments as $subcomment ){ 
+$subcom_id = $subcomment->comment_ID;
+$comment_date = get_comment_date( 'j M в H:i', $subcom_id );
+$args = get_comment($subcom_id);
+$user_id = $args->user_id;
+$user       = get_userdata( $user_id );
+$first_name = $user->first_name;
+$last_name  = $user->last_name;
+?>
+	<div class="comments__block" data-subcommid="<? echo $subcomment->comment_ID;?>">
+	  <div class="comments__maint main-comment">
+		<div class="main-comment__avatar"> <img src="<?=get_user_image($user_id)?>" alt="ava"></div>
+		<div class="main-comment__body"> 
+		  <div class="main-comment__name">
+			<span class="main-comment__firstname"><? echo $first_name;?></span>
+			<span class="main-comment__lastname"><? echo $last_name; ?></span>
+			 </div>
+		  <div class="main-comment__message"><?php echo $subcomment->comment_content; ?></div>
+		  <div class="main-comment__footer"> 
+			<div class="main-comment__data"><?php echo $comment_date; ?></div>
+			<button class="main-comment__button">Ответить</button>
+		  </div>
+		</div>
+	  </div>
+	  <?    
+	  $g = $subcomment->comment_ID;
+$subsubcommargs = array(
+'no_found_rows'       => true,
+'orderby'             => '',
+'order'               => 'ASC',
+'post_id'             => $post_id,
+'post_type'           => 'ideas',
+'status'              => 'all',
+'count'               => false,
+'date_query'          => null, // See WP_Date_Query
+'hierarchical'        => false,
+'parent'       => $g,
+'update_comment_meta_cache'  => true,
+'update_comment_post_cache'  => false,
+);
+if( $subsubcomments = get_comments( $subsubcommargs ) ){
+foreach( $subsubcomments as $subsubcomment ){ 
+$subsubcom_id = $subsubcomment->comment_ID;
+$comment_date = get_comment_date( 'j M в H:i', $subsubcom_id );
+$args = get_comment($subsubcom_id);
+$user_id = $args->user_id;
+$user       = get_userdata( $user_id );
+$first_name = $user->first_name;
+$last_name  = $user->last_name;
+?>
+	  <div class="comments__sub sub-comment">
+		<div class="sub-comment__avatar"> <img src="<?=get_user_image($user_id)?>" alt="ava"></div>
+		<div class="sub-comment__body"> 
+		  <div class="sub-comment__name">
+		  <span class="sub-comment__firstname"><? echo $first_name;?></span>
+			<span class="sub-comment__lastname"><? echo $last_name; ?></span>
+		  </div>
+		  <div class="sub-comment__message"><?php echo $subsubcomment->comment_content; ?></div>
+		  <div class="sub-comment__footer"> 
+			<div class="sub-comment__data"><?php echo $comment_date; ?></div>
+			<button class="sub-comment__button">Ответить</button>
+		  </div>
+		</div>
+	  </div>
+<? }} ?>
+	</div>
+<? }} 
+
 $args = get_comment($parent);
 $a_id = $args->user_id;
 add_user_meta($a_id, 'notifications-idea', ['answ', $current_user_id. '/' . $post_id]);
