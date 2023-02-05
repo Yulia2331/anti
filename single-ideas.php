@@ -204,6 +204,7 @@ if( $comments = get_comments( $args ) ){
               <form class="comments__add">
                 <input class="comments__input input-field" type="text" placeholder="Ваш комментарий">
                 <input class="comments__input_pid" type="hidden" value="<? echo $idea_id; ?>">
+                <input class="comments__input_mainpar" type="hidden" value="<? echo $com_id; ?>">
                 <input class="comments__input_par" type="hidden" value="<? echo $com_id; ?>">
                 <button class="comments__button secondary__button">Отправить</button>
               </form>

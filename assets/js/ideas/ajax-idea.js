@@ -395,7 +395,8 @@ try{
         self.reset();
         e.target.disabled = false;
         self.querySelector('.comments__input_par').value = id;
-        $( '.sub-comment__wrap' ).html(data);
+        let wrap = e.target.closest('.comments__wrapper').querySelector('.sub-comment__wrap');
+        wrap.innerHTML = data;
       }
       });
     }
