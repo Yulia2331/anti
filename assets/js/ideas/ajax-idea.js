@@ -448,10 +448,8 @@ success: function ( answer ) {
 try{
 document.addEventListener('click', (e) => {
   if (e.target.classList.contains('view-idea__button-reviews')) {
-    console.log(e.target);
   document.querySelectorAll('.view-idea').forEach(idea => {
     idea.classList.remove('active');
-    console.log(idea);
   })
   console.log(e.target);
   let self = e.target;

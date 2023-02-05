@@ -20,6 +20,7 @@
 	'count'               => false,
 	'date_query'          => null, // See WP_Date_Query
 	'hierarchical'        => false,
+  'parent'       => 0,
 	'update_comment_meta_cache'  => true,
 	'update_comment_post_cache'  => false,
 );

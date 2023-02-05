@@ -187,9 +187,51 @@ $rating = ceil($s/$l);
       ],
 ];
 
-wp_new_comment( $commentdata );
 
-
+$h = FALSE;
+$com_id;
+$comargs = array(
+  'no_found_rows'       => true,
+  'post_id'             => $post_id,
+  'orderby'             => 'date',
+  'order'               => 'ASC',
+  'post_type'           => 'ideas',
+  'status'              => 'all',
+  'count'               => false,
+  'date_query'          => null, // See WP_Date_Query
+  'hierarchical'        => false,
+  'user_id' =>  $current_user_id,
+	'parent'       => 0,
+  'update_comment_meta_cache'  => true,
+  'update_comment_post_cache'  => false,
+);
+if( $comments = get_comments( $comargs ) ){
+	$end = end($comments);
+	$date = strtotime($end->comment_date);
+	$time = current_time( 'timestamp' );
+	$d = 86400;
+	$check = $time - $date;
+	if($check<=$d){
+	  $com_id = $end->comment_ID;
+	  $h = TRUE;
+	}
+}
+if($h){
+	echo $com_id;
+	$commentarr = [
+		'comment_ID'      => $com_id,
+		'comment_content' => $comment,
+		'comment_type'         => 'comment',
+		'comment_meta'         => [ 
+			'reviews_plus' => $plus,
+			'reviews_minus' => $minus,
+			'reviews_rating' => $rating
+		]
+	];
+	wp_update_comment( $commentarr);
+} else {
+	wp_new_comment( $commentdata );
+}
 
 $arr = array();
 $args = array(
