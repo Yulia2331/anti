@@ -20,20 +20,14 @@ $user_info = get_userdata(get_current_user_id());
                 <div class="container__icon--18 navigation-close__icon"><i class="fa-solid fa-chart-line"></i></div></a></li>
             <li class="navigation__item"><a class="navigation__link" href="./users/">
                 <div class="container__icon--18 navigation-close__icon"><i class="fa-regular fa-address-book"></i></div></a></li>
+            <li class="navigation__item"><a class="navigation__link" href="<?php echo home_url(); ?>/lenta/">
+                <div class="container__icon--18 navigation-close__icon"><i class="fa-regular fa-window-restore"></i></div></a></li>
+            <li class="navigation__item"><a class="navigation__link" href="<?php echo home_url(); ?>/spisok-kursov/">
+                <div class="container__icon--18 navigation-close__icon"><i class="fa-regular fa-newspaper"></i></div></a></li>
                 <? if( is_user_role_in( [ 'administrator','contributor' ] ) ){ ?>
             <li class="navigation__item"><a class="navigation__link" href="<?php echo home_url(); ?>/spisok-razreshenij/">
                 <div class="container__icon--18 navigation-close__icon"><i class="fa-regular fa-file-excel"></i></div></a></li>
                 <?php	}?>
-            <li class="navigation__item"><a class="navigation__link" href="<?php echo home_url(); ?>/spisok-kursov/">
-                <div class="container__icon--18 navigation-close__icon"><i class="fa-regular fa-newspaper"></i></div></a></li>
-            <li class="navigation__item"><a class="navigation__link" href="<?php echo home_url(); ?>/lenta/">
-                <div class="container__icon--18 navigation-close__icon"><i class="fa-regular fa-window-restore"></i></div></a></li>
-            <li class="navigation__item"><a class="navigation__link" href="<?php echo home_url(); ?>/bank-idej/">
-                <div class="container__icon--18 navigation-close__icon"><i class="fa-regular fa-lightbulb"></i></div></a></li>
-            <li class="navigation__item"><a class="navigation__link" href="<?php echo home_url(); ?>/teacher">
-                <div class="container__icon--18 navigation-close__icon"><i class="fa-solid fa-list-check"></i></div></a></li>
-            <li class="navigation__item"><a class="navigation__link"  href="<?php echo home_url(); ?>/home-work">
-                <div class="container__icon--18 navigation-close__icon"><i class="fa-solid fa-list-check"></i></div></a></li>
           </ul>
         </nav>
       </div>
@@ -78,14 +72,12 @@ $user_info = get_userdata(get_current_user_id());
                     <div class="container__icon--18 navigation__icon"><i class="fa-regular fa-address-book"></i></div>
                     <p>Список пользователей</p>
                   </div>
-                 <? if( is_user_role_in( [ 'administrator','contributor' ] ) ){ ?>
                   <div class="navigation__marker"><i class="fa-solid fa-angle-right"></i></div></a></li>
-              <li class="navigation__item <?php echo (is_page(255)?'here':'')?>"><a class="navigation__link" href="<?php echo home_url(); ?>/spisok-razreshenij/">
+                  <li class="navigation__item <?php echo (is_page(244))?'here':'' ?>"><a class="navigation__link" href="<?php echo home_url(); ?>/lenta/">
                   <div class="navigation__link-name">
-                    <div class="container__icon--18 navigation__icon"><i class="fa-regular fa-file-excel"></i></div>
-                    <p>Список разрешений</p>
+                    <div class="container__icon--18 navigation__icon"><i class="fa-regular fa-window-restore"></i></div>
+                    <p>Лента</p>
                   </div>
-                  <?php	}?>
                   <div class="navigation__marker"><i class="fa-solid fa-angle-right"></i></div></a></li>
               <li class="navigation__item"><a class="navigation__link" href="<?php echo home_url(); ?>/spisok-kursov/">
                   <div class="navigation__link-name">
@@ -93,30 +85,13 @@ $user_info = get_userdata(get_current_user_id());
                     <p>Список курсов</p>
                   </div>
                   <div class="navigation__marker"><i class="fa-solid fa-angle-right"></i></div></a></li>
-              <li class="navigation__item <?php echo (is_page(244))?'here':'' ?>"><a class="navigation__link" href="<?php echo home_url(); ?>/lenta/">
+                  <? if( is_user_role_in( [ 'administrator','contributor' ] ) ){ ?>
+              <li class="navigation__item <?php echo (is_page(255)?'here':'')?>"><a class="navigation__link" href="<?php echo home_url(); ?>/spisok-razreshenij/">
                   <div class="navigation__link-name">
-                    <div class="container__icon--18 navigation__icon"><i class="fa-regular fa-window-restore"></i></div>
-                    <p>Лента</p>
+                    <div class="container__icon--18 navigation__icon"><i class="fa-regular fa-file-excel"></i></div>
+                    <p>Список разрешений</p>
                   </div>
-                  <div class="navigation__marker"><i class="fa-solid fa-angle-right"></i></div></a></li>
-              <li class="navigation__item"><a class="navigation__link" href="<?php echo home_url(); ?>/bank-idej/">
-                  <div class="navigation__link-name">
-                    <div class="container__icon--18 navigation__icon"><i class="fa-regular fa-lightbulb"></i></div>
-                    <p>Банк идей</p>
-                  </div>
-                  <div class="navigation__marker"><i class="fa-solid fa-angle-right"></i></div></a></li>
-                  <li class="navigation__item <?php echo (is_page(428)?'here':'')?>"><a class="navigation__link" href="<?php echo home_url(); ?>/teacher">
-                  <div class="navigation__link-name">
-                    <div class="container__icon--18 navigation__icon"><i class="fa-solid fa-list-check"></i></div>
-                    <p>Страница учителя</p>
-                  </div>
-                  <div class="navigation__marker"><i class="fa-solid fa-angle-right"></i></div></a></li>
-              <li class="navigation__item <?php echo (is_page(428)?'here':'')?>"><a class="navigation__link" href="<?php echo home_url(); ?>/home-work">
-                  <div class="navigation__link-name">
-                    <div class="container__icon--18 navigation__icon"><i class="fa-solid fa-list-check"></i></div>
-                    <p>Мои задания</p>
-                  </div>
-                  <div class="navigation__marker"><i class="fa-solid fa-angle-right"></i></div></a></li>
+                  <div class="navigation__marker"><i class="fa-solid fa-angle-right"></i></div></a></li>  <?php	}?>
             </ul>
           </nav>
         </div>

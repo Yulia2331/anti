@@ -17,6 +17,8 @@ get_header();
     'post_type' => 'ideas',
     'orderby'     => 'date',
     'order'       => 'DESC',
+    'posts_per_page' => 9,
+		'paged' => $paged,
   );
   query_posts( $args );
                     ?>
@@ -30,7 +32,20 @@ get_header();
     echo 'Ничего не найдено';
     } ?>
       </div>
-      <!-- <button class="board-ideas__more">Смотреть еще</button> -->
+      <?php
+								if ( $wp_query->max_num_pages > 1 ) { ?>
+									<script> var this_page = 1; </script>
+									<button class="board-ideas__more" title="Загрузить еще"
+										data-param-posts='<?php echo serialize($wp_query->query_vars); ?>'
+										data-max-pages='<?php echo $wp_query->max_num_pages; ?>'
+										data-tpl='ideas'
+									 >
+											  <span class="fas fa-redo"></span> Загрузить ещё
+									</button>
+								<?php
+								  }
+								
+								?>
     </div>
   </div>
 </section>

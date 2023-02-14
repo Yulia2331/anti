@@ -267,6 +267,9 @@
 .navigation__link-name p{
     margin-bottom: 0;
 }
+.scroll-y{
+    overflow-x: hidden;
+}
 .active{
     display: block;
 }

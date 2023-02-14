@@ -421,14 +421,23 @@ Template Name: Users Page
 														
 															<input class="form-control form-control-lg form-control-solid" type="text" placeholder="Инстаграм" name="instagram"
 																autocomplete="off">
-															
 															<!--end::Col-->
 															</div>
 												</div>
 												<div class="fv-row mb-7">
 													<div class="col-xl-12">
-														<input class="form-control form-control-lg form-control-solid required" id="input_city" type="text" placeholder="Город"
-															name="city" autocomplete="off" />
+															<?	
+															$user_id = get_current_user_id();
+															$field = get_field_object( 'city', 'user_'.$user_id );
+																$arr = $field['choices'];
+																$city = get_field('city', 'user_'.$user_id)
+															?>
+															<select required class="form-control form-control-lg form-control-solid required" placeholder="город"
+																		id="input_city" name="city" autocomplete="off">
+																<?	foreach( $arr as $item ){ ?>
+																		<option value="<?php echo $item; ?>"><?php echo $item; ?></option>
+																<?  } ?>
+															</select>
 													</div>
 												</div>
 												<div class="fv-row mb-7">

@@ -143,7 +143,7 @@ function theme_name_scripts() {
 	
 
 	wp_enqueue_style( 'general', get_template_directory_uri() . '/assets/css/general.css?3' );
-	wp_enqueue_style( 'my-style-idea', get_template_directory_uri() . '/assets/css/ideas/my-style-idea.css?8' );
+	wp_enqueue_style( 'my-style-idea', get_template_directory_uri() . '/assets/css/ideas/my-style-idea.css?9' );
 	// wp_enqueue_style( 'all-ideas', get_template_directory_uri() . '/assets/css/ideas/all-ideas.min.css' );
 	// wp_enqueue_style( 'my-reviews', get_template_directory_uri() . '/assets/css/ideas/my-reviews.min.css' );
 	// wp_enqueue_style( 'tracked-ideas', get_template_directory_uri() . '/assets/css/ideas/tracked-ideas.min.css' );
@@ -161,7 +161,7 @@ function theme_name_scripts() {
 	wp_enqueue_script( 'ideas-app', get_template_directory_uri() . '/assets/js/ideas/app.js?7', array(), '1.0.0', true );
 	wp_enqueue_script( 'ideas-nav', get_template_directory_uri() . '/assets/js/ideas/navigation.js', array(), '1.0.0', true );
 	wp_enqueue_script( 'ideas-counts', get_template_directory_uri() . '/assets/js/ideas/counts.js', array(), '1.0.0', true );
-	wp_enqueue_script( 'ideas-ajax', get_template_directory_uri() . '/assets/js/ideas/ajax-idea.js?8', array(), '1.0.0', true );
+	wp_enqueue_script( 'ideas-ajax', get_template_directory_uri() . '/assets/js/ideas/ajax-idea.js?9', array(), '1.0.0', true );
 	if (is_page(array(252,311))){
 	wp_enqueue_style( 'fullcalendar.bundle.css', get_template_directory_uri() . '/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css' );
 	wp_enqueue_style( 'datatables.bundle.css', get_template_directory_uri() . '/assets/plugins/custom/datatables/datatables.bundle.css' );
@@ -262,7 +262,7 @@ function theme_name_scripts() {
 		wp_enqueue_script( 'script-jquery-ui', 'https://code.jquery.com/ui/1.13.1/jquery-ui.js', array(), '1.0.0', true );
 		wp_enqueue_script( 'datepickir-ru', get_template_directory_uri() . '/assets/js/datepicker-ru.js', array(), '1.0.0', true );	
 		wp_enqueue_script( 'input-mask', "https://cdn.jsdelivr.net/npm/jquery.maskedinput@1.4.1/src/jquery.maskedinput.min.js", array(), '1.0.0', true );	
-		wp_enqueue_script( 'script-custom', get_template_directory_uri() . '/assets/js/custom.js?7', array(), '1.0.0', true );
+		wp_enqueue_script( 'script-custom', get_template_directory_uri() . '/assets/js/custom.js?9', array(), '1.0.0', true );
 
 }
 

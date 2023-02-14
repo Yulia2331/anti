@@ -132,7 +132,16 @@ $user_id = $user->ID;
 								<label class='fw-bold fs-6 text-gray-400 '  for="city">Город</label>
 							</div>
 							<div class="col-9 col-lg-6">
-								<input class="form-control form-control-lg form-control-solid required textonly" id="city" type="text" placeholder="город"  name="city" value='<?=get_field('city', 'user_'.$user_id)?>' autocomplete="off">
+								<?	$field = get_field_object( 'city', 'user_'.$user_id );
+								$arr = $field['choices'];
+								$city = get_field('city', 'user_'.$user_id)
+								?>
+								<select required class="form-control form-control-lg form-control-solid required" placeholder="город"
+										id="city" name="city" autocomplete="off">
+								<?	foreach( $arr as $item ){ ?>
+										<option <?php echo ($city==$item)? 'selected':'' ?> value="<?php echo $item; ?>"><?php echo $item; ?></option>
+								<?  } ?>
+									</select>
 							</div>
 						</div>
 						<div class="row">

@@ -40,7 +40,6 @@
     ?>
 
         </div>
-        <!-- <button class="board-ideas__more">Смотреть еще</button> -->
       </div>
     </section>
 <?php

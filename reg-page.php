@@ -1,6 +1,6 @@
 <?php
 /*
-Template Name: регистрация
+Template Name: Регистрация
 */
 ?>
 <?php 
@@ -164,9 +164,20 @@ License: For each use you must have a valid license purchased only from above li
 								</div>
 										
 							<div class="fv-row mb-7">
-								<div class="col-xl-12">
-									<input class="form-control form-control-lg form-control-solid required" id="input_city" type="text" placeholder="Город"
-										name="city" autocomplete="off" />
+								<div class="col-xl-12 position-relative">
+								<?	
+									$user_id = 201;
+									$field = get_field_object( 'city', 'user_'.$user_id );
+									$arr = $field['choices'];
+								?>
+									<select required class="form-control form-control-lg form-control-solid required" placeholder="Город"
+										id="input_city" name="city" autocomplete="off">
+										   <option selected disabled hidden value=""></option>
+											<?	foreach( $arr as $item ){ ?>
+												<option value="<?php echo $item; ?>"><?php echo $item; ?></option>
+											<?  } ?>
+									</select>
+									<label for="input_city">Город</label>
 								</div>
 							</div>
 							<div class="fv-row mb-7">
